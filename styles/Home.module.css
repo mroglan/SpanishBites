@@ -1,0 +1,28 @@
+
+/* Basic Grid layouts */
+
+.root {
+    display: grid;
+    min-height: 100vh;
+    grid-template: auto auto 1fr auto / minmax(200px, 20%) 1fr minmax(200px, 20%)
+}
+
+.header {
+    grid-column: 1 / span 3;
+}
+
+.sub-carousel {
+    grid-column: 1 / span 3;
+}
+
+.side-bar {
+    grid-column: auto / span 1;
+}
+
+.main {
+    grid-column: 2 / span 1;
+}
+
+.footer {
+    grid-column: 1 / span 3;
+}
