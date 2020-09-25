@@ -1,4 +1,5 @@
 import { CssBaseline } from '@material-ui/core';
+import '../styles/globals.css'
 import red from '@material-ui/core/colors/red';
 import amber from '@material-ui/core/colors/amber'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
