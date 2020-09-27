@@ -6,7 +6,7 @@ export default function MainSideNav() {
 
     return (
         <Box pl={1}>
-            <List component="nav">
+            <List component="nav" style={{fontSize: '1.1rem'}}>
                 <ListItem>
                     <Link href="/authors">
                         <a>
