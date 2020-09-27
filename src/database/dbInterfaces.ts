@@ -85,9 +85,9 @@ export interface DBBook extends Book {
 
 export interface ClientBook extends Book {
     _id: string;
-    genres: string[];
-    authors: string[];
-    timePeriod: string;
+    genres: ClientGenre[];
+    authors: ClientAuthor[];
+    timePeriod: ClientTimePeriod;
 }
 
 export interface VocabWord {
