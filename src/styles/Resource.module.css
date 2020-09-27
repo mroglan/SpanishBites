@@ -1,0 +1,77 @@
+
+
+/* GRID TEMPLATE */
+.root {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: auto 1fr auto;
+}
+
+.root a:hover {
+    cursor: pointer;
+}
+
+.header {
+    grid-column: 1 / -1;
+}
+
+.content {
+    grid-column: 1 / -1;
+    padding: 2rem 1rem 0;
+    display: flex;
+    align-items: stretch;
+}
+
+.footer {
+    grid-column: 1 / -1;
+}
+
+
+/* CONTENT */
+
+.content-container {
+    flex-basis: 60%;
+}
+
+
+/* IMGAGE SIZING */
+
+.img-container {
+    flex-basis: 40%;
+    text-align: center;
+}
+
+.img-container img {
+    object-fit: cover;
+    max-width: 100%;
+}
+
+@media (max-width: 960px) {
+
+    .content {
+        flex-direction: column;
+    }
+
+    .img-container img {
+        max-width: 400px;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .img-container img {
+        max-width: 90vw;
+    }
+}
+
+
+/* Key points and relevant works grid layout */
+
+.author-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.author-grid-container > div {
+    padding-bottom: 1rem;
+}
