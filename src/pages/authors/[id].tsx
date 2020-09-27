@@ -16,7 +16,7 @@ interface Props {
 
 export default function Author({author}:Props) {
 
-    if(!author._id) {
+    if(!author || !author._id) {
         return (
             <>
                 <Head>
@@ -28,8 +28,6 @@ export default function Author({author}:Props) {
             </>
         )
     }
-
-    console.log(author)
 
     return (
         <>
