@@ -8,6 +8,19 @@ export const PrimaryLink = withStyles(theme => ({
         textDecoration: 'none',
         '&:hover': {
             textDecoration: 'underline'
-        }
+        },
+        display: 'inline'
+    }
+}))(Typography)
+
+export const SecondaryLink = withStyles(theme => ({
+    root: {
+        color: theme.palette.secondary.main,
+        textDecorationColor: theme.palette.secondary.main,
+        textDecoration: 'none',
+        '&:hover': {
+            textDecoration: 'underline'
+        },
+        display: 'inline'
     }
 }))(Typography)
