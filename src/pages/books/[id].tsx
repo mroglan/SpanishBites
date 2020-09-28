@@ -96,7 +96,9 @@ export default function Book({book}:Props) {
                                     </Typography>
                                 </Box>
                                 <Box pt={1}>
-                                    <TextDisplay text={book.desc} />
+                                    <Box maxWidth="90ch">
+                                        <TextDisplay text={book.desc} />
+                                    </Box>
                                 </Box>
                             </Box>
                         </Paper>
