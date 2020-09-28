@@ -17,8 +17,6 @@ interface Props {
 
 export default function Book({book}:Props) {
 
-    console.log(book)
-
     if(!book || !book._id) {
         return (
             <>
