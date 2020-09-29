@@ -1,7 +1,8 @@
 import {Event as dbEvent} from '../../database/dbInterfaces'
 import styles from '../../styles/Timeline.module.css'
 import {Box, Grid, Typography} from '@material-ui/core'
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import LocationOnIcon from '@material-ui/icons/LocationOn'
+import TextDisplay from '../mui-rte/TextDisplay'
 
 interface Event extends dbEvent {
     type: string;
@@ -35,10 +36,8 @@ export default function TimeLine({events}:Props) {
                                     </Grid>
                                 </Grid>
                             </Box>}
-                            <Box pt={1}>
-                                <Typography variant="body1">
-                                    {event.title}
-                                </Typography>
+                            <Box>
+                                <TextDisplay text={event.desc} />
                             </Box>
                         </div>
                         <div className={styles['img-container']}>

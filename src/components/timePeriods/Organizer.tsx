@@ -1,5 +1,5 @@
 import {Event} from '../../database/dbInterfaces'
-import {useState, useMemo} from 'react'
+import {useState, useMemo, useEffect} from 'react'
 import {FormControl, InputLabel, Select, MenuItem, Box} from '@material-ui/core'
 import TimeLine from './TimeLine'
 
@@ -42,6 +42,12 @@ export default function Organizer({worldEvents:inputWorld, spainEvents:inputSpai
             return spainEvents.sort((a, b) => a.numDate - b.numDate).map((event, i) => ({...event, side: i % 2 === 0 ? 'left' : 'right'}))
         }
         return worldEvents.sort((a, b) => a.numDate - b.numDate).map((event, i) => ({...event, side: i % 2 === 0 ? 'left' : 'right'}))
+    }, [filter])
+
+    useEffect(() => {
+        setTimeout(() => window.scroll({
+            top: 0, left: 0
+        }), 1)
     }, [filter])
 
     return (
