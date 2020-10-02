@@ -2,6 +2,8 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import database from '../../database/database'
 import {DBAuthor, ClientAuthor} from '../../database/dbInterfaces'
 import {ObjectId} from 'mongodb'
+import useSWR from 'swr'
+import {getAuthor} from '../../utils/authors'
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../../styles/Resource.module.css'
@@ -14,7 +16,9 @@ interface Props {
     author: ClientAuthor;
 }
 
-export default function Author({author}:Props) {
+export default function Author({author:dbAuthor}:Props) {
+
+    const {data:{author}} = useSWR(`/api/authors/${dbAuthor._id}`, {initialData: {author: dbAuthor}})
 
     if(!author || !author._id) {
         return (
@@ -121,7 +125,7 @@ export default function Author({author}:Props) {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    hello world
+                    footer
                 </div>
             </div>
         </>
@@ -130,20 +134,11 @@ export default function Author({author}:Props) {
 
 export const getStaticProps:GetStaticProps = async (ctx) => {
     const id = ctx.params.id as string
-    const db = await database()
     if(!ObjectId.isValid(id)) return {props: {author: {}}}
-    const author:DBAuthor[] = await db.collection('authors').aggregate([
-        {$match: {'_id': new ObjectId(id)}},
-        {$lookup: {
-            from: 'timePeriods',
-            localField: 'timePeriod',
-            foreignField: '_id',
-            as: 'timePeriod'
-        }},
-        {$unwind: '$timePeriod'}
-    ]).toArray()
 
-    return {props: {author: JSON.parse(JSON.stringify(author[0] || {}))}, revalidate: 60}
+    const author = await getAuthor(new ObjectId(id))
+
+    return {props: {author: JSON.parse(JSON.stringify(author || {}))}, revalidate: 60}
 }
 
 export const getStaticPaths:GetStaticPaths = async() => {
