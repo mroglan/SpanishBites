@@ -45,8 +45,9 @@
     object-fit: cover;
     max-width: 100%;
     min-width: 80%;
-    max-height: 700px;
+    max-height: 600px;
     margin-right: 1rem;
+    border-radius: 4px;
 }
 
 @media (max-width: 960px) {
