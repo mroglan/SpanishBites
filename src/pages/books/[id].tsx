@@ -2,6 +2,8 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import database from '../../database/database'
 import {DBBook, ClientBook} from '../../database/dbInterfaces'
 import {ObjectId} from 'mongodb'
+import useSWR from 'swr'
+import {getBook} from '../../utils/books'
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../../styles/Resource.module.css'
@@ -15,7 +17,9 @@ interface Props {
     book: ClientBook;
 }
 
-export default function Book({book}:Props) {
+export default function Book({book:dbBook}:Props) {
+
+    const {data: {book}} = useSWR(`/api/books/${dbBook._id}`, {initialData: {book: dbBook}})
 
     if(!book || !book._id) {
         return (
@@ -112,32 +116,10 @@ export default function Book({book}:Props) {
 
 export const getStaticProps:GetStaticProps = async (ctx:GetStaticPropsContext) => {
     const id = ctx.params.id as string
-    const db = await database()
     if(!ObjectId.isValid(id)) return {props: {book: {}}}
-    const book:DBBook[] = await db.collection('books').aggregate([
-        {$match: {'_id': new ObjectId(id)}},
-        {$lookup: {
-            from: 'timePeriods',
-            localField: 'timePeriod',
-            foreignField: '_id',
-            as: 'timePeriod'
-        }},
-        {$unwind: '$timePeriod'},
-        {$lookup: {
-            from: 'authors',
-            localField: 'authors',
-            foreignField: '_id',
-            as: 'authors'
-        }},
-        {$lookup: {
-            from: 'genres',
-            localField: 'genres',
-            foreignField: '_id',
-            as: 'genres'
-        }}
-    ]).toArray()
+    const book = await getBook(new ObjectId(id))
 
-    return {props: {book: JSON.parse(JSON.stringify(book[0] || {}))}, revalidate: 60}
+    return {props: {book: JSON.parse(JSON.stringify(book || {}))}, revalidate: 60}
 }
 
 export const getStaticPaths:GetStaticPaths = async () => {
