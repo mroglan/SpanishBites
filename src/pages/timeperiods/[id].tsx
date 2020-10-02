@@ -2,6 +2,8 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import database from '../../database/database'
 import {DBTimePeriod, ClientTimePeriod} from '../../database/dbInterfaces'
 import {ObjectId} from 'mongodb'
+import useSWR from 'swr'
+import {getTimePeriod} from '../../utils/timePeriods'
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../../styles/Resource.module.css'
@@ -14,7 +16,9 @@ interface Props {
     timePeriod: ClientTimePeriod;
 }
 
-export default function TimePeriod({timePeriod}:Props) {
+export default function TimePeriod({timePeriod:dbTimePeriod}:Props) {
+
+    const {data: {timePeriod}} = useSWR(`/api/timeperiods/${dbTimePeriod._id}`, {initialData: {timePeriod: dbTimePeriod}})
 
     if(!timePeriod || !timePeriod._id) {
         return (
@@ -58,9 +62,9 @@ export default function TimePeriod({timePeriod}:Props) {
 
 export const getStaticProps:GetStaticProps = async (ctx:GetStaticPropsContext) => {
     const id = ctx.params.id as string
-    const db = await database()
     if(!ObjectId.isValid(id)) return {props: {timePeriod: {}}}
-    const timePeriod:DBTimePeriod = await db.collection('timePeriods').findOne({'_id': new ObjectId(id)})
+
+    const timePeriod = await getTimePeriod(new ObjectId(id))
 
     return {props: {timePeriod: JSON.parse(JSON.stringify(timePeriod))}, revalidate: 60}
 }
