@@ -2,23 +2,11 @@ import {Event} from '../../database/dbInterfaces'
 import {useState, useMemo, useEffect} from 'react'
 import {FormControl, InputLabel, Select, MenuItem, Box} from '@material-ui/core'
 import TimeLine from './TimeLine'
+import {findDate} from '../../utils/dates'
 
 interface Props {
     worldEvents: Event[];
     spainEvents: Event[];
-}
-
-const findDate = (input:string) => {
-
-    for(let i = 0; i < input.length; i++) {
-        if(i + 4 > input.length) break
-        const num = Number(input.substring(i, i + 4))
-        if(Number.isInteger(num) && num.toString().length > 3) {
-            return num
-        }
-    }
-
-    return 0
 }
 
 export default function Organizer({worldEvents:inputWorld, spainEvents:inputSpain}:Props) {
