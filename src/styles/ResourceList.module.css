@@ -13,9 +13,27 @@
     column-gap: 20px;
 }
 
+.detailed-list-container {
+    column-count: 3;
+    column-gap: 20px;
+}
+
+.detailed-list-container img {
+    max-height: 100px;
+}
+
+@media (max-width: 1280px) {
+    .detailed-list-container {
+        column-count: 2;
+    }
+}
+
 @media (max-width: 960px) {
     .list-container {
         column-count: 2;
+    }
+    .detailed-list-container {
+        column-count: 1;
     }
 }
 
