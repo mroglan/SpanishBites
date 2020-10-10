@@ -11,6 +11,7 @@ import {Paper, Box, Typography, Divider} from '@material-ui/core'
 import {SecondaryLink} from '../../components/items/links'
 import {BulletList} from '../../components/items/lists'
 import MainHeader from '../../components/nav/MainHeader'
+import ResourceNotFound from '../../components/error/ResourceNotFound'
 
 interface Props {
     author: ClientAuthor;
@@ -19,22 +20,13 @@ interface Props {
 export default function Author({author:dbAuthor}:Props) {
 
     if(!dbAuthor) {
-        return <div>nothing to see</div>
+        return <ResourceNotFound />
     }
 
     const {data:{author}} = useSWR(`/api/authors/${dbAuthor._id || 'undefined'}`, {initialData: {author: dbAuthor}})
 
     if(!author || !author._id) {
-        return (
-            <>
-                <Head>
-                    <title>Resource Not Found!</title>
-                </Head>
-                <div>
-                    Resource not found
-                </div>
-            </>
-        )
+        return <ResourceNotFound />
     }
 
     return (

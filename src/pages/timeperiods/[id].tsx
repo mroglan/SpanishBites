@@ -11,6 +11,7 @@ import {Paper, Box, Typography, Divider} from '@material-ui/core'
 import {SecondaryLink} from '../../components/items/links'
 import MainHeader from '../../components/nav/MainHeader'
 import Organizer from '../../components/timePeriods/Organizer'
+import ResourceNotFound from '../../components/error/ResourceNotFound'
 
 interface Props {
     timePeriod: ClientTimePeriod;
@@ -19,22 +20,13 @@ interface Props {
 export default function TimePeriod({timePeriod:dbTimePeriod}:Props) {
 
     if(!dbTimePeriod) {
-        return <div>nothing to see</div>
+        return <ResourceNotFound />
     }
 
     const {data: {timePeriod}} = useSWR(`/api/timeperiods/${dbTimePeriod._id || 'undefined'}`, {initialData: {timePeriod: dbTimePeriod}})
 
     if(!timePeriod || !timePeriod._id) {
-        return (
-            <>
-                <Head>
-                    <title>Resource not found!</title>
-                </Head>
-                <div>
-                    Resource not found.
-                </div>
-            </>
-        )
+        return <ResourceNotFound />
     }
 
     return (

@@ -12,6 +12,7 @@ import {SecondaryLink} from '../../components/items/links'
 import {BulletList} from '../../components/items/lists'
 import MainHeader from '../../components/nav/MainHeader'
 import TextDisplay from '../../components/mui-rte/TextDisplay'
+import ResourceNotFound from '../../components/error/ResourceNotFound'
 
 interface Props {
     book: ClientBook;
@@ -20,22 +21,13 @@ interface Props {
 export default function Book({book:dbBook}:Props) {
 
     if(!dbBook) {
-        return <div>nothing to see</div>
+        return <ResourceNotFound />
     }
 
     const {data: {book}} = useSWR(`/api/books/${dbBook._id || 'undefined'}`, {initialData: {book: dbBook}})
 
     if(!book || !book._id) {
-        return (
-            <>
-                <Head>
-                    <title>Resource not found!</title>
-                </Head>
-                <div>
-                    Resource not found.
-                </div>
-            </>
-        )
+        return <ResourceNotFound />
     }
 
     return (
