@@ -18,7 +18,7 @@ interface Props {
 
 export default function Author({author:dbAuthor}:Props) {
 
-    const {data:{author}} = useSWR(`/api/authors/${dbAuthor._id}`, {initialData: {author: dbAuthor}})
+    const {data:{author}} = useSWR(`/api/authors/${dbAuthor._id || 'undefined'}`, {initialData: {author: dbAuthor}})
 
     if(!author || !author._id) {
         return (
