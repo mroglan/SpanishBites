@@ -18,6 +18,10 @@ interface Props {
 
 export default function TimePeriod({timePeriod:dbTimePeriod}:Props) {
 
+    if(!dbTimePeriod) {
+        return <div>nothing to see</div>
+    }
+
     const {data: {timePeriod}} = useSWR(`/api/timeperiods/${dbTimePeriod._id || 'undefined'}`, {initialData: {timePeriod: dbTimePeriod}})
 
     if(!timePeriod || !timePeriod._id) {

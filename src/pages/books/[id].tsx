@@ -19,6 +19,10 @@ interface Props {
 
 export default function Book({book:dbBook}:Props) {
 
+    if(!dbBook) {
+        return <div>nothing to see</div>
+    }
+
     const {data: {book}} = useSWR(`/api/books/${dbBook._id || 'undefined'}`, {initialData: {book: dbBook}})
 
     if(!book || !book._id) {

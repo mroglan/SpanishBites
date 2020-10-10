@@ -18,6 +18,10 @@ interface Props {
 
 export default function Author({author:dbAuthor}:Props) {
 
+    if(!dbAuthor) {
+        return <div>nothing to see</div>
+    }
+
     const {data:{author}} = useSWR(`/api/authors/${dbAuthor._id || 'undefined'}`, {initialData: {author: dbAuthor}})
 
     if(!author || !author._id) {
