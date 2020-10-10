@@ -35,7 +35,7 @@ export default function MainSideNav() {
                     </Link>
                 </ListItem>
                 <ListItem>
-                    <Link href="/passages">
+                    <Link href="/timeperiods">
                         <a>
                             <PrimaryLink variant="body1">
                                 Time Periods
