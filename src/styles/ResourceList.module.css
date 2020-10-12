@@ -69,10 +69,10 @@
 .timeline-line::after {
     content: '';
     position: absolute;
-    width: 16px;
+    width: 14px;
     height: 100px;
     left: 50%;
-    margin-left: -8px;
+    margin-left: -7px;
     bottom: 0px;
     background: hsl(229, 100%, 81%);
 }
@@ -95,7 +95,7 @@
     margin-top: -19px;
     margin-left: -15px;
     border: 5px solid hsl(359, 55%, 58%);
-    background: #fff;
+    background: hsl(229, 100%, 81%);
 }
 
 .bottom-dot::before {
@@ -109,7 +109,7 @@
     margin-bottom: -19px;
     margin-left: -15px;
     border: 5px solid hsl(359, 55%, 58%);
-    background: #fff;
+    background: hsl(229, 100%, 81%);
     z-index: 1;
 }
 
