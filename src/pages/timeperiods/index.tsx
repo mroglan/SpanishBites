@@ -41,5 +41,5 @@ export const getStaticProps:GetStaticProps = async () => {
 
     const timePeriods = await getAllTimePeriods()
 
-    return {props: {timePeriods: JSON.parse(JSON.stringify(timePeriods))}}
+    return {props: {timePeriods: JSON.parse(JSON.stringify(timePeriods))}, revalidate: 60}
 }
