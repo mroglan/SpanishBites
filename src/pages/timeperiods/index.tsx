@@ -15,8 +15,6 @@ export default function TimePeriods({timePeriods:dbTimePeriods}:Props) {
 
     const {data: {timePeriods}} = useSWR('/api/timeperiods', {initialData: {timePeriods: dbTimePeriods}})
 
-    console.log(timePeriods)
-
     return (
         <>
             <Head>
