@@ -1,15 +1,17 @@
-import {ClientTimePeriod} from '../../../database/dbInterfaces'
+import {ClientTimePeriod, ClientUnpopulatedAuthor} from '../../../database/dbInterfaces'
 import styles from '../../../styles/ResourceList.module.css'
 import {Box, Typography} from '@material-ui/core'
 import Link from 'next/link'
 import {PrimaryLink} from '../../items/links'
 import TextDisplay from '../../mui-rte/TextDisplay'
+import {SmallCollage} from '../../items/collage'
 
 interface Props {
     timePeriods: ClientTimePeriod[];
+    authors: ClientUnpopulatedAuthor[][];
 }
 
-export default function List({timePeriods}:Props) {
+export default function List({timePeriods, authors}:Props) {
 
     return (
         <Box>
@@ -27,6 +29,10 @@ export default function List({timePeriods}:Props) {
                         </Box>
                         <Box>
                             <TextDisplay text={period.intro} />
+                        </Box>
+                        <Box>
+                            <SmallCollage images={authors[i].map(author => ({url: author.image, linkHref: '/authors/[id]', linkAs: `/authors/${author._id}`}))} 
+                            labels={authors[i].map(author => author.firstName + ' ' + author.lastName)} />
                         </Box>
                         <div className={styles['timeperiod-marker']} id={period._id} />
                     </div>
