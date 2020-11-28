@@ -55,6 +55,11 @@ export interface ClientAuthor extends Author {
     timePeriod: ClientTimePeriod;
 }
 
+export interface ClientUnpopulatedAuthor extends Author {
+    _id: string;
+    timePeriod: string;
+}
+
 
 export interface Genre {
     name: string;
