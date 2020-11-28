@@ -18,6 +18,14 @@ export const getAllAuthors = async () => {
     return authors
 }
 
+export const getAllUnpopulatedAuthors = async () => {
+    const db = await database()
+
+    const authors:DBAuthor[] = await db.collection('authors').find({}).toArray()
+
+    return authors
+}
+
 export const getAuthor = async (id:ObjectId) => {
     const db = await database()
 
