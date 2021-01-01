@@ -63,7 +63,7 @@ export default class MyApp extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>Spanish Bites Admin</title>
+          <title>Spanish Bites</title>
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
