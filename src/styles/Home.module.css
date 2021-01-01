@@ -32,14 +32,20 @@
 
 .donQuijote-banner-root {
     height: 600px;
-    display: flex;
     background: hsl(50, 100%, 80%);
+}
+
+.donQuijote-banner-root > div {
+    display: flex;
+    background-image: url('/landingPage/grass.png');
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 175px;
     padding: 0 2rem;
 }
 
 .donQuijote-image {
     height: 600px;
-    max-width: 75%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -47,9 +53,9 @@
     overflow: hidden;
 }
 
+
 .donQuijote-image img {
     height: 100%;
-    opacity: 0.7;
 }
 
 .main-message-container {
@@ -57,6 +63,60 @@
     justify-content: center;
     align-items: center;
 }
+
+.main-message-textbox {
+    text-align: center;
+}
+
+@media only screen and (max-width: 1300px) {
+    .donQuijote-banner-root > div {
+        background-image: none;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .donQuijote-image {
+        min-width: 400px;
+    }
+
+}
+
+@media only screen and (max-width: 890px) {
+    .donQuijote-banner-root {
+        height: auto;
+    }
+
+    .donQuijote-image {
+        min-width: 300px;
+        justify-content: flex-start;
+    }
+}
+
+@media only screen and (max-width: 790px) {
+
+    .donQuijote-image {
+        min-width: 240px;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+
+    .donQuijote-banner-root > div {
+        flex-wrap: wrap;
+    }
+
+    .donQuijote-image {
+        width: 100%;
+        height: 300px;
+        justify-content: flex-end;
+        margin-top: -30px;
+    }
+
+    .main-message-title {
+        font-size: 3rem !important;
+    }
+}
+
 
 /* TYPOGRAPHY */
 
