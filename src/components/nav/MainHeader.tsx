@@ -4,7 +4,8 @@ import {makeStyles} from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
     title: {
         color: theme.palette.primary.main,
-        fontWeight: 500
+        fontWeight: 500,
+        whiteSpace: 'nowrap'
     },
     backdrop: {
         background: 'hsl(50, 100%, 80%)',
