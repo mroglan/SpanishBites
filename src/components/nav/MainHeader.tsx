@@ -21,10 +21,7 @@ export default function Header() {
                     <Grid item>
                         <Grid container spacing={1} alignItems="center">
                             <Grid item>
-                                <Box width={40} height={40} border="1px solid hsl(229, 100%, 58%)" display="flex" 
-                                justifyContent="center" alignItems="center" padding={2} borderRadius="50%">
-                                    <Typography color="primary">Logo</Typography>
-                                </Box>
+                                <img src="/logo2.svg" title="Spanish Bites" style={{width: 40, height: 40}} />
                             </Grid>
                             <Grid item>
                                 <Typography className={classes.title} variant="h4" component="h1">
