@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 import {Box} from '@material-ui/core'
 import MainHeader from '../components/nav/MainHeader'
 import MainSideBar from '../components/nav/MainSideNav'
+import FirstBanner from '../components/home/FirstBanner'
 
 export default function Home() {
 
@@ -16,9 +17,7 @@ export default function Home() {
                     <MainHeader />
                 </div>
                 <div className={styles['sub-ad']}>
-                    <Box height={200} display="flex" alignItems="center" justifyContent="center">
-                        Buy Premium Promotion
-                    </Box>
+                    <FirstBanner />
                 </div>
                 <div className={styles['side-bar']}>
                     <MainSideBar />
@@ -33,5 +32,3 @@ export default function Home() {
         </>
     )
 }
-
-//redeploy
