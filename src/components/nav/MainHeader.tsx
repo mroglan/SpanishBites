@@ -19,7 +19,7 @@ export default function Header() {
             <Box py={1} px={3} textAlign="center" className={classes.backdrop}>
                 <Grid container alignItems="center" justify="space-between">
                     <Grid item>
-                        <Grid container spacing={1} alignItems="center">
+                        <Grid container wrap="nowrap" spacing={1} alignItems="center">
                             <Grid item>
                                 <img src="/logo2.svg" title="Spanish Bites" style={{width: 40, height: 40}} />
                             </Grid>
