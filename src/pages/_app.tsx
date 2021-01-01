@@ -24,7 +24,8 @@ export const theme = createMuiTheme({
     },
     secondary: {
       main: 'hsl(359, 94%, 32%)',
-      light: 'hsl(359, 55%, 58%)'
+      light: 'hsl(359, 55%, 58%)',
+      dark: 'hsl(359, 94%, 42%)'
     },
     error: {
       main: 'hsl(356, 81%, 49%)',
@@ -38,11 +39,14 @@ export const theme = createMuiTheme({
     },
     background: {
       default: 'hsl(50, 100%, 97%)',
+      // darker: hsl(50, 100%, 80%)
       paper: '#fff'
     },
-
   },
-  spacing: 8
+  spacing: 8,
+  typography: {
+    //fontFamily: '"Catamaran", "Roboto", "Arial"'
+  }
 });
 
 export default class MyApp extends App {
