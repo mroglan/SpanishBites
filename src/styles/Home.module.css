@@ -26,3 +26,48 @@
 .footer {
     grid-column: 1 / span 3;
 }
+
+
+/* Entry Banner */
+
+.donQuijote-banner-root {
+    height: 600px;
+    display: flex;
+    background: hsl(50, 100%, 80%);
+    padding: 0 2rem;
+}
+
+.donQuijote-image {
+    height: 600px;
+    max-width: 75%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-width: 50%;
+    overflow: hidden;
+}
+
+.donQuijote-image img {
+    height: 100%;
+    opacity: 0.7;
+}
+
+.main-message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* TYPOGRAPHY */
+
+.catamaran {
+    font-family: "Catamaran" !important;
+}
+
+.red {
+    color: hsl(359, 94%, 42%);
+}
+
+.light-red {
+    color: hsl(359, 80%, 50%);
+}
