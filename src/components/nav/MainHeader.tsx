@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 500
     },
     backdrop: {
-        background: 'rgba(0, 0, 0, .1)',
+        background: 'hsl(50, 100%, 80%)',
     }
 }))
 
