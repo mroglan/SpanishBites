@@ -7,7 +7,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import MainHeader from '../../../components/nav/MainHeader'
 import useSWR from 'swr'
-import Main from '../../../components/authors/indexPage/Main'
+import Main from '../../../components/library/authors/indexPage/Main'
 
 interface Props {
     authors: ClientAuthor[];

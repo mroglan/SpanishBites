@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import Head from 'next/head'
 import styles from '../../styles/ResourceList.module.css'
 import MainHeader from '../../../components/nav/MainHeader'
-import Main from '../../../components/timePeriods/indexPage/Main'
+import Main from '../../../components/library/timePeriods/indexPage/Main'
 import { getAllTimePeriods } from '../../../utils/timePeriods'
 import {getAllAuthors, getAllUnpopulatedAuthors} from '../../../utils/authors'
 

@@ -10,7 +10,7 @@ import styles from '../../styles/Resource.module.css'
 import {Paper, Box, Typography, Divider} from '@material-ui/core'
 import {SecondaryLink} from '../../../components/items/links'
 import MainHeader from '../../../components/nav/MainHeader'
-import Organizer from '../../../components/timePeriods/Organizer'
+import Organizer from '../../../components/library/timePeriods/Organizer'
 import ResourceNotFound from '../../../components/error/ResourceNotFound'
 
 interface Props {
