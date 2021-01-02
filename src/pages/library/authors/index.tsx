@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import database from '../../../database/database'
 import {DBAuthor, ClientAuthor} from '../../../database/dbInterfaces'
 import {getAllAuthors} from '../../../utils/authors'
-import styles from '../../styles/ResourceList.module.css'
+import styles from '../../../styles/ResourceList.module.css'
 import Head from 'next/head'
 import Link from 'next/link'
 import MainHeader from '../../../components/nav/MainHeader'

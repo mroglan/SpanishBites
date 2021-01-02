@@ -3,7 +3,7 @@ import {Box, Typography, Grid} from '@material-ui/core'
 import Link from 'next/link'
 import {PrimaryLink} from '../../../items/links'
 import {findDate} from '../../../../utils/dates'
-import styles from '../../../styles/ResourceList.module.css'
+import styles from '../../../../styles/ResourceList.module.css'
 import {useState, useReducer, useMemo, useCallback} from 'react'
 import Filters from './Filters'
 
@@ -96,7 +96,7 @@ export default function Main({authors:inputAuthors}:Props) {
             {filters.mode === 'list' ? <Box className={styles['list-container']} mt={3}>
                 {filteredAuthors.map(author => (
                     <Box my={1} key={author._id}>
-                        <Link href="library/authors/[id]" as={`library/authors/${author._id}`}>
+                        <Link href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
                             <a>
                                 <PrimaryLink variant="body1">
                                     {author.firstName} {author.lastName}
@@ -115,7 +115,7 @@ export default function Main({authors:inputAuthors}:Props) {
                                 </Grid>
                                 <Grid item style={{flexGrow: 1}}>
                                     <Box>
-                                        <Link href="library/authors/[id]" as={`library/authors/${author._id}`}>
+                                        <Link href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
                                             <a>
                                                 <PrimaryLink variant="body1">
                                                     {author.firstName} {author.lastName}

@@ -1,6 +1,6 @@
 import {Box, List, ListItem, Typography} from '@material-ui/core'
 import {ClientTimePeriod} from '../../../../database/dbInterfaces'
-import styles from '../../../styles/ResourceList.module.css'
+import styles from '../../../../styles/ResourceList.module.css'
 import Scrollspy from 'react-scrollspy'
 import {useMemo} from 'react'
 

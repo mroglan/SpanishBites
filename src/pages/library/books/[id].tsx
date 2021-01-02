@@ -54,7 +54,7 @@ export default function Book({book:dbBook}:Props) {
                                 <Box pt={1}>
                                     <Typography variant="h6">
                                         By {book.authors.map((author, i) => (
-                                            <Link key={i} href="library/authors/[id]" as={`library/authors/${author._id}`}>
+                                            <Link key={i} href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
                                                 <a>
                                                     <SecondaryLink variant="inherit">
                                                         {author.firstName + ' ' + author.lastName}
@@ -70,7 +70,7 @@ export default function Book({book:dbBook}:Props) {
                             <Box px={3} pt={2}>
                                 <Box>
                                     <Typography variant="h6">
-                                        Time Period: <Link href="library/timeperiods/[id]" as={`library/timeperiods/${book.timePeriod._id}`}>
+                                        Time Period: <Link href="/library/timeperiods/[id]" as={`/library/timeperiods/${book.timePeriod._id}`}>
                                             <a>
                                                 <SecondaryLink variant="inherit">
                                                     {book.timePeriod.name}
@@ -82,7 +82,7 @@ export default function Book({book:dbBook}:Props) {
                                 <Box pt={1}>
                                     <Typography variant="h6">
                                         Genre: {book.genres.map((genre, i) => (
-                                            <Link key={i} href="library/genres/[id]" as={`library/genres/${genre._id}`}>
+                                            <Link key={i} href="/library/genres/[id]" as={`/library/genres/${genre._id}`}>
                                                 <a>
                                                     <SecondaryLink variant="inherit">
                                                         {genre.name}

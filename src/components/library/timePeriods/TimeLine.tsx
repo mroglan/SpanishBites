@@ -1,5 +1,5 @@
 import {Event as dbEvent} from '../../../database/dbInterfaces'
-import styles from '../../styles/Timeline.module.css'
+import styles from '../../../styles/Timeline.module.css'
 import {Box, Grid, Typography} from '@material-ui/core'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import TextDisplay from '../../mui-rte/TextDisplay'

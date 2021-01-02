@@ -2,7 +2,7 @@ import {ClientTimePeriod, ClientAuthor, ClientUnpopulatedAuthor} from '../../../
 import {Box, Typography} from '@material-ui/core'
 import List from './List'
 import TabNav from './TabNav'
-import styles from '../../../styles/ResourceList.module.css'
+import styles from '../../../../styles/ResourceList.module.css'
 import {useMemo} from 'react'
 
 interface Props {
