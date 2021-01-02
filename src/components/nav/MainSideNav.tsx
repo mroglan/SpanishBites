@@ -1,3 +1,4 @@
+import React from 'react'
 import {List, ListItem, Box, Typography} from '@material-ui/core'
 import Link from 'next/link'
 import {PrimaryLink} from '../items/links'
@@ -8,7 +9,7 @@ export default function MainSideNav() {
         <Box pl={1}>
             <List component="nav" style={{fontSize: '1.1rem'}}>
                 <ListItem>
-                    <Link href="/authors">
+                    <Link href="/library/authors">
                         <a>
                             <PrimaryLink variant="body1">
                                 Authors
@@ -17,7 +18,7 @@ export default function MainSideNav() {
                     </Link>
                 </ListItem>
                 <ListItem>
-                    <Link href="/books">
+                    <Link href="/library/books">
                         <a>
                             <PrimaryLink variant="body1">
                                 Books
@@ -26,7 +27,7 @@ export default function MainSideNav() {
                     </Link>
                 </ListItem>
                 <ListItem>
-                    <Link href="/passages">
+                    <Link href="/library/passages">
                         <a>
                             <PrimaryLink variant="body1">
                                 Passages
@@ -35,7 +36,7 @@ export default function MainSideNav() {
                     </Link>
                 </ListItem>
                 <ListItem>
-                    <Link href="/timeperiods">
+                    <Link href="/library/timeperiods">
                         <a>
                             <PrimaryLink variant="body1">
                                 Time Periods

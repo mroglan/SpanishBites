@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from '../../styles/Home.module.css'
 import {Box, Typography, Grid, useMediaQuery} from '@material-ui/core'
 import {RedPrimaryButton, RedSecondaryButton} from '../items/buttons'
