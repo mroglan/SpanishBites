@@ -1,3 +1,4 @@
+import React from 'react'
 import {ClientAuthor} from '../../../../database/dbInterfaces'
 import {Box, Typography, Grid} from '@material-ui/core'
 import Link from 'next/link'
@@ -96,40 +97,44 @@ export default function Main({authors:inputAuthors}:Props) {
             {filters.mode === 'list' ? <Box className={styles['list-container']} mt={3}>
                 {filteredAuthors.map(author => (
                     <Box my={1} key={author._id}>
-                        <Link href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
-                            <a>
-                                <PrimaryLink variant="body1">
-                                    {author.firstName} {author.lastName}
-                                </PrimaryLink>
-                            </a>
-                        </Link>
+                        <div data-testid="listAuthorItem">
+                            <Link href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
+                                <a>
+                                    <PrimaryLink variant="body1">
+                                        {author.firstName} {author.lastName}
+                                    </PrimaryLink>
+                                </a>
+                            </Link>
+                        </div>
                     </Box>
                 ))}
             </Box> : <Box className={styles['detailed-list-container']}>
                     {filteredAuthors.map(author => (
                         <Box my={1} key={author._id} style={{breakInside: 'avoid'}}>
-                            <Grid container wrap="nowrap" spacing={2} alignItems="center">
-                                <Grid item>
-                                    <img src={author.image || '/no-profile.jpg'} alt={author.firstName + ' ' + author.lastName}
-                                    title={author.firstName + ' ' + author.lastName} />
+                            <div data-testid="detailedAuthorItem">
+                                <Grid container wrap="nowrap" spacing={2} alignItems="center">
+                                    <Grid item>
+                                        <img src={author.image || '/no-profile.jpg'} alt={author.firstName + ' ' + author.lastName}
+                                        title={author.firstName + ' ' + author.lastName} />
+                                    </Grid>
+                                    <Grid item style={{flexGrow: 1}}>
+                                        <Box>
+                                            <Link href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
+                                                <a>
+                                                    <PrimaryLink variant="body1">
+                                                        {author.firstName} {author.lastName}
+                                                    </PrimaryLink>
+                                                </a>
+                                            </Link>
+                                        </Box>
+                                        <Box mt={1}>
+                                            <Typography variant="body1">
+                                                {author.birthDate} - {author.deathDate}
+                                            </Typography>
+                                        </Box>
+                                    </Grid>
                                 </Grid>
-                                <Grid item style={{flexGrow: 1}}>
-                                    <Box>
-                                        <Link href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
-                                            <a>
-                                                <PrimaryLink variant="body1">
-                                                    {author.firstName} {author.lastName}
-                                                </PrimaryLink>
-                                            </a>
-                                        </Link>
-                                    </Box>
-                                    <Box mt={1}>
-                                        <Typography variant="body1">
-                                            {author.birthDate} - {author.deathDate}
-                                        </Typography>
-                                    </Box>
-                                </Grid>
-                            </Grid>
+                            </div>
                         </Box>
                     ))}
             </Box>}
