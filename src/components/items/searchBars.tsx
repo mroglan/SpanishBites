@@ -39,7 +39,7 @@ export function PrimarySearchBar({search, setSearch}:Props) {
     return (
         <FormControl variant="outlined">
             <OutlinedInput id="search-bar" placeholder="Search..." onKeyPress={handleKeyPress} onBlur={handleBlur}
-            value={input} onChange={(e) => setInput(e.target.value as string)} margin="dense" inputProps={{'data-testid': 'input'}}
+            value={input} onChange={(e) => setInput(e.target.value as string)} margin="dense" inputProps={{'data-testid': 'searchInput'}}
             startAdornment={
                 <InputAdornment position="start">
                     <IconButton aria-label="Search" data-testid="searchBtn" className={classes.button} onClick={() => setSearch(input)} 

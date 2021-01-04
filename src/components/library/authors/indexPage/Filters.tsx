@@ -1,3 +1,4 @@
+import React from 'react'
 import {Dispatch, useState, useMemo, useEffect} from 'react'
 import {Box, Grid, FormControl, InputLabel, Select, MenuItem} from '@material-ui/core'
 import {PrimarySearchBar} from '../../../items/searchBars'
@@ -24,7 +25,8 @@ export default function Filters({filters, dispatch}:Props) {
                 <Grid item>
                     <FormControl variant="outlined">
                         <InputLabel id="sort">Sorting by</InputLabel>
-                        <Select labelId="sort" label="Sorting by" value={filters.sort} onChange={(e) => dispatch({type: 'CHANGE_SORT', payload: e.target.value})}>
+                        <Select labelId="sort" label="Sorting by" value={filters.sort} inputProps={{'data-testid': 'authorSortInput'}}
+                         onChange={(e) => dispatch({type: 'CHANGE_SORT', payload: e.target.value})}>
                             <MenuItem value="firstName">First Name</MenuItem>
                             <MenuItem value="lastName">Last Name</MenuItem>
                             <MenuItem value="dob">Date of Birth</MenuItem>
@@ -35,7 +37,8 @@ export default function Filters({filters, dispatch}:Props) {
                 <Grid item>
                     <FormControl style={{minWidth: 100}} variant="outlined">
                         <InputLabel id="mode-label">View mode</InputLabel>
-                        <Select labelId="mode-label" label="View mode" value={filters.mode} onChange={(e) => dispatch({type: 'CHANGE_MODE', payload: e.target.value})}>
+                        <Select labelId="mode-label" label="View mode" value={filters.mode} inputProps={{'data-testid': 'authorModeInput'}}
+                        onChange={(e) => dispatch({type: 'CHANGE_MODE', payload: e.target.value})}>
                             <MenuItem value="detailed">Detailed</MenuItem>
                             <MenuItem value="list">List</MenuItem>
                         </Select>
