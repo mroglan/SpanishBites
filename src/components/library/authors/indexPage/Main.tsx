@@ -99,7 +99,7 @@ export default function Main({authors:inputAuthors}:Props) {
                     <Box my={1} key={author._id}>
                         <div data-testid="listAuthorItem">
                             <Link href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
-                                <a>
+                                <a data-testid="authorName">
                                     <PrimaryLink variant="body1">
                                         {author.firstName} {author.lastName}
                                     </PrimaryLink>
@@ -115,12 +115,12 @@ export default function Main({authors:inputAuthors}:Props) {
                                 <Grid container wrap="nowrap" spacing={2} alignItems="center">
                                     <Grid item>
                                         <img src={author.image || '/no-profile.jpg'} alt={author.firstName + ' ' + author.lastName}
-                                        title={author.firstName + ' ' + author.lastName} />
+                                        title={author.firstName + ' ' + author.lastName} data-testid="authorImg" />
                                     </Grid>
                                     <Grid item style={{flexGrow: 1}}>
                                         <Box>
                                             <Link href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
-                                                <a>
+                                                <a data-testid="authorName">
                                                     <PrimaryLink variant="body1">
                                                         {author.firstName} {author.lastName}
                                                     </PrimaryLink>
@@ -128,7 +128,7 @@ export default function Main({authors:inputAuthors}:Props) {
                                             </Link>
                                         </Box>
                                         <Box mt={1}>
-                                            <Typography variant="body1">
+                                            <Typography data-testid="authorLifespan" variant="body1">
                                                 {author.birthDate} - {author.deathDate}
                                             </Typography>
                                         </Box>
