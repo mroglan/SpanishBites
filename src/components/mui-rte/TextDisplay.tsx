@@ -1,3 +1,4 @@
+import React from 'react'
 import MUIRichTextEditor from 'mui-rte'
 import {Box} from '@material-ui/core'
 import {useState, useEffect} from 'react'
