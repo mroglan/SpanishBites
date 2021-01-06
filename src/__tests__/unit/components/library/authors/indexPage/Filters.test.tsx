@@ -15,11 +15,6 @@ describe('Authors Filters', () => {
 
     const wrapper = mount(<Filters filters={filters} dispatch={dispatch} />)
 
-    it('Updates the search', () => {
-        wrapper.find('[data-testid="searchInput"]').simulate('change', {target: {value: 'hello world'}})
-        expect(dispatch).toHaveBeenCalled()
-    })
-
     it('Updates the sort mode', () => {
         wrapper.find('[data-testid="authorSortInput"]').filter('input').simulate('change', {target: {value: 'firstName'}})
         expect(dispatch).toHaveBeenCalledWith({type: 'CHANGE_SORT', payload: 'firstName'})
