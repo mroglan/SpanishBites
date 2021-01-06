@@ -1,3 +1,4 @@
+import React from 'react'
 import {Event} from '../../../database/dbInterfaces'
 import {useState, useMemo, useEffect} from 'react'
 import {FormControl, InputLabel, Select, MenuItem, Box} from '@material-ui/core'
@@ -43,7 +44,9 @@ export default function Organizer({worldEvents:inputWorld, spainEvents:inputSpai
             <Box textAlign="center">
                 <FormControl variant="outlined">
                     <InputLabel id="filter-label">Viewing</InputLabel>
-                    <Select label="Viewing" labelId="filter-label" id="filter" value={filter} onChange={(e) => setFilter(e.target.value as string)}>
+                    <Select label="Viewing" labelId="filter-label" id="filter" value={filter} 
+                    inputProps={{'data-testid': 'timePeriodViewMode'}}
+                    onChange={(e) => setFilter(e.target.value as string)}>
                         <MenuItem value="both">Spain and World Events</MenuItem>
                         <MenuItem value="spain">Spain Events</MenuItem>
                         <MenuItem value="world">World Events</MenuItem>
