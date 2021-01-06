@@ -1,3 +1,4 @@
+import React from 'react'
 import {ClientTimePeriod, ClientUnpopulatedAuthor} from '../../../../database/dbInterfaces'
 import styles from '../../../../styles/ResourceList.module.css'
 import {Box, Typography} from '@material-ui/core'
@@ -20,7 +21,7 @@ export default function List({timePeriods, authors}:Props) {
                     <div className={`${styles['period-content']} ${i > 0 ? styles['top-dot'] : ''} ${i + 1 < timePeriods.length ? styles['bottom-dot'] : ''}`}>
                         <Box textAlign="center">
                             <Link href="/library/timeperiods/[id]" as={`/library/timeperiods/${period._id}`}>
-                                <a>
+                                <a data-testid="periodListItemName">
                                     <PrimaryLink variant="h5">
                                         {period.name} ({period.dateRange[0]} - {period.dateRange[1]})
                                     </PrimaryLink>
@@ -28,11 +29,15 @@ export default function List({timePeriods, authors}:Props) {
                             </Link>
                         </Box>
                         <Box>
-                            <TextDisplay text={period.intro} />
+                            <div data-testid="periodListItemIntro">
+                                <TextDisplay text={period.intro} />
+                            </div>
                         </Box>
                         <Box>
-                            <SmallCollage images={authors[i].map(author => ({url: author.image, linkHref: '/library/authors/[id]', linkAs: `/library/authors/${author._id}`}))} 
-                            labels={authors[i].map(author => author.firstName + ' ' + author.lastName)} />
+                            <div data-testid="periodListItemAuthorCollage">
+                                <SmallCollage images={authors[i].map(author => ({url: author.image, linkHref: '/library/authors/[id]', linkAs: `/library/authors/${author._id}`}))} 
+                                labels={authors[i].map(author => author.firstName + ' ' + author.lastName)} />
+                            </div>
                         </Box>
                         <div className={styles['timeperiod-marker']} id={period._id} />
                     </div>
