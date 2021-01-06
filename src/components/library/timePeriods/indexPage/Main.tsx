@@ -1,3 +1,4 @@
+import React from 'react'
 import {ClientTimePeriod, ClientAuthor, ClientUnpopulatedAuthor} from '../../../../database/dbInterfaces'
 import {Box, Typography} from '@material-ui/core'
 import List from './List'
@@ -38,7 +39,9 @@ export default function Main({timePeriods, authors}:Props) {
                 </Box>
             </Box>
             <Box mt="1rem">
-                <TabNav timePeriods={timePeriods} />
+                <div data-testid="timePeriodTabNav">
+                    <TabNav timePeriods={timePeriods} />
+                </div>
             </Box>
         </Box>
     )
