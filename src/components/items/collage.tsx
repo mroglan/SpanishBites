@@ -16,8 +16,8 @@ export const SmallCollage = ({images, labels}:CollageProps) => {
                 <div key={i}>
                     <Link href={image.linkHref} as={image.linkAs}>
                         <a>
-                            {!labels ? <img src={image.url || '/no-profile.jpg'} /> : <Tooltip title={labels[i]}>
-                                <img src={image.url || '/no-profile.jpg'} />
+                            {!labels ? <img data-testid="smallCollageImage" src={image.url || '/no-profile.jpg'} /> : <Tooltip title={labels[i]}>
+                                <img data-testid="smallCollageImage" src={image.url || '/no-profile.jpg'} />
                             </Tooltip>}
                         </a>
                     </Link>
