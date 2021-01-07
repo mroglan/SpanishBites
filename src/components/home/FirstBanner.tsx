@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../../styles/Home.module.css'
 import {Box, Typography, Grid, useMediaQuery} from '@material-ui/core'
-import {RedPrimaryButton, RedSecondaryButton} from '../items/buttons'
+import {RedPrimaryButton, RedSecondaryButton, BluePrimaryButton, BlueSecondaryButton} from '../items/buttons'
 
 const bannerImage = (mobile:boolean, small:boolean) => {
     if(mobile) return '/landingPage/donQuijote4.png'
@@ -32,18 +32,18 @@ export default function Banner() {
                         <Box mt={3}>
                             <Grid container spacing={3} justify="center">
                                 <Grid item>
-                                    <RedPrimaryButton variant="contained">
+                                    <BluePrimaryButton variant="contained">
                                         <Typography variant="body1" color="inherit">
                                             Create an Account
                                         </Typography>
-                                    </RedPrimaryButton>
+                                    </BluePrimaryButton>
                                 </Grid>
                                 <Grid item>
-                                    <RedSecondaryButton variant="outlined">
+                                    <BlueSecondaryButton variant="outlined">
                                         <Typography variant="body1" >
                                             Learn More
                                         </Typography>
-                                    </RedSecondaryButton>
+                                    </BlueSecondaryButton>
                                 </Grid>
                             </Grid>
                         </Box>
