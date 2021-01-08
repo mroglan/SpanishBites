@@ -15,7 +15,7 @@ export default function Home() {
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
-                    <MainHeader />
+                    <MainHeader bg="hsl(50, 100%, 80%)" />
                 </div>
                 <div className={styles['sub-ad']}>
                     <FirstBanner />
