@@ -24,7 +24,7 @@ export default function Authors({authors:dbAuthors}:Props) {
             </Head>
             <div className={styles.root}>
                 <div>
-                    <MainHeader />
+                    <MainHeader bg="none" />
                 </div>
                 <div>
                     <Main authors={authors} />

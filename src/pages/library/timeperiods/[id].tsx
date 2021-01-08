@@ -36,7 +36,7 @@ export default function TimePeriod({timePeriod:dbTimePeriod}:Props) {
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
-                    <MainHeader />
+                    <MainHeader bg="none" />
                 </div>
                 <div>
                     <Box textAlign="center">

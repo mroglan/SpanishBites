@@ -26,7 +26,7 @@ export default function TimePeriods({timePeriods:dbTimePeriods, authors:dbAuthor
             </Head>
             <div className={styles.root}>
                 <div>
-                    <MainHeader />
+                    <MainHeader bg="none" />
                 </div>
                 <div>
                     <Main timePeriods={timePeriods} authors={authors} />

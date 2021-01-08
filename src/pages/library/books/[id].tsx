@@ -37,7 +37,7 @@ export default function Book({book:dbBook}:Props) {
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
-                    <MainHeader />
+                    <MainHeader bg="none" />
                 </div>
                 <div className={styles.content}>
                     <div className={styles['img-container']}>
