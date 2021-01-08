@@ -58,3 +58,19 @@ export const RedSecondaryButton = withStyles(theme => ({
         }
     }
 }))(Button)
+
+
+export const SideBarBluePrimaryButton = withStyles(theme => ({
+    root: {
+        background: 'hsla(229, 100%, 81%, .2)',
+        borderRadius: '10px',
+        width: '100%',
+        color: theme.palette.primary.main,
+        padding: `${theme.spacing(2)}px ${theme.spacing(1)}px`,
+        transition: 'color background 300ms',
+        '&:hover': {
+            color: theme.palette.primary.main,
+            background: 'hsla(229, 100%, 81%, .3)'
+        }
+    }
+}))(Button)
