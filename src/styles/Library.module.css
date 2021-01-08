@@ -4,3 +4,28 @@
     min-height: 100vh;
     grid-template-rows: auto 1fr auto;
 }
+
+.main-section-root {
+    display: grid;
+    height: clamp(500px, 100%, 1000px);
+    grid-template-columns: minmax(300px, auto) 1fr;
+}
+
+.sidebar {
+    width: clamp(300px, 20%, 500px);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0 10px;
+}
+
+.sidebar ul li {
+    margin-bottom: 8px;
+}
+
+.sidebar ul li p {
+    font-size: 1.4rem;
+    letter-spacing: .06rem;
+    font-weight: 400;
+}
