@@ -3,6 +3,7 @@ import Head from 'next/head'
 import styles from '../../styles/Library.module.css'
 
 import MainHeader from '../../components/nav/MainHeader'
+import Main from '../../components/library/indexPage/Main'
 
 export default function Library() {
 
@@ -18,7 +19,7 @@ export default function Library() {
                     <MainHeader bg="none" />
                 </div>
                 <div>
-                    main
+                    <Main />
                 </div>
                 <div>
                     footer
