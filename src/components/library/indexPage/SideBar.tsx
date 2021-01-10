@@ -18,6 +18,13 @@ export default function SideBar() {
                 <li>
                     <SideBarBluePrimaryButton>
                         <Typography variant="body1">
+                            Favorites
+                        </Typography>
+                    </SideBarBluePrimaryButton>
+                </li>
+                <li>
+                    <SideBarBluePrimaryButton>
+                        <Typography variant="body1">
                             Authors
                         </Typography>
                     </SideBarBluePrimaryButton>
