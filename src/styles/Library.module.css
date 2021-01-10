@@ -2,7 +2,7 @@
 .root {
     display: grid;
     min-height: 100vh;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr;
 }
 
 .main-section-root {
@@ -10,6 +10,8 @@
     height: clamp(500px, 100%, 1000px);
     grid-template-columns: minmax(300px, auto) 1fr;
 }
+
+/* SIDEBAR */
 
 .sidebar {
     width: clamp(300px, 20%, 500px);
@@ -28,4 +30,60 @@
     font-size: 1.4rem;
     letter-spacing: .06rem;
     font-weight: 400;
+}
+
+
+/* USER PANEL */
+
+.user-panel-root {
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto 1fr;
+}
+
+.display-panel-root {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
+}
+
+.display-panel-row {
+    height: 250px;
+    display: grid;
+    grid-template-rows: 1fr 35px;
+    margin-bottom: 10px;
+}
+
+.shelf-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.shelf {
+    border-bottom: 30px solid hsla(359, 94%, 32%, .5);
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+	top: -20px;
+    z-index: -10;
+    position: relative;
+}
+
+.shelf:after {
+	content: '';
+	background: hsla(359, 94%, 32%, .9);
+	height: 20px;
+	width: calc(100% + 40px); /*IE9+*/
+	position: absolute;
+	top: 35px;
+	left: 0;
+	right: 0;
+	z-index: 1;
+    margin: 0 -20px;
+}
+
+.paper {
+    height: 215px;
 }
