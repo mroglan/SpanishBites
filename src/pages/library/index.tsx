@@ -21,9 +21,9 @@ export default function Library() {
                 <div>
                     <Main />
                 </div>
-                <div>
-                    footer
-                </div>
+            </div>
+            <div>
+                footer
             </div>
         </>
     )
