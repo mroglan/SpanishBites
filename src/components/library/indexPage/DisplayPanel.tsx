@@ -2,6 +2,8 @@ import React, {useEffect, useRef, useState, useMemo} from 'react'
 import styles from '../../../styles/Library.module.css'
 import {Grid} from '@material-ui/core'
 import {useSprings, animated} from 'react-spring'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 interface Props {
     items: string[];
@@ -12,6 +14,7 @@ export default function DisplayPanel({items}:Props) {
     const mainRef = useRef<HTMLElement>()
 
     const [{rows, cols}, setDimensions] = useState({rows: 0, cols: 0})
+    const [disabledArrows, setDisabledArrows] = useState({left: true, right: false})
     const [panels, setPanels] = useState([])
 
     const origin = useRef<number>()
@@ -43,12 +46,15 @@ export default function DisplayPanel({items}:Props) {
         }, [])
 
         setPanels(panelsArray)
+        setDisabledArrows({left: true, right: panelsArray.length < 1})
 
     }, [rows, cols, items])
 
     const [panelAnimations, setPanelAnimations] = useSprings<any>(panels.length, i => ({x: i === 0 ? '0' : '100', config: {friction: 20}}))
     
     const movePanels = (val:number) => {
+        if(origin.current + val === -1) return
+        if(origin.current + val >= panels.length) return
         origin.current += val
         move.current = val < 0 ? 'right' : 'left'
         setPanelAnimations(i => {
@@ -56,14 +62,19 @@ export default function DisplayPanel({items}:Props) {
             if(i > origin.current) return {x: '100'}
             return {x: '-100'}
         })
+        setDisabledArrows({
+            left: origin.current === 0,
+            right: origin.current + 1 === panels.length
+        })
     }
 
     return (
         <div className={styles['display-panel-root']}>
-            <aside>
-                <button onClick={() => movePanels(-1)} >
-                    back
-                </button>
+            <aside onClick={() => movePanels(-1)} 
+            className={`${styles['display-panel-side']} ${disabledArrows.left ? styles.disabled : styles.active}`}>
+                <div>
+                    <ArrowBackIosIcon color="secondary" />
+                </div>
             </aside>
             <main ref={mainRef}>
                 <div className={styles['shelf-background']}>
@@ -98,10 +109,11 @@ export default function DisplayPanel({items}:Props) {
                     ))}
                 </div>
             </main>
-            <aside>
-                <button onClick={() => movePanels(1)} >
-                    forward
-                </button>
+            <aside onClick={() => movePanels(1)} 
+            className={`${styles['display-panel-side']} ${disabledArrows.right ? styles.disabled : styles.active}`}>
+                <div>
+                    <ArrowForwardIosIcon color="secondary" />
+                </div>
             </aside>
         </div>
     )
