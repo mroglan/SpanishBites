@@ -47,6 +47,26 @@
     grid-template-columns: 50px 1fr 50px;
 }
 
+.display-panel-root > main {
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.display-panel-side {
+    display: flex;
+    justify-content: center;
+    padding-top: 215px;
+}
+
+.display-panel-side.active {
+    cursor: pointer;
+}
+
+.display-panel-side.disabled {
+    opacity: .2;
+}
+
 .display-panel-row {
     height: 250px;
     display: grid;
@@ -54,7 +74,7 @@
     margin-bottom: 10px;
 }
 
-.shelf-background {
+.shelf-background, .panel {
     position: absolute;
     top: 0;
     left: 0;
@@ -71,7 +91,7 @@
     position: relative;
 }
 
-.shelf:after {
+.shelf::after {
 	content: '';
 	background: hsla(359, 94%, 32%, .9);
 	height: 20px;
