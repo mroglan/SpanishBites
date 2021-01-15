@@ -60,3 +60,46 @@ export function PrimarySearchBar({search, setSearch}:Props) {
         </FormControl>
     )
 }
+
+export function PrimaryLargeSearchBar({search, setSearch}:Props) {
+
+    const [input, setInput] = useState('')
+
+    const searchRef = useRef<HTMLButtonElement>()
+
+    const handleKeyPress = (e:KeyboardEvent) => {
+        if(e.key === 'Enter') searchRef.current.click()
+    }
+
+    const handleBlur = () => {
+        if(input) return
+        if(!search) return
+        setSearch('')
+    }
+
+    const classes = usePrimaryStyles()
+
+    return (
+        <FormControl style={{width: '100%'}} variant="outlined">
+            <OutlinedInput id="search-bar" placeholder="Search..." onKeyPress={handleKeyPress} onBlur={handleBlur} fullWidth
+            value={input} onChange={(e) => setInput(e.target.value as string)} inputProps={{'data-testid': 'searchInput'}}
+            startAdornment={
+                <InputAdornment position="start">
+                    <IconButton aria-label="Search" data-testid="searchBtn" className={classes.button} onClick={() => setSearch(input)} 
+                    edge="start" ref={searchRef}>
+                        <SearchIcon />
+                    </IconButton>
+                </InputAdornment>
+            } endAdornment={
+                Boolean(input) && <InputAdornment position="end">
+                    <IconButton aria-label="Clear Search" data-testid="clearBtn" className={classes.button} onClick={() => {
+                        setInput('')
+                        setSearch('')
+                    }} edge="end">
+                        <CloseIcon />
+                    </IconButton>
+                </InputAdornment>
+            } />
+        </FormControl>
+    )
+}
