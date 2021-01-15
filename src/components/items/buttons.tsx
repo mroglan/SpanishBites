@@ -1,5 +1,5 @@
 import {withStyles} from '@material-ui/core/styles'
-import {Button} from '@material-ui/core'
+import {Button, IconButton} from '@material-ui/core'
 
 export const BluePrimaryButton = withStyles(theme => ({
     root: {
@@ -74,3 +74,10 @@ export const SideBarBluePrimaryButton = withStyles(theme => ({
         }
     }
 }))(Button)
+
+
+export const BluePrimaryIconButton = withStyles(theme => ({
+    root: {
+        color: theme.palette.primary.main
+    }
+}))(IconButton)
