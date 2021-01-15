@@ -46,11 +46,11 @@ export default function DisplayPanel({items}:Props) {
         }, [])
 
         setPanels(panelsArray)
-        setDisabledArrows({left: true, right: panelsArray.length < 1})
+        setDisabledArrows({left: true, right: panelsArray.length < 2})
 
     }, [rows, cols, items])
 
-    const [panelAnimations, setPanelAnimations] = useSprings<any>(panels.length, i => ({x: i === 0 ? '0' : '100', config: {friction: 20}}))
+    const [panelAnimations, setPanelAnimations] = useSprings<any>(panels.length, i => ({x: i === 0 ? '0' : '100', config: {friction: 14 + panels[0].length}}))
     
     const movePanels = (val:number) => {
         if(origin.current + val === -1) return
