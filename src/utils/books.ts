@@ -2,6 +2,14 @@ import database from '../database/database'
 import {DBBook} from '../database/dbInterfaces'
 import {ObjectId} from 'mongodb'
 
+export const getAllUnpopulatedBooks = async () => {
+    const db = await database()
+
+    const books:DBBook[] = await db.collection('books').find({}).toArray()
+
+    return books
+}
+
 export const getBook = async (id:ObjectId) => {
     const db = await database()
 
