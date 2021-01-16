@@ -1,9 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from '../../../styles/Library.module.css'
 import SideBar from './SideBar'
 import DisplayPanel from './DisplayPanel'
+import SearchPanel from './SearchPanel'
 
 export default function Main() {
+
+    const [items, setItems] = useState(Array(20).fill(''))
 
     return (
         <div className={styles['main-section-root']}>
@@ -12,10 +15,10 @@ export default function Main() {
             </aside>
             <main className={styles['user-panel-root']}>
                 <section>
-                    <div style={{height: 100}} />
+                    <SearchPanel />
                 </section>
                 <section>
-                    <DisplayPanel />
+                    <DisplayPanel items={items} />
                 </section>
             </main>
         </div>
