@@ -8,6 +8,7 @@ import {SetStateAction, Dispatch, useState, useRef, KeyboardEvent} from 'react'
 interface Props {
     search: string;
     setSearch: Dispatch<SetStateAction<string>>;
+    disabled?:boolean;
 }
 
 const usePrimaryStyles = makeStyles(theme => ({
@@ -61,7 +62,7 @@ export function PrimarySearchBar({search, setSearch}:Props) {
     )
 }
 
-export function PrimaryLargeSearchBar({search, setSearch}:Props) {
+export function PrimaryLargeSearchBar({search, setSearch, disabled}:Props) {
 
     const [input, setInput] = useState('')
 
@@ -99,7 +100,7 @@ export function PrimaryLargeSearchBar({search, setSearch}:Props) {
                         <CloseIcon />
                     </IconButton>
                 </InputAdornment>
-            } />
+            } disabled={disabled} />
         </FormControl>
     )
 }
