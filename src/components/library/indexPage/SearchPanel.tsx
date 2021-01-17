@@ -15,12 +15,9 @@ export default function SearchPanel() {
 
     return (
         <div className={styles['search-panel-root']}>
-            <Grid container alignItems="center">
+            <Grid style={{position: 'relative'}} container alignItems="center">
                 <Grid item className={styles['searchbar-grid-item']}>
                     <PrimaryLargeSearchBar search={search} setSearch={setSearch} disabled={dropDown} />
-                    {dropDown && <div className={styles['filters-dropdown-container']}>
-                        <FiltersPanel />
-                    </div>}
                 </Grid>
                 <Grid item>
                     <Grid container>
@@ -36,6 +33,9 @@ export default function SearchPanel() {
                         </Grid>
                     </Grid>
                 </Grid>
+                {dropDown && <div className={styles['filters-dropdown-container']}>
+                        <FiltersPanel />
+                </div>}
             </Grid>
         </div>
     )
