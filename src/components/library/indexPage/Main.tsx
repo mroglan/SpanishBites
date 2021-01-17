@@ -1,12 +1,15 @@
-import React, {useState} from 'react'
+import React, {useState, createContext} from 'react'
+import {Props} from '../../../pages/library/index'
 import styles from '../../../styles/Library.module.css'
 import SideBar from './SideBar'
 import DisplayPanel from './DisplayPanel'
 import SearchPanel from './SearchPanel'
 
-export default function Main() {
+export const LibraryItemsContext = createContext<any>({})
 
-    const [items, setItems] = useState(Array(20).fill(''))
+export default function Main({items:libraryItems}:Props) {
+
+    const [displayItems, setDisplayItems] = useState(Array(20).fill(''))
 
     return (
         <div className={styles['main-section-root']}>
@@ -15,10 +18,12 @@ export default function Main() {
             </aside>
             <main className={styles['user-panel-root']}>
                 <section>
-                    <SearchPanel />
+                    <LibraryItemsContext.Provider value={libraryItems}>
+                        <SearchPanel />
+                    </LibraryItemsContext.Provider>
                 </section>
                 <section>
-                    <DisplayPanel items={items} />
+                    <DisplayPanel items={displayItems} />
                 </section>
             </main>
         </div>
