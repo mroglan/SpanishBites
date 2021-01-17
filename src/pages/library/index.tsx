@@ -7,11 +7,22 @@ import {getAllUnpopulatedBooks} from '../../utils/books'
 import {getAllTimePeriods} from '../../utils/timePeriods'
 import {getAllGenres} from '../../utils/genres'
 import {getAllPassages} from '../../utils/passages'
+import {ClientAuthor, ClientBook, ClientGenre, ClientTimePeriod, ClientPassage} from '../../database/dbInterfaces'
 
 import MainHeader from '../../components/nav/MainHeader'
 import Main from '../../components/library/indexPage/Main'
 
-export default function Library({items:dbItems}) {
+export interface Props {
+    items: {
+        authors: ClientAuthor[];
+        books: ClientBook[];
+        timePeriods: ClientTimePeriod[];
+        genres: ClientGenre[];
+        passages: ClientPassage[];
+    };
+}
+
+export default function Library({items:dbItems}:Props) {
 
     return (
         <>
@@ -25,7 +36,7 @@ export default function Library({items:dbItems}) {
                     <MainHeader bg="none" />
                 </div>
                 <div>
-                    <Main />
+                    <Main items={dbItems} />
                 </div>
             </div>
             <div>
