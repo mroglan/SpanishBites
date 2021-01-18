@@ -7,6 +7,16 @@ import {ClientAuthor, ClientBook, ClientGenre, ClientTimePeriod} from '../../../
 import {LibraryItemsContext} from './Main'
 import {GrayDenseButton, BlueDenseButton} from '../../items/buttons'
 
+export interface Filters {
+    libraryItem: string;
+    timePeriods: string[];
+    birthDate: string;
+    deathDate: string;
+    authors: string[];
+    genres: string[];
+    books: string[];
+}
+
 export const initialFilters = {
     libraryItem: 'none',
     timePeriods: [],
