@@ -7,14 +7,14 @@ import {getAllUnpopulatedBooks} from '../../utils/books'
 import {getAllTimePeriods} from '../../utils/timePeriods'
 import {getAllGenres} from '../../utils/genres'
 import {getAllPassages} from '../../utils/passages'
-import {ClientAuthor, ClientBook, ClientGenre, ClientTimePeriod, ClientPassage} from '../../database/dbInterfaces'
+import {ClientUnpopulatedAuthor, ClientUnpopulatedBook, ClientGenre, ClientTimePeriod, ClientPassage} from '../../database/dbInterfaces'
 
 import MainHeader from '../../components/nav/MainHeader'
 import Main from '../../components/library/indexPage/Main'
 
 export interface LibraryItems {
-    authors: ClientAuthor[];
-    books: ClientBook[];
+    authors: ClientUnpopulatedAuthor[];
+    books: ClientUnpopulatedBook[];
     timePeriods: ClientTimePeriod[];
     genres: ClientGenre[];
     passages: ClientPassage[];
