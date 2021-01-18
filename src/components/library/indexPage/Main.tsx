@@ -11,6 +11,8 @@ export default function Main({items:libraryItems}:Props) {
 
     const [displayItems, setDisplayItems] = useState(Array(20).fill(''))
 
+    console.log('displayItems', displayItems)
+
     return (
         <div className={styles['main-section-root']}>
             <aside className={styles['sidebar']}>
@@ -19,7 +21,7 @@ export default function Main({items:libraryItems}:Props) {
             <main className={styles['user-panel-root']}>
                 <section>
                     <LibraryItemsContext.Provider value={libraryItems}>
-                        <SearchPanel />
+                        <SearchPanel setDisplayItems={setDisplayItems} />
                     </LibraryItemsContext.Provider>
                 </section>
                 <section>
