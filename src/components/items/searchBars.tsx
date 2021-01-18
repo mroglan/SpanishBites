@@ -87,7 +87,7 @@ export function PrimaryLargeSearchBar({search, setSearch, disabled}:Props) {
             startAdornment={
                 <InputAdornment position="start">
                     <IconButton aria-label="Search" data-testid="searchBtn" className={classes.button} onClick={() => setSearch(input)} 
-                    edge="start" ref={searchRef}>
+                    edge="start" ref={searchRef} disabled={disabled}>
                         <SearchIcon />
                     </IconButton>
                 </InputAdornment>
@@ -96,7 +96,7 @@ export function PrimaryLargeSearchBar({search, setSearch, disabled}:Props) {
                     <IconButton aria-label="Clear Search" data-testid="clearBtn" className={classes.button} onClick={() => {
                         setInput('')
                         setSearch('')
-                    }} edge="end">
+                    }} edge="end" disabled={disabled}>
                         <CloseIcon />
                     </IconButton>
                 </InputAdornment>
