@@ -117,7 +117,7 @@ export interface DBPassage extends Passage {
 
 export interface ClientPassage extends Passage {
     _id: string;
-    book: string;
+    book: {_id: string; genres: string[]; authors: string[]; timePeriod: string};
 }
 
 
