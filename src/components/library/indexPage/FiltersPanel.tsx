@@ -2,7 +2,7 @@ import React, {useState, useReducer, useContext, useMemo} from 'react'
 import styles from '../../../styles/Library.module.css'
 import {Grid, Typography, Box, FormControl, Select, MenuItem, InputLabel, TextField} from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-import {ClientAuthor, ClientBook, ClientGenre, ClientTimePeriod} from '../../../database/dbInterfaces'
+import {ClientUnpopulatedAuthor, ClientUnpopulatedBook, ClientGenre, ClientTimePeriod} from '../../../database/dbInterfaces'
 
 import {LibraryItemsContext} from './Main'
 import {GrayDenseButton, BlueDenseButton} from '../../items/buttons'
@@ -63,7 +63,7 @@ interface LifeSpanProps {
 interface AuthorSelectProps {
     value: string[];
     dispatch: any;
-    authors: ClientAuthor[];
+    authors: ClientUnpopulatedAuthor[];
 }
 
 interface GenreSelectProps {
@@ -75,7 +75,7 @@ interface GenreSelectProps {
 interface BookSelectProps {
     value: string[];
     dispatch: any;
-    books: ClientBook[];
+    books: ClientUnpopulatedBook[];
 }
 
 function BookSelect({value, dispatch, books}:BookSelectProps) {
