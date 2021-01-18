@@ -192,7 +192,7 @@ function LifeSpan({birthDate, deathDate, dispatch}:LifeSpanProps) {
                 </Typography>
             </Grid>
             <Grid style={{flexGrow: 1}} item>
-                <TextField variant="standard" id="birthdate-input" value={birthDate} 
+                <TextField variant="standard" id="birthdate-input" value={birthDate}  fullWidth
                 onChange={(e) => e.target.value.length < 5 && dispatch({type: 'CHANGE_BIRTHDATE', payload: e.target.value})} />
             </Grid>
             <Grid item>
@@ -203,7 +203,7 @@ function LifeSpan({birthDate, deathDate, dispatch}:LifeSpanProps) {
                 </Typography>
             </Grid>
             <Grid style={{flexGrow: 1}} item>
-                <TextField variant="standard" id="deathdate-input" value={deathDate}
+                <TextField variant="standard" id="deathdate-input" value={deathDate} fullWidth
                 onChange={(e) => e.target.value.length < 5 && dispatch({type: 'CHANGE_DEATHDATE', payload: e.target.value})} />
             </Grid>
         </Grid>
