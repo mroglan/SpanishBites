@@ -12,14 +12,16 @@ import {ClientAuthor, ClientBook, ClientGenre, ClientTimePeriod, ClientPassage} 
 import MainHeader from '../../components/nav/MainHeader'
 import Main from '../../components/library/indexPage/Main'
 
+export interface LibraryItems {
+    authors: ClientAuthor[];
+    books: ClientBook[];
+    timePeriods: ClientTimePeriod[];
+    genres: ClientGenre[];
+    passages: ClientPassage[];
+}
+
 export interface Props {
-    items: {
-        authors: ClientAuthor[];
-        books: ClientBook[];
-        timePeriods: ClientTimePeriod[];
-        genres: ClientGenre[];
-        passages: ClientPassage[];
-    };
+    items: LibraryItems;
 }
 
 export default function Library({items:dbItems}:Props) {
