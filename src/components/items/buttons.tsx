@@ -33,7 +33,6 @@ export const BlueSecondaryButton = withStyles(theme => ({
         border: `2px solid #000`,
         borderRadius: theme.spacing(3),
         padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
-        //color: 'hsl(359, 80%, 50%)',
         transition: 'background color border 300ms',
         '&:hover': {
             color: '#fff',
@@ -81,3 +80,30 @@ export const BluePrimaryIconButton = withStyles(theme => ({
         color: theme.palette.primary.main
     }
 }))(IconButton)
+
+
+export const GrayDenseButton = withStyles(theme => ({
+    root: {
+        background: 'hsla(229, 23%, 78%, .8)',
+        color: '#000',
+        borderRadius: theme.spacing(1),
+        padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+        transition: 'background 300ms',
+        '&:hover': {
+            background: 'hsla(229, 23%, 78%, 1)'
+        }
+    }
+}))(Button)
+
+export const BlueDenseButton = withStyles(theme => ({
+    root: {
+        background: theme.palette.primary.main,
+        color: '#fff',
+        borderRadius: theme.spacing(1),
+        padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+        transition: 'background 300ms',
+        '&:hover': {
+            background: theme.palette.primary.dark
+        }
+    }
+}))(Button)
