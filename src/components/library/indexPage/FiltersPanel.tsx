@@ -314,7 +314,11 @@ export default function FilterPanel({filters:startFilters, setFilters, closeFilt
                 <Box>
                     <TimePeriodSelect value={filters.timePeriods} dispatch={dispatch} periods={libraryItems.timePeriods} />
                 </Box>
-            </Box> : ''}
+            </Box> : <Box>
+                <Box>
+                    <TimePeriodSelect value={filters.timePeriods} dispatch={dispatch} periods={libraryItems.timePeriods} />
+                </Box>
+            </Box>}
             <Box mt={3}>
                 <Grid container spacing={3} justify="flex-end" alignItems="center">
                     <Grid item>
