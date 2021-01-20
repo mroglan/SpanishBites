@@ -5,11 +5,7 @@ import {useSprings, animated} from 'react-spring'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-interface Props {
-    items: string[];
-}
-
-export default function DisplayPanel({items}:Props) {
+export default function DisplayPanel({items}) {
 
     const mainRef = useRef<HTMLElement>()
 

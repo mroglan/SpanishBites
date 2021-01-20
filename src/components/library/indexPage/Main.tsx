@@ -5,6 +5,8 @@ import SideBar from './SideBar'
 import DisplayPanel from './DisplayPanel'
 import SearchPanel from './SearchPanel'
 import {initialFilters} from './FiltersPanel'
+import FiltersDisplay from './FiltersDisplay'
+import {Box} from '@material-ui/core'
 
 export const LibraryItemsContext = createContext<any>({})
 
@@ -20,11 +22,14 @@ export default function Main({items:libraryItems}:Props) {
                 <SideBar />
             </aside>
             <main className={styles['user-panel-root']}>
-                <section>
-                    <LibraryItemsContext.Provider value={libraryItems}>
-                        <SearchPanel filters={filters} setFilters={setFilters} setDisplayItems={setDisplayItems} />
-                    </LibraryItemsContext.Provider>
-                </section>
+                <LibraryItemsContext.Provider value={libraryItems}>
+                    <section>
+                            <SearchPanel filters={filters} setFilters={setFilters} setDisplayItems={setDisplayItems} />
+                    </section>
+                    <section className={styles['filters-display-overflow']}>
+                        <FiltersDisplay filters={filters} setFilters={setFilters} />
+                    </section>
+                </LibraryItemsContext.Provider>
                 <section>
                     <DisplayPanel items={displayItems} />
                 </section>
