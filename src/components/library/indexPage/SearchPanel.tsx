@@ -13,9 +13,10 @@ import { ClientUnpopulatedAuthor, ClientUnpopulatedBook, ClientPassage } from '.
 import { FilterNoneSharp } from '@material-ui/icons'
 
 interface Props {
-    setDisplayItems: (value:any[]) => void;
     filters: Filters;
     setFilters: (value:Filters) => void;
+    search: string;
+    setSearch: (value:string) => void;
 }
 
 function searchThruAuthors(authors:ClientUnpopulatedAuthor[], search:string, filters:Filters) {
@@ -57,7 +58,7 @@ function searchThruAllItems(libraryItems:LibraryItems, search:string, filters:Fi
     return items
 }
 
-function findDisplayItems(libraryItems:LibraryItems, search:string, filters:Filters) {
+export function findDisplayItems(libraryItems:LibraryItems, search:string, filters:Filters) {
     const {libraryItem:searchItem} = filters
     const lcSearch = search.toLowerCase()
     if(searchItem === 'none') return searchThruAllItems(libraryItems, lcSearch, filters)
@@ -66,23 +67,18 @@ function findDisplayItems(libraryItems:LibraryItems, search:string, filters:Filt
     return searchThruPassages(libraryItems.passages, lcSearch, filters)
 }
 
-export default function SearchPanel({setDisplayItems, filters, setFilters}:Props) {
+export default function SearchPanel({filters, setFilters, search, setSearch}:Props) {
 
-    const libraryItems:LibraryItems = useContext(LibraryItemsContext)
-
-    const [search, setSearch] = useState('')
     const [dropDown, setDropDown] = useState(false)
 
     const closeFilters = () => setDropDown(false)
 
     const saveNewFilters = (newFilters:Filters) => {
-        setDisplayItems(findDisplayItems(libraryItems, search, newFilters))
         closeFilters()
         setFilters(newFilters)
     }
 
     const updateSearch = (input:string) => {
-        setDisplayItems(findDisplayItems(libraryItems, input, filters))
         setSearch(input)
     }
 

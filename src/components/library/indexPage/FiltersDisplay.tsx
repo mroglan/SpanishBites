@@ -26,7 +26,7 @@ function FilterChip({title, onDelete}:FilterChipProps) {
 
 export default function FiltersDisplay({filters, setFilters}:Props) {
 
-    const libraryItems:LibraryItems = useContext(LibraryItemsContext)
+    const libraryItems = useContext(LibraryItemsContext)
 
     const timePeriods = useMemo(() => {
         return filters.timePeriods.map(period => libraryItems.timePeriods.find(p => p._id === period))
