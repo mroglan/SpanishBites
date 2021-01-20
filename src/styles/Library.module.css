@@ -39,7 +39,19 @@
 .user-panel-root {
     display: grid;
     height: 100%;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr;
+}
+
+.filters-display-overflow {
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 0 50px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.filters-display-overflow::-webkit-scrollbar { 
+    width: 0;
 }
 
 /* DISPLAY PANEL */
@@ -136,4 +148,10 @@
 
 .text-faded {
     color: rgba(0, 0, 0, .9)
+}
+
+/* FILTERS DISPLAY */
+
+.filters-display-root {
+
 }
