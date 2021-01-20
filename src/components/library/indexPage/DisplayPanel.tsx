@@ -5,13 +5,26 @@ import {useSprings, animated} from 'react-spring'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
+interface DisplayItem {
+    type: string;
+    title: string;
+}
+
 export default function DisplayPanel({items}) {
+
+    const displayItems:DisplayItem[] = useMemo(() => {
+        return items.map(item => {
+            if(item.type === 'author') return {...item, title: item.firstName + ' ' + item.lastName}
+            if(item.type === 'book') return {...item}
+            return {...item, title: item.name}
+        })
+    }, [items])
 
     const mainRef = useRef<HTMLElement>()
 
     const [{rows, cols}, setDimensions] = useState({rows: 0, cols: 0})
     const [disabledArrows, setDisabledArrows] = useState({left: true, right: false})
-    const [panels, setPanels] = useState([])
+    const [panels, setPanels] = useState<DisplayItem[][]>([])
 
     const origin = useRef<number>()
     const move = useRef<string>()
@@ -29,7 +42,7 @@ export default function DisplayPanel({items}) {
         if(!rows || !cols) return
 
         const itemsPerPanel = rows * cols
-        const panelsArray = items.reduce((result, item, i) => {
+        const panelsArray = displayItems.reduce((result, item, i) => {
             const chunkIndex = Math.floor(i / itemsPerPanel)
 
             if(!result[chunkIndex]) {
@@ -64,6 +77,9 @@ export default function DisplayPanel({items}) {
         })
     }
 
+    console.log('items', items)
+    console.log('displayItems', displayItems)
+
     return (
         <div className={styles['display-panel-root']}>
             <aside onClick={() => movePanels(-1)} 
@@ -93,7 +109,9 @@ export default function DisplayPanel({items}) {
                                                 if(k < j * cols) return
                                                 if((j * cols) + cols < k + 1) return
                                                 return <Grid key={k} item>
-                                                    <img src="/library/paper.png" className={styles.paper} title="Paper" />
+                                                    <div className={styles['display-item']}>
+                                                        <img src="/library/paper.png" className={styles.paper} title="Paper" />
+                                                    </div>
                                                 </Grid>
                                             })}
                                         </Grid>
