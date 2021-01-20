@@ -60,12 +60,11 @@ function findDisplayItems(libraryItems:LibraryItems, search:string, filters:Filt
     return searchThruPassages(libraryItems.passages, lcSearch, filters)
 }
 
-export default function SearchPanel({setDisplayItems}) {
+export default function SearchPanel({setDisplayItems, filters, setFilters}) {
 
     const libraryItems:LibraryItems = useContext(LibraryItemsContext)
 
     const [search, setSearch] = useState('')
-    const [filters, setFilters] = useState(initialFilters)
     const [dropDown, setDropDown] = useState(false)
 
     const closeFilters = () => setDropDown(false)

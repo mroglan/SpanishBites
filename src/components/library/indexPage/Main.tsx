@@ -4,6 +4,7 @@ import styles from '../../../styles/Library.module.css'
 import SideBar from './SideBar'
 import DisplayPanel from './DisplayPanel'
 import SearchPanel from './SearchPanel'
+import {initialFilters} from './FiltersPanel'
 
 export const LibraryItemsContext = createContext<any>({})
 
@@ -11,7 +12,7 @@ export default function Main({items:libraryItems}:Props) {
 
     const [displayItems, setDisplayItems] = useState(Array(20).fill(''))
 
-    console.log('displayItems', displayItems)
+    const [filters, setFilters] = useState(initialFilters)
 
     return (
         <div className={styles['main-section-root']}>
@@ -21,7 +22,7 @@ export default function Main({items:libraryItems}:Props) {
             <main className={styles['user-panel-root']}>
                 <section>
                     <LibraryItemsContext.Provider value={libraryItems}>
-                        <SearchPanel setDisplayItems={setDisplayItems} />
+                        <SearchPanel filters={filters} setFilters={setFilters} setDisplayItems={setDisplayItems} />
                     </LibraryItemsContext.Provider>
                 </section>
                 <section>
