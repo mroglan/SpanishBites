@@ -26,7 +26,7 @@ function searchThruAuthors(authors:ClientUnpopulatedAuthor[], search:string, fil
         if(filters.birthDate && filters.birthDate !== birthDate) return false
         if(filters.deathDate && filters.deathDate !== deathDate) return false
         return true
-    })
+    }).map(author => ({...author, type: 'author'}))
 }
 
 function searchThruBooks(books:ClientUnpopulatedBook[], search:string, filters:Filters) {
@@ -36,7 +36,7 @@ function searchThruBooks(books:ClientUnpopulatedBook[], search:string, filters:F
         if(filters.authors.length > 0 && !filters.authors.find(author => authors.includes(author))) return false
         if(filters.genres.length > 0 && !filters.genres.find(genre => genres.includes(genre))) return false
         return true
-    })
+    }).map(book => ({...book, type: 'book'}))
 }
 
 function searchThruPassages(passages:ClientPassage[], search:string, filters:Filters) {
@@ -47,7 +47,7 @@ function searchThruPassages(passages:ClientPassage[], search:string, filters:Fil
         if(filters.authors.length > 0 && !filters.authors.find(author => book.authors.includes(author))) return false
         if(filters.genres.length > 0 && !filters.genres.find(genre => book.genres.includes(genre))) return false
         return true
-    })
+    }).map(passage => ({...passage, type: 'passage'}))
 }
 
 function searchThruAllItems(libraryItems:LibraryItems, search:string, filters:Filters) {
