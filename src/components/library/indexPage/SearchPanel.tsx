@@ -12,6 +12,12 @@ import {LibraryItems} from '../../../pages/library/index'
 import { ClientUnpopulatedAuthor, ClientUnpopulatedBook, ClientPassage } from '../../../database/dbInterfaces'
 import { FilterNoneSharp } from '@material-ui/icons'
 
+interface Props {
+    setDisplayItems: (value:any[]) => void;
+    filters: Filters;
+    setFilters: (value:Filters) => void;
+}
+
 function searchThruAuthors(authors:ClientUnpopulatedAuthor[], search:string, filters:Filters) {
     return authors.filter(({firstName, lastName, timePeriod, birthDate, deathDate}) => {
         if(!`${firstName} ${lastName}`.match(new RegExp(search, 'i'))) return false
@@ -60,7 +66,7 @@ function findDisplayItems(libraryItems:LibraryItems, search:string, filters:Filt
     return searchThruPassages(libraryItems.passages, lcSearch, filters)
 }
 
-export default function SearchPanel({setDisplayItems, filters, setFilters}) {
+export default function SearchPanel({setDisplayItems, filters, setFilters}:Props) {
 
     const libraryItems:LibraryItems = useContext(LibraryItemsContext)
 
