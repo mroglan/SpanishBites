@@ -18,7 +18,7 @@ export default function DisplayPanel({items}) {
             if(item.type === 'author') return {...item, title: item.firstName + ' ' + item.lastName}
             if(item.type === 'book') return {...item}
             return {...item, title: item.name}
-        })
+        }).sort((a, b) => a.title.localeCompare(b.title))
     }, [items])
 
     const mainRef = useRef<HTMLElement>()
