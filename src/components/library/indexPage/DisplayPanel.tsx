@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState, useMemo} from 'react'
 import styles from '../../../styles/Library.module.css'
-import {Grid} from '@material-ui/core'
+import {Divider, Grid, Typography} from '@material-ui/core'
 import {useSprings, animated} from 'react-spring'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -8,6 +8,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 interface DisplayItem {
     type: string;
     title: string;
+    image?: string;
 }
 
 export default function DisplayPanel({items}) {
@@ -77,9 +78,6 @@ export default function DisplayPanel({items}) {
         })
     }
 
-    console.log('items', items)
-    console.log('displayItems', displayItems)
-
     return (
         <div className={styles['display-panel-root']}>
             <aside onClick={() => movePanels(-1)} 
@@ -106,11 +104,25 @@ export default function DisplayPanel({items}) {
                                     <div>
                                         <Grid container justify="space-around">
                                             {panel.map((item, k) => {
+                                                const animationItemIndex = (i * panel.length) + k
                                                 if(k < j * cols) return
                                                 if((j * cols) + cols < k + 1) return
                                                 return <Grid key={k} item>
                                                     <div className={styles['display-item']}>
-                                                        <img src="/library/paper.png" className={styles.paper} title="Paper" />
+                                                        <img src="/library/paper.png" className={styles.paper} title="Paper"/>
+                                                        <div className={styles['display-item-title']}>
+                                                            <Typography variant="body1">
+                                                                {item.title}
+                                                            </Typography>
+                                                        </div>
+                                                        <div className={styles['display-item-type']}>
+                                                            <Typography color="inherit" variant="body2">
+                                                                {item.type.toUpperCase()}
+                                                            </Typography>
+                                                        </div>
+                                                        {item.image && <div className={styles['display-item-img-container']}>
+                                                        <img src={item.image} className={styles['display-item-image']}/>
+                                                        </div>}
                                                     </div>
                                                 </Grid>
                                             })}

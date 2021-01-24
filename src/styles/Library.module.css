@@ -121,7 +121,60 @@
 
 .paper {
     height: 215px;
+    z-index: 5;
 }
+
+.display-item {
+    position: relative;
+}
+
+.display-item-title {
+    position: absolute;
+    top: 5px;
+    left: 50px;
+    width: 140px;
+    height: 180px;
+    display: grid;
+    place-items: center;
+    z-index: 6;
+}
+
+.display-item-title p {
+    text-align: center;
+}
+
+.display-item-type {
+    position: absolute;
+    left: 40px;
+    top: 190px;
+    height: 25px;
+    width: 70px;
+    display: flex;
+    align-items: flex-end;
+    color:hsla(359, 94%, 32%, .7) !important;
+    z-index: 6;
+}
+
+.display-item-img-container {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    overflow: hidden;
+    width: 200px;
+    height: 165px;
+    border-bottom-left-radius: 15px;
+}
+
+.display-item-image {
+    position: absolute;
+    height: 165px;
+    left: 0;
+    max-width: 180px;
+    z-index: -1;
+    transform: translateX(-35%);
+    opacity: .7;
+}
+
 
 /* SEARCH PANEL */
 

@@ -12,7 +12,7 @@ export const LibraryItemsContext = createContext<LibraryItems>({authors: [], boo
 
 export default function Main({items:libraryItems}:Props) {
 
-    const [displayItems, setDisplayItems] = useState(Array(20).fill(''))
+    const [displayItems, setDisplayItems] = useState([])
 
     const [filters, setFilters] = useState(initialFilters)
     const [search, setSearch] = useState('')
