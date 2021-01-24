@@ -24,7 +24,7 @@ export default function Main({items:libraryItems}:Props) {
     return (
         <div className={styles['main-section-root']}>
             <aside className={styles['sidebar']}>
-                <SideBar />
+                <SideBar setFilters={setFilters} />
             </aside>
             <main className={styles['user-panel-root']}>
                 <LibraryItemsContext.Provider value={libraryItems}>

@@ -1,9 +1,19 @@
 import React from 'react'
+import Link from 'next/link'
 import styles from '../../../styles/Library.module.css'
 import {SideBarBluePrimaryButton} from '../../items/buttons'
 import {Typography} from '@material-ui/core'
+import {Filters, initialFilters} from './FiltersPanel'
 
-export default function SideBar() {
+interface Props {
+    setFilters: (filters:Filters) => void;
+}
+
+export default function SideBar({setFilters}) {
+
+    const changeFilters = (libraryItem:string) => {
+        setFilters({...initialFilters, libraryItem})
+    }
 
     return (
         <div>
@@ -23,32 +33,36 @@ export default function SideBar() {
                     </SideBarBluePrimaryButton>
                 </li>
                 <li>
-                    <SideBarBluePrimaryButton>
+                    <SideBarBluePrimaryButton onClick={() => changeFilters('authors')}>
                         <Typography variant="body1">
                             Authors
                         </Typography>
                     </SideBarBluePrimaryButton>
                 </li>
                 <li>
-                    <SideBarBluePrimaryButton>
+                    <SideBarBluePrimaryButton onClick={() => changeFilters('books')}>
                         <Typography variant="body1">
                             Books
                         </Typography>
                     </SideBarBluePrimaryButton>
                 </li>
                 <li>
-                    <SideBarBluePrimaryButton>
+                    <SideBarBluePrimaryButton onClick={() => changeFilters('passages')}>
                         <Typography variant="body1">
                             Passages
                         </Typography>
                     </SideBarBluePrimaryButton>
                 </li>
                 <li>
-                    <SideBarBluePrimaryButton>
-                        <Typography variant="body1">
-                            Time Periods
-                        </Typography>
-                    </SideBarBluePrimaryButton>
+                    <Link href="/library/timeperiods" >
+                        <a>
+                            <SideBarBluePrimaryButton>
+                                <Typography variant="body1">
+                                    Time Periods
+                                </Typography>
+                            </SideBarBluePrimaryButton>
+                        </a>
+                    </Link>
                 </li>
             </ul>
         </div>
