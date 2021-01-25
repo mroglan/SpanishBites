@@ -4,6 +4,7 @@ import {Divider, Grid, Typography} from '@material-ui/core'
 import {useSprings, animated} from 'react-spring'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import PreviewCarousel from './preview/PreviewCarousel'
 
 interface DisplayItem {
     type: string;
@@ -26,13 +27,13 @@ export default function DisplayPanel({items}) {
     const [{rows, cols}, setDimensions] = useState({rows: 0, cols: 0})
     const [disabledArrows, setDisabledArrows] = useState({left: true, right: false})
     const [panels, setPanels] = useState<DisplayItem[][]>([])
+    const [viewPreview, setViewPreview] = useState(false)
 
     const origin = useRef<number>()
-    const move = useRef<string>()
+    const previewOrigin = useRef<number>()
 
     useMemo(() => {
         origin.current = 0
-        move.current = 'none'
     }, [items])
 
     useEffect(() => {
@@ -61,12 +62,16 @@ export default function DisplayPanel({items}) {
     }, [rows, cols, items])
 
     const [panelAnimations, setPanelAnimations] = useSprings<any>(panels.length, i => ({x: i === 0 ? '0' : '100', config: {friction: 14 + panels[0].length}}))
+
+    const [previewPanelAnimations, setPreviewPanelAnimations] = useSprings<any>(displayItems.length, i => {
+        return {x: '0'}
+    })
     
     const movePanels = (val:number) => {
+        if(viewPreview) movePreview(val)
         if(origin.current + val === -1) return
         if(origin.current + val >= panels.length) return
         origin.current += val
-        move.current = val < 0 ? 'right' : 'left'
         setPanelAnimations(i => {
             if(i === origin.current) return {x: '0'}
             if(i > origin.current) return {x: '100'}
@@ -75,6 +80,31 @@ export default function DisplayPanel({items}) {
         setDisabledArrows({
             left: origin.current === 0,
             right: origin.current + 1 === panels.length
+        })
+    }
+
+    const openPreview = (index:number) => {
+        setPreview(index, true)
+        setViewPreview(true)
+    }
+
+    const movePreview = (val:number) => {
+        if(previewOrigin.current + val === -1) return
+        if(previewOrigin.current + val >= displayItems.length) return
+        setPreview(previewOrigin.current + val)
+    }
+
+    const setPreview = (index:number, opening?:boolean) => {
+        previewOrigin.current = index
+        const config = opening ? {duration: 0} : {}
+        setPreviewPanelAnimations(i => {
+            if(i === previewOrigin.current) return {x: '0', config}
+            if(i > previewOrigin.current) return {x: '100', config}
+            return {x: '-100', config}
+        })
+        setDisabledArrows({
+            left: previewOrigin.current === 0,
+            right: previewOrigin.current + 1 === displayItems.length
         })
     }
 
@@ -104,11 +134,10 @@ export default function DisplayPanel({items}) {
                                     <div>
                                         <Grid container justify="space-around">
                                             {panel.map((item, k) => {
-                                                const animationItemIndex = (i * panel.length) + k
                                                 if(k < j * cols) return
                                                 if((j * cols) + cols < k + 1) return
                                                 return <Grid key={k} item>
-                                                    <div className={styles['display-item']}>
+                                                    <div onClick={() => openPreview((i * panel.length) + k)} className={styles['display-item']}>
                                                         <img src="/library/paper.png" className={styles.paper} title="Paper"/>
                                                         <div className={styles['display-item-title']}>
                                                             <Typography variant="body1">
@@ -134,6 +163,7 @@ export default function DisplayPanel({items}) {
                         </animated.div>
                     ))}
                 </div>
+                {viewPreview && <PreviewCarousel items={displayItems} previewPanelAnimations={previewPanelAnimations} origin={previewOrigin} />}
             </main>
             <aside onClick={() => movePanels(1)} 
             className={`${styles['display-panel-side']} ${disabledArrows.right ? styles.disabled : styles.active}`}>
