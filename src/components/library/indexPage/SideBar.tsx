@@ -9,7 +9,7 @@ interface Props {
     setFilters: (filters:Filters) => void;
 }
 
-export default function SideBar({setFilters}) {
+export default function SideBar({setFilters}:Props) {
 
     const changeFilters = (libraryItem:string) => {
         setFilters({...initialFilters, libraryItem})
