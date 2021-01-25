@@ -89,12 +89,16 @@
     margin-bottom: 10px;
 }
 
-.shelf-background, .panel {
+.shelf-background, .panel, .preview-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.preview-bg {
+    background: hsl(50, 100%, 97%);
 }
 
 .shelf {
@@ -126,6 +130,7 @@
 
 .display-item {
     position: relative;
+    cursor: pointer;
 }
 
 .display-item-title {
@@ -204,7 +209,3 @@
 }
 
 /* FILTERS DISPLAY */
-
-.filters-display-root {
-
-}
