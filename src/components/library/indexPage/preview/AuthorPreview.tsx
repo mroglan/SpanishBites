@@ -27,15 +27,17 @@ export default function AuthorPreview({author}:Props) {
                     <img src={author.image || '/no-profile.jpg'} />
                 </div>
                 <div>
-                    <BulletList>
-                        {author.keyPoints.map((point, i) => (
-                            <li key={i}>
-                                <Typography variant="body1">
-                                    {point}
-                                </Typography>
-                            </li>
-                        ))}
-                    </BulletList>
+                    <Box mt="-14px">
+                        <BulletList>
+                            {author.keyPoints.map((point, i) => (
+                                <li key={i}>
+                                    <Typography variant="body1">
+                                        {point}
+                                    </Typography>
+                                </li>
+                            ))}
+                        </BulletList>
+                    </Box>
                 </div>
             </Box>
         </Box>
