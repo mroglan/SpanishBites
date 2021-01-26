@@ -65,7 +65,7 @@ export default function DisplayPanel({items}) {
     })
     
     const movePanels = (val:number) => {
-        if(viewPreview) movePreview(val)
+        if(viewPreview) return movePreview(val)
         if(origin.current + val === -1) return
         if(origin.current + val >= panels.length) return
         origin.current += val
