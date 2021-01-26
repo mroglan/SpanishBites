@@ -1,16 +1,13 @@
 import React, {useEffect, useRef, useState, useMemo} from 'react'
 import styles from '../../../styles/Library.module.css'
+import {ClientTimePeriod, ClientPassage, ClientUnpopulatedAuthor, ClientUnpopulatedBook} from '../../../database/dbInterfaces'
 import {Divider, Grid, Typography} from '@material-ui/core'
 import {useSprings, animated} from 'react-spring'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import PreviewCarousel from './preview/PreviewCarousel'
 
-interface DisplayItem {
-    type: string;
-    title: string;
-    image?: string;
-}
+export type DisplayItem = (ClientTimePeriod|ClientPassage|ClientUnpopulatedAuthor|ClientUnpopulatedBook) & {type:string; title:string; image?:string}
 
 export default function DisplayPanel({items}) {
 
