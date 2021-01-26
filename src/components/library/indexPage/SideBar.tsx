@@ -25,13 +25,13 @@ export default function SideBar({setFilters}:Props) {
                         </Typography>
                     </SideBarBluePrimaryButton>
                 </li>
-                <li>
+                {/* <li>
                     <SideBarBluePrimaryButton>
                         <Typography variant="body1">
                             Favorites
                         </Typography>
                     </SideBarBluePrimaryButton>
-                </li>
+                </li> */}
                 <li>
                     <SideBarBluePrimaryButton onClick={() => changeFilters('authors')}>
                         <Typography variant="body1">
