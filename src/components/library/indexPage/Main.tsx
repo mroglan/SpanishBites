@@ -34,10 +34,10 @@ export default function Main({items:libraryItems}:Props) {
                     <section className={styles['filters-display-overflow']}>
                         <FiltersDisplay filters={filters} setFilters={setFilters} />
                     </section>
+                    <section>
+                        <DisplayPanel items={displayItems} />
+                    </section>
                 </LibraryItemsContext.Provider>
-                <section>
-                    <DisplayPanel items={displayItems} />
-                </section>
             </main>
         </div>
     )
