@@ -85,6 +85,7 @@ export default function DisplayPanel({items}) {
     }
 
     const openPreview = (index:number) => {
+        console.log(index)
         setPreview(index, true)
         setViewPreview(true)
     }
@@ -150,7 +151,7 @@ export default function DisplayPanel({items}) {
                                                 if(k < j * cols) return
                                                 if((j * cols) + cols < k + 1) return
                                                 return <Grid key={k} item>
-                                                    <div onClick={() => openPreview((i * panel.length) + k)} className={styles['display-item']}>
+                                                    <div onClick={() => openPreview((i * (rows * cols)) + k)} className={styles['display-item']}>
                                                         <img src="/library/paper.png" className={styles.paper} title="Paper"/>
                                                         <div className={styles['display-item-title']}>
                                                             <Typography variant="body1">
@@ -176,14 +177,14 @@ export default function DisplayPanel({items}) {
                         </animated.div>
                     ))}
                 </div>
-                {viewPreview && <div className={styles['preview-bg']}>
+                <div style={{display: viewPreview ? 'initial' : 'none'}} className={styles['preview-bg']}>
                     {updatedItems.map((item:any, i) => (
                         <animated.div style={{transform: previewPanelAnimations[i].x.interpolate(x => `translateX(${x}%)`)}}
                         className={styles['preview-panel']} key={i}>
                             <PreviewCarousel item={item} closePreview={closePreview} />
                         </animated.div>
                     ))}
-                </div>}
+                </div>
             </main>
             <aside onClick={() => movePanels(1)} 
             className={`${styles['display-panel-side']} ${disabledArrows.right ? styles.disabled : styles.active}`}>
