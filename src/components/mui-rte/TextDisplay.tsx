@@ -1,6 +1,6 @@
 import React from 'react'
 import MUIRichTextEditor from 'mui-rte'
-import {Box} from '@material-ui/core'
+import {Box, NoSsr} from '@material-ui/core'
 import {useState, useEffect} from 'react'
 
 interface Props {
@@ -9,13 +9,11 @@ interface Props {
 
 export default function TextDisplay({text}:Props) {
 
-    const [clientSide, setClientSide] = useState(false)
-
-    useEffect(() => setClientSide(true), [])
-
     return (
         <Box>
-            {clientSide && <MUIRichTextEditor defaultValue={text} controls={[]} readOnly /> }
+            <NoSsr>
+                <MUIRichTextEditor defaultValue={text} controls={[]} readOnly />
+            </NoSsr>
         </Box>
     )
 }
