@@ -53,6 +53,7 @@ export default function DisplayPanel({items}) {
             return result
         }, [])
 
+        if(viewPreview) setViewPreview(false)
         setPanels(panelsArray)
         setDisabledArrows({left: true, right: panelsArray.length < 2})
 
