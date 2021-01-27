@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState, useMemo} from 'react'
+import React, {useEffect, useRef, useState, useMemo, useContext, useCallback} from 'react'
 import styles from '../../../styles/Library.module.css'
 import {ClientTimePeriod, ClientPassage, ClientUnpopulatedAuthor, ClientUnpopulatedBook} from '../../../database/dbInterfaces'
 import {Divider, Grid, Typography} from '@material-ui/core'
@@ -6,10 +6,13 @@ import {useSprings, animated} from 'react-spring'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import PreviewCarousel from './preview/PreviewCarousel'
+import {LibraryItemsContext} from './Main'
 
 export type DisplayItem = (ClientTimePeriod|ClientPassage|ClientUnpopulatedAuthor|ClientUnpopulatedBook) & {type:string; title:string; image?:string}
 
 export default function DisplayPanel({items}) {
+
+    const libraryItems = useContext(LibraryItemsContext)
 
     const displayItems:DisplayItem[] = useMemo(() => {
         return items.map(item => {
@@ -106,7 +109,17 @@ export default function DisplayPanel({items}) {
         })
     }
 
-    const closePreview = () => setViewPreview(false)
+    const closePreview = useCallback(() => setViewPreview(false), [])
+
+    const updatedItems = useMemo(() => displayItems.map((item:any) => {
+        if(item.type === 'author') return item
+        if(item.type === 'book') return {...item, authors: item.authors.map(author => {
+            return libraryItems.authors.find(a => a._id === author)
+        })}
+        return {...item, book: {...item.book, authors: item.book.authors.map(author => {
+            return libraryItems.authors.find(a => a._id === author)
+        })}}
+    }), [displayItems])
 
     return (
         <div className={styles['display-panel-root']}>
@@ -163,7 +176,14 @@ export default function DisplayPanel({items}) {
                         </animated.div>
                     ))}
                 </div>
-                {viewPreview && <PreviewCarousel items={displayItems} previewPanelAnimations={previewPanelAnimations} closePreview={closePreview} />}
+                {viewPreview && <div className={styles['preview-bg']}>
+                    {updatedItems.map((item:any, i) => (
+                        <animated.div style={{transform: previewPanelAnimations[i].x.interpolate(x => `translateX(${x}%)`)}}
+                        className={styles['preview-panel']} key={i}>
+                            <PreviewCarousel item={item} closePreview={closePreview} />
+                        </animated.div>
+                    ))}
+                </div>}
             </main>
             <aside onClick={() => movePanels(1)} 
             className={`${styles['display-panel-side']} ${disabledArrows.right ? styles.disabled : styles.active}`}>

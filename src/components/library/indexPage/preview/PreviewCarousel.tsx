@@ -1,4 +1,4 @@
-import React, {useContext, useMemo} from 'react'
+import React, {memo} from 'react'
 import Link from 'next/link'
 import styles from '../../../../styles/Library.module.css'
 import {Grid} from '@material-ui/core'
@@ -15,66 +15,46 @@ import BookPreview from './BookPreview'
 import PassagePreview from './PassagePreview'
 
 interface Props {
-    items: any[];
-    previewPanelAnimations: any[]; // from react-spring
+    item: any;
     closePreview: () => void;
 }
 
-export default function PreviewCarousel({items, previewPanelAnimations, closePreview}:Props) {
-
-    const libraryItems = useContext(LibraryItemsContext)
-
-    const updatedItems = useMemo(() => items.map(item => {
-        if(item.type === 'author') return item
-        if(item.type === 'book') return {...item, authors: item.authors.map(author => {
-            return libraryItems.authors.find(a => a._id === author)
-        })}
-        return {...item, book: {...item.book, authors: item.book.authors.map(author => {
-            return libraryItems.authors.find(a => a._id === author)
-        })}}
-    }), [items])
+export default memo(function PreviewCarousel({item, closePreview}:Props) {
 
     return (
-        <div className={styles['preview-bg']}>
-            {updatedItems.map((item:any, i) => (
-                <animated.div style={{transform: previewPanelAnimations[i].x.interpolate(x => `translateX(${x}%)`)}}
-                 className={styles['preview-panel']} key={i}>
-                    <div className={styles['preview-root']}>
-                        <div className={styles['preview-content']}>
-                            <div className={styles['preview-visit-container']}>
-                                <Link href={`/library/${item.type}s/[id]`} as={`/library/${item.type}s/${item._id}`}>
-                                    <a>
-                                        <BluePrimaryIconButton>
-                                            <LaunchIcon />
-                                        </BluePrimaryIconButton>
-                                    </a>
-                                </Link>
-                            </div>
-                            {item.type === 'author' ? <AuthorPreview author={item} /> : 
-                            item.type === 'book' ? <BookPreview book={item} /> : 
-                            <PassagePreview passage={item} /> }
-                            <div className={styles['preview-close-container']}>
-                                <BluePrimaryIconButton onClick={() => closePreview()} >
-                                    <CloseIcon />
-                                </BluePrimaryIconButton>
-                            </div>
-                        </div>
-                        <div>
-                            <Grid container justify="center">
-                                <Grid item>
-                                    <Link href={`/library/${item.type}s/[id]`} as={`/library/${item.type}s/${item._id}`}>
-                                        <a>
-                                            <BlueDenseButton>
-                                                Visit Page
-                                            </BlueDenseButton>
-                                        </a>
-                                    </Link>
-                                </Grid>
-                            </Grid>
-                        </div>
-                    </div>
-                </animated.div>
-            ))}
+        <div className={styles['preview-root']}>
+            <div className={styles['preview-content']}>
+                <div className={styles['preview-visit-container']}>
+                    <Link href={`/library/${item.type}s/[id]`} as={`/library/${item.type}s/${item._id}`}>
+                        <a>
+                            <BluePrimaryIconButton>
+                                <LaunchIcon />
+                            </BluePrimaryIconButton>
+                        </a>
+                    </Link>
+                </div>
+                {item.type === 'author' ? <AuthorPreview author={item} /> : 
+                item.type === 'book' ? <BookPreview book={item} /> : 
+                <PassagePreview passage={item} /> }
+                <div className={styles['preview-close-container']}>
+                    <BluePrimaryIconButton onClick={() => closePreview()} >
+                        <CloseIcon />
+                    </BluePrimaryIconButton>
+                </div>
+            </div>
+            <div>
+                <Grid container justify="center">
+                    <Grid item>
+                        <Link href={`/library/${item.type}s/[id]`} as={`/library/${item.type}s/${item._id}`}>
+                            <a>
+                                <BlueDenseButton>
+                                    Visit Page
+                                </BlueDenseButton>
+                            </a>
+                        </Link>
+                    </Grid>
+                </Grid>
+            </div>
         </div>
     )
-}  
+})
