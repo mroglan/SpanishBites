@@ -2,7 +2,9 @@ import React, {useContext, useMemo} from 'react'
 import Link from 'next/link'
 import styles from '../../../../styles/Library.module.css'
 import {Grid} from '@material-ui/core'
-import {BlueDenseButton} from '../../../items/buttons'
+import {BlueDenseButton, BluePrimaryIconButton} from '../../../items/buttons'
+import CloseIcon from '@material-ui/icons/Close';
+import LaunchIcon from '@material-ui/icons/Launch';
 import {ClientUnpopulatedAuthor} from '../../../../database/dbInterfaces'
 import {animated} from 'react-spring'
 import {DisplayItem} from '../DisplayPanel'
@@ -39,9 +41,23 @@ export default function PreviewCarousel({items, previewPanelAnimations, origin}:
                  className={styles['preview-panel']} key={i}>
                     <div className={styles['preview-root']}>
                         <div className={styles['preview-content']}>
+                            <div className={styles['preview-visit-container']}>
+                                <Link href={`/library/${item.type}s/[id]`} as={`/library/${item.type}s/${item._id}`}>
+                                    <a>
+                                        <BluePrimaryIconButton>
+                                            <LaunchIcon />
+                                        </BluePrimaryIconButton>
+                                    </a>
+                                </Link>
+                            </div>
                             {item.type === 'author' ? <AuthorPreview author={item} /> : 
                             item.type === 'book' ? <BookPreview book={item} /> : 
                             <PassagePreview passage={item} /> }
+                            <div className={styles['preview-close-container']}>
+                                <BluePrimaryIconButton>
+                                    <CloseIcon />
+                                </BluePrimaryIconButton>
+                            </div>
                         </div>
                         <div>
                             <Grid container justify="center">

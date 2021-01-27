@@ -18,7 +18,7 @@ export default function BookPreview({book}:Props) {
 
     return (
         <Box>
-            <Box textAlign="center">
+            <Box mx="50px" textAlign="center">
                 <Typography variant="h4">
                     {book.title}
                 </Typography>

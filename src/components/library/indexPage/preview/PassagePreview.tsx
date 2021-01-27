@@ -24,7 +24,7 @@ export default function PreviewPassage({passage}:Props) {
 
     return (
         <Box>
-            <Box textAlign="center">
+            <Box mx="50px" textAlign="center">
                 <Typography variant="h4">
                     {passage.name}
                 </Typography>

@@ -12,7 +12,7 @@ export default function AuthorPreview({author}:Props) {
 
     return (
         <Box>
-            <Box textAlign="center">
+            <Box mx="50px" textAlign="center">
                 <Typography variant="h4">
                     {author.firstName} {author.lastName}
                 </Typography>
