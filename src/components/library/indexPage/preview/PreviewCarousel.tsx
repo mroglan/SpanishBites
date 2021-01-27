@@ -1,5 +1,8 @@
 import React, {useContext, useMemo} from 'react'
+import Link from 'next/link'
 import styles from '../../../../styles/Library.module.css'
+import {Grid} from '@material-ui/core'
+import {BlueDenseButton} from '../../../items/buttons'
 import {ClientUnpopulatedAuthor} from '../../../../database/dbInterfaces'
 import {animated} from 'react-spring'
 import {DisplayItem} from '../DisplayPanel'
@@ -41,7 +44,17 @@ export default function PreviewCarousel({items, previewPanelAnimations, origin}:
                             <PassagePreview passage={item} /> }
                         </div>
                         <div>
-                            visit page
+                            <Grid container justify="center">
+                                <Grid item>
+                                    <Link href={`/library/${item.type}s/[id]`} as={`/library/${item.type}s/${item._id}`}>
+                                        <a>
+                                            <BlueDenseButton>
+                                                Visit Page
+                                            </BlueDenseButton>
+                                        </a>
+                                    </Link>
+                                </Grid>
+                            </Grid>
                         </div>
                     </div>
                 </animated.div>
