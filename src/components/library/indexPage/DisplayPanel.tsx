@@ -110,7 +110,17 @@ export default function DisplayPanel({items}) {
         })
     }
 
-    const closePreview = useCallback(() => setViewPreview(false), [])
+    const closePreview = useCallback(() => {
+        setViewPreview(false)
+    }, [])
+
+    useMemo(() => {
+        if(viewPreview) return
+        setDisabledArrows({
+            left: origin.current === 0,
+            right: origin.current + 1 === panels.length
+        })
+    }, [viewPreview])
 
     const updatedItems = useMemo(() => displayItems.map((item:any) => {
         if(item.type === 'author') return item
