@@ -105,6 +105,8 @@ export default function DisplayPanel({items}) {
         })
     }
 
+    const closePreview = () => setViewPreview(false)
+
     return (
         <div className={styles['display-panel-root']}>
             <aside onClick={() => movePanels(-1)} 
@@ -160,7 +162,7 @@ export default function DisplayPanel({items}) {
                         </animated.div>
                     ))}
                 </div>
-                {viewPreview && <PreviewCarousel items={displayItems} previewPanelAnimations={previewPanelAnimations} origin={previewOrigin} />}
+                {viewPreview && <PreviewCarousel items={displayItems} previewPanelAnimations={previewPanelAnimations} closePreview={closePreview} />}
             </main>
             <aside onClick={() => movePanels(1)} 
             className={`${styles['display-panel-side']} ${disabledArrows.right ? styles.disabled : styles.active}`}>

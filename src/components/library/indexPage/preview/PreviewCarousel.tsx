@@ -17,10 +17,10 @@ import PassagePreview from './PassagePreview'
 interface Props {
     items: any[];
     previewPanelAnimations: any[]; // from react-spring
-    origin: any; // ref with ref.current = number
+    closePreview: () => void;
 }
 
-export default function PreviewCarousel({items, previewPanelAnimations, origin}:Props) {
+export default function PreviewCarousel({items, previewPanelAnimations, closePreview}:Props) {
 
     const libraryItems = useContext(LibraryItemsContext)
 
@@ -54,7 +54,7 @@ export default function PreviewCarousel({items, previewPanelAnimations, origin}:
                             item.type === 'book' ? <BookPreview book={item} /> : 
                             <PassagePreview passage={item} /> }
                             <div className={styles['preview-close-container']}>
-                                <BluePrimaryIconButton>
+                                <BluePrimaryIconButton onClick={() => closePreview()} >
                                     <CloseIcon />
                                 </BluePrimaryIconButton>
                             </div>
