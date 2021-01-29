@@ -7,7 +7,8 @@ import {getAllUnpopulatedBooks} from '../../utils/books'
 import {getAllTimePeriods} from '../../utils/timePeriods'
 import {getAllGenres} from '../../utils/genres'
 import {getAllPassages} from '../../utils/passages'
-import {ClientUnpopulatedAuthor, ClientUnpopulatedBook, ClientGenre, ClientTimePeriod, ClientPassage} from '../../database/dbInterfaces'
+import {getTodayBite} from '../../utils/bites'
+import {ClientUnpopulatedAuthor, ClientUnpopulatedBook, ClientGenre, ClientTimePeriod, ClientPassage, ClientSpanishBite} from '../../database/dbInterfaces'
 
 import MainHeader from '../../components/nav/MainHeader'
 import Main from '../../components/library/indexPage/Main'
@@ -18,6 +19,7 @@ export interface LibraryItems {
     timePeriods: ClientTimePeriod[];
     genres: ClientGenre[];
     passages: ClientPassage[];
+    bite: ClientSpanishBite;
 }
 
 export interface Props {
@@ -50,15 +52,16 @@ export default function Library({items:dbItems}:Props) {
 
 export const getStaticProps:GetStaticProps = async () => {
 
-    const [authors, books, timePeriods, genres, passages] = await Promise.all([getAllUnpopulatedAuthors(), 
-        getAllUnpopulatedBooks(), getAllTimePeriods(), getAllGenres(), getAllPassages()])
+    const [authors, books, timePeriods, genres, passages, bite] = await Promise.all([getAllUnpopulatedAuthors(), 
+        getAllUnpopulatedBooks(), getAllTimePeriods(), getAllGenres(), getAllPassages(), getTodayBite()])
     
     return {props: {items: {
         authors: JSON.parse(JSON.stringify(authors)),
         books: JSON.parse(JSON.stringify(books)),
         timePeriods: JSON.parse(JSON.stringify(timePeriods)),
         genres: JSON.parse(JSON.stringify(genres)),
-        passages: JSON.parse(JSON.stringify(passages))
+        passages: JSON.parse(JSON.stringify(passages)),
+        bite: JSON.parse(JSON.stringify(bite))
     }}}
 
 }
