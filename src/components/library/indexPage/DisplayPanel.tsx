@@ -85,7 +85,6 @@ export default function DisplayPanel({items}) {
     }
 
     const openPreview = (index:number) => {
-        console.log(index)
         setPreview(index, true)
         setViewPreview(true)
     }
