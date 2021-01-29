@@ -6,6 +6,7 @@ import DisplayPanel from './DisplayPanel'
 import SearchPanel, {findDisplayItems} from './SearchPanel'
 import {initialFilters} from './FiltersPanel'
 import FiltersDisplay from './FiltersDisplay'
+import BiteDisplay from './BiteDisplay'
 import {Box} from '@material-ui/core'
 
 export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
@@ -35,9 +36,12 @@ export default function Main({items:libraryItems}:Props) {
                     <section className={styles['filters-display-overflow']}>
                         <FiltersDisplay filters={filters} setFilters={setFilters} />
                     </section>
-                    <section>
+                    <section style={{display: filters.bite ? 'none' : 'initial'}}>
                         <DisplayPanel items={displayItems} />
                     </section>
+                    {filters.bite && <section>
+                        <BiteDisplay />
+                    </section>}
                 </LibraryItemsContext.Provider>
             </main>
         </div>
