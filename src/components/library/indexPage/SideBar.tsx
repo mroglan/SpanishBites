@@ -15,11 +15,15 @@ export default function SideBar({setFilters}:Props) {
         setFilters({...initialFilters, libraryItem})
     }
 
+    const openBite = () => {
+        setFilters({...initialFilters, bite: true})
+    }
+
     return (
         <div>
             <ul>
                 <li>
-                    <SideBarBluePrimaryButton>
+                    <SideBarBluePrimaryButton onClick={() => openBite()}>
                         <Typography variant="body1">
                             Today's Bite
                         </Typography>
