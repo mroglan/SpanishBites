@@ -8,7 +8,8 @@ import {initialFilters} from './FiltersPanel'
 import FiltersDisplay from './FiltersDisplay'
 import {Box} from '@material-ui/core'
 
-export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: []})
+export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
+    bite: {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}})
 
 export default function Main({items:libraryItems}:Props) {
 
