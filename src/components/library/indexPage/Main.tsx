@@ -20,30 +20,33 @@ export default function Main({items:libraryItems}:Props) {
     const [search, setSearch] = useState('')
 
     useMemo(() => {
+        if(filters.bite) return
         setDisplayItems(findDisplayItems(libraryItems, search, filters))
     }, [filters, search])
+
+    const hideBite = () => setFilters({...filters, bite: false})
 
     return (
         <div className={styles['main-section-root']}>
             <aside className={styles['sidebar']}>
                 <SideBar setFilters={setFilters} />
             </aside>
-            <main className={styles['user-panel-root']}>
-                <LibraryItemsContext.Provider value={libraryItems}>
+            <LibraryItemsContext.Provider value={libraryItems}>
+                <main style={{display: filters.bite ? 'none' : 'grid'}} className={styles['user-panel-root']}>
                     <section>
                         <SearchPanel search={search} setSearch={setSearch} filters={filters} setFilters={setFilters} />
                     </section>
                     <section className={styles['filters-display-overflow']}>
                         <FiltersDisplay filters={filters} setFilters={setFilters} />
                     </section>
-                    <section style={{display: filters.bite ? 'none' : 'initial'}}>
+                    <section>
                         <DisplayPanel items={displayItems} />
                     </section>
-                    {filters.bite && <section>
-                        <BiteDisplay />
-                    </section>}
-                </LibraryItemsContext.Provider>
-            </main>
+                </main>
+                {filters.bite && <main>
+                    <BiteDisplay hideBite={hideBite} />
+                </main>}
+            </LibraryItemsContext.Provider>
         </div>
     )
 }

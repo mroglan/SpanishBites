@@ -12,7 +12,7 @@ interface Props {
 export default function SideBar({setFilters}:Props) {
 
     const changeFilters = (libraryItem:string) => {
-        setFilters({...initialFilters, libraryItem})
+        setFilters({...initialFilters, bite: false, libraryItem})
     }
 
     const openBite = () => {
