@@ -253,3 +253,51 @@
     top: 0;
     left: 0;
 }
+
+
+/* BITE DISPLAY */
+
+.bite-display-root {
+    padding-top: 1rem;
+    overflow: hidden;
+}
+
+.bite-display-paper {
+    border-radius: 24px;
+    position: relative;
+}
+
+.bite-display-circle {
+    position: absolute;
+    background: hsl(50, 100%, 97%);
+    border-radius: 50%;
+}
+
+.bite-display-c1 {
+    top: -20px;
+    right: -20px;
+    width: 120px;
+    height: 120px;
+    transform: translate(50%, -50%)
+}
+
+.bite-display-c2 {
+    top: -40px;
+    right: 40px;
+    width: 70px;
+    height: 70px;
+}
+
+.bite-display-c3 {
+    top: -20px;
+    right: 0px;
+    width: 80px;
+    height: 80px;
+}
+
+.bite-display-c4 {
+    top: 20px;
+    right: -20px;
+    width: 50px;
+    height: 50px;
+}
