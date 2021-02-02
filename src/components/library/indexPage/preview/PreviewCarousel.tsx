@@ -1,7 +1,7 @@
 import React, {memo} from 'react'
 import Link from 'next/link'
 import styles from '../../../../styles/Library.module.css'
-import {Grid} from '@material-ui/core'
+import {Grid, Box} from '@material-ui/core'
 import {BlueDenseButton, BluePrimaryIconButton} from '../../../items/buttons'
 import CloseIcon from '@material-ui/icons/Close';
 import LaunchIcon from '@material-ui/icons/Launch';
@@ -43,17 +43,19 @@ export default memo(function PreviewCarousel({item, closePreview}:Props) {
                 </div>
             </div>
             <div>
-                <Grid container justify="center">
-                    <Grid item>
-                        <Link href={`/library/${item.type}s/[id]`} as={`/library/${item.type}s/${item._id}`}>
-                            <a>
-                                <BlueDenseButton>
-                                    Visit Page
-                                </BlueDenseButton>
-                            </a>
-                        </Link>
+                <Box mb={1}>
+                    <Grid container justify="center">
+                        <Grid item>
+                            <Link href={`/library/${item.type}s/[id]`} as={`/library/${item.type}s/${item._id}`}>
+                                <a>
+                                    <BlueDenseButton>
+                                        Visit Page
+                                    </BlueDenseButton>
+                                </a>
+                            </Link>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Box>
             </div>
         </div>
     )
