@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState, useMemo, useContext, useCallback} from 'react'
+import React, {useEffect, useRef, useState, useMemo, useContext, useCallback, memo} from 'react'
 import styles from '../../../styles/Library.module.css'
 import {ClientTimePeriod, ClientPassage, ClientUnpopulatedAuthor, ClientUnpopulatedBook} from '../../../database/dbInterfaces'
 import {Divider, Grid, Typography} from '@material-ui/core'
@@ -9,6 +9,46 @@ import PreviewCarousel from './preview/PreviewCarousel'
 import {LibraryItemsContext} from './Main'
 
 export type DisplayItem = (ClientTimePeriod|ClientPassage|ClientUnpopulatedAuthor|ClientUnpopulatedBook) & {type:string; title:string; image?:string}
+
+
+const Panel = memo(({i, rows, cols, panel, openPreview}:any) => {
+    
+    return (
+        <>
+        {Array(rows).fill('').map((_, j) => (
+            <div key={j} className={styles['display-panel-row']}>
+                <div>
+                    <Grid container justify="space-around">
+                        {panel.map((item, k) => {
+                            if(k < j * cols) return
+                            if((j * cols) + cols < k + 1) return
+                            return <Grid key={k} item>
+                                <div onClick={() => openPreview((i * (rows * cols)) + k)} className={styles['display-item']}>
+                                    <img src="/library/paper.png" className={styles.paper} title="Paper"/>
+                                    <div className={styles['display-item-title']}>
+                                        <Typography variant="body1">
+                                            {item.title}
+                                        </Typography>
+                                    </div>
+                                    <div className={styles['display-item-type']}>
+                                        <Typography color="inherit" variant="body2">
+                                            {item.type.toUpperCase()}
+                                        </Typography>
+                                    </div>
+                                    {item.image && <div className={styles['display-item-img-container']}>
+                                    <img src={item.image} className={styles['display-item-image']}/>
+                                    </div>}
+                                </div>
+                            </Grid>
+                        })}
+                    </Grid>
+                </div>
+                <div />
+            </div>
+        ))}
+        </>
+    )
+})
 
 export default function DisplayPanel({items}) {
 
@@ -84,10 +124,10 @@ export default function DisplayPanel({items}) {
         })
     }
 
-    const openPreview = (index:number) => {
+    const openPreview = useCallback((index:number) => {
         setPreview(index, true)
         setViewPreview(true)
-    }
+    }, [])
 
     const movePreview = (val:number) => {
         if(previewOrigin.current + val === -1) return
@@ -152,37 +192,7 @@ export default function DisplayPanel({items}) {
                     {panelAnimations && panels.map((panel, i) => (
                         <animated.div style={{transform: panelAnimations[i].x.interpolate(x => `translateX(${x}%)` )}}
                          className={`${styles['panel']}`} key={i}>
-                            {Array(rows).fill('').map((_, j) => (
-                                <div key={j} className={styles['display-panel-row']}>
-                                    <div>
-                                        <Grid container justify="space-around">
-                                            {panel.map((item, k) => {
-                                                if(k < j * cols) return
-                                                if((j * cols) + cols < k + 1) return
-                                                return <Grid key={k} item>
-                                                    <div onClick={() => openPreview((i * (rows * cols)) + k)} className={styles['display-item']}>
-                                                        <img src="/library/paper.png" className={styles.paper} title="Paper"/>
-                                                        <div className={styles['display-item-title']}>
-                                                            <Typography variant="body1">
-                                                                {item.title}
-                                                            </Typography>
-                                                        </div>
-                                                        <div className={styles['display-item-type']}>
-                                                            <Typography color="inherit" variant="body2">
-                                                                {item.type.toUpperCase()}
-                                                            </Typography>
-                                                        </div>
-                                                        {item.image && <div className={styles['display-item-img-container']}>
-                                                        <img src={item.image} className={styles['display-item-image']}/>
-                                                        </div>}
-                                                    </div>
-                                                </Grid>
-                                            })}
-                                        </Grid>
-                                    </div>
-                                    <div />
-                                </div>
-                            ))}
+                            <Panel i={i} rows={rows} cols={cols} panel={panel} openPreview={openPreview} />
                         </animated.div>
                     ))}
                 </div>
