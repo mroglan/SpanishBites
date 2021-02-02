@@ -7,6 +7,7 @@ import SearchPanel, {findDisplayItems} from './SearchPanel'
 import {initialFilters} from './FiltersPanel'
 import FiltersDisplay from './FiltersDisplay'
 import BiteDisplay from './BiteDisplay'
+import PopoutSidebar from './PopoutSidebar'
 import {Box} from '@material-ui/core'
 
 export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
@@ -28,7 +29,7 @@ export default function Main({items:libraryItems}:Props) {
 
     return (
         <div className={styles['main-section-root']}>
-            <aside className={styles['sidebar']}>
+            <aside className={`${styles['sidebar']} ${styles['main']}`}>
                 <SideBar setFilters={setFilters} />
             </aside>
             <LibraryItemsContext.Provider value={libraryItems}>
@@ -41,6 +42,9 @@ export default function Main({items:libraryItems}:Props) {
                     </section>
                     <section>
                         <DisplayPanel items={displayItems} />
+                        <aside className={styles['popout-sidebar']}>
+                            <PopoutSidebar setFilters={setFilters} />
+                        </aside> 
                     </section>
                 </main>
                 {filters.bite && <main>

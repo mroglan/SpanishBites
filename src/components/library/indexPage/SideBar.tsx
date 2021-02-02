@@ -7,15 +7,18 @@ import {Filters, initialFilters} from './FiltersPanel'
 
 interface Props {
     setFilters: (filters:Filters) => void;
+    closePopup?: () => void;
 }
 
-export default function SideBar({setFilters}:Props) {
+export default function SideBar({setFilters, closePopup}:Props) {
 
     const changeFilters = (libraryItem:string) => {
+        if(Boolean(closePopup)) closePopup()
         setFilters({...initialFilters, bite: false, libraryItem})
     }
 
     const openBite = () => {
+        if(Boolean(closePopup)) closePopup()
         setFilters({...initialFilters, bite: true})
     }
 
