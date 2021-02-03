@@ -13,8 +13,18 @@
 
 /* SIDEBAR */
 
-.sidebar {
+.popout-sidebar {
+    display: none;
+}
+
+.sidebar.main {
     width: clamp(300px, 20%, 500px);
+}
+
+.sidebar.popup {
+    width: 250px;
+    background:hsl(50, 100%, 97%);
+    padding: .5rem 0;
 }
 
 .sidebar ul {
@@ -31,6 +41,18 @@
     font-size: 1.4rem;
     letter-spacing: .06rem;
     font-weight: 400;
+}
+
+@media only screen and (max-width: 1000px) {
+    .sidebar.main {
+        display: none;
+    }
+    .popout-sidebar {
+        display: initial;
+    }
+    .main-section-root {
+        grid-template-columns: 1fr;
+    }
 }
 
 
@@ -177,6 +199,11 @@
     opacity: .7;
 }
 
+@media only screen and (max-width: 1000px) {
+    .display-panel-root {
+        height: calc(100% - 50px);
+    }
+}
 
 /* SEARCH PANEL */
 
