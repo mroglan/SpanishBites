@@ -88,7 +88,7 @@ export default function SearchPanel({filters, setFilters, search, setSearch}:Pro
                 <Grid item className={styles['searchbar-grid-item']}>
                     <PrimaryLargeSearchBar search={search} setSearch={updateSearch} disabled={dropDown} />
                 </Grid>
-                <Grid item>
+                <Grid item className={styles['search-panel-options-item']}>
                     <Grid container>
                         <Grid item>
                             <BluePrimaryIconButton disabled={dropDown} onClick={() => setDropDown(true)} >
