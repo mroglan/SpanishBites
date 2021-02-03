@@ -281,6 +281,15 @@
     left: 0;
 }
 
+@media only screen and (max-width: 675px) {
+    .picture-grid {
+        grid-template-columns: 1fr;
+    }
+    .preview-image-container img {
+        margin-left: 40px;
+    }
+}
+
 
 /* BITE DISPLAY */
 
