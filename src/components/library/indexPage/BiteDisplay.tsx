@@ -20,18 +20,24 @@ export default function BiteDisplay({hideBite}:Props) {
                     <Box p={3}>
                         <Box mr={10}>
                             <Typography variant="h6">
-                                {bite.work && <span>From <i>{bite.work}</i></span>}
-                                {bite.author && <span> by {bite.author}</span>}
+                                <span data-testid="bite-citation">
+                                    {bite.work && <span>From <i>{bite.work}</i></span>}
+                                    {bite.author && <span> by {bite.author}</span>}
+                                </span>
                             </Typography>
                         </Box>
                         <Box mt={3}>
-                            <TextDisplay text={bite.text} />
+                            <span data-testid="bite-text">
+                                <TextDisplay text={bite.text} />
+                            </span>
                         </Box>
                         <Box mt={3} />
                         <Divider />
                         <Box mt={3}>
                             <Typography variant="body1">
-                                {bite.desc}
+                                <span data-testid="bite-desc">
+                                    {bite.desc}
+                                </span>
                             </Typography>
                         </Box>
                     </Box>
@@ -42,7 +48,7 @@ export default function BiteDisplay({hideBite}:Props) {
                 </Paper>
                 <Box mt={3}>
                     <Grid container justify="center">
-                        <BlueDenseButton onClick={() => hideBite()}>
+                        <BlueDenseButton data-testid="bite-display-return-home-btn" onClick={() => hideBite()}>
                             Return Home
                         </BlueDenseButton>
                     </Grid>
