@@ -140,8 +140,8 @@ export default function DisplayPanel({items}) {
         const config = opening ? {duration: 0} : {}
         setPreviewPanelAnimations(i => {
             if(i === previewOrigin.current) return {x: '0', config}
-            if(i > previewOrigin.current) return {x: '100', config}
-            return {x: '-100', config}
+            if(i > previewOrigin.current) return {x: '110', config}
+            return {x: '-110', config}
         })
         setDisabledArrows({
             left: previewOrigin.current === 0,
