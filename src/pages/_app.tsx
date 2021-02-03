@@ -68,6 +68,7 @@ export default class MyApp extends App {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
           />
+          <link rel="icon" type="svg" href="/logo3.svg" />
         </Head>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
