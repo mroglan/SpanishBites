@@ -16,10 +16,12 @@ interface FilterChipProps {
     onDelete: () => void;
 }
 
-function FilterChip({title, onDelete}:FilterChipProps) {
+export function FilterChip({title, onDelete}:FilterChipProps) {
     return (
         <Grid style={{display: 'inline-block'}} item>
-            <Chip label={title} onDelete={onDelete} color="primary" />
+            <div data-testid="filter-chip">
+                <Chip label={title} onDelete={onDelete} color="primary" />
+            </div>
         </Grid>
     )
 }
