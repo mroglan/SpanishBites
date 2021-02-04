@@ -10,8 +10,15 @@ import {LibraryItemsContext} from './Main'
 
 export type DisplayItem = (ClientTimePeriod|ClientPassage|ClientUnpopulatedAuthor|ClientUnpopulatedBook) & {type:string; title:string; image?:string}
 
+interface PanelProps {
+    i: number;
+    rows: number;
+    cols: number;
+    panel: any[];
+    openPreview: (val:number) => void;
+}
 
-const Panel = memo(({i, rows, cols, panel, openPreview}:any) => {
+export const Panel = memo(({i, rows, cols, panel, openPreview}:PanelProps) => {
     
     return (
         <>
