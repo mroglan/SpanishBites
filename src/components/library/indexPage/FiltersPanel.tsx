@@ -80,7 +80,7 @@ interface BookSelectProps {
     books: ClientUnpopulatedBook[];
 }
 
-function BookSelect({value, dispatch, books}:BookSelectProps) {
+export function BookSelect({value, dispatch, books}:BookSelectProps) {
 
     const options = books.map(book => ({_id: book._id, label: book.title}))
 
@@ -103,10 +103,10 @@ function BookSelect({value, dispatch, books}:BookSelectProps) {
             <Grid style={{flexGrow: 1}} item>
                 <FormControl fullWidth>
                     <Autocomplete multiple id="book-input" options={options} getOptionLabel={(option:any) => option.label}
-                    getOptionSelected={(option, value) => option._id === value._id}
+                    getOptionSelected={(option, value) => option._id === value._id} ListboxProps={{'data-testid': 'book-options'}}
                     renderInput={(params) => (
                         <TextField {...params} variant="standard" />
-                    )} onChange={updateFilter} value={valArray}
+                    )} onChange={updateFilter} value={valArray} data-testid="book-select-input"
                     /> 
                 </FormControl>
             </Grid>
@@ -114,7 +114,7 @@ function BookSelect({value, dispatch, books}:BookSelectProps) {
     )
 }
 
-function GenreSelect({value, dispatch, genres}:GenreSelectProps) {
+export function GenreSelect({value, dispatch, genres}:GenreSelectProps) {
 
     const options = genres.map(genre => ({_id: genre._id, label: genre.name}))
 
@@ -148,7 +148,7 @@ function GenreSelect({value, dispatch, genres}:GenreSelectProps) {
     )
 }
 
-function AuthorSelect({value, dispatch, authors}:AuthorSelectProps) {
+export function AuthorSelect({value, dispatch, authors}:AuthorSelectProps) {
 
     const options = authors.map(author => ({_id: author._id, label: author.firstName + ' ' + author.lastName}))
 
@@ -182,7 +182,7 @@ function AuthorSelect({value, dispatch, authors}:AuthorSelectProps) {
     )
 }
 
-function LifeSpan({birthDate, deathDate, dispatch}:LifeSpanProps) {
+export function LifeSpan({birthDate, deathDate, dispatch}:LifeSpanProps) {
 
     return (
         <Grid container wrap="nowrap" alignItems="center" spacing={3}>
@@ -212,7 +212,7 @@ function LifeSpan({birthDate, deathDate, dispatch}:LifeSpanProps) {
     )
 }
 
-function TimePeriodSelect({value, dispatch, periods}:TimePeriodSelectProps) {
+export function TimePeriodSelect({value, dispatch, periods}:TimePeriodSelectProps) {
 
     const options = [...periods.map(period => ({_id: period._id, title: period.name,
          label: `${period.name} (${period.dateRange[0]}-${period.dateRange[1]})`}))]
