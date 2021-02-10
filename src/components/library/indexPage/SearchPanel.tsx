@@ -93,7 +93,7 @@ export default function SearchPanel({filters, setFilters, search, setSearch}:Pro
                 <Grid item className={styles['search-panel-options-item']}>
                     <Grid container>
                         <Grid item>
-                            <BluePrimaryIconButton disabled={dropDown} onClick={() => setDropDown(true)} >
+                            <BluePrimaryIconButton data-testid="filters-dropdown-btn" disabled={dropDown} onClick={() => setDropDown(true)} >
                                 <ExpandMoreOutlinedIcon />
                             </BluePrimaryIconButton>
                         </Grid>
@@ -104,7 +104,7 @@ export default function SearchPanel({filters, setFilters, search, setSearch}:Pro
                         </Grid>
                     </Grid>
                 </Grid>
-                {dropDown && <div className={styles['filters-dropdown-container']}>
+                {dropDown && <div data-testid="filterspanel-container" className={styles['filters-dropdown-container']}>
                     <FiltersPanel filters={filters} setFilters={saveNewFilters} closeFilters={closeFilters} />
                 </div>}
             </Grid>
