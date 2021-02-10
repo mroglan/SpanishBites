@@ -12,7 +12,8 @@ export const getAllAuthors = async () => {
             foreignField: '_id',
             as: 'timePeriod'
         }},
-        {$unwind: '$timePeriod'}
+        {$unwind: '$timePeriod'},
+        {$unset: 'detailedInfo'}
     ]).sort({'lastName': 1}).toArray()
     
     return authors
@@ -21,7 +22,9 @@ export const getAllAuthors = async () => {
 export const getAllUnpopulatedAuthors = async () => {
     const db = await database()
 
-    const authors:DBAuthor[] = await db.collection('authors').find({}).toArray()
+    const authors:DBAuthor[] = await db.collection('authors').aggregate([
+        {$unset: 'detailedInfo'}
+    ]).sort({'lastName': 1}).toArray()
 
     return authors
 }
@@ -37,7 +40,8 @@ export const getAuthor = async (id:ObjectId) => {
             foreignField: '_id',
             as: 'timePeriod'
         }},
-        {$unwind: '$timePeriod'}
+        {$unwind: '$timePeriod'},
+        {$unset: 'detailedInfo'}
     ]).toArray()
 
     return author[0]
