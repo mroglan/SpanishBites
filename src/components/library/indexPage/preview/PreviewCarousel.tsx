@@ -37,7 +37,7 @@ export default memo(function PreviewCarousel({item, closePreview}:Props) {
                 item.type === 'book' ? <BookPreview book={item} /> : 
                 <PassagePreview passage={item} /> }
                 <div className={styles['preview-close-container']}>
-                    <BluePrimaryIconButton onClick={() => closePreview()} >
+                    <BluePrimaryIconButton data-testid="closepreview-btn" onClick={() => closePreview()} >
                         <CloseIcon />
                     </BluePrimaryIconButton>
                 </div>
