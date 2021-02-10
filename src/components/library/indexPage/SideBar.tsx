@@ -26,7 +26,7 @@ export default function SideBar({setFilters, closePopup}:Props) {
         <div>
             <ul>
                 <li>
-                    <SideBarBluePrimaryButton onClick={() => openBite()}>
+                    <SideBarBluePrimaryButton data-testid="sidebar-bite" onClick={() => openBite()}>
                         <Typography variant="body1">
                             Today's Bite
                         </Typography>
@@ -40,21 +40,21 @@ export default function SideBar({setFilters, closePopup}:Props) {
                     </SideBarBluePrimaryButton>
                 </li> */}
                 <li>
-                    <SideBarBluePrimaryButton onClick={() => changeFilters('authors')}>
+                    <SideBarBluePrimaryButton data-testid="sidebar-authors" onClick={() => changeFilters('authors')}>
                         <Typography variant="body1">
                             Authors
                         </Typography>
                     </SideBarBluePrimaryButton>
                 </li>
                 <li>
-                    <SideBarBluePrimaryButton onClick={() => changeFilters('books')}>
+                    <SideBarBluePrimaryButton data-testid="sidebar-books" onClick={() => changeFilters('books')}>
                         <Typography variant="body1">
                             Books
                         </Typography>
                     </SideBarBluePrimaryButton>
                 </li>
                 <li>
-                    <SideBarBluePrimaryButton onClick={() => changeFilters('passages')}>
+                    <SideBarBluePrimaryButton data-testid="sidebar-passages" onClick={() => changeFilters('passages')}>
                         <Typography variant="body1">
                             Passages
                         </Typography>
