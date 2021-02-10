@@ -29,25 +29,25 @@ export default function Main({items:libraryItems}:Props) {
 
     return (
         <div className={styles['main-section-root']}>
-            <aside className={`${styles['sidebar']} ${styles['main']}`}>
+            <aside data-testid="library-sidebar" className={`${styles['sidebar']} ${styles['main']}`}>
                 <SideBar setFilters={setFilters} />
             </aside>
             <LibraryItemsContext.Provider value={libraryItems}>
                 <main style={{display: filters.bite ? 'none' : 'grid'}} className={styles['user-panel-root']}>
-                    <section>
+                    <section data-testid="searchpanel-section">
                         <SearchPanel search={search} setSearch={setSearch} filters={filters} setFilters={setFilters} />
                     </section>
-                    <section className={styles['filters-display-overflow']}>
+                    <section data-testid="filtersdisplay-section" className={styles['filters-display-overflow']}>
                         <FiltersDisplay filters={filters} setFilters={setFilters} />
                     </section>
-                    <section>
+                    <section data-testid="displaypanel-section">
                         <DisplayPanel items={displayItems} />
                         <aside className={styles['popout-sidebar']}>
                             <PopoutSidebar setFilters={setFilters} />
                         </aside> 
                     </section>
                 </main>
-                {filters.bite && <main>
+                {filters.bite && <main data-testid="bitedisplay-section">
                     <BiteDisplay hideBite={hideBite} />
                 </main>}
             </LibraryItemsContext.Provider>
