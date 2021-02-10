@@ -42,7 +42,7 @@ export interface Author {
     birthDate: string;
     deathDate: string;
     image: string;
-    detailedInfo: string; // PREMIUM ONLY
+    detailedInfo?: string; // PREMIUM ONLY
 }
 
 export interface DBAuthor extends Author {
