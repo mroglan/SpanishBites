@@ -324,12 +324,12 @@ export default function FilterPanel({filters:startFilters, setFilters, closeFilt
             <Box mt={3}>
                 <Grid container spacing={3} justify="flex-end" alignItems="center">
                     <Grid item>
-                        <GrayDenseButton disabled={saving} onClick={closeFilters}>
+                        <GrayDenseButton data-testid="filterspanel-cancel" disabled={saving} onClick={closeFilters}>
                             Cancel
                         </GrayDenseButton>
                     </Grid>
                     <Grid item>
-                        <BlueDenseButton disabled={saving} onClick={() => saveChanges()}>
+                        <BlueDenseButton data-testid="filterspanel-save" disabled={saving} onClick={() => saveChanges()}>
                             Save Filters
                         </BlueDenseButton>
                     </Grid>
