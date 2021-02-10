@@ -12,7 +12,8 @@ export const getAllPassages = async () => {
             foreignField: '_id',
             as: 'book'
         }},
-        {$unwind: '$book'}
+        {$unwind: '$book'},
+        {$unset: ['annotations', 'commentary']}
     ]).toArray()
 
     return passages
