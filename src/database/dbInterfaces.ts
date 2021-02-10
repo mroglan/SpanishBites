@@ -112,9 +112,9 @@ interface Passage {
     desc: string;
     englishText: string;
     spanishText: string;
-    commentary: string;
+    commentary?: string; // PREMIUM ONLY
     vocab: VocabWord[];
-    annotations: string; // link to a pdf
+    annotations?: string; // PREMIUM ONLY
 }
 
 export interface DBPassage extends Passage {
