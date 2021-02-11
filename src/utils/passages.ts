@@ -18,3 +18,42 @@ export const getAllPassages = async () => {
 
     return passages
 }
+
+export const getPassage = async (id:ObjectId) => {
+    const db = await database()
+
+    const passage:DBPassage[] = await db.collection('passages').aggregate([
+        {$match: {'_id': id}},
+        {$lookup: {
+            from: 'books', 
+            let: {'bookId': '$book'},
+            pipeline: [
+                {$match: {$expr: {$eq: ['$_id', '$$bookId']}}},
+                {$lookup: {
+                    from: 'timePeriods',
+                    localField: 'timePeriod',
+                    foreignField: '_id',
+                    as: 'timePeriod'
+                }},
+                {$unwind: '$timePeriod'},
+                {$lookup: {
+                    from: 'authors',
+                    localField: 'authors',
+                    foreignField: '_id',
+                    as: 'authors'
+                }},
+                {$lookup: {
+                    from: 'genres',
+                    localField: 'genres',
+                    foreignField: '_id',
+                    as: 'genres'
+                }}
+            ],
+            as: 'book'
+        }},
+        {$unwind: '$book'},
+        {$unset: ['annotations', 'commentary']}
+    ]).toArray()
+
+    return passage[0]
+}
