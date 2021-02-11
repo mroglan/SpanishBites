@@ -127,6 +127,10 @@ export interface ClientPassage extends Passage {
     book: {_id: string; genres: string[]; authors: string[]; timePeriod: string; title: string; desc: string; image: string; detailedInfo: string;};
 }
 
+export interface FullyPopulatedClientPassage extends Passage {
+    _id: string;
+    book: ClientBook;
+}
 
 export interface User {
     username: string;
