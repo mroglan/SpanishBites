@@ -79,3 +79,58 @@
 .author-grid-container > div {
     padding-bottom: 1rem;
 }
+
+
+/* PASSAGE */
+
+.passage-main {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 1rem;
+    min-height: 100%;
+}
+
+.passage-text-container {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    max-width: 90ch;
+    display: flex;
+    flex-direction: column;
+}
+
+.passage-premium-container {
+    flex-grow: 1;
+    min-height: 100%;
+}
+
+.passage-display-tab-container {
+    display: flex;
+    background: #fff;
+}
+
+.passage-display-tab-container > div {
+    margin-right: 1rem;
+    
+}
+
+.passage-display-root {
+    background: hsl(50, 100%, 99%);
+    height: 100%
+}
+
+.no-premium-message-root {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    max-width: 90ch;
+}
+
+.no-premium-message-root > div {
+    max-width: 300px;
+}
+
+/* @media only screen and (max-width: 1072px) {
+    .no-premium-message-root {
+        max-width: 90ch;
+    }
+} */
