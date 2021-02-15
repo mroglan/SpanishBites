@@ -18,7 +18,7 @@ interface Props {
 export default function Passage({passage:dbPassage}:Props) {
 
     if(!dbPassage) {
-        <ResourceNotFound />
+        return <ResourceNotFound />
     }
 
     const {data: {passage}} = useSWR(`/api/passages/${dbPassage._id || 'undefined'}`, {initialData: {passage: dbPassage}})
