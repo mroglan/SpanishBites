@@ -12,3 +12,10 @@ export const ignoreCapsAndAccentsRegex = (input:string) => {
     
     return new RegExp(regex, 'i')
 }
+
+export const matchesSearch = (name:string, filter:string) => {
+    if(!filter) return true
+    const regex = ignoreCapsAndAccentsRegex(filter)
+    if(name.match(regex)) return true
+    return false
+}
