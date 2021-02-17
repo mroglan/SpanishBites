@@ -95,6 +95,13 @@ export interface ClientBook extends Book {
     timePeriod: ClientTimePeriod;
 }
 
+export interface AuthorPopulatedClientBook extends Book {
+    _id: string;
+    genres: string[];
+    authors: ClientAuthor[];
+    timePeriod: string;
+}
+
 export interface ClientUnpopulatedBook extends Book {
     _id: string;
     genres: string[];
