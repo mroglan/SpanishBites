@@ -7,6 +7,7 @@ import {findDate} from '../../../../utils/dates'
 import styles from '../../../../styles/ResourceList.module.css'
 import {useState, useReducer, useMemo, useCallback} from 'react'
 import Filters from './Filters'
+import {matchesSearch} from '../../../../utils/regex'
 
 interface Props {
     authors: ClientAuthor[];
@@ -45,13 +46,6 @@ const defaultFilters = {
     search: '',
     sort: 'lastName',
     mode: 'detailed'
-}
-
-const matchesSearch = (name:string, filter:string) => {
-    if(!filter) return true
-    const regex = new RegExp(filter, 'i')
-    if(name.match(regex)) return true
-    return false
 }
 
 const sortAuthors = (type:string, {a, b}:{a:Author; b:Author;}) => {
