@@ -10,6 +10,21 @@ export const getAllUnpopulatedBooks = async () => {
     return books
 }
 
+export const getAllBooks = async () => {
+    const db = await database()
+
+    const books:DBBook[] = await db.collection('books').aggregate([
+        {$lookup: {
+            from: 'authors',
+            localField: 'authors',
+            foreignField: '_id',
+            as: 'authors'
+        }}
+    ]).toArray()
+
+    return books
+}
+
 export const getBook = async (id:ObjectId) => {
     const db = await database()
 
