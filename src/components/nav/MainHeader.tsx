@@ -20,12 +20,12 @@ export default function Header({bg}:Props) {
     const classes = useStyles()
     return (
         <Box>
-            <Box py={1} px={3} textAlign="center" style={{background: bg}}>
+            <Box py={1} px={2} textAlign="center" style={{background: bg}}>
                 <Grid container alignItems="center" justify="space-between">
                     <Grid item>
                         <Grid container wrap="nowrap" spacing={1} alignItems="center">
                             <Grid item>
-                                <img src={bg === "#fff" || bg === "none" ? '/logo.svg' : '/logo2.svg'} title="Spanish Bites" style={{width: 40, height: 40}} />
+                                <img src="/logo3.svg" title="Spanish Bites" style={{width: 40, height: 40}} />
                             </Grid>
                             <Grid item>
                                 <Typography className={classes.title} variant="h4" component="h1">
