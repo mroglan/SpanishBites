@@ -10,6 +10,7 @@ import styles from '../../../styles/Resource.module.css'
 import {Paper, Box, Typography, Divider} from '@material-ui/core'
 import {SecondaryLink} from '../../../components/items/links'
 import MainHeader from '../../../components/nav/MainHeader'
+import MainFooter from '../../../components/nav/MainFooter'
 import Organizer from '../../../components/library/timePeriods/Organizer'
 import ResourceNotFound from '../../../components/error/ResourceNotFound'
 
@@ -49,7 +50,7 @@ export default function TimePeriod({timePeriod:dbTimePeriod}:Props) {
                     </Box>
                 </div>
                 <div className={styles.footer}>
-                    Footer
+                    <MainFooter />
                 </div>
             </div>
         </>

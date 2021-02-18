@@ -4,6 +4,7 @@ import {getAllBooks} from '../../../utils/books'
 import styles from '../../../styles/ResourceList.module.css'
 import Head from 'next/head'
 import MainHeader from '../../../components/nav/MainHeader'
+import MainFooter from '../../../components/nav/MainFooter'
 import useSWR from 'swr'
 import Main from '../../../components/library/books/indexPage/Main'
 
@@ -28,7 +29,7 @@ export default function Books({books:dbBooks}:Props) {
                     <Main books={books} />
                 </div>
                 <div>
-                    footer
+                    <MainFooter />
                 </div>
             </div>
         </>

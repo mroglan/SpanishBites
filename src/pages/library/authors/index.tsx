@@ -6,6 +6,7 @@ import styles from '../../../styles/ResourceList.module.css'
 import Head from 'next/head'
 import Link from 'next/link'
 import MainHeader from '../../../components/nav/MainHeader'
+import MainFooter from '../../../components/nav/MainFooter'
 import useSWR from 'swr'
 import Main from '../../../components/library/authors/indexPage/Main'
 
@@ -30,7 +31,7 @@ export default function Authors({authors:dbAuthors}:Props) {
                     <Main authors={authors} />
                 </div>
                 <div>
-                    footer
+                    <MainFooter />
                 </div>
             </div>
         </>

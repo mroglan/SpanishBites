@@ -11,6 +11,7 @@ import {Paper, Box, Typography, Divider} from '@material-ui/core'
 import {SecondaryLink} from '../../../components/items/links'
 import {BulletList} from '../../../components/items/lists'
 import MainHeader from '../../../components/nav/MainHeader'
+import MainFooter from '../../../components/nav/MainFooter'
 import ResourceNotFound from '../../../components/error/ResourceNotFound'
 
 interface Props {
@@ -121,7 +122,7 @@ export default function Author({author:dbAuthor}:Props) {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    footer
+                    <MainFooter />
                 </div>
             </div>
         </>

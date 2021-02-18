@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import {Box} from '@material-ui/core'
 import MainHeader from '../components/nav/MainHeader'
 import MainSideBar from '../components/nav/MainSideNav'
+import MainFooter from '../components/nav/MainFooter'
 import FirstBanner from '../components/home/FirstBanner'
 
 export default function Home() {
@@ -27,7 +28,7 @@ export default function Home() {
                     Main Section for Bites and Such
                 </div>
                 <div className={styles.footer}>
-                    Footer
+                    <MainFooter />
                 </div>
             </div>
         </>

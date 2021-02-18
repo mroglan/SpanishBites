@@ -4,6 +4,7 @@ import useSWR from 'swr'
 import Head from 'next/head'
 import styles from '../../../styles/ResourceList.module.css'
 import MainHeader from '../../../components/nav/MainHeader'
+import MainFooter from '../../../components/nav/MainFooter'
 import Main from '../../../components/library/timePeriods/indexPage/Main'
 import { getAllTimePeriods } from '../../../utils/timePeriods'
 import {getAllAuthors, getAllUnpopulatedAuthors} from '../../../utils/authors'
@@ -32,7 +33,7 @@ export default function TimePeriods({timePeriods:dbTimePeriods, authors:dbAuthor
                     <Main timePeriods={timePeriods} authors={authors} />
                 </div>
                 <div>
-                    footer
+                    <MainFooter />
                 </div>
             </div>
         </>

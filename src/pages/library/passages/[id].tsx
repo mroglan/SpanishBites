@@ -8,6 +8,7 @@ import useSWR from 'swr'
 import Head from 'next/head'
 import styles from '../../../styles/Resource.module.css'
 import MainHeader from '../../../components/nav/MainHeader'
+import MainFooter from '../../../components/nav/MainFooter'
 import ResourceNotFound from '../../../components/error/ResourceNotFound'
 import Main from '../../../components/library/passages/Main'
 
@@ -42,7 +43,7 @@ export default function Passage({passage:dbPassage}:Props) {
                     <Main passage={passage} />
                 </div>
                 <div className={styles.footer}>
-                    footer
+                    <MainFooter />
                 </div>
             </div>
         </>

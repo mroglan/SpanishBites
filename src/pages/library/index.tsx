@@ -11,6 +11,7 @@ import {getTodayBite} from '../../utils/bites'
 import {ClientUnpopulatedAuthor, ClientUnpopulatedBook, ClientGenre, ClientTimePeriod, ClientPassage, ClientSpanishBite} from '../../database/dbInterfaces'
 
 import MainHeader from '../../components/nav/MainHeader'
+import MainFooter from '../../components/nav/MainFooter'
 import Main from '../../components/library/indexPage/Main'
 
 export interface LibraryItems {
@@ -44,7 +45,7 @@ export default function Library({items:dbItems}:Props) {
                 </div>
             </div>
             <div>
-                footer
+                <MainFooter />
             </div>
         </>
     )

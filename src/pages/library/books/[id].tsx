@@ -11,6 +11,7 @@ import {Paper, Box, Typography, Divider} from '@material-ui/core'
 import {SecondaryLink} from '../../../components/items/links'
 import {BulletList} from '../../../components/items/lists'
 import MainHeader from '../../../components/nav/MainHeader'
+import MainFooter from '../../../components/nav/MainFooter'
 import TextDisplay from '../../../components/mui-rte/TextDisplay'
 import ResourceNotFound from '../../../components/error/ResourceNotFound'
 
@@ -103,7 +104,7 @@ export default function Book({book:dbBook}:Props) {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    Footer
+                    <MainFooter />
                 </div>
             </div>
         </>
