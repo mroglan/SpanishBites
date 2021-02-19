@@ -77,12 +77,12 @@ export default function Main({passages}:Props) {
                                 <Grid container wrap="nowrap" spacing={2} alignItems="center">
                                     <Grid item>
                                         <img src={passage.book.image || '/no-profile.jpg'} alt={passage.name}
-                                        title={passage.name} data-testid="passageImg" />
+                                        title={passage.name} data-testid="passage-img" />
                                     </Grid>
                                     <Grid item style={{flexGrow: 1}}>
                                         <Box>
                                             <Link href="/library/passages/[id]" as={`/library/passages/${passage._id}`}>
-                                                <a data-testid="passageName">
+                                                <a data-testid="passage-name">
                                                     <PrimaryLink variant="body1">
                                                         {passage.name}
                                                     </PrimaryLink>
@@ -90,7 +90,7 @@ export default function Main({passages}:Props) {
                                             </Link>
                                         </Box>
                                         <Box mt={1}>
-                                            <Typography data-testid="passage-authors" variant="body1">
+                                            <Typography data-testid="passage-book" variant="body1">
                                                 <i>{passage.book.title}</i>
                                             </Typography>
                                         </Box>
