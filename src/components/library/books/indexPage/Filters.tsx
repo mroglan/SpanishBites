@@ -25,7 +25,7 @@ export default function Filters({filters, dispatch}:Props) {
                 <Grid item>
                     <FormControl style={{minWidth: 100}} variant="outlined">
                         <InputLabel id="mode-label">View mode</InputLabel>
-                        <Select labelId="mode-label" label="View mode" value={filters.mode} inputProps={{'data-testid': 'book-mode-input'}}
+                        <Select labelId="mode-label" label="View mode" value={filters.mode} inputProps={{'data-testid': 'view-mode-input'}}
                         onChange={(e) => dispatch({type: 'CHANGE_MODE', payload: e.target.value})}>
                             <MenuItem value="detailed">Detailed</MenuItem>
                             <MenuItem value="list">List</MenuItem>
