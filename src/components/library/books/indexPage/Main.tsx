@@ -79,12 +79,12 @@ export default function Main({books}:Props) {
                                 <Grid container wrap="nowrap" spacing={2} alignItems="center">
                                     <Grid item>
                                         <img src={book.image || '/no-profile.jpg'} alt={book.title}
-                                        title={book.title} data-testid="bookImg" />
+                                        title={book.title} data-testid="book-img" />
                                     </Grid>
                                     <Grid item style={{flexGrow: 1}}>
                                         <Box>
                                             <Link href="/library/books/[id]" as={`/library/books/${book._id}`}>
-                                                <a data-testid="bookName">
+                                                <a data-testid="book-name">
                                                     <PrimaryLink variant="body1">
                                                         {book.title}
                                                     </PrimaryLink>
