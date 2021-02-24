@@ -63,6 +63,6 @@ export const getStaticProps:GetStaticProps = async () => {
         genres: JSON.parse(JSON.stringify(genres)),
         passages: JSON.parse(JSON.stringify(passages)),
         bite: JSON.parse(JSON.stringify(bite))
-    }}}
+    }}, revalidate: 60}
 
 }
