@@ -1,0 +1,27 @@
+
+/* MAIN HEADER */
+
+.main-root {
+    padding: .5rem 1rem;
+}
+
+.title {
+    color: hsl(229, 100%, 58%);
+    font-weight: 600 !important;
+    white-space: nowrap;
+    font-family: "Catamaran" !important;
+}
+
+.link {
+    color: hsl(229, 100%, 58%);
+}
+
+.link:hover {
+    color: hsl(229, 100%, 35%);
+}
+
+@media only screen and (min-width: 1000px) {
+    .main-root {
+        padding: .5rem 2rem;
+    }
+}
