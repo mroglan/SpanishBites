@@ -6,7 +6,10 @@ import FirstBanner from '../../../components/home/FirstBanner'
 import styles from '../../../styles/Home.module.css'
 
 describe('Landing Page', () => {
-    const wrapper = shallow(<App />)
+
+    const bite = {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}
+
+    const wrapper = shallow(<App bite={bite} />)
 
     it('Has a header', () => {
         expect(wrapper.find(`.${styles.header}`).exists()).toBeTruthy()
