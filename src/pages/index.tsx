@@ -1,6 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
+import {GetStaticProps} from 'next'
+import {getTodayBite} from '../utils/bites'
 import styles from '../styles/Home.module.css'
+import {ClientSpanishBite} from '../database/dbInterfaces'
 import {Box} from '@material-ui/core'
 import MainHeader from '../components/nav/MainHeader'
 import MainSideBar from '../components/nav/MainSideNav'
@@ -8,7 +11,11 @@ import MainFooter from '../components/nav/MainFooter'
 import FirstBanner from '../components/home/FirstBanner'
 import Library from '../components/home/Library'
 
-export default function Home() {
+interface Props {
+    bite: ClientSpanishBite;
+}
+
+export default function Home({bite}:Props) {
 
     return (
         <>
@@ -22,11 +29,8 @@ export default function Home() {
                 <div className={styles['sub-ad']}>
                     <FirstBanner />
                 </div>
-                {/* <div className={styles['side-bar']}>
-                    <MainSideBar />
-                </div> */}
                 <div className={styles.main}>
-                    <Library />
+                    <Library bite={bite} />
                 </div>
                 <div className={styles.footer}>
                     <MainFooter />
@@ -34,4 +38,11 @@ export default function Home() {
             </div>
         </>
     )
+}
+
+export const getStaticProps:GetStaticProps = async () => {
+
+    const bite = await getTodayBite()
+
+    return {props: {bite: JSON.parse(JSON.stringify(bite))}, revalidate: 60}
 }
