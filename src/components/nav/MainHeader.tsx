@@ -12,7 +12,7 @@ export default function Header({bg}:Props) {
 
     return (
         <Box>
-            <Box  className={styles['main-root']} textAlign="center" style={{background: bg}}>
+            <Box className={styles['main-root']} textAlign="center" style={{background: bg}}>
                 <Grid container alignItems="center" justify="space-between">
                     <Grid item>
                         <Link href="/">
