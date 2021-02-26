@@ -173,7 +173,7 @@ export default function DisplayPanel({items}) {
         if(item.type === 'book') return {...item, authors: item.authors.map(author => {
             return libraryItems.authors.find(a => a._id === author)
         })}
-        return {...item, book: {...item.book, authors: item.book.authors.map(author => {
+        return {...item, book: item.book && {...item.book, authors: item.book.authors.map(author => {
             return libraryItems.authors.find(a => a._id === author)
         })}}
     }), [displayItems])

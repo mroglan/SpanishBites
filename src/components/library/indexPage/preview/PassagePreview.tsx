@@ -20,7 +20,10 @@ interface Props {
 
 export default function PreviewPassage({passage}:Props) {
 
-    const authors = useMemo(() => passage.book.authors.map(({firstName, lastName}) => firstName + ' ' + lastName), [passage])
+    const authors = useMemo(() => {
+        const authorList = passage.authors?.length > 0 ? passage.authors : passage.book?.authors || []
+        return authorList.map(({firstName, lastName}) => firstName + ' ' + lastName)
+    }, [passage])
 
     return (
         <Box>
@@ -30,9 +33,9 @@ export default function PreviewPassage({passage}:Props) {
                 </Typography>
             </Box>
             <Box textAlign="center" mt={2}>
-                <Typography variant="h5">
+                {passage.book && <Typography variant="h5">
                     From <i>{passage.book.title}</i>
-                </Typography>
+                </Typography>}
                 <Typography variant="h5">
                     by {authors.join(', ')}
                 </Typography>
