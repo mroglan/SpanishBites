@@ -12,8 +12,14 @@ export const getAllPassages = async () => {
             foreignField: '_id',
             as: 'book'
         }},
-        {$unwind: '$book'},
-        {$unset: ['annotations', 'commentary']}
+        {$unwind: {path: '$book', preserveNullAndEmptyArrays: true}}, 
+        {$lookup: {
+            from: 'authors', 
+            localField: 'authors',
+            foreignField: '_id', 
+            as: 'authors'
+        }},
+        {$unset: ['annotations', 'commentary']},
     ]).toArray()
 
     return passages
@@ -52,6 +58,12 @@ export const getPassage = async (id:ObjectId) => {
             as: 'book'
         }},
         {$unwind: '$book'},
+        {$lookup: {
+            from: 'authors', 
+            localField: 'authors',
+            foreignField: '_id', 
+            as: 'authors'
+        }},
         {$unset: ['annotations', 'commentary']}
     ]).toArray()
 
