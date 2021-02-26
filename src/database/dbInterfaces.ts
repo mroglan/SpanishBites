@@ -127,16 +127,19 @@ interface Passage {
 export interface DBPassage extends Passage {
     _id: ObjectId;
     book: ObjectId; 
+    authors?: ObjectId[];
 }
 
 export interface ClientPassage extends Passage {
     _id: string;
     book: {_id: string; genres: string[]; authors: string[]; timePeriod: string; title: string; desc: string; image: string; detailedInfo: string;};
+    authors?: ClientUnpopulatedAuthor[];
 }
 
 export interface FullyPopulatedClientPassage extends Passage {
     _id: string;
     book: ClientBook;
+    authors?: ClientUnpopulatedAuthor[];
 }
 
 export interface User {
