@@ -76,7 +76,7 @@ export default function Main({passages}:Props) {
                             <div data-testid="detailed-passage-item">
                                 <Grid container wrap="nowrap" spacing={2} alignItems="center">
                                     <Grid item>
-                                        <img src={passage.book.image || '/no-profile.jpg'} alt={passage.name}
+                                        <img src={passage.book?.image || '/no-profile.jpg'} alt={passage.name}
                                         title={passage.name} data-testid="passage-img" />
                                     </Grid>
                                     <Grid item style={{flexGrow: 1}}>
@@ -91,7 +91,7 @@ export default function Main({passages}:Props) {
                                         </Box>
                                         <Box mt={1}>
                                             <Typography data-testid="passage-book" variant="body1">
-                                                <i>{passage.book.title}</i>
+                                                <i>{passage.book?.title}</i>
                                             </Typography>
                                         </Box>
                                     </Grid>
