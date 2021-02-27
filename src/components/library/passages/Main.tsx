@@ -14,6 +14,8 @@ interface Props {
 
 export default function Main({passage}:Props) {
 
+    const authors:any[] = passage.authors?.length > 0 ? passage.authors : passage.book.authors
+
     return (
         <div className={styles['passage-main']}>
             <div className={styles['passage-text-container']}>
@@ -30,12 +32,12 @@ export default function Main({passage}:Props) {
                                     <i>{passage.book.title}</i>
                                 </SecondaryLink>
                             </a>
-                        </Link> by {passage.book.authors.map((author, i) => (
+                        </Link> by {authors.map((author, i) => (
                             <Link key={i} href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
                                 <a>
                                     <SecondaryLink variant="inherit">
                                         {author.firstName + ' ' + author.lastName}
-                                        {i + 1 < passage.book.authors.length ? ', ' : ''}
+                                        {i + 1 < authors.length ? ', ' : ''}
                                     </SecondaryLink>
                                 </a>
                             </Link>
