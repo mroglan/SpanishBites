@@ -12,9 +12,7 @@ interface Props {
     books: AuthorPopulatedClientBook[];
 }
 
-export default function Books({books:dbBooks}:Props) {
-
-    const {data: {books}} = useSWR('/api/books', {initialData: {books: dbBooks}})
+export default function Books({books}:Props) {
 
     return (
         <>
@@ -40,5 +38,5 @@ export const getStaticProps:GetStaticProps = async () => {
 
     const books = await getAllBooks()
 
-    return {props: {books: JSON.parse(JSON.stringify(books))}, revalidate: 60}
+    return {props: {books: JSON.parse(JSON.stringify(books))}, revalidate: 1800}
 }

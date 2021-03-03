@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
-import database from '../../../database/database'
 import {DBBook, ClientBook} from '../../../database/dbInterfaces'
-import {ObjectId} from 'mongodb'
+import {client} from '../../../database/fauna-db'
+import {query as q} from 'faunadb'
 import useSWR from 'swr'
 import {getBook} from '../../../utils/books'
 import Head from 'next/head'
@@ -19,13 +19,7 @@ interface Props {
     book: ClientBook;
 }
 
-export default function Book({book:dbBook}:Props) {
-
-    if(!dbBook) {
-        return <ResourceNotFound />
-    }
-
-    const {data: {book}} = useSWR(`/api/books/${dbBook._id || 'undefined'}`, {initialData: {book: dbBook}})
+export default function Book({book}:Props) {
 
     if(!book || !book._id) {
         return <ResourceNotFound />
@@ -113,17 +107,19 @@ export default function Book({book:dbBook}:Props) {
 
 export const getStaticProps:GetStaticProps = async (ctx:GetStaticPropsContext) => {
     const id = ctx.params.id as string
-    if(!ObjectId.isValid(id)) return {props: {book: {}}}
-    const book = await getBook(new ObjectId(id))
+    
+    const book = await getBook(id)
 
-    return {props: {book: JSON.parse(JSON.stringify(book || {}))}, revalidate: 60}
+    return {props: {book: JSON.parse(JSON.stringify(book || {}))}, revalidate: 1800}
 }
 
 export const getStaticPaths:GetStaticPaths = async () => {
-    const db = await database()
-    const books:DBBook[] = await db.collection('books').find({}).toArray()
 
-    const paths = books.map(book => ({params: {id: book._id.toString()}}))
+    const books:any = await client.query(
+        q.Paginate(q.Match(q.Index('all_books')))
+    )
+
+    const paths = books.data.map(book => ({params: {id: book.id}}))
 
     return {
         fallback: true,
