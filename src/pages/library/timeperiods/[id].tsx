@@ -2,6 +2,8 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import database from '../../../database/database'
 import {DBTimePeriod, ClientTimePeriod} from '../../../database/dbInterfaces'
 import {ObjectId} from 'mongodb'
+import {client} from '../../../database/fauna-db'
+import {query as q} from 'faunadb'
 import useSWR from 'swr'
 import {getTimePeriod} from '../../../utils/timePeriods'
 import Head from 'next/head'
@@ -18,13 +20,7 @@ interface Props {
     timePeriod: ClientTimePeriod;
 }
 
-export default function TimePeriod({timePeriod:dbTimePeriod}:Props) {
-
-    if(!dbTimePeriod) {
-        return <ResourceNotFound />
-    }
-
-    const {data: {timePeriod}} = useSWR(`/api/timeperiods/${dbTimePeriod._id || 'undefined'}`, {initialData: {timePeriod: dbTimePeriod}})
+export default function TimePeriod({timePeriod}:Props) {
 
     if(!timePeriod || !timePeriod._id) {
         return <ResourceNotFound />
@@ -58,22 +54,24 @@ export default function TimePeriod({timePeriod:dbTimePeriod}:Props) {
 }
 
 export const getStaticProps:GetStaticProps = async (ctx:GetStaticPropsContext) => {
-    const id = ctx.params.id as string
-    if(!ObjectId.isValid(id)) return {props: {timePeriod: {}}}
+    try {
+        const id = ctx.params.id as string
 
-    const timePeriod = await getTimePeriod(new ObjectId(id))
+        const timePeriod = await getTimePeriod(id)
 
-    return {props: {timePeriod: JSON.parse(JSON.stringify(timePeriod))}, revalidate: 60}
+        return {props: {timePeriod: timePeriod}, revalidate: 1800}
+    } catch(e) {
+        return {props: {timePeriod: {}}}
+    }
 }
 
 export const getStaticPaths:GetStaticPaths = async () => {
-    const db = await database()
-    const periods:DBTimePeriod[] = await db.collection('timePeriods').find({}).toArray()
 
-    const paths = periods.map(period => ({params: {id: period._id.toString()}}))
+    const periods:any = await client.query(
+        q.Paginate(q.Match(q.Index('all_timePeriods')))
+    )
 
-    console.log(paths[0])
-    console.log(typeof paths[0].params.id)
+    const paths = periods.data.map(period => ({params: {id: period.id}}))
 
     return {
         fallback: true,

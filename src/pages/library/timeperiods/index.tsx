@@ -44,5 +44,5 @@ export const getStaticProps:GetStaticProps = async () => {
 
     const [timePeriods, authors] = await Promise.all([getAllTimePeriods(), getAllUnpopulatedAuthors()])
 
-    return {props: {timePeriods: JSON.parse(JSON.stringify(timePeriods)), authors: JSON.parse(JSON.stringify(authors))}, revalidate: 60}
+    return {props: {timePeriods: timePeriods, authors: authors}, revalidate: 1800}
 }
