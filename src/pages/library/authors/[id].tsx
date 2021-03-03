@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import database from '../../../database/database'
 import {DBAuthor, ClientAuthor} from '../../../database/dbInterfaces'
-import {ObjectId} from 'mongodb'
+import {client} from '../../../database/fauna-db'
+import {query as q} from 'faunadb'
 import useSWR from 'swr'
 import {getAuthor} from '../../../utils/authors'
 import Head from 'next/head'
@@ -18,13 +18,7 @@ interface Props {
     author: ClientAuthor;
 }
 
-export default function Author({author:dbAuthor}:Props) {
-
-    if(!dbAuthor) {
-        return <ResourceNotFound />
-    }
-
-    const {data:{author}} = useSWR(`/api/authors/${dbAuthor._id || 'undefined'}`, {initialData: {author: dbAuthor}})
+export default function Author({author}:Props) {
 
     if(!author || !author._id) {
         return <ResourceNotFound />
@@ -130,19 +124,25 @@ export default function Author({author:dbAuthor}:Props) {
 }
 
 export const getStaticProps:GetStaticProps = async (ctx) => {
-    const id = ctx.params.id as string
-    if(!ObjectId.isValid(id)) return {props: {author: {}}}
 
-    const author = await getAuthor(new ObjectId(id))
+    try {
+        const id = ctx.params.id as string
 
-    return {props: {author: JSON.parse(JSON.stringify(author || {}))}, revalidate: 60}
+        const author = await getAuthor(id)
+
+        return {props: {author}, revalidate: 1800}
+    } catch(e) {
+        return {props: {author: {}}}
+    }
 }
 
 export const getStaticPaths:GetStaticPaths = async() => {
-    const db = await database()
-    const authors:DBAuthor[] = await db.collection('authors').find({}).toArray()
 
-    const paths = authors.map(author => ({params: {id: author._id.toString()}}))
+    const authors:any = await client.query(
+        q.Paginate(q.Match(q.Index('all_authors')))
+    )
+
+    const paths = authors.data.map(author => ({params: {id: author.id}}))
 
     return {
         fallback: true,

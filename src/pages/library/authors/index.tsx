@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import database from '../../../database/database'
 import {DBAuthor, ClientAuthor} from '../../../database/dbInterfaces'
 import {getAllAuthors} from '../../../utils/authors'
 import styles from '../../../styles/ResourceList.module.css'
@@ -14,9 +13,7 @@ interface Props {
     authors: ClientAuthor[];
 }
 
-export default function Authors({authors:dbAuthors}:Props) {
-
-    const {data: {authors}} = useSWR(`/api/authors`, {initialData: {authors: dbAuthors}})
+export default function Authors({authors}:Props) {
 
     return (
         <>
@@ -42,5 +39,5 @@ export const getStaticProps:GetStaticProps = async () => {
 
     const authors = await getAllAuthors()
 
-    return {props: {authors: JSON.parse(JSON.stringify(authors))}, revalidate: 60}
+    return {props: {authors}, revalidate: 1800}
 }
