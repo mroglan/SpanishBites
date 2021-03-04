@@ -27,7 +27,7 @@ export interface Props {
     items: LibraryItems;
 }
 
-export default function Library({items:dbItems}:Props) {
+export default function Library({items}:Props) {
 
     return (
         <>
@@ -41,7 +41,7 @@ export default function Library({items:dbItems}:Props) {
                     <MainHeader bg="none" />
                 </div>
                 <div>
-                    <Main items={dbItems} />
+                    <Main items={items} />
                 </div>
             </div>
             <div>
@@ -55,7 +55,7 @@ export const getStaticProps:GetStaticProps = async () => {
 
     const [authors, books, timePeriods, genres, passages, bite] = await Promise.all([getAllUnpopulatedAuthors(), 
         getAllUnpopulatedBooks(), getAllTimePeriods(), getAllGenres(), getAllPassages(), getTodayBite()])
-    
+
     return {props: {items: {
         authors: JSON.parse(JSON.stringify(authors)),
         books: JSON.parse(JSON.stringify(books)),
@@ -63,6 +63,6 @@ export const getStaticProps:GetStaticProps = async () => {
         genres: JSON.parse(JSON.stringify(genres)),
         passages: JSON.parse(JSON.stringify(passages)),
         bite: JSON.parse(JSON.stringify(bite))
-    }}, revalidate: 60}
+    }}, revalidate: 1800}
 
 }
