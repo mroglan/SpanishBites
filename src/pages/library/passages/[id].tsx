@@ -1,9 +1,9 @@
 import React from 'react'
 import {GetStaticPaths, GetStaticProps, GetStaticPropsContext} from 'next'
-import {ObjectId} from 'mongodb'
+import {client} from '../../../database/fauna-db'
+import {query as q} from 'faunadb'
 import {DBPassage, FullyPopulatedClientPassage} from '../../../database/dbInterfaces'
 import {getPassage} from '../../../utils/passages'
-import database from '../../../database/database'
 import useSWR from 'swr'
 import Head from 'next/head'
 import styles from '../../../styles/Resource.module.css'
@@ -16,13 +16,9 @@ interface Props {
     passage: FullyPopulatedClientPassage;
 }
 
-export default function Passage({passage:dbPassage}:Props) {
+export default function Passage({passage}:Props) {
 
-    if(!dbPassage) {
-        return <ResourceNotFound />
-    }
-
-    const {data: {passage}} = useSWR(`/api/passages/${dbPassage._id || 'undefined'}`, {initialData: {passage: dbPassage}})
+    console.log(passage)
 
     if(!passage || !passage._id) {
         return <ResourceNotFound />
@@ -51,18 +47,24 @@ export default function Passage({passage:dbPassage}:Props) {
 }
 
 export const getStaticProps:GetStaticProps = async (ctx:GetStaticPropsContext) => {
-    const id = ctx.params.id as string
-    if(!ObjectId.isValid(id)) return {props: {passage: {}}}
-    const passage = await getPassage(new ObjectId(id))
+    try {
+        const id = ctx.params.id as string
 
-    return {props: {passage: JSON.parse(JSON.stringify(passage || {}))}, revalidate: 60}
+        const passage = await getPassage(id)
+
+        return {props: {passage: JSON.parse(JSON.stringify(passage || {}))}, revalidate: 1800}
+    } catch(e) {
+        return {props: {passage: {}}}
+    }
 }
 
 export const getStaticPaths:GetStaticPaths = async () => {
-    const db = await database()
-    const passages:DBPassage[] = await db.collection('passages').find({}).toArray()
 
-    const paths = passages.map(passage => ({params: {id: passage._id.toString()}}))
+    const passages:any = await client.query(
+        q.Paginate(q.Match(q.Index('all_passages')))
+    )
+
+    const paths = passages.data.map(passage => ({params: {id: passage.id}}))
 
     return {fallback: true, paths}
 }

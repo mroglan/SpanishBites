@@ -12,9 +12,7 @@ interface Props {
     passages: ClientPassage[];
 }
 
-export default function Passages({passages:dbPassages}:Props) {
-
-    const {data: {passages}} = useSWR('/api/passages', {initialData: {passages: dbPassages}})
+export default function Passages({passages}:Props) {
 
     return (
         <>
@@ -40,5 +38,5 @@ export const getStaticProps:GetStaticProps = async () => {
 
     const passages = await getAllPassages()
 
-    return {props: {passages: JSON.parse(JSON.stringify(passages))}, revalidate: 60}
+    return {props: {passages: JSON.parse(JSON.stringify(passages))}, revalidate: 1800}
 }
