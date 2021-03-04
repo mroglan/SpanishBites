@@ -1,6 +1,5 @@
 import { NextApiResponse, NextApiRequest } from "next";
 import {getAllAuthors} from '../../../utils/authors'
-import {ObjectId} from 'mongodb'
 
 export default async function GetAllAuthors(req:NextApiRequest, res:NextApiResponse) {
 

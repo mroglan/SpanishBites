@@ -1,18 +1,14 @@
 import { NextApiResponse, NextApiRequest } from "next";
 import {getBook} from '../../../utils/books'
-import {ObjectId} from 'mongodb'
 
 export default async function GetBook(req:NextApiRequest, res:NextApiResponse) {
 
     const id = req.query.id as string
     
-    try {   
-        if(!ObjectId.isValid(id)) {
-            return res.status(400).json({msg: 'Invalid ObjectId'})
-        }
+    try {
     
         if(req.method === 'GET') {
-            const book = await getBook(new ObjectId(id))
+            const book = await getBook(id)
             return res.status(200).json({book})
         }
         

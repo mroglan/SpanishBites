@@ -1,6 +1,5 @@
 import { NextApiResponse, NextApiRequest } from "next";
 import {getAllTimePeriods} from '../../../utils/timePeriods'
-import {ObjectId} from 'mongodb'
 
 export default async function TimePeriods(req:NextApiRequest, res:NextApiResponse) {
 
