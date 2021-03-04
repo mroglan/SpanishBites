@@ -1,27 +1,28 @@
-import database from '../database/database'
 import {DBSpanishBite, DBDailyEvent} from '../database/dbInterfaces'
-import {ObjectId} from 'mongodb'
 import dayjs from 'dayjs'
+import {client} from '../database/fauna-db'
+import {query as q} from 'faunadb'
 
 export const getTodayBite = async () => {
-    const db = await database()
 
-    const dateRange = {min: new Date(dayjs().add(-1, 'day').toISOString()), max: new Date(dayjs().toISOString())}
+    const todayDate = dayjs().format('YYYY-MM-DD')
 
-    const dailyEvents = await db.collection('dailyEvents').aggregate([
-        {$match: {
-            date: {$gte: (dateRange.min), $lte: (dateRange.max)}
-        }},
-        {$lookup: {
-            from: 'bites', 
-            localField: 'bite',
-            foreignField: '_id',
-            as: 'bite'
-        }},
-        {$unwind: '$bite'}
-    ]).toArray()
-
-    const bite:DBSpanishBite = dailyEvents[0].bite
+    const bite:any = client.query(
+        q.If(
+            q.Exists(q.Match(q.Index('dailyEvents_by_date'), todayDate)),
+            q.Let(
+                {eventDoc: q.Get(q.Match(q.Index('dailyEvents_by_date'), todayDate))},
+                q.If(
+                    q.Exists(q.Ref(q.Collection('bites'), q.Select(['data', 'bite', 'id'], q.Var('eventDoc'), '555555555555555555'))),
+                    q.Merge(
+                        q.Select(['data'], q.Get(q.Select(['data', 'bite'], q.Var('eventDoc')))), {_id: q.Select(['data', 'bite', 'id'], q.Var('eventDoc'))}
+                    ),
+                    null
+                )
+            ),
+            null
+        )
+    )
 
     return bite
 }
