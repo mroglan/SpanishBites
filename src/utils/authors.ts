@@ -27,7 +27,10 @@ export const getAllAuthors = async () => {
         )
     )
     
-    return authors.data
+    return authors.data.map(a => {
+        delete a.detailedInfo
+        return a
+    })
 }
 
 export const getAllUnpopulatedAuthors = async () => {
@@ -50,6 +53,8 @@ export const getAuthor = async (id:string) => {
             populateAuthorDoc(q.Var('authorDoc'))
         )
     )
+
+    delete author.detailedInfo
 
     return author
 }
