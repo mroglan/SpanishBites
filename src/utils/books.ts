@@ -5,11 +5,11 @@ import {query as q} from 'faunadb'
 export const getAllUnpopulatedBooks = async () => {
 
     const books:any = await client.query(
-        q.Map(q.Paginate(q.Match(q.Index('all_books'))), (ref) => q.Get(ref))
+        q.Map(q.Paginate(q.Match(q.Index('all_books')), {size: 1000}), (ref) => q.Get(ref))
     )
 
-    return books.data.map(d => ({...d.data, _id: d.ref.id, timePeriod: d.timePeriod?.id || '', genres: d.genres.map(g => g?.id || ''),
-        authors: d.authors.map(a => a?.id || '')
+    return books.data.map(d => ({...d.data, _id: d.ref.id, timePeriod: d.data.timePeriod?.id || '', genres: d.data.genres.map(g => g?.id || ''),
+        authors: d.data.authors.map(a => a?.id || '')
     }))
 }
 
