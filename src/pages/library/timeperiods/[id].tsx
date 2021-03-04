@@ -1,7 +1,5 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
-import database from '../../../database/database'
 import {DBTimePeriod, ClientTimePeriod} from '../../../database/dbInterfaces'
-import {ObjectId} from 'mongodb'
 import {client} from '../../../database/fauna-db'
 import {query as q} from 'faunadb'
 import useSWR from 'swr'
