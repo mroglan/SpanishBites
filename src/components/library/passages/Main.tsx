@@ -14,7 +14,7 @@ interface Props {
 
 export default function Main({passage}:Props) {
 
-    const authors:any[] = passage.authors?.length > 0 ? passage.authors : passage.book.authors
+    const authors:any[] = passage.authors
 
     return (
         <div className={styles['passage-main']}>
@@ -26,22 +26,27 @@ export default function Main({passage}:Props) {
                 </Box>
                 <Box mt={1}>
                     <Typography variant="h6">
-                        From <Link href="/library/books/[id]" as={`/library/books/${passage.book._id}`}>
+                        {passage.book && <span>
+                            From <Link href="/library/books/[id]" as={`/library/books/${passage.book._id}`}>
                             <a>
                                 <SecondaryLink variant="inherit">
                                     <i>{passage.book.title}</i>
                                 </SecondaryLink>
                             </a>
-                        </Link> by {authors.map((author, i) => (
-                            <Link key={i} href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
-                                <a>
-                                    <SecondaryLink variant="inherit">
-                                        {author.firstName + ' ' + author.lastName}
-                                        {i + 1 < authors.length ? ', ' : ''}
-                                    </SecondaryLink>
-                                </a>
-                            </Link>
-                        ))}
+                        </Link>
+                        </span>} 
+                        {passage.authors.length > 0 && <span>
+                            {' '}by {authors.map((author, i) => (
+                                <Link key={i} href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
+                                    <a>
+                                        <SecondaryLink variant="inherit">
+                                            {author.firstName + ' ' + author.lastName}
+                                            {i + 1 < authors.length ? ', ' : ''}
+                                        </SecondaryLink>
+                                    </a>
+                                </Link>
+                            ))}
+                        </span>}
                     </Typography>
                 </Box>
                 <Box my={1}>
