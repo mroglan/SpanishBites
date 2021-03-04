@@ -7,7 +7,7 @@ const populateAuthorDoc = (doc) => {
         q.Select(['data'], doc),
         [
             {timePeriod: q.If(
-                q.Exists(q.Ref(q.Collection('timePeriods'), q.Select(['data', 'timePeriod', 'id'], doc))),
+                q.Exists(q.Ref(q.Collection('timePeriods'), q.Select(['data', 'timePeriod', 'id'], doc, '555555555555555555'))),
                 q.Merge(q.Select(['data'], q.Get(q.Select(['data', 'timePeriod'], doc))), {_id: q.Select(['data', 'timePeriod', 'id'], doc)}),
                 null
             )},

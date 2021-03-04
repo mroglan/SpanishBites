@@ -57,7 +57,7 @@ export const getBook = async (id:string) => {
                         null
                     )))},
                     {timePeriod: q.If(
-                        q.Exists(q.Ref(q.Collection('timePeriods'), q.Select(['data', 'timePeriod', 'id'], q.Var('bookDoc')))),
+                        q.Exists(q.Ref(q.Collection('timePeriods'), q.Select(['data', 'timePeriod', 'id'], q.Var('bookDoc'), '555555555555555555'))),
                         q.Merge(q.Select(['data'], q.Get(q.Select(['data', 'timePeriod'], q.Var('bookDoc')))), {_id: q.Select(['data', 'timePeriod', 'id'], q.Var('bookDoc'))}),
                         null
                     )}
