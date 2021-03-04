@@ -75,5 +75,8 @@ export const getPassage = async (id:string) => {
         )
     )
 
+    delete passage.annotations 
+    delete passage.commentary
+
     return passage
 }
