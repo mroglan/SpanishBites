@@ -1,11 +1,12 @@
-import database from '../database/database'
 import {Genre} from '../database/dbInterfaces'
-import {ObjectId} from 'mongodb'
+import {client} from '../database/fauna-db'
+import {query as q} from 'faunadb'
 
 export const getAllGenres = async () => {
-    const db = await database()
 
-    const genres:Genre[] = await db.collection('genres').find({}).toArray()
+    const genres:any = await client.query(
+        q.Map(q.Paginate(q.Match(q.Index('all_genres'))), q.Lambda('ref', q.Get(q.Var('ref'))))
+    )
 
-    return genres
+    return genres.data.map(g => ({...g.data, _id: g.ref.id}))
 }
