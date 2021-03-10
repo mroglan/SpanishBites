@@ -17,7 +17,7 @@ export default function BiteDisplay({hideBite}:Props) {
     return (
         <div className={styles['bite-display-root']}>
             <Box maxWidth={800}>
-                <BiteCard bite={bite} />
+                {bite && <BiteCard bite={bite} />}
                 <Box mt={3}>
                     <Grid container justify="center">
                         <BlueDenseButton data-testid="bite-display-return-home-btn" onClick={() => hideBite()}>

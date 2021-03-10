@@ -16,7 +16,7 @@ export default function Library({bite}:Props) {
             <section>
                 <div className={styles['c1-container']}>
                     <div className={styles['c1-graphic-container']}>
-                        <BiteCard bite={bite} />
+                        {bite && <BiteCard bite={bite} />}
                     </div>
                     <div className={styles['c1-text-container']}>
                         <div>
