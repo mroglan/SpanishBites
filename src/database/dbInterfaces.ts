@@ -141,12 +141,21 @@ export interface FullyPopulatedClientPassage extends Passage {
     authors?: ClientUnpopulatedAuthor[];
 }
 
+
+export interface Preview {
+    type: string;
+    id: string;
+}
+
 export interface User {
     username: string;
+    name: string;
     email: string;
     password: string;
     isAdmin: boolean;
     isVerified: boolean;
+    premiumExpiration: string;
+    previews: Preview[];
 }
 
 export interface DBUser extends User {
