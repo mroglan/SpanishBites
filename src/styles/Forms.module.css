@@ -1,0 +1,24 @@
+
+.catamaran {
+    font-family: "Catamaran" !important;
+}
+
+.input {
+
+}
+
+.input.error-input::after {
+    border-bottom-color: hsl(356, 81%, 49%);
+}
+
+.text-field {
+
+}
+
+.text-field.error-label {
+    color: hsl(356, 81%, 49%);
+}
+
+.helper-text.helper-text-error {
+    color: hsl(356, 81%, 49%);
+}
