@@ -153,7 +153,6 @@ export interface User {
     email: string;
     password: string;
     isAdmin: boolean;
-    isVerified: boolean;
     premiumExpiration: string;
     previews: Preview[];
 }
