@@ -26,14 +26,14 @@ export default function Signup({vals, onSubmit}:Props) {
         <Box>
             <Formik validationSchema={ object({
                 email: string().required('Please enter your email.').email('Please enter a valid email.'),
-                name: string().required('Please enter your profile name.').matches(/^\w+$/, {message: 'Name must be alphanumeric.'}).min(2).max(100),
+                name: string().required('Please enter your profile name.').matches(/^[\w\-\s]+$/, {message: 'Name must be alphanumeric.'}).min(2).max(100),
                 password: string().required('Please enter your password.').min(8).max(128),
                 passwordConfirmation: string().when('password', {
                     is: password => password && password.length > 0,
                     then: string().oneOf([ref('password')], 'Your passwords do not match.').required('Please confirm your password.')
                 })
             })} initialValues={initialValues} onSubmit={(values, actions) => onSubmit(values, actions)}>
-                {(values, errors, isSubmitting, isValidating) => (
+                {({values, errors, isSubmitting, isValidating}) => (
                     <Form>
                         <Box my={2}>
                             <FormGroup>
@@ -60,7 +60,7 @@ export default function Signup({vals, onSubmit}:Props) {
                             </FormGroup>
                         </Box>
                         <Box mt={4}>
-                            <BlueDenseButton style={{minWidth: 200}} disabled={isSubmitting || isValidating} variant="contained">
+                            <BlueDenseButton type="submit" style={{minWidth: 200}} disabled={isSubmitting || isValidating} variant="contained">
                                 Sign Up
                             </BlueDenseButton>
                         </Box>
