@@ -60,7 +60,7 @@ export default function Signup({vals, onSubmit}:Props) {
                             </FormGroup>
                         </Box>
                         <Box mt={4}>
-                            <BlueDenseButton style={{minWidth: 200}} variant="contained">
+                            <BlueDenseButton style={{minWidth: 200}} disabled={isSubmitting || isValidating} variant="contained">
                                 Sign Up
                             </BlueDenseButton>
                         </Box>
