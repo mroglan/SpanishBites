@@ -5,10 +5,28 @@ import styles from '../../styles/Forms.module.css'
 import {Bite} from '../items/bites'
 import Link from 'next/link'
 import {PrimaryLink} from '../items/links'
+import axios from 'axios'
 
 export default function Main() {
 
     const initialVals = {email: '', name: ''}
+
+    const onSubmit = async (values, actions) => {
+        try {
+            await axios({
+                method: 'POST',
+                url: '/api/signup',
+                data: values
+            })
+
+            console.log('success')
+
+        } catch(e) {
+            if(e.response.status !== 409) return
+            actions.setFieldError(e.response.data.field, e.response.data.msg)
+            actions.setSubmitting(false)
+        }
+    }
 
     return (
         <div>
@@ -22,7 +40,7 @@ export default function Main() {
                                 </Typography>
                             </Box>
                             <Box my={3}>
-                                <Signup vals={initialVals} onSubmit={(a, b) => null} />
+                                <Signup vals={initialVals} onSubmit={onSubmit} />
                             </Box>
                             <Box>
                                 <Typography component="span" variant="body1">
