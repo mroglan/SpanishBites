@@ -6,6 +6,7 @@ import {Bite} from '../items/bites'
 import Link from 'next/link'
 import {PrimaryLink} from '../items/links'
 import axios from 'axios'
+import Router from 'next/router'
 
 export default function Main() {
 
@@ -19,7 +20,9 @@ export default function Main() {
                 data: values
             })
 
-            console.log('success')
+            Router.push({
+                pathname: '/auth/verifyemail'
+            })
 
         } catch(e) {
             if(e.response.status !== 409) return
