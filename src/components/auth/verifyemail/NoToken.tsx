@@ -1,5 +1,6 @@
 import React from 'react'
 import {Box, Paper, Typography} from '@material-ui/core'
+import styles from '../../../styles/Auth.module.css'
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Link from 'next/link'
 import {PrimaryLink} from '../../items/links'
@@ -7,28 +8,31 @@ import {PrimaryLink} from '../../items/links'
 export default function NoToken() {
 
     return (
-        <Box height="100%" display="flex" alignItems="center" justifyContent="center">
-            <Box maxWidth={400}>
-                <Paper elevation={3}>
-                    <Box p={3}>
-                        <Box mb={3} textAlign="center">
-                            <MailOutlineIcon color="secondary" style={{fontSize: 100}} />
-                        </Box>
-                        <Box textAlign="center">
-                            <Typography variant="h6">
-                                Check your email for instructions to verify your account. If you don't see an email after a few minutes,{' '}
-                            </Typography>
-                            <Link href="/auth/resendemail">
-                                <a>
-                                    <PrimaryLink variant="h6">
-                                        resend it.
-                                    </PrimaryLink>
-                                </a>
-                            </Link> 
-                        </Box>
+        <div className={styles['main-root']}>
+            <div>
+                <div className={styles['main-img-container']}>
+                    <MailOutlineIcon color="secondary" style={{fontSize: 300}} />
+                </div>
+                <div className={styles['main-message-container']}>
+                    <Box textAlign="center" mb={1}>
+                        <Typography className={styles['catamaran']} variant="h3">
+                            Verify your email address
+                        </Typography>
                     </Box>
-                </Paper>
-            </Box>
-        </Box>
+                    <Box textAlign="center">
+                        <Typography variant="h6" component="span" className={styles['catamaran']}>
+                            Check your inbox for an email we just sent you. If you don't receive an email in the next few minutes{' '}
+                        </Typography>
+                        <Link href="/auth/resendemail">
+                            <a>
+                                <PrimaryLink className={styles['catamaran']} variant="h6">
+                                    resend it.
+                                </PrimaryLink>
+                            </a>
+                        </Link> 
+                    </Box>
+                </div>
+            </div>
+        </div>
     )
 }
