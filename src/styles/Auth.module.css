@@ -1,0 +1,19 @@
+
+.catamaran {
+    font-family: "Catamaran" !important;
+}
+
+.main-root {
+    padding-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.main-img-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.main-message-container {
+    max-width: 600px;
+}
