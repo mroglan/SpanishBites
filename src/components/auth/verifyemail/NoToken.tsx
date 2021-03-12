@@ -17,14 +17,14 @@ export default function NoToken() {
                         <Box textAlign="center">
                             <Typography variant="h6">
                                 Check your email for instructions to verify your account. If you don't see an email after a few minutes,{' '}
-                                <Link href="/auth/resendemail">
-                                    <a>
-                                        <PrimaryLink variant="h6">
-                                            resend it.
-                                        </PrimaryLink>
-                                    </a>
-                                </Link>
                             </Typography>
+                            <Link href="/auth/resendemail">
+                                <a>
+                                    <PrimaryLink variant="h6">
+                                        resend it.
+                                    </PrimaryLink>
+                                </a>
+                            </Link> 
                         </Box>
                     </Box>
                 </Paper>
