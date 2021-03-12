@@ -1,7 +1,7 @@
 import React from 'react'
 import {useRouter} from 'next/router'
 import Head from 'next/head'
-import SimpleHeader from '../../components/nav/SimpleHeader'
+import MainHeader from '../../components/nav/MainHeader'
 import MainFooter from '../../components/nav/MainFooter'
 import styles from '../../styles/Basic.module.css'
 import NoToken from '../../components/auth/verifyemail/NoToken'
@@ -18,7 +18,7 @@ export default function VerifyEmail() {
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
-                    <SimpleHeader bg="none" />
+                    <MainHeader bg="none" />
                 </div>
                 <div className={styles.main}>
                     {token ? <WithToken token={token as string} /> : <NoToken />}
