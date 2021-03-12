@@ -192,3 +192,13 @@ export interface ClientDailyEvent {
     bite: string;
     _id: string;
 }
+
+
+export interface VerificationToken {
+    token: string;
+    userInfo: {
+        name: string;
+        email: string;
+        password: string;
+    }
+}
