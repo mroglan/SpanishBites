@@ -24,3 +24,16 @@ export const isTokenWithEmail = async (email:string) => {
         )
     )
 }
+
+export const getTokenWithToken = async (token:string) => {
+
+    const vToken:any = await client.query(
+        q.If(
+            q.Exists(q.Match(q.Index('verificationTokens_by_token'), token)),
+            q.Get(q.Match(q.Index('verificationTokens_by_token'), token)),
+            null
+        )
+    )
+
+    return vToken ? {...vToken.data, _id: vToken.ref.id} : vToken
+}
