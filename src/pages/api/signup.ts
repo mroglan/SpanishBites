@@ -23,7 +23,7 @@ export default async function SignUp(req:NextApiRequest, res:NextApiResponse) {
             return res.status(409).json({msg: 'Your passwords do not match.', field: 'passwordConfirmation'})
         }
 
-        const usedEmail = await isUserWithEmail(req.body.email) // need to also check if matches a token!
+        const usedEmail = await isUserWithEmail(req.body.email)
 
         if(usedEmail) {
             return res.status(409).json({msg: 'This email is currently in use.', field: 'email'})
