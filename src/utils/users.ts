@@ -55,7 +55,7 @@ export const createUser = async (info:UserInfo) => {
     )
 }
 
-export const getUser = async (email:string) => {
+export const getUserFromEmail = async (email:string) => {
 
     const user:any = await client.query(
         q.If(
