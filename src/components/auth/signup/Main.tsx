@@ -16,7 +16,7 @@ export default function Main() {
         try {
             await axios({
                 method: 'POST',
-                url: '/api/signup',
+                url: '/api/auth/signup',
                 data: values
             })
 
@@ -25,8 +25,9 @@ export default function Main() {
             })
 
         } catch(e) {
-            if(e.response.status !== 409) return
-            actions.setFieldError(e.response.data.field, e.response.data.msg)
+            if(e.response.status === 409) {
+                actions.setFieldError(e.response.data.field, e.response.data.msg)
+            }
             actions.setSubmitting(false)
         }
     }
