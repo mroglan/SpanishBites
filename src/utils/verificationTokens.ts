@@ -37,3 +37,10 @@ export const getTokenWithToken = async (token:string) => {
 
     return vToken ? {...vToken.data, _id: vToken.ref.id} : vToken
 }
+
+export const deleteToken = async (id:string) => {
+    
+    await client.query(
+        q.Delete(q.Ref(q.Collection('verificationTokens'), id))
+    )
+}
