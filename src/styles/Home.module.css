@@ -194,6 +194,10 @@
     font-size: 1.3rem !important;
 }
 
+.link {
+    text-decoration: none;
+}
+
 @media only screen and (max-width: 500px) {
     .title-text {
         font-size: 2rem !important;
