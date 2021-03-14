@@ -1,6 +1,12 @@
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
+interface UserInfo {
+    name: string;
+    password: string;
+    email: string;
+}
+
 export const isUserWithEmail = async (email:string) => {
 
     return await client.query(
@@ -20,5 +26,31 @@ export const isUserWithUsername = async (username:string) => {
             true, 
             false
         )
+    )
+}
+
+const getRandomDigits = () => Math.floor(Math.random() * 1000000)
+
+const findUniqueUsername = async (name:string) => {
+
+    const noSpaceUsername = name.split(' ').join('_')
+
+    let newUsername = noSpaceUsername + getRandomDigits()
+
+    while(await isUserWithUsername(newUsername)) {
+        newUsername = noSpaceUsername + getRandomDigits()
+    }
+
+    return newUsername
+}
+
+export const createUser = async (info:UserInfo) => {
+
+    const username = findUniqueUsername(info.name)
+
+    const data = {...info, username, isAdmin: false, isVerified: true, premiumExpiration: '', previews: []}
+
+    await client.query(
+        q.Create(q.Collection('users'), {data})
     )
 }
