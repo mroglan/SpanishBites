@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import SimpleHeader from '../components/nav/SimpleHeader'
-import Main from '../components/signup/Main'
+import Main from '../components/auth/signup/Main'
 import MainFooter from '../components/nav/MainFooter'
 import styles from '../styles/Basic.module.css'
 
