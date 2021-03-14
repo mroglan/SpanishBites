@@ -10,8 +10,6 @@ import Router from 'next/router'
 
 export default function Main() {
 
-    const initialVals = {email: '', name: ''}
-
     const onSubmit = async (values, actions) => {
         try {
             await axios({
