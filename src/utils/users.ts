@@ -54,3 +54,16 @@ export const createUser = async (info:UserInfo) => {
         q.Create(q.Collection('users'), {data})
     )
 }
+
+export const getUser = async (email:string) => {
+
+    const user:any = await client.query(
+        q.If(
+            q.Exists(q.Match(q.Index('users_by_email'), email)),
+            q.Get(q.Match(q.Index('users_by_email'), email)),
+            null
+        )
+    )
+
+    return user ? {...user.data, _id: user.ref.id} : user
+}
