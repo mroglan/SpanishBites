@@ -35,10 +35,10 @@ const findUniqueUsername = async (name:string) => {
 
     const noSpaceUsername = name.split(' ').join('_')
 
-    let newUsername = noSpaceUsername + getRandomDigits()
+    let newUsername = noSpaceUsername + getRandomDigits().toString()
 
     while(await isUserWithUsername(newUsername)) {
-        newUsername = noSpaceUsername + getRandomDigits()
+        newUsername = noSpaceUsername + getRandomDigits().toString()
     }
 
     return newUsername
@@ -46,7 +46,7 @@ const findUniqueUsername = async (name:string) => {
 
 export const createUser = async (info:UserInfo) => {
 
-    const username = findUniqueUsername(info.name)
+    const username = await findUniqueUsername(info.name)
 
     const data = {...info, username, isAdmin: false, isVerified: true, premiumExpiration: '', previews: []}
 
