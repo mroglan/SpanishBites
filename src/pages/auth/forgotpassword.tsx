@@ -5,6 +5,7 @@ import MainHeader from '../../components/nav/MainHeader'
 import MainFooter from '../../components/nav/MainFooter'
 import styles from '../../styles/Basic.module.css'
 import NoToken from '../../components/auth/forgotpassword/NoToken'
+import WithToken from '../../components/auth/forgotpassword/WithToken'
 
 export default function ForgotPassword() {
 
@@ -20,7 +21,7 @@ export default function ForgotPassword() {
                     <MainHeader bg="none" />
                 </div>
                 <div className={styles.main}>
-                    {token ? '' : <NoToken />}
+                    {token ? <WithToken token={token as string} /> : <NoToken />}
                 </div>
                 <div className={styles.footer}>
                     <MainFooter />
