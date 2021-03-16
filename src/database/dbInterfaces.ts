@@ -203,3 +203,9 @@ export interface VerificationToken {
         password: string;
     }
 }
+
+
+export interface PasswordResetToken {
+    token: string;
+    email: string;
+}
