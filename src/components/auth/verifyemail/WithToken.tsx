@@ -43,7 +43,7 @@ function SuccessScreen() {
                 </Box>
                 <Box mb={2} textAlign="center">
                     <Typography variant="h6" component="span" className={styles['catamaran']}>
-                        You're email has been varified and you can now login.
+                        You're email has been verified and you can now login.
                     </Typography>
                 </Box>
                 <Box textAlign="center">
