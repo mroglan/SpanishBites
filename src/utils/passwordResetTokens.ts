@@ -23,3 +23,14 @@ export const getTokenWithEmail = async (email:string) => {
 
     return token ? {...token.data, _id: token.ref.id} : token
 }
+
+export const isTokenWithToken = async (token:string) => {
+
+    return await client.query(
+        q.If(
+            q.Exists(q.Match(q.Index('passwordResetTokens_by_token'), token)),
+            true,
+            false
+        )
+    )
+}
