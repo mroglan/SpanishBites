@@ -1,7 +1,7 @@
 import React from 'react'
 import {Grid, Paper, Box, Typography, FormGroup, TextField, Button} from '@material-ui/core'
 import {Form, Formik, Field, useField, ErrorMessage} from 'formik'
-import {FormikTextField} from './FormikFields'
+import {FormikTextField, FormikPasswordField} from './FormikFields'
 import {object, string, number, boolean, array, mixed, ref} from 'yup'
 import styles from '../../styles/Forms.module.css'
 import {BluePrimaryButton, BlueDenseButton} from '../items/buttons'
@@ -49,13 +49,13 @@ export default function Signup({vals, onSubmit}:Props) {
                         </Box>
                         <Box my={2}>
                             <FormGroup>
-                                <FormikTextField name="password" type="password" label="Password" InputProps={inputProps}
+                                <FormikPasswordField name="password" type="password" label="Password" InputProps={inputProps}
                                 InputLabelProps={inputLabelProps} FormHelperTextProps={formHelperTextProps} />
                             </FormGroup>
                         </Box>
                         <Box my={2}>
                             <FormGroup>
-                                <FormikTextField name="passwordConfirmation" type="password" label="Confirm Password" InputProps={inputProps}
+                                <FormikPasswordField name="passwordConfirmation" type="password" label="Confirm Password" InputProps={inputProps}
                                 InputLabelProps={inputLabelProps} FormHelperTextProps={formHelperTextProps} />
                             </FormGroup>
                         </Box>
