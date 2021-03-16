@@ -27,7 +27,7 @@ export const isTokenWithEmail = async (email:string) => {
 
 export const getTokenWithEmail = async (email:string) => {
 
-    return await client.query(
+    const token:any =  await client.query(
         q.Let(
             {tokenRef: q.Match(q.Index('verificationTokens_by_user_email'), email)},
             q.If(
@@ -37,6 +37,8 @@ export const getTokenWithEmail = async (email:string) => {
             )
         )
     )
+
+    return token ? {...token.data, _id: token.ref.id} : token
 }
 
 export const getTokenWithToken = async (token:string) => {
