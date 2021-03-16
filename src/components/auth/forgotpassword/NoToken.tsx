@@ -39,7 +39,7 @@ export function SuccessScreen({setSuccess}) {
 
 export default function NoToken() {
 
-    const [success, setSuccess] = useState(true)
+    const [success, setSuccess] = useState(false)
 
     const onSubmit = async (values, actions) => {
         try {
