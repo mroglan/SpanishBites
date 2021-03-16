@@ -58,10 +58,13 @@ export const createUser = async (info:UserInfo) => {
 export const getUserFromEmail = async (email:string) => {
 
     const user:any = await client.query(
-        q.If(
-            q.Exists(q.Match(q.Index('users_by_email'), email)),
-            q.Get(q.Match(q.Index('users_by_email'), email)),
-            null
+        q.Let(
+            {userRef: q.Match(q.Index('users_by_email'), email)},
+            q.If(
+                q.Exists(q.Var('userRef')),
+                q.Get(q.Var('userRef')),
+                null
+            )
         )
     )
 
