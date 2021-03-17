@@ -32,7 +32,7 @@ export default async function SendEmail(req:NextApiRequest, res:NextApiResponse)
         const token = passwordResetToken ? passwordResetToken.token : await createRandomToken()
 
         if(!passwordResetToken) {
-            await createToken(token, req.body.email)
+            await createToken(token, req.body.email, user._id)
         }
 
         await sendPasswordResetToken(token, req.body.email)
