@@ -50,3 +50,10 @@ export const isTokenWithToken = async (token:string) => {
         )
     )
 }
+
+export const deleteToken = async (id:string) => {
+    
+    await client.query(
+        q.Delete(q.Ref(q.Collection('passwordResetTokens'), id))
+    )
+}
