@@ -13,7 +13,7 @@ interface Props {
     token: string;
 }
 
-function LoadingScreen() {
+export function LoadingScreen() {
 
     return (
         <div className={styles['main-root']}>
@@ -33,7 +33,7 @@ function LoadingScreen() {
     )
 }
 
-function FormScreen({onSubmit}) {
+export function FormScreen({onSubmit}) {
 
     return (
         <Box mt="3rem" maxWidth={600} mx="auto">
@@ -60,7 +60,7 @@ function FormScreen({onSubmit}) {
     )
 }
 
-function TokenNotFoundScreen() {
+export function TokenNotFoundScreen() {
 
     return (
         <div className={styles['main-root']}>
@@ -86,7 +86,7 @@ function TokenNotFoundScreen() {
     )
 }
 
-function ErrorScreen() {
+export function ErrorScreen() {
 
     return (
         <div className={styles['main-root']}>
@@ -111,7 +111,7 @@ function ErrorScreen() {
     )
 }
 
-function SuccessScreen() {
+export function SuccessScreen() {
 
     return (
         <div className={styles['main-root']}>
