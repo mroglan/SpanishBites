@@ -23,7 +23,7 @@ export default function NoToken() {
                         <Typography variant="h6" component="span" className={styles['catamaran']}>
                             Check your inbox for an email we just sent you. If you don't receive an email in the next few minutes{' '}
                         </Typography>
-                        <Link href="/auth/resendemail">
+                        <Link href="/auth/verifyemail/resend">
                             <a>
                                 <PrimaryLink className={styles['catamaran']} variant="h6">
                                     resend it.
