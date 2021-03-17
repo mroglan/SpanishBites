@@ -208,4 +208,5 @@ export interface VerificationToken {
 export interface PasswordResetToken {
     token: string;
     email: string;
+    userId: string;
 }

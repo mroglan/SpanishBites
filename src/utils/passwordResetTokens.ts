@@ -1,10 +1,10 @@
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
-export const createToken = async (token:string, email:string) => {
+export const createToken = async (token:string, email:string, userId:string) => {
 
     await client.query(
-        q.Create(q.Collection('passwordResetTokens'), {data: {token, email}})
+        q.Create(q.Collection('passwordResetTokens'), {data: {token, email, userId}})
     )
 }
 
