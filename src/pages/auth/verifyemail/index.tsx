@@ -1,11 +1,11 @@
 import React from 'react'
 import {useRouter} from 'next/router'
 import Head from 'next/head'
-import MainHeader from '../../components/nav/MainHeader'
-import MainFooter from '../../components/nav/MainFooter'
-import styles from '../../styles/Basic.module.css'
-import NoToken from '../../components/auth/verifyemail/NoToken'
-import WithToken from '../../components/auth/verifyemail/WithToken'
+import MainHeader from '../../../components/nav/MainHeader'
+import MainFooter from '../../../components/nav/MainFooter'
+import styles from '../../../styles/Basic.module.css'
+import NoToken from '../../../components/auth/verifyemail/NoToken'
+import WithToken from '../../../components/auth/verifyemail/WithToken'
 
 export default function VerifyEmail() {
 
