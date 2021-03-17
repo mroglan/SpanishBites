@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next'
-import {getTokenWithToken, deleteToken} from '../../../utils/verificationTokens'
-import {createUser} from '../../../utils/users'
+import {getTokenWithToken, deleteToken} from '../../../../utils/verificationTokens'
+import {createUser} from '../../../../utils/users'
 
 export default async function VerifyEmail(req:NextApiRequest, res:NextApiResponse) {
     
