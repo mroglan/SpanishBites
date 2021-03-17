@@ -70,3 +70,10 @@ export const getUserFromEmail = async (email:string) => {
 
     return user ? {...user.data, _id: user.ref.id} : user
 }
+
+export const updateUserPassword = async (id:string, password:string) => {
+
+    await client.query(
+        q.Update(q.Ref(q.Collection('users'), id), {data: {password}})
+    )
+}
