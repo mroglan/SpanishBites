@@ -5,6 +5,7 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import {BlueDenseButton, BluePrimaryButton} from '../../items/buttons'
 import axios from 'axios'
+import Link from 'next/link'
 
 interface Props {
     token: string;
@@ -47,9 +48,13 @@ function SuccessScreen() {
                     </Typography>
                 </Box>
                 <Box textAlign="center">
-                    <BluePrimaryButton style={{minWidth: 200}}>
-                        Login
-                    </BluePrimaryButton>
+                    <Link href="/login">
+                        <a>
+                            <BluePrimaryButton style={{minWidth: 200}}>
+                                Login
+                            </BluePrimaryButton>
+                        </a>
+                    </Link>
                 </Box>
             </div>
         </>
