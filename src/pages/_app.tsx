@@ -1,13 +1,28 @@
 import { CssBaseline } from '@material-ui/core';
 import '../styles/globals.css'
-import red from '@material-ui/core/colors/red';
-import amber from '@material-ui/core/colors/amber'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import App from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 import axios from 'axios'
 import {SWRConfig} from 'swr'
+import Nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
+import Router from 'next/dist/client/router'
+
+Nprogress.configure({showSpinner: false})
+
+Router.events.on('routeChangeStart', () => {
+    Nprogress.start()
+})
+
+Router.events.on('routeChangeComplete', () => {
+     Nprogress.done()
+})
+
+Router.events.on('routeChangeError', () => {
+    Nprogress.done()
+})
 
 axios.defaults.baseURL = process.env.BASE_URL
 axios.defaults.headers.post['Content-Type'] = 'application/json'
@@ -75,8 +90,7 @@ export default class MyApp extends App {
           <CssBaseline />
             <style jsx global>{`
               #nprogress .bar {
-                background: hsl(301, 77%, 40%);
-                height: .2rem
+                background: hsl(229, 100%, 81%);
               }
             `}</style>
             <SWRConfig value={{fetcher}}>
