@@ -9,6 +9,6 @@ describe('Main Signup', () => {
     const wrapper = shallow(<Main />)
 
     it('Contains the signup form', () => {
-        expect(wrapper.containsMatchingElement(<Signup onSubmit={(a, b) => null} vals={{email: '', name: ''}} />))
+        expect(wrapper.find('[data-testid="signup-form-container"]').length).toEqual(1)
     })
 })

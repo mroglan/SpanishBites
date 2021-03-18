@@ -41,7 +41,9 @@ export default function Main() {
                                 </Typography>
                             </Box>
                             <Box my={3}>
-                                <Login onSubmit={onSubmit} vals={{email: ''}} />
+                                <div data-testid="login-form-container">
+                                    <Login onSubmit={onSubmit} vals={{email: ''}} />
+                                </div>
                             </Box>
                             <Box my={2}>
                                 <Link href="/auth/forgotpassword">

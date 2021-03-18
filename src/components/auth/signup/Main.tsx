@@ -44,7 +44,9 @@ export default function Main() {
                                 </Typography>
                             </Box>
                             <Box my={3}>
-                                <Signup vals={initialVals} onSubmit={onSubmit} />
+                                <div data-testid="signup-form-container">
+                                    <Signup vals={initialVals} onSubmit={onSubmit} />
+                                </div>
                             </Box>
                             <Box>
                                 <Typography component="span" variant="body1">
