@@ -76,7 +76,9 @@ export default function Resend() {
                                 </Typography>
                             </Box>
                             <Box my={3}>
-                                <Email onSubmit={onSubmit} vals={{email: ''}} />
+                                <div data-testid="email-form-container">
+                                    <Email onSubmit={onSubmit} vals={{email: ''}} />
+                                </div>
                             </Box>
                         </Box>
                     </Paper>
