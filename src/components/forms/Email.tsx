@@ -13,7 +13,7 @@ interface Props {
     onSubmit: (vals, actions) => void;
 }
 
-export default function Signup({vals, onSubmit}:Props) {
+export default function Email({vals, onSubmit}:Props) {
 
     const initialValues = {...vals}
 
