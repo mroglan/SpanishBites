@@ -11,7 +11,7 @@ interface Props {
     token: string;
 }
 
-function LoadingScreen() {
+export function LoadingScreen() {
 
     return (
         <>
@@ -29,7 +29,7 @@ function LoadingScreen() {
     )
 }
 
-function SuccessScreen() {
+export function SuccessScreen() {
 
     return (
         <>
@@ -61,7 +61,7 @@ function SuccessScreen() {
     )
 }
 
-function ErrorScreen() {
+export function ErrorScreen() {
 
     return (
         <>
@@ -84,7 +84,7 @@ function ErrorScreen() {
     )
 }
 
-function TokenNotFoundScreen() {
+export function TokenNotFoundScreen() {
 
     return (
         <>
