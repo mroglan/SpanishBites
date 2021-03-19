@@ -2,6 +2,7 @@ import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 import {NextApiRequest} from 'next'
 import jwt from 'jsonwebtoken'
+import {GeneralItem} from '../database/dbInterfaces'
 
 interface UserInfo {
     name: string;
@@ -57,6 +58,15 @@ export const createUser = async (info:UserInfo) => {
     )
 }
 
+export const getUser = async (id:string) => {
+
+    const user:any = await client.query(
+        q.Get(q.Ref(q.Collection('users'), id))
+    )
+
+    return {...user.data, _id: user.ref.id}
+}
+
 export const getUserFromEmail = async (email:string) => {
 
     const user:any = await client.query(
@@ -95,4 +105,11 @@ export async function getUserFromApi(req:NextApiRequest) {
     } catch(e) {
         return null
     }
+}
+
+export async function addToRecentlyAdded(id:string, items:GeneralItem[]) {
+
+    await client.query(
+        q.Update(q.Ref(q.Collection('users'), id), {data: {recentlyViewed: items}})
+    )
 }
