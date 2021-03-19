@@ -5,6 +5,7 @@ import {query as q} from 'faunadb'
 import {DBPassage, FullyPopulatedClientPassage} from '../../../database/dbInterfaces'
 import {getPassage} from '../../../utils/passages'
 import useSWR from 'swr'
+import axios from 'axios'
 import Head from 'next/head'
 import styles from '../../../styles/Resource.module.css'
 import MainHeader from '../../../components/nav/MainHeader'
@@ -22,6 +23,18 @@ export default function Passage({passage}:Props) {
 
     if(!passage || !passage._id) {
         return <ResourceNotFound />
+    }
+
+    const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
+
+    if(user) {
+        axios({
+            method: 'POST',
+            url: '/api/auth/userinfo/add-recently-viewed',
+            data: {
+                item: {id: passage._id, type: 'passages'}
+            }
+        })
     }
 
     return (
