@@ -61,10 +61,10 @@ export default function Author({author}:Props) {
                                 <Box pt={1}>
                                     <Typography variant="h6">
                                         {author.birthDate} - {author.deathDate},{' '}
-                                        <Link href="/library/timeperiods/[id]" as={`/library/timeperiods/${author.timePeriod._id}`}>
+                                        <Link href="/library/timeperiods/[id]" as={`/library/timeperiods/${author.timePeriod?._id}`}>
                                             <a>
                                                 <SecondaryLink variant="inherit">
-                                                    {author.timePeriod.name}
+                                                    {author.timePeriod?.name}
                                                 </SecondaryLink>
                                             </a>
                                         </Link>
