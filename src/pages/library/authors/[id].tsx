@@ -13,6 +13,7 @@ import {BulletList} from '../../../components/items/lists'
 import MainHeader from '../../../components/nav/MainHeader'
 import MainFooter from '../../../components/nav/MainFooter'
 import ResourceNotFound from '../../../components/error/ResourceNotFound'
+import axios from 'axios'
 
 interface Props {
     author: ClientAuthor;
@@ -27,7 +28,13 @@ export default function Author({author}:Props) {
     const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
 
     if(user) {
-        console.log('user', user)
+        axios({
+            method: 'POST',
+            url: '/api/auth/userinfo/add-recently-viewed',
+            data: {
+                item: {id: author._id, type: 'authors'}
+            }
+        })
     }
 
     return (
