@@ -142,7 +142,7 @@ export interface FullyPopulatedClientPassage extends Passage {
 }
 
 
-export interface Preview {
+export interface GeneralItem {
     type: string;
     id: string;
 }
@@ -155,7 +155,8 @@ export interface User {
     isAdmin: boolean;
     isVerified: boolean;
     premiumExpiration: string;
-    previews: Preview[];
+    previews: GeneralItem[];
+    recentlyViewed: GeneralItem[];
 }
 
 export interface DBUser extends User {
