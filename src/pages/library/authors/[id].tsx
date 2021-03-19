@@ -24,6 +24,12 @@ export default function Author({author}:Props) {
         return <ResourceNotFound />
     }
 
+    const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
+
+    if(user) {
+        console.log('user', user)
+    }
+
     return (
         <>
             <Head>
