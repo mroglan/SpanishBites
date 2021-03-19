@@ -1,5 +1,7 @@
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
+import {NextApiRequest} from 'next'
+import jwt from 'jsonwebtoken'
 
 interface UserInfo {
     name: string;
@@ -48,7 +50,7 @@ export const createUser = async (info:UserInfo) => {
 
     const username = await findUniqueUsername(info.name)
 
-    const data = {...info, username, isAdmin: false, isVerified: true, premiumExpiration: '', previews: []}
+    const data = {...info, username, isAdmin: false, isVerified: true, premiumExpiration: '', previews: [], recentlyViewed: []}
 
     await client.query(
         q.Create(q.Collection('users'), {data})
@@ -76,4 +78,21 @@ export const updateUserPassword = async (id:string, password:string) => {
     await client.query(
         q.Update(q.Ref(q.Collection('users'), id), {data: {password}})
     )
+}
+
+export async function getUserFromApi(req:NextApiRequest) {
+
+    try {
+
+        const user = await new Promise((res, rej) => {
+            jwt.verify(req.cookies.auth, process.env.SIGNATURE, (err, decoded) => {
+                if(!err && decoded) res(decoded)
+                rej('Not Signed In')
+            })
+        })
+
+        return user
+    } catch(e) {
+        return null
+    }
 }
