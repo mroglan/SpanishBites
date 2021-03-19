@@ -18,7 +18,7 @@ export default async function UpdateRecentlyAdded(req:NextApiRequest, res:NextAp
         if(!user.recentlyViewed) {
             user.recentlyViewed  = [req.body.item]
         } else {
-            user.recentlyViewed.filter(item => item.id !== req.body.item.id)
+            user.recentlyViewed = user.recentlyViewed.filter(item => item.id !== req.body.item.id)
             user.recentlyViewed.unshift(req.body.item)
         }
 
