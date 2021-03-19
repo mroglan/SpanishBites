@@ -3,6 +3,7 @@ import {DBBook, ClientBook} from '../../../database/dbInterfaces'
 import {client} from '../../../database/fauna-db'
 import {query as q} from 'faunadb'
 import useSWR from 'swr'
+import axios from 'axios'
 import {getBook} from '../../../utils/books'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -23,6 +24,18 @@ export default function Book({book}:Props) {
 
     if(!book || !book._id) {
         return <ResourceNotFound />
+    }
+
+    const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
+
+    if(user) {
+        axios({
+            method: 'POST',
+            url: '/api/auth/userinfo/add-recently-viewed',
+            data: {
+                item: {id: book._id, type: 'books'}
+            }
+        })
     }
 
     return (
