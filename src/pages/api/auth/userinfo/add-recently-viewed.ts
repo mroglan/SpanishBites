@@ -20,6 +20,9 @@ export default async function UpdateRecentlyAdded(req:NextApiRequest, res:NextAp
         } else {
             user.recentlyViewed = user.recentlyViewed.filter(item => item.id !== req.body.item.id)
             user.recentlyViewed.unshift(req.body.item)
+            if(user.recentlyViewed.length > 10) {
+                user.recentlyViewed.pop()
+            }
         }
 
         await addToRecentlyAdded(user._id, user.recentlyViewed)
