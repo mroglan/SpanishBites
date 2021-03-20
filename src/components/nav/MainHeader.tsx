@@ -1,14 +1,16 @@
 import React from 'react'
-import {Box, Typography, Grid} from '@material-ui/core'
+import {ClientCookieUser} from '../../database/dbInterfaces'
+import {Box, Typography, Grid, Avatar} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import Link from 'next/link'
 import styles from '../../styles/Header.module.css'
 
 interface Props {
     bg: string;
+    user?: ClientCookieUser;
 }
 
-export default function Header({bg}:Props) {
+export default function Header({bg, user}:Props) {
 
     return (
         <Box>
@@ -31,7 +33,7 @@ export default function Header({bg}:Props) {
                         </Link>
                     </Grid>
                     <Grid item>
-                        <Grid container wrap="nowrap" spacing={1} alignItems="center">
+                        <Grid container wrap="nowrap" spacing={2} alignItems="center">
                             <Grid item>
                                 <Link href="/library">
                                     <a>
@@ -41,6 +43,13 @@ export default function Header({bg}:Props) {
                                     </a>
                                 </Link>
                             </Grid>
+                            {user && <Grid item>
+                                <Link href="/dashboard">
+                                    <a>
+                                        <Avatar alt={user.name} src={user.image || '/no-profile.jpg'} />
+                                    </a>
+                                </Link>
+                            </Grid>}
                         </Grid>
                     </Grid>
                 </Grid>
