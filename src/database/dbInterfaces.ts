@@ -164,6 +164,15 @@ export interface DBUser extends User {
     _id: string;
 }
 
+export interface ClientCookieUser {
+    username: string;
+    name: string;
+    email: string;
+    premiumExpeiration: string;
+    preview: GeneralItem[];
+    image: string;
+}
+
 
 export interface SpanishBite {
     name: string; // just for admin to keep track of them
