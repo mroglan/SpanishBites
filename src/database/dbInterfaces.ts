@@ -157,6 +157,7 @@ export interface User {
     premiumExpiration: string;
     previews: GeneralItem[];
     recentlyViewed: GeneralItem[];
+    image: string;
 }
 
 export interface DBUser extends User {

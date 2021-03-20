@@ -51,7 +51,7 @@ export const createUser = async (info:UserInfo) => {
 
     const username = await findUniqueUsername(info.name)
 
-    const data = {...info, username, isAdmin: false, isVerified: true, premiumExpiration: '', previews: [], recentlyViewed: []}
+    const data = {...info, username, isAdmin: false, isVerified: true, premiumExpiration: '', previews: [], recentlyViewed: [], image: ''}
 
     await client.query(
         q.Create(q.Collection('users'), {data})
