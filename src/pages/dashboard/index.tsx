@@ -14,7 +14,7 @@ export default function Dashboard({user}) {
                 <MainHeader bg="none" user={user} />
             </div>
             <div className={styles.main}>
-                <Main />
+                <Main user={user} />
             </div>
             <div className={styles.footer}>
                 <MainFooter />
