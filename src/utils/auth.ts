@@ -31,3 +31,19 @@ export async function ensureAuth(ctx:GetServerSidePropsContext) {
         return {}
     }
 }
+
+export const verifyUser = (fn:NextApiHandler) => (req:NextApiRequest, res:NextApiResponse) => {
+    return new Promise<void>(resolve => {
+        jwt.verify(req.cookies.auth, process.env.SIGNATURE, async (err, decoded) => {
+            if(err || !decoded) {
+                res.status(401).json({msg: 'YOU CANNOT PASS'})
+                return resolve()
+            }
+            if(req.method !== 'GET') {
+                req.body.jwtUser = decoded
+            }
+            await fn(req, res)
+            return resolve()
+        })
+    })
+}
