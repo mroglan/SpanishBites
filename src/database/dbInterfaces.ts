@@ -171,6 +171,7 @@ export interface ClientCookieUser {
     premiumExpeiration: string;
     preview: GeneralItem[];
     image: string;
+    _id: string;
 }
 
 
