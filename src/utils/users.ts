@@ -113,3 +113,22 @@ export async function addToRecentlyAdded(id:string, items:GeneralItem[]) {
         q.Update(q.Ref(q.Collection('users'), id), {data: {recentlyViewed: items}})
     )
 }
+
+export async function getRecentlyViewed(id:string) {
+
+    const recentlyViewed:any = await client.query(
+        q.Let(
+            {userDoc: q.Get(q.Ref(q.Collection('users'), id))},
+            q.Map(q.Select(['data', 'recentlyViewed'], q.Var('userDoc')), q.Lambda('item', q.If(
+                q.Exists(q.Ref(q.Collection(q.Select(['type'], q.Var('item'))), q.Select(['id'], q.Var('item')))),
+                q.Merge(
+                    q.Select(['data'], q.Get(q.Ref(q.Collection(q.Select(['type'], q.Var('item'))), q.Select(['id'], q.Var('item'))))),
+                    {_id: q.Select(['id'], q.Var('item')), type: q.Select(['type'], q.Var('item'))}
+                ),
+                null
+            )))
+        )
+    )
+
+    return recentlyViewed
+}
