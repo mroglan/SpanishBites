@@ -5,6 +5,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import Link from 'next/link'
 import styles from '../../styles/Header.module.css'
 import UserNavDropdown from './UserNavDropdown'
+import {BlueDenseButton} from '../items/buttons'
 
 interface Props {
     bg: string;
@@ -15,7 +16,7 @@ export default function Header({bg, user}:Props) {
 
     return (
         <Box>
-            <Box className={styles['main-root']} textAlign="center" style={{background: bg}}>
+            <Box py={2} className={styles['main-root']} textAlign="center" style={{background: bg}}>
                 <Grid container alignItems="center" justify="space-between">
                     <Grid item>
                         <Link href="/">
@@ -34,7 +35,25 @@ export default function Header({bg, user}:Props) {
                         </Link>
                     </Grid>
                     <Grid item>
-                        <Grid container wrap="nowrap" spacing={2} alignItems="center">
+                        <Grid container wrap="nowrap" spacing={3} alignItems="center">
+                            <Grid item>
+                                <Link href="/about">
+                                    <a>
+                                        <Typography className={styles.link} variant="h6">
+                                            About
+                                        </Typography>
+                                    </a>
+                                </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link href="/bookclub">
+                                    <a>
+                                        <Typography className={styles.link} variant="h6">
+                                            Book Club
+                                        </Typography>
+                                    </a>
+                                </Link>
+                            </Grid>
                             <Grid item>
                                 <Link href="/library">
                                     <a>
@@ -44,8 +63,18 @@ export default function Header({bg, user}:Props) {
                                     </a>
                                 </Link>
                             </Grid>
-                            {user && <Grid item>
+                            {user ? <Grid item>
                                 <UserNavDropdown user={user} />
+                            </Grid> : <Grid style={{marginLeft: '1rem'}} item>
+                                <Link href="/login">
+                                    <a>
+                                        <BlueDenseButton>
+                                            <Typography variant="body1">
+                                                Sign in
+                                            </Typography>
+                                        </BlueDenseButton>
+                                    </a>
+                                </Link>
                             </Grid>}
                         </Grid>
                     </Grid>
