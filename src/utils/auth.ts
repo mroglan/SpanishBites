@@ -53,7 +53,7 @@ export const logout = async () => {
     try {
         await axios({
             method: 'POST',
-            url: '/api/logout'
+            url: '/api/auth/logout'
         })
         Router.push({
             pathname: '/login'
