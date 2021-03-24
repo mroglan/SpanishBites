@@ -4,6 +4,7 @@ import {Box, Typography, Grid, Avatar} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import Link from 'next/link'
 import styles from '../../styles/Header.module.css'
+import UserNavDropdown from './UserNavDropdown'
 
 interface Props {
     bg: string;
@@ -44,11 +45,7 @@ export default function Header({bg, user}:Props) {
                                 </Link>
                             </Grid>
                             {user && <Grid item>
-                                <Link href="/dashboard">
-                                    <a>
-                                        <Avatar alt={user.name} src={user.image || '/no-profile.jpg'} />
-                                    </a>
-                                </Link>
+                                <UserNavDropdown user={user} />
                             </Grid>}
                         </Grid>
                     </Grid>
