@@ -2,6 +2,7 @@ import {GetServerSidePropsContext, NextApiHandler, NextApiRequest, NextApiRespon
 import jwt from 'jsonwebtoken'
 import Router from 'next/router'
 import {parseCookies} from 'nookies'
+import axios from 'axios'
 
 const redirectTo = (ctx:GetServerSidePropsContext, url:string) => {
     if(!ctx.req) {
@@ -46,4 +47,18 @@ export const verifyUser = (fn:NextApiHandler) => (req:NextApiRequest, res:NextAp
             return resolve()
         })
     })
+}
+
+export const logout = async () => {
+    try {
+        await axios({
+            method: 'POST',
+            url: '/api/logout'
+        })
+        Router.push({
+            pathname: '/login'
+        })
+    } catch(e) {
+        console.log(e.response)
+    }
 }
