@@ -13,11 +13,11 @@
 }
 
 .link {
-    color: hsl(229, 100%, 58%);
+    color: hsl(359, 94%, 32%);
 }
 
 .link:hover {
-    color: hsl(229, 100%, 35%);
+    color: hsl(359, 94%, 22%);
 }
 
 @media only screen and (min-width: 1000px) {
