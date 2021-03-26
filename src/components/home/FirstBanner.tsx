@@ -44,11 +44,15 @@ export default function Banner() {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <BlueSecondaryButton variant="outlined">
-                                        <Typography variant="body1" >
-                                            Learn More
-                                        </Typography>
-                                    </BlueSecondaryButton>
+                                    <Link href="/about">
+                                        <a className={styles.link}>
+                                            <BlueSecondaryButton variant="outlined">
+                                                <Typography variant="body1" >
+                                                    Learn More
+                                                </Typography>
+                                            </BlueSecondaryButton>
+                                        </a>
+                                    </Link>
                                 </Grid>
                             </Grid>
                         </Box>
