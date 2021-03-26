@@ -1,7 +1,7 @@
 /* TITLE SECTION */
 
 .title-root {
-    height: calc(100vh - 100px);
+    height: clamp(100px, calc(100vh - 100px), 750px);    
     background: hsl(50, 100%, 80%);
 }
 
@@ -43,6 +43,21 @@
     .body-text {
         font-size: 1rem !important;
     }
+}
+
+
+/* TRANSITION TRIANGLES */
+
+.triangle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-left: calc(50vw - 24px) solid transparent;
+    border-right: calc(50vw - 24px) solid transparent;
+}
+
+.gray-triangle {
+    border-top: 48px solid hsl(50, 100%, 97%);
 }
 
 /* CONTAINERS */
