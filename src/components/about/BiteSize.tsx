@@ -6,7 +6,7 @@ import Image from 'next/image'
 export default function BiteSize() {
 
     return (
-        <Box my={6} mx={6}>
+        <Box py={6} px={6}>
             <div className={styles['c1-container']}>
                 <div className={styles['c1-graphic-container']}>
                     <img src="/about/magnifyText.png" />
