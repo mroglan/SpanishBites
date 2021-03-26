@@ -60,15 +60,19 @@
 }
 
 .c1-graphic-container {
-    min-width: 400px;
-    flex-basis: 50%;
+    min-width: 300px;
+    flex-basis: 40%;
     text-align: center;
+}
+
+.c1-graphic-container img {
+    max-width: 100%;
 }
 
 .c1-text-container {
     max-width: 600px;
     min-width: 300px;
-    flex-basis: 40%;
+    flex-basis: 50%;
 }
 
 @media only screen and (max-width: 915px) {
