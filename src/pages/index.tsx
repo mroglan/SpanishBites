@@ -44,5 +44,5 @@ export const getStaticProps:GetStaticProps = async () => {
 
     const bite = await getTodayBite()
 
-    return {props: {bite: JSON.parse(JSON.stringify(bite))}, revalidate: 60}
+    return {props: {bite: JSON.parse(JSON.stringify(bite))}, revalidate: 1800}
 }
