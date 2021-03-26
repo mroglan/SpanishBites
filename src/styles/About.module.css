@@ -1,0 +1,31 @@
+/* TITLE SECTION */
+
+.title-root {
+    height: 100%;
+    background: hsl(50, 100%, 80%);
+}
+
+.title-root > div {
+    height: 100%;
+    background-image: url('/about/steppingIntoLibrary2.png');
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.title-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.title-content > div {
+    width: 100%;
+    background: rgba(255, 255, 255, .7);
+}
+
+
+/* TYPOGRAPHY */
+
+.catamaran {
+    font-family: 'Catamaran' !important;
+}
