@@ -62,10 +62,44 @@
 .c1-graphic-container {
     min-width: 400px;
     flex-basis: 50%;
+    text-align: center;
 }
 
 .c1-text-container {
     max-width: 600px;
     min-width: 300px;
     flex-basis: 40%;
+}
+
+@media only screen and (max-width: 915px) {
+    .c1-container > div {
+        flex-basis: 100%;
+        margin-right: 0;
+    }
+
+    .c1-container > div:first-child {
+        margin-right: 0;
+    }
+
+    .c1-text-container {
+        max-width: none;
+        min-width: none;
+        text-align: center;
+        order: -1;
+    }
+
+    .c1-graphic-container {
+        min-width: none;
+    }
+
+    .c1-text-container > div {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .c1-text-container {
+        padding: 0 1rem;
+    }
 }
