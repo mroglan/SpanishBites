@@ -9,3 +9,9 @@
 .header, .main, .footer {
     grid-column: 1 / span 1;
 }
+
+.sticky {
+    position: sticky;
+    top: 0px;
+    z-index: 2000;
+}
