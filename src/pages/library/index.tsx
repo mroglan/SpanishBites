@@ -37,7 +37,7 @@ export default function Library({items}:Props) {
                 </title>
             </Head>
             <div className={styles.root}>
-                <div>
+                <div style={{position: 'sticky', top: 0, zIndex: 2000}}>
                     <MainHeader bg="none" />
                 </div>
                 <div>
