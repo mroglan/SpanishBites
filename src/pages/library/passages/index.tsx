@@ -20,7 +20,7 @@ export default function Passages({passages}:Props) {
                 <title>Passages | Spanish Bites</title>
             </Head>
             <div className={styles.root}>
-                <div>
+                <div className={styles.header}>
                     <MainHeader bg="none" />
                 </div>
                 <div>

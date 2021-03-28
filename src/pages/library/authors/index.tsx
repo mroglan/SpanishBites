@@ -21,7 +21,7 @@ export default function Authors({authors}:Props) {
                 <title>Authors | Spanish Bites</title>
             </Head>
             <div className={styles.root}>
-                <div>
+                <div className={styles.header}>
                     <MainHeader bg="none" />
                 </div>
                 <div>

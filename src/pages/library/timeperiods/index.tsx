@@ -26,7 +26,7 @@ export default function TimePeriods({timePeriods:dbTimePeriods, authors:dbAuthor
                 <title>Time Periods | Spanish Bites</title>
             </Head>
             <div className={styles.root}>
-                <div>
+                <div className={styles.header}>
                     <MainHeader bg="none" />
                 </div>
                 <div>
