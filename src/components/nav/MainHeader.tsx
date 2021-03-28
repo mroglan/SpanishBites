@@ -85,9 +85,10 @@ function HeaderContent({user, bg}) {
 export default function Header({bg, user}:Props) {
 
     if(bg === 'none') {
+        const background = 'hsl(50, 100%, 97%)'
         return (
-            <Paper style={{background: bg}} square elevation={3}>
-                <HeaderContent bg={bg} user={user} />
+            <Paper style={{background}} square elevation={3}>
+                <HeaderContent bg={background} user={user} />
             </Paper>
         )
     }
