@@ -1,3 +1,4 @@
+import {query as q} from 'faunadb'
 
 export interface Event {
     title: string;
@@ -221,4 +222,33 @@ export interface PasswordResetToken {
     token: string;
     email: string;
     userId: string;
+}
+
+export interface ClubEvent {
+    bookName: string;
+    bookAuthor: string;
+    bookDesc: string;
+    bookImage: string;
+    month: string;
+    year: string;
+    posts: typeof q.Ref[];
+    meetings: {date: string; users: typeof q.Ref[]}[];
+}
+
+export interface DBClubEvent extends ClubEvent {
+    ref: typeof q.Ref;
+}
+
+export interface ClientClubEvent extends ClubEvent {
+    _id: string;
+}
+
+
+export interface Survey {
+    name: string;
+    responses: any[];
+}
+
+export interface ClientSurvey extends Survey {
+    _id: string;
 }
