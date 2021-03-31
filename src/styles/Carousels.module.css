@@ -1,0 +1,25 @@
+
+.carousel-root {
+    position: relative;
+    overflow: hidden;
+    margin: auto;
+}
+
+.simple-btn {
+    position: absolute;
+    height: 100%;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    z-index: 2;
+}
+
+.simple-btn.left {
+    left: 0;
+}
+
+.simple-btn.right {
+    right: 0;
+}
