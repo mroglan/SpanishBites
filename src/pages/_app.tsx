@@ -59,8 +59,12 @@ export const theme = createMuiTheme({
     },
   },
   spacing: 8,
-  typography: {
-    //fontFamily: '"Catamaran", "Roboto", "Arial"'
+  overrides: {
+    MuiFormLabel: {
+      root: {
+        color: 'rgba(0, 0, 0, .7)'
+      }
+    }
   }
 });
 
