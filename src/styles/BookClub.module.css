@@ -9,3 +9,13 @@
 .desc-text {
     font-size: 1.5rem !important;
 }
+
+
+/* SURVEY */
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    max-width: 900px;
+    margin: auto;
+}
