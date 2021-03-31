@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {useField, Field} from 'formik'
 import {TextField, InputAdornment, IconButton} from '@material-ui/core'
+import { Autocomplete } from '@material-ui/lab';
+
 import VisibilityIcon from '@material-ui/icons/VisibilityOutlined';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOffOutlined';
 
@@ -33,3 +35,23 @@ export const FormikPasswordField = (props) => {
         </InputAdornment>}} />
     )
 }
+
+export const FormikAutocomplete = ({ textFieldProps, ...props }) => {
+
+    const [field, meta, helpers] = useField({
+        name: props.name
+    })
+
+    return (
+      <Autocomplete options={props.options}
+        {...props}
+        {...field}
+        onChange={ (_, value) => helpers.setValue(value) }
+        onBlur={ () => helpers.setTouched(true)}
+        renderInput={ props => (
+          <TextField {...props} {...textFieldProps} helperText={meta.touched && meta.error ? meta.error : ''}
+           error={meta.touched && meta.error ? true : false} />
+        )}
+      />
+    );
+  }
