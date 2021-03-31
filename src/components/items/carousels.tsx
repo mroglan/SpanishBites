@@ -1,15 +1,14 @@
 import React, { useMemo, useState, useRef, useEffect, memo } from 'react'
 import {useSprings, animated, interpolate} from 'react-spring'
 import styles from '../../styles/Carousels.module.css'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import {IconButton} from '@material-ui/core'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {BluePrimaryIconButton} from '../items/buttons'
 
 interface BasicImageCarouselProps {
     width?: number;
     height?: number;
-    images: string[];
+    images: {src:string;link:string}[];
 }
 
 export function BasicImageCarousel({images, width, height}:BasicImageCarouselProps) {
@@ -77,19 +76,21 @@ export function BasicImageCarousel({images, width, height}:BasicImageCarouselPro
         <div style={{width, height}} className={styles['carousel-root']}>
             <div className={`${styles['simple-btn']} ${styles['left']}`}>
                 <BluePrimaryIconButton onClick={() => movePanels(-1)}>
-                    <ArrowBackIosIcon />
+                    <ChevronLeftIcon fontSize="large" />
                 </BluePrimaryIconButton>
             </div>
             <div style={{height: '100%'}}>
                 {panelAnimations && images.map((image, i) => (
                     <animated.div style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', ...panelAnimations[i] }} key={i}>
-                        <img src={image} style={{width, height}} />
+                        <a href={image.link} target="_blank">
+                            <img src={image.src} style={{width, height}} />
+                        </a>
                     </animated.div> 
                 ))}
             </div>
             <div className={`${styles['simple-btn']} ${styles.right}`}>
                 <BluePrimaryIconButton onClick={() => movePanels(1)}>
-                    <ArrowForwardIosIcon />
+                    <ChevronRightIcon fontSize="large" />
                 </BluePrimaryIconButton>
             </div>
         </div>
