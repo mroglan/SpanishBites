@@ -14,8 +14,8 @@ interface Props {
 
 export function NotSignedIn() {
     return (
-        <Box>
-            <Box p={6} border="1px solid #000" maxWidth={500} mx="auto">
+        <Box maxWidth={400}>
+            <Box p={6} mx="auto">
                 <Grid container justify="center" alignItems="center" spacing={3}>
                     <Grid xs={12} item>
                         <Box textAlign="center">
@@ -42,10 +42,6 @@ export function NotSignedIn() {
 }
 
 export default function Survey({user}:Props) {
-
-    if(!user) {
-        return <NotSignedIn />
-    }
 
     const images = [
         {src: "/bookclub/openingSurvey/de amor y de sombra.jpg", link: "https://www.goodreads.com/book/show/16532.Of_Love_and_Shadows"},
@@ -84,7 +80,7 @@ export default function Survey({user}:Props) {
                             </Box>
                             <Divider style={{margin: '1.5rem 0', width: 400}} />
                             <Box>
-                                <BookClubSurvey books={books} onSubmit={(a, b) => null} />
+                                {user ? <BookClubSurvey books={books} onSubmit={(a, b) => null} /> : <NotSignedIn />}
                             </Box>
                         </Box>
                     </Grid>
