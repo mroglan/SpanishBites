@@ -77,7 +77,7 @@ export default function BookClubSurvey({books, onSubmit}:Props) {
                         <Box maxWidth={400} my={6}>
                             <FormGroup>
                                 <FormLabel error={Boolean(errors.weekDay) && (touched.weekDay as boolean)} htmlFor="weekDay">
-                                    What day(s) do you want us to meet?
+                                    What day(s) do you prefer for us to meet?
                                 </FormLabel>
                                 <Field name="weekDay" id="weekDay" as={FormikAutocomplete} multiple
                                 options={['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']} />
