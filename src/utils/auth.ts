@@ -4,6 +4,15 @@ import Router from 'next/router'
 import {parseCookies} from 'nookies'
 import axios from 'axios'
 
+export const decodeUser = (auth:string) => {
+    return new Promise((res) => {
+        jwt.verify(auth, process.env.SIGNATURE, (err, decoded) => {
+            if(!err && decoded) res(decoded)
+            res(null)
+        })
+    })
+}
+
 const redirectTo = (ctx:GetServerSidePropsContext, url:string) => {
     if(!ctx.req) {
         Router.replace('url')
