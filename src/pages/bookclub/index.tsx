@@ -1,6 +1,7 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import React from 'react'
 import {ClientCookieUser} from '../../database/dbInterfaces'
+import {decodeUser} from '../../utils/auth'
 import styles from '../../styles/Basic.module.css'
 import {parseCookies} from 'nookies'
 import MainHeader from '../../components/nav/MainHeader'
@@ -32,5 +33,7 @@ export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePro
 
     const {auth} = parseCookies(ctx)
 
-    return {props: {user: auth || null}}
+    const user = auth ? await decodeUser(auth) : null
+
+    return {props: {user}}
 }   
