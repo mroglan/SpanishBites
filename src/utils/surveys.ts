@@ -1,10 +1,10 @@
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
-export const updateSurveyResponses = async (name:string, responses:any[]) => {
+export const updateSurveyResponses = async (id:string, responses:any[]) => {
 
     await client.query(
-        q.Update(q.Match(q.Index('surveys_by_name'), name), {data: {responses}})
+        q.Update(q.Ref(q.Collection('surveys'), id), {data: {responses}})
     )
 }
 
