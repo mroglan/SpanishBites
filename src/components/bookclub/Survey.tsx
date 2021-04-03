@@ -10,6 +10,7 @@ import BookClubSurvey from '../forms/BookClubSurvey'
 import axios from 'axios'
 import useSWR, {mutate} from 'swr'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import SnackbarMessage from '../items/SnackbarMessage'
 
 interface Props {
     user: ClientCookieUser;
@@ -82,6 +83,8 @@ export function Completed() {
 
 export default function Survey({user}:Props) {
 
+    const [message, setMessage] = useState({type: '', content: ''})
+
     const url = `/api/surveys/check-if-completed?name=Book Club Opening Survey&user=${user._id}`
 
     const {data, isValidating, error} = useSWR(url)
@@ -112,6 +115,7 @@ export default function Survey({user}:Props) {
 
             mutate(url, {completed: true})
         } catch(e) {
+            setMessage({type: 'error', content: 'Error Saving Response'})
             actions.setSubmitting(false)
         }
     }
@@ -148,6 +152,7 @@ export default function Survey({user}:Props) {
                     </Grid>
                 </Paper>
             </Bite>
+            <SnackbarMessage message={message} setMessage={setMessage} />
         </Box>
     )
 }
