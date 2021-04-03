@@ -5,7 +5,7 @@ import {isUserWithEmail, isUserWithUsername} from '../../../utils/users'
 import {createToken, isTokenWithEmail} from '../../../utils/verificationTokens'
 import {sendToken} from '../../../utils/emails'
 import crypto from 'crypto'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 export default async function SignUp(req:NextApiRequest, res:NextApiResponse) {
 
