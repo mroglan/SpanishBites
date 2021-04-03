@@ -44,7 +44,7 @@ export default function Author({author}:Props) {
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
-                    <MainHeader bg="none" />
+                    <MainHeader bg="none" user={user} />
                 </div>
                 <div className={styles.content}>
                     <div className={styles['img-container']}>

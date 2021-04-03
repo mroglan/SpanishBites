@@ -15,6 +15,8 @@ interface Props {
 
 export default function Authors({authors}:Props) {
 
+    const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
+
     return (
         <>
             <Head>
@@ -22,7 +24,7 @@ export default function Authors({authors}:Props) {
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
-                    <MainHeader bg="none" />
+                    <MainHeader bg="none" user={user} />
                 </div>
                 <div>
                     <Main authors={authors} />

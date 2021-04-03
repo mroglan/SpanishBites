@@ -14,6 +14,8 @@ interface Props {
 
 export default function Books({books}:Props) {
 
+    const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
+
     return (
         <>
             <Head>
@@ -21,7 +23,7 @@ export default function Books({books}:Props) {
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
-                    <MainHeader bg="none" />
+                    <MainHeader bg="none" user={user} />
                 </div>
                 <div>
                     <Main books={books} />

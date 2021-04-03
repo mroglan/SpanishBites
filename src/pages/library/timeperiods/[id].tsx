@@ -24,6 +24,8 @@ export default function TimePeriod({timePeriod}:Props) {
         return <ResourceNotFound />
     }
 
+    const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
+
     return (
         <>
             <Head>
@@ -31,7 +33,7 @@ export default function TimePeriod({timePeriod}:Props) {
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
-                    <MainHeader bg="none" />
+                    <MainHeader bg="none" user={user} />
                 </div>
                 <div>
                     <Box textAlign="center">
