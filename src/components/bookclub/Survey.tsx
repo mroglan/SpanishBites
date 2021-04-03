@@ -85,7 +85,7 @@ export default function Survey({user}:Props) {
 
     const [message, setMessage] = useState({type: '', content: ''})
 
-    const url = `/api/surveys/check-if-completed?name=Book Club Opening Survey&user=${user._id}`
+    const url = `/api/surveys/check-if-completed?name=Book Club Opening Survey&user=${user?._id}`
 
     const {data, isValidating, error} = useSWR(url)
 
