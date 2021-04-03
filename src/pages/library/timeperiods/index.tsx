@@ -20,6 +20,8 @@ export default function TimePeriods({timePeriods:dbTimePeriods, authors:dbAuthor
 
     const {data: {authors}} = useSWR('/api/authors/unpopulated', {initialData: {authors:dbAuthors}})
 
+    const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
+
     return (
         <>
             <Head>
@@ -27,7 +29,7 @@ export default function TimePeriods({timePeriods:dbTimePeriods, authors:dbAuthor
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
-                    <MainHeader bg="none" />
+                    <MainHeader bg="none" user={user} />
                 </div>
                 <div>
                     <Main timePeriods={timePeriods} authors={authors} />

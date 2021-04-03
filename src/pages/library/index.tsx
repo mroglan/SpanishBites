@@ -9,6 +9,7 @@ import {getAllGenres} from '../../utils/genres'
 import {getAllPassages} from '../../utils/passages'
 import {getTodayBite} from '../../utils/bites'
 import {ClientUnpopulatedAuthor, ClientUnpopulatedBook, ClientGenre, ClientTimePeriod, ClientPassage, ClientSpanishBite} from '../../database/dbInterfaces'
+import useSWR from 'swr'
 
 import MainHeader from '../../components/nav/MainHeader'
 import MainFooter from '../../components/nav/MainFooter'
@@ -29,6 +30,8 @@ export interface Props {
 
 export default function Library({items}:Props) {
 
+    const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
+
     return (
         <>
             <Head>
@@ -38,7 +41,7 @@ export default function Library({items}:Props) {
             </Head>
             <div className={styles.root}>
                 <div style={{position: 'sticky', top: 0, zIndex: 2000}}>
-                    <MainHeader bg="none" />
+                    <MainHeader bg="none" user={user} />
                 </div>
                 <div>
                     <Main items={items} />

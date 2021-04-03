@@ -19,8 +19,6 @@ interface Props {
 
 export default function Passage({passage}:Props) {
 
-    console.log(passage)
-
     if(!passage || !passage._id) {
         return <ResourceNotFound />
     }

@@ -10,12 +10,15 @@ import MainSideBar from '../components/nav/MainSideNav'
 import MainFooter from '../components/nav/MainFooter'
 import FirstBanner from '../components/home/FirstBanner'
 import Library from '../components/home/Library'
+import useSWR from 'swr'
 
 interface Props {
     bite: ClientSpanishBite;
 }
 
 export default function Home({bite}:Props) {
+
+    const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
 
     return (
         <>
@@ -24,7 +27,7 @@ export default function Home({bite}:Props) {
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
-                    <MainHeader bg="hsl(50, 100%, 80%)" />
+                    <MainHeader bg="hsl(50, 100%, 80%)" user={user} />
                 </div>
                 <div className={styles['sub-ad']}>
                     <FirstBanner />
