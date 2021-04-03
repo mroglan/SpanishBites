@@ -1,12 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {ClientCookieUser} from '../../database/dbInterfaces'
-import {Box, Grid, Typography, Paper, Divider} from '@material-ui/core'
+import {Box, Grid, Typography, Paper, Divider, CircularProgress} from '@material-ui/core'
 import {BlueDenseButton} from '../items/buttons'
 import Link from 'next/link'
 import {BasicImageCarousel} from '../items/carousels'
 import styles from '../../styles/BookClub.module.css'
 import {Bite} from '../items/bites'
 import BookClubSurvey from '../forms/BookClubSurvey'
+import axios from 'axios'
+import useSWR, {mutate} from 'swr'
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 interface Props {
     user: ClientCookieUser;
@@ -41,7 +44,49 @@ export function NotSignedIn() {
     )
 }
 
+export function Loading() {
+    return (
+        <Box maxWidth={400} p={6}>
+            <Box textAlign="center">
+                <CircularProgress color="secondary" />
+            </Box>
+        </Box>
+    )
+}
+
+export function Error() {
+    return (
+        <Box maxWidth={400}>
+            <Typography variant="body1">
+                There was an error loading this form.
+            </Typography>
+        </Box>
+    )
+}
+
+export function Completed() {
+    
+    return (
+        <Box maxWidth={400}>
+            <Box my={3} textAlign="center">
+                <CheckCircleOutlineIcon color="secondary" style={{fontSize: 100}} />
+            </Box>
+            <Box textAlign="center">
+                <Typography variant="body1">
+                    Thank you for completing the survey!
+                </Typography>
+            </Box>
+        </Box>
+    )
+}
+
 export default function Survey({user}:Props) {
+
+    const url = `/api/surveys/check-if-completed?name=Book Club Opening Survey&user=${user._id}`
+
+    const {data, isValidating, error} = useSWR(url)
+
+    const {completed} = data || {}
 
     const images = [
         {src: "/bookclub/openingSurvey/de amor y de sombra.jpg", link: "https://www.goodreads.com/book/show/16532.Of_Love_and_Shadows"},
@@ -56,6 +101,20 @@ export default function Survey({user}:Props) {
         'El fuego invisible', 'La reina descalza', 'La biblioteca de saint-malo', 'Historias de cronopios y de famas',
         'De amor y de sombra', 'Nocturno de Chile', 'Sidi'
     ]
+
+    const onSubmit = async (values, actions) => {
+        try {
+            await axios({
+                method: 'POST',
+                url: '/api/surveys/addresponse',
+                data: {values, name: 'Book Club Opening Survey'}
+            })
+
+            mutate(url, {completed: true})
+        } catch(e) {
+            actions.setSubmitting(false)
+        }
+    }
 
     return (
         <Box mx={3}>
@@ -80,7 +139,10 @@ export default function Survey({user}:Props) {
                             </Box>
                             <Divider style={{margin: '1.5rem 0', width: 400}} />
                             <Box>
-                                {user ? <BookClubSurvey books={books} onSubmit={(a, b) => null} /> : <NotSignedIn />}
+                                {error ? <Error /> : 
+                                completed ? <Completed /> :
+                                user ? <BookClubSurvey books={books} onSubmit={onSubmit} /> : 
+                                <NotSignedIn />}
                             </Box>
                         </Box>
                     </Grid>
