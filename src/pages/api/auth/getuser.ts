@@ -10,7 +10,7 @@ export default async function GetUser(req:NextApiRequest, res:NextApiResponse) {
         if(user) {
             return res.status(200).json(user)
         }
-        return res.status(403).json({msg: 'Not authenticated'})
+        return res.status(200).json(null)
     } catch(e) {
         return res.status(500).json({msg: 'Internal server error'})
     }
