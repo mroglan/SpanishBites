@@ -25,3 +25,30 @@
         padding: .5rem 2rem;
     }
 }
+
+.small-screen-content {
+    display: none;
+}
+
+@media only screen and (max-width: 700px) {
+    .large-screen-content {
+        display: none;
+    }
+    .small-screen-content {
+        display: initial;
+    }
+}
+
+.drawer {
+    background: hsl(50, 100%, 97%) !important;
+}
+
+.drawer-list {
+    width: 250px;
+    padding-top: 0;
+}
+
+.drawer-list > div {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
