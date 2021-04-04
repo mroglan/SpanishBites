@@ -27,7 +27,7 @@ export function BasicImageCarousel({images, width, height}:BasicImageCarouselPro
 
     useEffect(() => {
         setTimeout(() => autoMove(), 5000)
-    }, [images])
+    }, [])
 
     const [panelAnimations, setPanelAnimations] = useSprings<any>(images.length, i => ({transform: i === 0 ? 'translateX(0%)' : 'translateX(100%)'}))
 
