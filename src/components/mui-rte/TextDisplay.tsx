@@ -1,7 +1,6 @@
 import React from 'react'
 import MUIRichTextEditor from 'mui-rte'
 import {Box, NoSsr} from '@material-ui/core'
-import {useState, useEffect} from 'react'
 
 interface Props {
     text: string;
