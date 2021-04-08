@@ -32,7 +32,10 @@ export default function Main({timePeriods, authors, books}:Props) {
     }, [timePeriods, authors]) 
 
     const sortedBooks = useMemo(() => {
-        return sortItems(timePeriods, books)
+        const popBooks = books.map(book => ({...book, authors: book.authors.map(author => {
+            return authors.find(a => a._id === author) || {}
+        })}))
+        return sortItems(timePeriods, popBooks)
     }, [timePeriods, books]) 
 
     return (
