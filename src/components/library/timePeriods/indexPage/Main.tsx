@@ -1,30 +1,39 @@
 import React from 'react'
-import {ClientTimePeriod, ClientAuthor, ClientUnpopulatedAuthor} from '../../../../database/dbInterfaces'
+import {ClientTimePeriod, ClientAuthor, ClientUnpopulatedAuthor, ClientUnpopulatedBook} from '../../../../database/dbInterfaces'
 import {Box, Typography} from '@material-ui/core'
 import List from './List'
 import TabNav from './TabNav'
 import styles from '../../../../styles/ResourceList.module.css'
-import {useMemo} from 'react'
+import {useMemo, useCallback} from 'react'
 
 interface Props {
     timePeriods: ClientTimePeriod[];
     authors: ClientUnpopulatedAuthor[];
+    books: ClientUnpopulatedBook[];
 }
 
-export default function Main({timePeriods, authors}:Props) {
+export default function Main({timePeriods, authors, books}:Props) {
 
-    const sortedAuthors = useMemo(() => {
-        const newAuthorArray = timePeriods.map(() => [])
-        authors.forEach(author => {
-            for(let i = 0; i < timePeriods.length; i++) {
-                if(author.timePeriod === timePeriods[i]._id) {
-                    newAuthorArray[i].push(author)
-                    break
+    const sortItems = useCallback((periods, items) => {
+        const newItemsArray = periods.map(() => [])
+        items.forEach(item => {
+            for(let i = 0; i < periods.length; i++) {
+                if(item.timePeriod === timePeriods[i]._id) {
+                    newItemsArray[i].push(item)
+                    break 
                 }
             }
         })
-        return newAuthorArray
+        return newItemsArray
+    }, [])
+
+    const sortedAuthors = useMemo(() => {
+        return sortItems(timePeriods, authors)
     }, [timePeriods, authors]) 
+
+    const sortedBooks = useMemo(() => {
+        return sortItems(timePeriods, books)
+    }, [timePeriods, books]) 
 
     return (
         <Box className={styles['timeline-root']}>
@@ -35,14 +44,12 @@ export default function Main({timePeriods, authors}:Props) {
                     </Typography>
                 </Box>
                 <Box mx="auto" maxWidth={600}>
-                    <List timePeriods={timePeriods} authors={sortedAuthors} />
+                    <List timePeriods={timePeriods} authors={sortedAuthors} books={sortedBooks} />
                 </Box>
             </Box>
-            <Box mt="1rem">
-                <div data-testid="timePeriodTabNav">
-                    <TabNav timePeriods={timePeriods} />
-                </div>
-            </Box>
+            <div data-testid="timePeriodTabNav" style={{marginTop: '1rem'}}>
+                <TabNav timePeriods={timePeriods} />
+            </div>
         </Box>
     )
 }
