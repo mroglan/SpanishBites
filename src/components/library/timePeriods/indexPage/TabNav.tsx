@@ -22,7 +22,11 @@ export default function TabNav({timePeriods}:Props) {
             <Scrollspy componentTag={List} items={ids} currentClassName={styles['nav-selected']}>
                 {timePeriods.map((period, i) => (
                     <ListItem className={styles['nav-item']} onClick={() => onClick(period._id)} key={i}>
-                        <Typography data-testid="periodTabName" variant="body1">{period.name}</Typography>
+                        <div>
+                            <Box py={1} pr={2} pl={1}>
+                                <Typography data-testid="periodTabName" variant="body1">{period.name}</Typography>
+                            </Box>
+                        </div>
                     </ListItem>
                 ))}
             </Scrollspy>
