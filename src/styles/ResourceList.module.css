@@ -67,7 +67,7 @@
 .timeperiod-marker {
     position: absolute;
     width: 0;
-    height: 0;
+    height: 100%;
     top: -60px;
 }
 
