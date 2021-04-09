@@ -24,9 +24,9 @@ export default function BookPreview({book}:Props) {
                 </Typography>
             </Box>
             <Box mt={2} textAlign="center">
-                <Typography variant="h5">
+                {bookAuthors.length > 0 && <Typography variant="h5">
                     By {bookAuthors.join(', ')}
-                </Typography>
+                </Typography>}
             </Box>
             <Box mt={2} maxWidth={700} mx="auto" className={styles['picture-grid']}>
                 <div className={styles['preview-image-container']}>
