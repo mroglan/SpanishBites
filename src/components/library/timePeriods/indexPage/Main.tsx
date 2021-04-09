@@ -40,6 +40,9 @@ export default function Main({timePeriods, authors, books}:Props) {
 
     return (
         <Box className={styles['timeline-root']}>
+            <div data-testid="timePeriodTabNav">
+                <TabNav timePeriods={timePeriods} />
+            </div>
             <Box>
                 <Box textAlign="center">
                     <Typography variant="h2" component="h1">
@@ -50,9 +53,6 @@ export default function Main({timePeriods, authors, books}:Props) {
                     <List timePeriods={timePeriods} authors={sortedAuthors} books={sortedBooks} />
                 </Box>
             </Box>
-            <div data-testid="timePeriodTabNav" style={{marginTop: '1rem'}}>
-                <TabNav timePeriods={timePeriods} />
-            </div>
         </Box>
     )
 }
