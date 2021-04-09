@@ -21,15 +21,21 @@ describe('TimePeriods Index Page Main', () => {
     {_id: '5', firstName: 'test', lastName: 'a', keyPoints: [''], relevantWorks: [], birthDate: '', deathDate: '', image: '', detailedInfo: '',
     timePeriod: 'period2'}]
 
-    const wrapper = mount(<Main timePeriods={timePeriods} authors={authors} />)
+    const books = [{title: '', desc: '', timePeriod: 'period1', authors: ['1'], genres: [], _id: '', image: '', detailedInfo: '' }]
+
+    const wrapper = mount(<Main timePeriods={timePeriods} authors={authors} books={books} />)
 
     it('Displays correct number of time periods', () => {
         expect(wrapper.find(`.${styles['period-root']}`).length).toEqual(2)
     })
 
     it('Sorts authors to each Time Period', () => {
-        expect(wrapper.find('[data-testid="periodListItemAuthorCollage"]').at(0).find('[data-testid="smallCollageImage"]').length).toEqual(2)
-        expect(wrapper.find('[data-testid="periodListItemAuthorCollage"]').at(1).find('[data-testid="smallCollageImage"]').length).toEqual(3)
+        expect(wrapper.find(`.${styles['content-list-container']}`).at(0).find('img').length).toEqual(2)
+        expect(wrapper.find(`.${styles['content-list-container']}`).at(2).find('img').length).toEqual(3)
+    })
+
+    it('Sorts books into each Time Period', () => {
+        expect(wrapper.find(`.${styles['content-list-container']}`).at(1).find('img').length).toEqual(1)
     })
 
     it('Populates TabNav with periods', () => {
