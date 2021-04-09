@@ -56,7 +56,7 @@
 
 .timeline-root {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr;
 }
 
 .period-root {
@@ -68,7 +68,7 @@
     position: absolute;
     width: 0;
     height: 100%;
-    top: -60px;
+    top: -90px;
 }
 
 .timeline-line::after {
@@ -130,17 +130,24 @@
 /* Time Period Nav */
 
 .nav-root {
-    background: #fff;
     position: sticky;
-    top: 90px;
+    top: 76px;
+    height: calc(100vh - 76px);
+    min-width: 280px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .nav-item {
     cursor: pointer;
 }
 
-.nav-item:hover {
-    background: hsl(229, 100%, 81%);
+.nav-item > div {
+    transition: border 200ms;
+}
+
+.nav-item:hover > div {
+    border-left: 3px solid hsl(229, 100%, 58%);
 }
 
 .nav-item p {
@@ -149,6 +156,7 @@
 
 .nav-selected {
     background: hsl(229, 100%, 81%);
+    box-shadow: 0px 1px 3px hsl(229, 100%, 58%);
 }
 
 @media (max-width: 960px) {
