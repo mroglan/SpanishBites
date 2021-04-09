@@ -36,9 +36,9 @@ export default function PreviewPassage({passage}:Props) {
                 {passage.book && <Typography variant="h5">
                     From <i>{passage.book.title}</i>
                 </Typography>}
-                <Typography variant="h5">
+                {authors.length > 0 && <Typography variant="h5">
                     by {authors.join(', ')}
-                </Typography>
+                </Typography>}
             </Box>
             <Box mx="auto" maxWidth="90ch" mt={3}>
                 <TextDisplay text={passage.spanishText} />
