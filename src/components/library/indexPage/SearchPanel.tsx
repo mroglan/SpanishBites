@@ -44,7 +44,7 @@ function searchThruBooks(books:ClientUnpopulatedBook[], search:string, filters:F
 function searchThruPassages(passages:ClientPassage[], search:string, filters:Filters) {
     return passages.filter(({name, book}) => {
         if(!name.match(ignoreCapsAndAccentsRegex(search))) return false
-        if(filters.books.length > 0 && !filters.books.includes(book._id)) return false
+        if(filters.books.length > 0 && !filters.books.includes(book ? book._id : '')) return false
         if(filters.timePeriods.length > 0 && !filters.timePeriods.includes(book.timePeriod)) return false
         if(filters.authors.length > 0 && !filters.authors.find(author => book.authors.includes(author))) return false
         if(filters.genres.length > 0 && !filters.genres.find(genre => book.genres.includes(genre))) return false
@@ -71,24 +71,26 @@ export function findDisplayItems(libraryItems:LibraryItems, search:string, filte
 
 export default function SearchPanel({filters, setFilters, search, setSearch}:Props) {
 
-    const [dropDown, setDropDown] = useState({open: false, updateFilters: false})
+    const [dropDown, setDropDown] = useState({open: false, updateFilters: false, updateSearch: false})
 
     const [newFilters, setNewFilters] = useState<Filters>(initialFilters)
+    const [newSearch, setNewSearch] = useState('')
 
-    const closeFilters = () => setDropDown({open: false, updateFilters: false})
+    const closeFilters = () => setDropDown({open: false, updateFilters: false, updateSearch: false})
 
     const saveNewFilters = (inputFilters:Filters) => {
-        setDropDown({open: false, updateFilters: true})
+        setDropDown({open: false, updateFilters: true, updateSearch: false})
         setNewFilters(inputFilters)
     }
 
     const updateSearch = (input:string) => {
-        setSearch(input)
+        setDropDown({open: false, updateFilters: false, updateSearch: true})
+        setNewSearch(input)
     }
 
     useEffect(() => {
-        if(!dropDown.updateFilters) return
-        setFilters(newFilters)
+        if(dropDown.updateFilters) setFilters(newFilters)
+        if(dropDown.updateSearch) setSearch(newSearch)
     }, [dropDown])
 
     return (
@@ -101,7 +103,7 @@ export default function SearchPanel({filters, setFilters, search, setSearch}:Pro
                     <Grid container>
                         <Grid item>
                             <BluePrimaryIconButton data-testid="filters-dropdown-btn" disabled={dropDown.open} 
-                            onClick={() => setDropDown({open: true, updateFilters: false})} >
+                            onClick={() => setDropDown({open: true, updateFilters: false, updateSearch: false})} >
                                 <ExpandMoreOutlinedIcon />
                             </BluePrimaryIconButton>
                         </Grid>
