@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useContext} from 'react'
+import React, {useState, useMemo, useContext, useEffect} from 'react'
 import styles from '../../../styles/Library.module.css'
 import {Grid, ClickAwayListener} from '@material-ui/core'
 import {PrimaryLargeSearchBar} from '../../items/searchBars'
@@ -71,40 +71,48 @@ export function findDisplayItems(libraryItems:LibraryItems, search:string, filte
 
 export default function SearchPanel({filters, setFilters, search, setSearch}:Props) {
 
-    const [dropDown, setDropDown] = useState(false)
+    const [dropDown, setDropDown] = useState({open: false, updateFilters: false})
 
-    const closeFilters = () => setDropDown(false)
+    const [newFilters, setNewFilters] = useState<Filters>(initialFilters)
 
-    const saveNewFilters = (newFilters:Filters) => {
-        closeFilters()
-        setFilters(newFilters)
+    const closeFilters = () => setDropDown({open: false, updateFilters: false})
+
+    const saveNewFilters = (inputFilters:Filters) => {
+        setDropDown({open: false, updateFilters: true})
+        setNewFilters(inputFilters)
     }
 
     const updateSearch = (input:string) => {
         setSearch(input)
     }
 
+    useEffect(() => {
+        if(!dropDown.updateFilters) return
+        setFilters(newFilters)
+    }, [dropDown])
+
     return (
         <div className={styles['search-panel-root']}>
             <Grid style={{position: 'relative'}} container alignItems="center">
                 <Grid item className={styles['searchbar-grid-item']}>
-                    <PrimaryLargeSearchBar search={search} setSearch={updateSearch} disabled={dropDown} />
+                    <PrimaryLargeSearchBar search={search} setSearch={updateSearch} disabled={dropDown.open} />
                 </Grid>
                 <Grid item className={styles['search-panel-options-item']}>
                     <Grid container>
                         <Grid item>
-                            <BluePrimaryIconButton data-testid="filters-dropdown-btn" disabled={dropDown} onClick={() => setDropDown(true)} >
+                            <BluePrimaryIconButton data-testid="filters-dropdown-btn" disabled={dropDown.open} 
+                            onClick={() => setDropDown({open: true, updateFilters: false})} >
                                 <ExpandMoreOutlinedIcon />
                             </BluePrimaryIconButton>
                         </Grid>
                         <Grid item>
-                            <BluePrimaryIconButton disabled={dropDown}>
+                            <BluePrimaryIconButton disabled={dropDown.open}>
                                 <SettingsOutlinedIcon />
                             </BluePrimaryIconButton>
                         </Grid>
                     </Grid>
                 </Grid>
-                {dropDown && <div data-testid="filterspanel-container" className={styles['filters-dropdown-container']}>
+                {dropDown.open && <div data-testid="filterspanel-container" className={styles['filters-dropdown-container']}>
                     <FiltersPanel filters={filters} setFilters={saveNewFilters} closeFilters={closeFilters} />
                 </div>}
             </Grid>
