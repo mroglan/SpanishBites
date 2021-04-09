@@ -1,4 +1,4 @@
-import React, {useState, createContext, useMemo} from 'react'
+import React, {useState, createContext, useMemo, useEffect} from 'react'
 import {Props, LibraryItems} from '../../../pages/library/index'
 import styles from '../../../styles/Library.module.css'
 import SideBar from './SideBar'
@@ -8,10 +8,23 @@ import {initialFilters} from './FiltersPanel'
 import FiltersDisplay from './FiltersDisplay'
 import BiteDisplay from './BiteDisplay'
 import PopoutSidebar from './PopoutSidebar'
-import {Box} from '@material-ui/core'
+import {Box, NoSsr, Grid, Typography} from '@material-ui/core'
 
 export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
     bite: {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}})
+    
+export function Loading() {
+
+    return (
+        <Grid container style={{height: '100%', width: '100%'}} alignItems="center" justify="center">
+            <Grid item>
+                <Typography variant="h5" color="secondary">
+                    Loading...
+                </Typography>
+            </Grid>
+        </Grid>
+    )
+}
 
 export default function Main({items:libraryItems}:Props) {
 
@@ -20,9 +33,16 @@ export default function Main({items:libraryItems}:Props) {
     const [filters, setFilters] = useState(initialFilters)
     const [search, setSearch] = useState('')
 
-    useMemo(() => {
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        if(loading) setLoading(false)
         if(filters.bite) return
         setDisplayItems(findDisplayItems(libraryItems, search, filters))
+    }, [filters, search])
+
+    useMemo(() => {
+        setLoading(true)
     }, [filters, search])
 
     const hideBite = () => setFilters({...filters, bite: false})
@@ -41,7 +61,9 @@ export default function Main({items:libraryItems}:Props) {
                         <FiltersDisplay filters={filters} setFilters={setFilters} />
                     </section>
                     <section data-testid="displaypanel-section">
-                        <DisplayPanel items={displayItems} />
+                        <NoSsr>
+                            {loading ? <Loading /> : <DisplayPanel items={displayItems} />}
+                        </NoSsr>
                         <aside className={styles['popout-sidebar']}>
                             <PopoutSidebar setFilters={setFilters} />
                         </aside> 
