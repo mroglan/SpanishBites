@@ -21,7 +21,7 @@ const usePrimaryStyles = makeStyles(theme => ({
 
 export function PrimarySearchBar({search, setSearch}:Props) {
 
-    const [input, setInput] = useState('')
+    const [input, setInput] = useState(search)
 
     const searchRef = useRef<HTMLButtonElement>()
 
@@ -64,7 +64,7 @@ export function PrimarySearchBar({search, setSearch}:Props) {
 
 export function PrimaryLargeSearchBar({search, setSearch, disabled}:Props) {
 
-    const [input, setInput] = useState('')
+    const [input, setInput] = useState(search)
 
     const searchRef = useRef<HTMLButtonElement>()
 
