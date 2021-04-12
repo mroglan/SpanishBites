@@ -1,14 +1,16 @@
-import React, {useState, createContext, useMemo, useEffect} from 'react'
+import React, {useState, createContext, useMemo, useEffect, useCallback} from 'react'
 import {Props, LibraryItems} from '../../../pages/library/index'
 import styles from '../../../styles/Library.module.css'
 import SideBar from './SideBar'
 import DisplayPanel from './DisplayPanel'
 import SearchPanel, {findDisplayItems} from './SearchPanel'
-import {initialFilters} from './FiltersPanel'
+import {initialFilters, Filters} from './FiltersPanel'
 import FiltersDisplay from './FiltersDisplay'
 import BiteDisplay from './BiteDisplay'
 import PopoutSidebar from './PopoutSidebar'
 import {Box, NoSsr, Grid, Typography} from '@material-ui/core'
+import Router, {useRouter} from 'next/router'
+import {getQueryParams, getInfoFromQuery} from '../../../utils/library'
 
 export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
     bite: {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}})
@@ -26,18 +28,27 @@ export function Loading() {
     )
 }
 
-export default function Main({items:libraryItems}:Props) {
+export default function Main({items:libraryItems, query}:Props) {
 
     const [displayItems, setDisplayItems] = useState([])
 
-    const [filters, setFilters] = useState(initialFilters)
-    const [search, setSearch] = useState('')
+    const [filters, setFilters] = useState(getInfoFromQuery(query).filters)
+    const [search, setSearch] = useState(getInfoFromQuery(query).search)
 
     const [loading, setLoading] = useState(true)
+
+    const updateQueryParams = useCallback((search:string, filters:Filters) => {
+        const queryParams = getQueryParams(search, filters)
+        Router.push({
+            pathname: '/library',
+            query: queryParams
+        }, undefined, {shallow: true})
+    }, [])
 
     useEffect(() => {
         if(loading) setLoading(false)
         if(filters.bite) return
+        updateQueryParams(search, filters)
         setDisplayItems(findDisplayItems(libraryItems, search, filters))
     }, [filters, search])
 
