@@ -5,10 +5,17 @@ import SearchIcon from '@material-ui/icons/Search'
 import CloseIcon from '@material-ui/icons/Close'
 import {SetStateAction, Dispatch, useState, useRef, KeyboardEvent} from 'react'
 
-interface Props {
+interface PrimarySearchBarProps {
     search: string;
     setSearch: Dispatch<SetStateAction<string>>;
-    disabled?:boolean;
+}
+
+interface PrimaryLargeSearchBarProps extends PrimarySearchBarProps {
+    disabled?: boolean;
+}
+
+interface SearchBarProps extends PrimaryLargeSearchBarProps {
+    type: string;
 }
 
 const usePrimaryStyles = makeStyles(theme => ({
@@ -19,7 +26,7 @@ const usePrimaryStyles = makeStyles(theme => ({
     }
 }))
 
-export function PrimarySearchBar({search, setSearch}:Props) {
+export function SearchBar({search, setSearch, type, disabled}:SearchBarProps) {
 
     const [input, setInput] = useState(search)
 
@@ -38,9 +45,10 @@ export function PrimarySearchBar({search, setSearch}:Props) {
     const classes = usePrimaryStyles()
 
     return (
-        <FormControl variant="outlined">
+        <FormControl style={{width: type === 'dense' ? 'auto' : '100%'}} variant="outlined">
             <OutlinedInput id="search-bar" placeholder="Search..." onKeyPress={handleKeyPress} onBlur={handleBlur}
-            value={input} onChange={(e) => setInput(e.target.value as string)} margin="dense" inputProps={{'data-testid': 'searchInput'}}
+            value={input} onChange={(e) => setInput(e.target.value as string)} margin={type === 'dense' ? 'dense' : 'none'} 
+            inputProps={{'data-testid': 'searchInput'}}
             startAdornment={
                 <InputAdornment position="start">
                     <IconButton aria-label="Search" data-testid="searchBtn" className={classes.button} onClick={() => setSearch(input)} 
@@ -57,50 +65,17 @@ export function PrimarySearchBar({search, setSearch}:Props) {
                         <CloseIcon />
                     </IconButton>
                 </InputAdornment>
-            } />
+            } disabled={disabled} />
         </FormControl>
     )
 }
 
-export function PrimaryLargeSearchBar({search, setSearch, disabled}:Props) {
+export function PrimarySearchBar({search, setSearch}:PrimarySearchBarProps) {
 
-    const [input, setInput] = useState(search)
+    return <SearchBar search={search} setSearch={setSearch} type="dense" />
+}
 
-    const searchRef = useRef<HTMLButtonElement>()
+export function PrimaryLargeSearchBar({search, setSearch, disabled}:PrimaryLargeSearchBarProps) {
 
-    const handleKeyPress = (e:KeyboardEvent) => {
-        if(e.key === 'Enter') searchRef.current.click()
-    }
-
-    const handleBlur = () => {
-        if(input) return
-        if(!search) return
-        setSearch('')
-    }
-
-    const classes = usePrimaryStyles()
-
-    return (
-        <FormControl style={{width: '100%'}} variant="outlined">
-            <OutlinedInput id="search-bar" placeholder="Search..." onKeyPress={handleKeyPress} onBlur={handleBlur} fullWidth
-            value={input} onChange={(e) => setInput(e.target.value as string)} inputProps={{'data-testid': 'searchInput'}}
-            startAdornment={
-                <InputAdornment position="start">
-                    <IconButton aria-label="Search" data-testid="searchBtn" className={classes.button} onClick={() => setSearch(input)} 
-                    edge="start" ref={searchRef} disabled={disabled}>
-                        <SearchIcon />
-                    </IconButton>
-                </InputAdornment>
-            } endAdornment={
-                Boolean(input) && <InputAdornment position="end">
-                    <IconButton aria-label="Clear Search" data-testid="clearBtn" className={classes.button} onClick={() => {
-                        setInput('')
-                        setSearch('')
-                    }} edge="end" disabled={disabled}>
-                        <CloseIcon />
-                    </IconButton>
-                </InputAdornment>
-            } disabled={disabled} />
-        </FormControl>
-    )
+    return <SearchBar search={search} setSearch={setSearch} type="large" />
 }
