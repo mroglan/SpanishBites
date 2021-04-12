@@ -3,14 +3,14 @@ import {Props, LibraryItems} from '../../../pages/library/index'
 import styles from '../../../styles/Library.module.css'
 import SideBar from './SideBar'
 import DisplayPanel from './DisplayPanel'
-import SearchPanel, {findDisplayItems} from './SearchPanel'
+import SearchPanel from './SearchPanel'
 import {initialFilters, Filters} from './FiltersPanel'
 import FiltersDisplay from './FiltersDisplay'
 import BiteDisplay from './BiteDisplay'
 import PopoutSidebar from './PopoutSidebar'
 import {Box, NoSsr, Grid, Typography} from '@material-ui/core'
 import Router, {useRouter} from 'next/router'
-import {getQueryParams, getInfoFromQuery} from '../../../utils/library'
+import {getQueryParams, getInfoFromQuery, findDisplayItems} from '../../../utils/library'
 
 export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
     bite: {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}})
