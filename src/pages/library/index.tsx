@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import styles from '../../styles/Library.module.css'
-import { GetStaticProps } from 'next'
+import { GetStaticProps, GetServerSideProps, GetServerSidePropsContext } from 'next'
 import {getAllUnpopulatedAuthors} from '../../utils/authors'
 import {getAllUnpopulatedBooks} from '../../utils/books'
 import {getAllTimePeriods} from '../../utils/timePeriods'
@@ -14,6 +14,7 @@ import useSWR from 'swr'
 import MainHeader from '../../components/nav/MainHeader'
 import MainFooter from '../../components/nav/MainFooter'
 import Main from '../../components/library/indexPage/Main'
+import { ParsedUrlQuery } from 'querystring'
 
 export interface LibraryItems {
     authors: ClientUnpopulatedAuthor[];
@@ -26,9 +27,10 @@ export interface LibraryItems {
 
 export interface Props {
     items: LibraryItems;
+    query: ParsedUrlQuery;
 }
 
-export default function Library({items}:Props) {
+export default function Library({items, query}:Props) {
 
     const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
 
@@ -44,7 +46,7 @@ export default function Library({items}:Props) {
                     <MainHeader bg="none" user={user} />
                 </div>
                 <div>
-                    <Main items={items} />
+                    <Main items={items} query={query} />
                 </div>
             </div>
             <div>
@@ -54,7 +56,9 @@ export default function Library({items}:Props) {
     )
 }
 
-export const getStaticProps:GetStaticProps = async () => {
+export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePropsContext) => {
+
+    ctx.res.setHeader('Cache-control', 's-maxage=1800, stale-while-revalidate')
 
     const [authors, books, timePeriods, genres, passages, bite] = await Promise.all([getAllUnpopulatedAuthors(), 
         getAllUnpopulatedBooks(), getAllTimePeriods(), getAllGenres(), getAllPassages(), getTodayBite()])
@@ -66,6 +70,7 @@ export const getStaticProps:GetStaticProps = async () => {
         genres: JSON.parse(JSON.stringify(genres)),
         passages: JSON.parse(JSON.stringify(passages)),
         bite: JSON.parse(JSON.stringify(bite))
-    }}, revalidate: 1800}
+    }, query: ctx.query
+    }}
 
 }
