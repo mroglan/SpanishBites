@@ -56,6 +56,8 @@ export default function Library({items, query}:Props) {
     )
 }
 
+// can't use getStaticProps because we need to access query params in case there are any filters
+// simulate static regeneration by setting the header
 export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePropsContext) => {
 
     ctx.res.setHeader('Cache-control', 's-maxage=1800, stale-while-revalidate')
