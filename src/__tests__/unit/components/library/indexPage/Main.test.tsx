@@ -9,7 +9,7 @@ const libraryItems = {authors: [], books: [], timePeriods: [], genres: [], passa
 
 describe('Main Library', () => {
 
-    const wrapper = shallow(<Main items={libraryItems} />)
+    const wrapper = shallow(<Main items={libraryItems} query={{}} />)
 
     it('Displays the sidebar', () => {
         expect(wrapper.find('[data-testid="library-sidebar"]').length).toEqual(1)

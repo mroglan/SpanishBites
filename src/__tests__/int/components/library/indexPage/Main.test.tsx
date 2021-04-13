@@ -1,12 +1,23 @@
 import React from 'react'
 import {mount} from 'enzyme'
 import styles from '../../../../../styles/Library.module.css'
+import Router, {useRouter} from 'next/router'
+import {NoSsr} from '@material-ui/core'
 
 import Main from '../../../../../components/library/indexPage/Main'
 
 const baseAuthor = {firstName: '', lastName: '', birthDate: '', deathDate: '', timePeriod: {}, keyPoints: []}
 
 const authors = Array(10).fill(baseAuthor).map((author, i) => ({...author, firstName: i}))
+
+jest.mock('next/router', () => ({
+    useRouter() {
+        return {
+            route: '/', pathname: '', query: '', asPath: ''
+        }
+    },
+    push: (stuff) => stuff
+}))
 
 describe('Main Library', () => {
 
@@ -17,7 +28,9 @@ describe('Main Library', () => {
         timePeriods: [], genres: [], passages: []
     }
 
-    const wrapper = mount(<Main items={libraryItems} />)
+    const wrapper = mount(<NoSsr><Main items={libraryItems} query={{}} /></NoSsr>)
+
+    // Router.push.mockImplementation(() => {() => jest.fn()})
 
     it('Displays initial items', () => {
         expect(wrapper.find(`.${styles['preview-root']}`).length).toEqual(11)
