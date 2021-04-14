@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from '../../styles/About.module.css'
 import {Box, Typography} from '@material-ui/core'
+import Link from 'next/link'
+import {SecondaryLink} from '../items/links'
 
 export default function FindingBooks() {
 
@@ -12,9 +14,19 @@ export default function FindingBooks() {
                         <Typography variant="h3" gutterBottom className={`${styles['catamaran']} ${styles['title-text']}`}>
                             Collaborating With Others
                         </Typography>
-                        <Typography variant="body1" className={`${styles['catamaran']} ${styles['body-text']}`}>
+                        <Typography display="inline" variant="body1" className={`${styles['catamaran']} ${styles['body-text']}`}>
                             A great way to explore literature is by discussing it with others. 
-                            Check out our book club where you can chat with others and Dr. Melendez about the current book we’re reading.
+                            Check out our{' '}
+                        </Typography>
+                        <Link href="/bookclub">
+                            <a>
+                                <SecondaryLink display="inline" className={`${styles['catamaran']} ${styles['body-text']}`}>
+                                    book club
+                                </SecondaryLink>
+                            </a>
+                        </Link>
+                        <Typography variant="body1" display="inline" className={`${styles['catamaran']} ${styles['body-text']}`}>
+                            {' '}where you can chat with others and Dr. Melendez about the current book we’re reading.
                         </Typography>
                     </div>
                 </div>
