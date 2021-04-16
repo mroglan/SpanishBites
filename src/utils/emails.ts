@@ -1,45 +1,29 @@
 import sgMail from '@sendgrid/mail'
 
-export async function sendToken(token:string, email:string) {
+export async function sendEmail(emailTo:string, emailFrom:string, templateId:string, templateData) {
+
     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-    const link = `${process.env.BASE_URL}/auth/verifyemail?token=${token}`
-
     const msg = {
-        to: email,
-        from: 'noreply@spanishbit.es',
-        subject: 'Verify your account',
-        text: `Welcome to Spanish Bites. Copy the following link into your browswer to verify your account: ${link}`,
-        html: `<html>
-            <body>
-            <h1>Welcome to Spanish Bites</h1>
-            <p> Click the link below or copy it into your browser to verify your account</p>
-            <p><a href=${link}>${link}</a></p>
-            </body>
-            </html>
-        `
+        to: emailTo,
+        from: emailFrom,
+        templateId,
+        dynamic_template_data: templateData
     }
-    
+
     await sgMail.send(msg)
 }
 
+export async function sendToken(token:string, email:string) {
+
+    const link = `${process.env.BASE_URL}/auth/verifyemail?token=${token}`
+
+    await sendEmail(email, 'noreply@spanishbit.es', 'd-78f676c691bf4e38a1158fd474871f93', {link})
+}
+
 export async function sendPasswordResetToken(token:string, email:string) {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
     const link = `${process.env.BASE_URL}/auth/forgotpassword?token=${token}`
 
-    const msg = {
-        to: email,
-        from: 'noreply@spanishbit.es',
-        subject: 'Forgot Your Password?',
-        text: `To reset your password, please copy the following link into your browser: ${link}`,
-        html: `<html>
-            <body>
-                <p>Click the link below or copy it into your browser to reset your password</p>
-                <p><a href=${link}>${link}</a></p>
-            </body>
-        </html>`
-    }
-
-    await sgMail.send(msg)
+    await sendEmail(email, 'noreply@spanishbit.es', 'd-bece4c51f0a54ce09889081f62aaa02a', {link})
 }
