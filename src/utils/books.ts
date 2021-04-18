@@ -1,10 +1,10 @@
-import {DBBook} from '../database/dbInterfaces'
+import {DBBook, DBUnpopulatedBook, OrganizedDBAuthorPopulatedBook, OrganizedDBBook} from '../database/dbInterfaces'
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
 export const getAllUnpopulatedBooks = async () => {
 
-    const books:any = await client.query(
+    const books:{data: DBUnpopulatedBook[]} = await client.query(
         q.Map(q.Paginate(q.Match(q.Index('all_books')), {size: 1000}), (ref) => q.Get(ref))
     )
 
@@ -15,7 +15,7 @@ export const getAllUnpopulatedBooks = async () => {
 
 export const getAllBooks = async () => {
 
-    const books:any = await client.query(
+    const books:{data: OrganizedDBAuthorPopulatedBook[]} = await client.query(
         q.Map(q.Paginate(q.Match(q.Index('all_books')), {size: 1000}), 
             q.Lambda('bookRef', q.Let(
                 {bookDoc: q.Get(q.Var('bookRef'))}, 
@@ -39,7 +39,7 @@ export const getAllBooks = async () => {
 
 export const getBook = async (id:string) => {
 
-    const book:any = await client.query(
+    const book:OrganizedDBBook = await client.query(
         q.Let(
             {bookDoc: q.Get(q.Ref(q.Collection('books'), id))},
             q.Merge(

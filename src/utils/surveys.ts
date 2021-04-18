@@ -1,3 +1,4 @@
+import {DBSurvey} from '../database/dbInterfaces'
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
@@ -10,7 +11,7 @@ export const updateSurveyResponses = async (id:string, responses:any[]) => {
 
 export const getSurvey = async (name:string) => {
 
-    const survey:any = await client.query(
+    const survey:DBSurvey = await client.query(
         q.Get(q.Match(q.Index('surveys_by_name'), name))
     )
 

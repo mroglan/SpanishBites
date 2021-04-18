@@ -1,4 +1,4 @@
-import {DBAuthor} from '../database/dbInterfaces'
+import {DBAuthor, DBUnpopulatedAuthor, OrganizedDBAuthor} from '../database/dbInterfaces'
 import { client } from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
@@ -18,7 +18,7 @@ const populateAuthorDoc = (doc) => {
 
 export const getAllAuthors = async () => {
 
-    const authors:any = await client.query(
+    const authors:{data: OrganizedDBAuthor[]} = await client.query(
         q.Map(q.Paginate(q.Match(q.Index('all_authors')), {size: 1000}),
             q.Lambda('authorRef', q.Let(
                 {authorDoc: q.Get(q.Var('authorRef'))},
@@ -35,7 +35,7 @@ export const getAllAuthors = async () => {
 
 export const getAllUnpopulatedAuthors = async () => {
 
-    const authors:any = await client.query(
+    const authors:{data: DBUnpopulatedAuthor[]} = await client.query(
         q.Map(q.Paginate(q.Match(q.Index('all_authors')), {size: 1000}), (ref) => q.Get(ref))
     )
 
@@ -47,7 +47,7 @@ export const getAllUnpopulatedAuthors = async () => {
 
 export const getAuthor = async (id:string) => {
 
-    const author:any = await client.query(
+    const author:OrganizedDBAuthor = await client.query(
         q.Let(
             {authorDoc: q.Get(q.Ref(q.Collection('authors'), id))},
             populateAuthorDoc(q.Var('authorDoc'))

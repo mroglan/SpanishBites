@@ -4,7 +4,7 @@ import {query as q} from 'faunadb'
 
 export const getAllTimePeriods = async () => {
 
-    const rawPeriods:any = await client.query(
+    const rawPeriods:{data: DBTimePeriod[]} = await client.query(
         q.Map(q.Paginate(q.Match(q.Index('all_timePeriods'))), (ref) => q.Get(ref))
     )
 
@@ -15,7 +15,7 @@ export const getAllTimePeriods = async () => {
 
 export const getTimePeriod = async (id:string) => {
 
-    const timePeriod:any = await client.query(
+    const timePeriod:DBTimePeriod = await client.query(
         q.Get(q.Ref(q.Collection('timePeriods'), id))
     )
     

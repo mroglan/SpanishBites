@@ -1,10 +1,10 @@
-import {DBPassage} from '../database/dbInterfaces'
+import {DBPassage, DBBookPopulatedPassage, OrganizedDBPassage} from '../database/dbInterfaces'
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
 export const getAllPassages = async () => {
 
-    const passages:any = await client.query(
+    const passages:{data: OrganizedDBPassage[]} = await client.query(
         q.Map(q.Paginate(q.Match(q.Index('all_passages')), {size: 1000}), q.Lambda(['passageRef'], q.Let(
             {passageDoc: q.Get(q.Var('passageRef'))},
             q.Merge(
@@ -35,7 +35,7 @@ export const getAllPassages = async () => {
 
 export const getPassage = async (id:string) => {
 
-    const passage:any = await client.query(
+    const passage:DBBookPopulatedPassage = await client.query(
         q.Let(
             {passageDoc: q.Get(q.Ref(q.Collection('passages'), id))},
             q.Merge(

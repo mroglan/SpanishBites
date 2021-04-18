@@ -1,4 +1,4 @@
-import {DBSpanishBite, DBDailyEvent} from '../database/dbInterfaces'
+import {OrganizedDBSpanishBite} from '../database/dbInterfaces'
 import dayjs from 'dayjs'
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
@@ -7,7 +7,7 @@ export const getTodayBite = async () => {
 
     const todayDate = dayjs().format('YYYY-MM-DD')
 
-    const bite:any = client.query(
+    const bite:OrganizedDBSpanishBite = await client.query(
         q.If(
             q.Exists(q.Match(q.Index('dailyEvents_by_date'), todayDate)),
             q.Let(

@@ -1,3 +1,4 @@
+import {DBVerificationToken} from '../database/dbInterfaces'
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
@@ -27,7 +28,7 @@ export const isTokenWithEmail = async (email:string) => {
 
 export const getTokenWithEmail = async (email:string) => {
 
-    const token:any =  await client.query(
+    const token:DBVerificationToken =  await client.query(
         q.Let(
             {tokenRef: q.Match(q.Index('verificationTokens_by_user_email'), email)},
             q.If(
@@ -43,7 +44,7 @@ export const getTokenWithEmail = async (email:string) => {
 
 export const getTokenWithToken = async (token:string) => {
 
-    const vToken:any = await client.query(
+    const vToken:DBVerificationToken = await client.query(
         q.If(
             q.Exists(q.Match(q.Index('verificationTokens_by_token'), token)),
             q.Get(q.Match(q.Index('verificationTokens_by_token'), token)),

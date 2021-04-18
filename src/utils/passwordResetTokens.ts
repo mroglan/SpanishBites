@@ -1,3 +1,4 @@
+import {DBPasswordResetToken} from '../database/dbInterfaces'
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
@@ -10,7 +11,7 @@ export const createToken = async (token:string, email:string, userId:string) => 
 
 export const getTokenWithEmail = async (email:string) => {
 
-    const token:any = await client.query(
+    const token:DBPasswordResetToken = await client.query(
         q.Let(
             {tokenRef: q.Match(q.Index('passwordResetTokens_by_email'), email)},
             q.If(
@@ -26,7 +27,7 @@ export const getTokenWithEmail = async (email:string) => {
 
 export const getTokenWithToken = async (token:string) => {
 
-    const passToken:any = await client.query(
+    const passToken:DBPasswordResetToken = await client.query(
         q.Let(
             {tokenRef: q.Match(q.Index('passwordResetTokens_by_token'), token)},
             q.If(

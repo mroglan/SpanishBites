@@ -2,7 +2,7 @@ import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 import {NextApiRequest} from 'next'
 import jwt from 'jsonwebtoken'
-import {GeneralItem} from '../database/dbInterfaces'
+import {GeneralItem, OrganizedDBUser, DBUser, ClientCookieUser, RecentlyViewedItem} from '../database/dbInterfaces'
 
 interface UserInfo {
     name: string;
@@ -60,7 +60,7 @@ export const createUser = async (info:UserInfo) => {
 
 export const getUser = async (id:string) => {
 
-    const user:any = await client.query(
+    const user:DBUser = await client.query(
         q.Get(q.Ref(q.Collection('users'), id))
     )
 
@@ -69,7 +69,7 @@ export const getUser = async (id:string) => {
 
 export const getUserFromEmail = async (email:string) => {
 
-    const user:any = await client.query(
+    const user:DBUser = await client.query(
         q.Let(
             {userRef: q.Match(q.Index('users_by_email'), email)},
             q.If(
@@ -94,7 +94,7 @@ export async function getUserFromApi(req:NextApiRequest) {
 
     try {
 
-        const user = await new Promise((res, rej) => {
+        const user:ClientCookieUser = await new Promise((res, rej) => {
             jwt.verify(req.cookies.auth, process.env.SIGNATURE, (err, decoded) => {
                 if(!err && decoded) res(decoded)
                 rej('Not Signed In')
@@ -116,7 +116,7 @@ export async function addToRecentlyAdded(id:string, items:GeneralItem[]) {
 
 export async function getRecentlyViewed(id:string) {
 
-    const recentlyViewed:any = await client.query(
+    const recentlyViewed:RecentlyViewedItem[] = await client.query(
         q.Let(
             {userDoc: q.Get(q.Ref(q.Collection('users'), id))},
             q.Map(q.Select(['data', 'recentlyViewed'], q.Var('userDoc')), q.Lambda('item', q.If(
