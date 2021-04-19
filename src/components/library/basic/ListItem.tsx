@@ -18,7 +18,7 @@ export default function ListItem({title, subtitle, image, link}:Props) {
     return (
         <div>
             <Box my={1} style={{breakInside: 'avoid'}}>
-                <div data-testid="detailedAuthorItem">
+                <div data-testid="list-item">
                     <Grid container wrap="nowrap" spacing={2} alignItems="center">
                         <Grid item>
                             <img src={image || '/no-profile.jpg'} alt={title}
