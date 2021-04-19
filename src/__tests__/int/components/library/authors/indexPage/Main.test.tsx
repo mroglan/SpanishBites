@@ -16,7 +16,7 @@ describe('Author Main Index Page', () => {
     const wrapper = mount(<Main authors={authors} />)
 
     it('Changes view mode', () => {
-        expect(wrapper.find('[data-testid="detailedAuthorItem"]').length).toEqual(2)
+        expect(wrapper.find('[data-testid="listitem-container"]').length).toEqual(2)
         wrapper.find('[data-testid="authorModeInput"]').filter('input').simulate('change', {target: {value: 'list'}})
         expect(wrapper.find('[data-testid="listAuthorItem"]').length).toEqual(2)
     })
