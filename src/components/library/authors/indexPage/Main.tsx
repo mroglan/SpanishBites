@@ -8,6 +8,7 @@ import styles from '../../../../styles/ResourceList.module.css'
 import {useState, useReducer, useMemo, useCallback} from 'react'
 import Filters from './Filters'
 import {matchesSearch} from '../../../../utils/regex'
+import ListItem from '../../basic/ListItem'
 
 interface Props {
     authors: ClientAuthor[];
@@ -104,32 +105,10 @@ export default function Main({authors:inputAuthors}:Props) {
                 ))}
             </Box> : <Box className={styles['detailed-list-container']}>
                     {filteredAuthors.map(author => (
-                        <Box my={1} key={author._id} style={{breakInside: 'avoid'}}>
-                            <div data-testid="detailedAuthorItem">
-                                <Grid container wrap="nowrap" spacing={2} alignItems="center">
-                                    <Grid item>
-                                        <img src={author.image || '/no-profile.jpg'} alt={author.firstName + ' ' + author.lastName}
-                                        title={author.firstName + ' ' + author.lastName} data-testid="authorImg" />
-                                    </Grid>
-                                    <Grid item style={{flexGrow: 1}}>
-                                        <Box>
-                                            <Link href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
-                                                <a data-testid="authorName">
-                                                    <PrimaryLink variant="body1">
-                                                        {author.firstName} {author.lastName}
-                                                    </PrimaryLink>
-                                                </a>
-                                            </Link>
-                                        </Box>
-                                        <Box mt={1}>
-                                            <Typography data-testid="authorLifespan" variant="body1">
-                                                {author.birthDate} - {author.deathDate}
-                                            </Typography>
-                                        </Box>
-                                    </Grid>
-                                </Grid>
-                            </div>
-                        </Box>
+                        <div data-testid="listitem-container" key={author._id}>
+                            <ListItem title={author.firstName + ' ' + author.lastName} subtitle={author.birthDate + ' - ' + author.deathDate}
+                            image={author.image} link={{href: '/library/authors/[id]', as: `/library/authors/${author._id}`}} />
+                        </div>
                     ))}
             </Box>}
         </Box>
