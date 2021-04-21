@@ -7,6 +7,7 @@ import {findDate} from '../../../../utils/dates'
 import styles from '../../../../styles/ResourceList.module.css'
 import {matchesSearch} from '../../../../utils/regex'
 import Filters from '../../books/indexPage/Filters'
+import ListItem from '../../basic/ListItem'
 
 interface Props {
     passages: ClientPassage[];
@@ -72,32 +73,10 @@ export default function Main({passages}:Props) {
                 ))}
             </Box> : <Box className={styles['detailed-list-container']}>
                     {filteredPassages.map(passage => (
-                        <Box my={1} key={passage._id} style={{breakInside: 'avoid'}}>
-                            <div data-testid="detailed-passage-item">
-                                <Grid container wrap="nowrap" spacing={2} alignItems="center">
-                                    <Grid item>
-                                        <img src={passage.book?.image || '/no-profile.jpg'} alt={passage.name}
-                                        title={passage.name} data-testid="passage-img" />
-                                    </Grid>
-                                    <Grid item style={{flexGrow: 1}}>
-                                        <Box>
-                                            <Link href="/library/passages/[id]" as={`/library/passages/${passage._id}`}>
-                                                <a data-testid="passage-name">
-                                                    <PrimaryLink variant="body1">
-                                                        {passage.name}
-                                                    </PrimaryLink>
-                                                </a>
-                                            </Link>
-                                        </Box>
-                                        <Box mt={1}>
-                                            <Typography data-testid="passage-book" variant="body1">
-                                                <i>{passage.book?.title}</i>
-                                            </Typography>
-                                        </Box>
-                                    </Grid>
-                                </Grid>
-                            </div>
-                        </Box>
+                        <div data-testid="listitem-container" key={passage._id}>
+                            <ListItem title={passage.name} subtitle={passage.book?.title} image={passage.book?.image}
+                            link={{href: '/library/passages/[id]', as: `/library/passages/${passage._id}`}} />
+                        </div>
                     ))}
             </Box>}
         </Box>
