@@ -22,16 +22,4 @@ describe('Author Main Index Page', () => {
     it('Displays authors info', () => {
         expect(wrapper.find('[data-testid="listitem-container"]').length).toEqual(2)
     })
-
-    // it('Displays author\'s name', () => {
-    //     expect(wrapper.find('[data-testid="authorName"]').length).toEqual(2)
-    // })
-
-    // it('Displays author\'s image', () => {
-    //     expect(wrapper.find('[data-testid="authorImg"]').length).toEqual(2)
-    // })
-
-    // it('Displays author\'s lifespan', () => {
-    //     expect(wrapper.find('[data-testid="authorLifespan"]').length).toEqual(2)
-    // })
 })
