@@ -13,7 +13,7 @@ describe('Main Book Index Page', () => {
     const wrapper = mount(<Main books={books} />)
 
     it('Changes view mode', () => {
-        expect(wrapper.find('[data-testid="detailed-book-item"]').length).toEqual(2)
+        expect(wrapper.find('[data-testid="listitem-container"]').length).toEqual(2)
         wrapper.find('[data-testid="view-mode-input"]').filter('input').simulate('change', {target: {value: 'list'}})
         expect(wrapper.find('[data-testid="list-book-item"]').length).toEqual(2)
     })

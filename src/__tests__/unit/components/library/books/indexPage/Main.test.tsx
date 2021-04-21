@@ -13,18 +13,6 @@ describe('Book Main Index Page', () => {
     const wrapper = shallow(<Main books={books} />)
 
     it('Displays all books', () => {
-        expect(wrapper.find('[data-testid="detailed-book-item"]').length).toEqual(2)
-    })
-
-    it('Displays books\'s name', () => {
-        expect(wrapper.find('[data-testid="book-name"]').length).toEqual(2)
-    })
-
-    it('Displays books\'s image', () => {
-        expect(wrapper.find('[data-testid="book-img"]').length).toEqual(2)
-    })
-
-    it('Displays books\'s lifespan', () => {
-        expect(wrapper.find('[data-testid="book-authors"]').length).toEqual(2)
+        expect(wrapper.find('[data-testid="listitem-container"]').length).toEqual(2)
     })
 })
