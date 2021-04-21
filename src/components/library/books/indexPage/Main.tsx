@@ -7,6 +7,7 @@ import {findDate} from '../../../../utils/dates'
 import styles from '../../../../styles/ResourceList.module.css'
 import {matchesSearch} from '../../../../utils/regex'
 import Filters from './Filters'
+import ListItem from '../../basic/ListItem'
 
 interface Props {
     books: AuthorPopulatedClientBook[];
@@ -74,34 +75,11 @@ export default function Main({books}:Props) {
                 ))}
             </Box> : <Box className={styles['detailed-list-container']}>
                     {filteredBooks.map(book => (
-                        <Box my={1} key={book._id} style={{breakInside: 'avoid'}}>
-                            <div data-testid="detailed-book-item">
-                                <Grid container wrap="nowrap" spacing={2} alignItems="center">
-                                    <Grid item>
-                                        <img src={book.image || '/no-profile.jpg'} alt={book.title}
-                                        title={book.title} data-testid="book-img" />
-                                    </Grid>
-                                    <Grid item style={{flexGrow: 1}}>
-                                        <Box>
-                                            <Link href="/library/books/[id]" as={`/library/books/${book._id}`}>
-                                                <a data-testid="book-name">
-                                                    <PrimaryLink variant="body1">
-                                                        {book.title}
-                                                    </PrimaryLink>
-                                                </a>
-                                            </Link>
-                                        </Box>
-                                        <Box mt={1}>
-                                            <Typography data-testid="book-authors" variant="body1">
-                                                {book.authors.map((author, i) => (
-                                                    author.firstName + ' ' + author.lastName + (i + 1 === book.authors.length ? '' : ', ' )
-                                                ))}
-                                            </Typography>
-                                        </Box>
-                                    </Grid>
-                                </Grid>
-                            </div>
-                        </Box>
+                        <div data-testid="listitem-container" key={book._id}>
+                            <ListItem title={book.title} subtitle={book.authors.map((author, i) => (
+                                author.firstName + ' ' + author.lastName
+                            )).join(', ')} image={book.image} link={{href: '/library/books/[id]', as: `/library/books${book._id}`}} />
+                        </div>
                     ))}
             </Box>}
         </Box>
