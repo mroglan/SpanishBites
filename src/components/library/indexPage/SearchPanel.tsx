@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useContext, useEffect} from 'react'
+import React, {useState, useMemo, useContext, useEffect, Dispatch, SetStateAction} from 'react'
 import styles from '../../../styles/Library.module.css'
 import {Grid, ClickAwayListener} from '@material-ui/core'
 import {PrimaryLargeSearchBar} from '../../items/searchBars'
@@ -6,15 +6,18 @@ import {BluePrimaryIconButton} from '../../items/buttons'
 import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 import FiltersPanel, {initialFilters, Filters} from './FiltersPanel'
+import Settings, {Settings as ISettings} from './Settings'
 
 interface Props {
     filters: Filters;
     setFilters: (value:Filters) => void;
     search: string;
     setSearch: (value:string) => void;
+    settings: ISettings;
+    setSettings: Dispatch<SetStateAction<ISettings>>;
 }
 
-export default function SearchPanel({filters, setFilters, search, setSearch}:Props) {
+export default function SearchPanel({filters, setFilters, search, setSearch, settings, setSettings}:Props) {
 
     const [dropDown, setDropDown] = useState({open: false, updateFilters: false, updateSearch: false})
 
@@ -53,9 +56,7 @@ export default function SearchPanel({filters, setFilters, search, setSearch}:Pro
                             </BluePrimaryIconButton>
                         </Grid>
                         <Grid item>
-                            <BluePrimaryIconButton disabled={dropDown.open}>
-                                <SettingsOutlinedIcon />
-                            </BluePrimaryIconButton>
+                            <Settings disabled={dropDown.open} settings={settings} setSettings={setSettings} />
                         </Grid>
                     </Grid>
                 </Grid>

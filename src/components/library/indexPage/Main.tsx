@@ -14,6 +14,11 @@ import {getQueryParams, getInfoFromQuery, findDisplayItems} from '../../../utils
 
 export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
     bite: {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}})
+
+const initialSettings = {
+    viewMode: 'list',
+    transitions: true
+}
     
 export function Loading() {
 
@@ -34,6 +39,8 @@ export default function Main({items:libraryItems, query}:Props) {
 
     const [filters, setFilters] = useState(getInfoFromQuery(query).filters)
     const [search, setSearch] = useState(getInfoFromQuery(query).search)
+
+    const [settings, setSettings] = useState(initialSettings)
 
     const [loading, setLoading] = useState(true)
 
@@ -66,7 +73,8 @@ export default function Main({items:libraryItems, query}:Props) {
             <LibraryItemsContext.Provider value={libraryItems}>
                 <main style={{display: filters.bite ? 'none' : 'grid'}} className={styles['user-panel-root']}>
                     <section data-testid="searchpanel-section">
-                        <SearchPanel search={search} setSearch={setSearch} filters={filters} setFilters={setFilters} />
+                        <SearchPanel search={search} setSearch={setSearch} filters={filters} setFilters={setFilters}
+                        settings={settings} setSettings={setSettings} />
                     </section>
                     <section data-testid="filtersdisplay-section" className={styles['filters-display-overflow']}>
                         <FiltersDisplay filters={filters} setFilters={setFilters} />
