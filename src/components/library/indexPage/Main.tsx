@@ -16,7 +16,7 @@ export const LibraryItemsContext = createContext<LibraryItems>({authors: [], boo
     bite: {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}})
 
 const initialSettings = {
-    viewMode: 'list',
+    viewMode: 'carousel',
     transitions: true
 }
     
