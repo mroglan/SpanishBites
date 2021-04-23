@@ -76,6 +76,7 @@
     width: 0;
 }
 
+
 /* DISPLAY PANEL */
 
 .display-panel-root {
@@ -205,6 +206,7 @@
     }
 }
 
+
 /* SEARCH PANEL */
 
 .search-panel-root {
@@ -237,6 +239,27 @@
         display: none;
     }
 }
+
+
+/* SETTINGS */
+
+.settings-menuitem {
+    padding: .8rem .5rem !important;
+    background: hsla(229, 100%, 81%, .05) !important;
+}
+
+.settings-menuitem:hover {
+    background: hsla(229, 100%, 81%, .3) !important;
+}
+
+.settings-menuitem.selected {
+    background:hsla(229, 100%, 81%, .3) !important;
+}
+
+.settings-option {
+    padding: .8rem .5rem !important;
+}
+
 
 /* PREVIEW PANEL */
 
