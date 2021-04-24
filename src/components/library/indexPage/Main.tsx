@@ -11,6 +11,7 @@ import PopoutSidebar from './PopoutSidebar'
 import {Box, NoSsr, Grid, Typography} from '@material-ui/core'
 import Router, {useRouter} from 'next/router'
 import {getQueryParams, getInfoFromQuery, findDisplayItems} from '../../../utils/library'
+import ListDisplay from './ListDisplay'
 
 export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
     bite: {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}})
@@ -81,7 +82,9 @@ export default function Main({items:libraryItems, query}:Props) {
                     </section>
                     <section data-testid="displaypanel-section">
                         <NoSsr>
-                            {loading ? <Loading /> : <DisplayPanel items={displayItems} />}
+                            {loading ? <Loading /> : 
+                            settings.viewMode === 'list' ? <ListDisplay items={displayItems} /> : 
+                            <DisplayPanel items={displayItems} />}
                         </NoSsr>
                         <aside className={styles['popout-sidebar']}>
                             <PopoutSidebar setFilters={setFilters} />
