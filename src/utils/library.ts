@@ -81,3 +81,45 @@ export function findDisplayItems(libraryItems:LibraryItems, search:string, filte
     if(searchItem === 'books') return searchThruBooks(libraryItems.books, lcSearch, filters)
     return searchThruPassages(libraryItems.passages, lcSearch, filters)
 }
+
+
+function getListItemInfoForPassage(item:ClientPassage&{type:string}) {
+    return {
+        title: item.name,
+        subtitle: item.book?.title,
+        image: item.book?.image,
+        link: {
+            href: '/library/passages/[id]',
+            as: `/library/passages/${item._id}`
+        }
+    }
+}
+
+function getListInfoForBook(item:ClientUnpopulatedBook&{type:string}, authors:ClientUnpopulatedAuthor[]) {
+    return {
+        title: item.title,
+        subtitle: item.authors.map(author => authors.find(a => a._id === author)).map(a => `${a.firstName} ${a.lastName}`).join(', '),
+        image: item.image,
+        link: {
+            href: '/library/books/[id]',
+            as: `/library/books/${item._id}`
+        }
+    }
+}
+
+function getListInfoForAuthor(item:ClientUnpopulatedAuthor&{type:string}) {
+    return {
+        title: `${item.firstName} ${item.lastName}`,
+        subtitle: `${item.birthDate} - ${item.deathDate}`,
+        image: item.image,
+        link: {
+            href: '/library/authors/[id]',
+            as: `/library/authors/${item._id}`
+        }
+    }
+}
+
+export function getListItemInfo(items, authors:ClientUnpopulatedAuthor[]) {
+    return items.map(item => item.type === 'author' ? getListInfoForAuthor(item) : item.type === 'book' ? getListInfoForBook(item, authors) :
+    getListItemInfoForPassage(item))
+}
