@@ -84,7 +84,7 @@ export default function Main({items:libraryItems, query}:Props) {
                         <NoSsr>
                             {loading ? <Loading /> : 
                             settings.viewMode === 'list' ? <ListDisplay items={displayItems} /> : 
-                            <DisplayPanel items={displayItems} />}
+                            <DisplayPanel items={displayItems} settings={settings} />}
                         </NoSsr>
                         <aside className={styles['popout-sidebar']}>
                             <PopoutSidebar setFilters={setFilters} />
