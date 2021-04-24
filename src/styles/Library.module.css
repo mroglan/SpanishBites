@@ -77,6 +77,23 @@
 }
 
 
+/* LIST DISPLAY */
+
+.list-display-root {
+    padding-left: 50px;
+}
+
+.list-display-items-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+}
+
+.list-display-items-container img {
+    max-height: 100px;
+}
+
+
 /* DISPLAY PANEL */
 
 .display-panel-root {
