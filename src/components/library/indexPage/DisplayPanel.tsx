@@ -7,6 +7,12 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import PreviewCarousel from './preview/PreviewCarousel'
 import {LibraryItemsContext} from './Main'
+import {Settings} from './Settings'
+
+interface Props {
+    items: any;
+    settings: Settings;
+}
 
 export type DisplayItem = (ClientTimePeriod|ClientPassage|ClientUnpopulatedAuthor|ClientUnpopulatedBook) & {type:string; title:string; image?:string}
 
@@ -57,7 +63,7 @@ export const Panel = memo(({i, rows, cols, panel, openPreview}:PanelProps) => {
     )
 })
 
-export default function DisplayPanel({items}) {
+export default function DisplayPanel({items, settings}:Props) {
 
     const libraryItems = useContext(LibraryItemsContext)
 
@@ -109,11 +115,27 @@ export default function DisplayPanel({items}) {
 
     }, [rows, cols, items])
 
-    const [panelAnimations, setPanelAnimations] = useSprings<any>(panels.length, i => ({x: i === 0 ? '0' : '100', config: {friction: 14 + panels[0].length}}))
+    const [panelAnimations, setPanelAnimations] = useSprings<any>(panels.length, i => ({x: i === 0 ? '0' : '100', config: {
+        friction: 14 + panels[0].length,
+        duration: settings.transitions ? undefined : 0
+    }}))
 
     const [previewPanelAnimations, setPreviewPanelAnimations] = useSprings<any>(displayItems.length, i => {
         return {x: '0'}
     })
+
+    useMemo(() => {
+        if(!panels[0]) return
+        const config = {
+            friction: 14 + panels[0].length,
+            duration: settings.transitions ? undefined : 0
+        }
+        setPanelAnimations((i) => {
+            if(i === origin.current) return {x: '0', config}
+            if(i > origin.current) return {x: '100', config}
+            return {x: '-100', config}
+        })
+    }, [settings.transitions])
     
     const movePanels = (val:number) => {
         if(viewPreview) return movePreview(val)
