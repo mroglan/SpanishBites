@@ -2,6 +2,13 @@ import {Filters, initialFilters} from '../components/library/indexPage/FiltersPa
 import {ignoreCapsAndAccentsRegex} from './regex'
 import {ClientPassage, ClientUnpopulatedAuthor, ClientUnpopulatedBook} from '../database/dbInterfaces'
 import {LibraryItems} from '../pages/library/index'
+import {GetServerSidePropsContext} from 'next'
+import {parseCookies} from 'nookies'
+
+export const getInitialSettings = async (ctx) => {
+    const {librarySettings} = await parseCookies(ctx)
+    return JSON.parse(librarySettings)
+}
 
 export const getQueryParams = (search:string, filters:Filters) => {
     let queryParams:any = {}
