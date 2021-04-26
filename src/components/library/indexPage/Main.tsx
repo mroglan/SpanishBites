@@ -12,14 +12,16 @@ import {Box, NoSsr, Grid, Typography} from '@material-ui/core'
 import Router, {useRouter} from 'next/router'
 import {getQueryParams, getInfoFromQuery, findDisplayItems} from '../../../utils/library'
 import ListDisplay from './ListDisplay'
+import axios from 'axios'
+import {parseCookies} from 'nookies'
 
 export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
     bite: {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}})
 
-const initialSettings = {
-    viewMode: 'carousel',
-    transitions: true
-}
+// const initialSettings = {
+//     viewMode: 'carousel',
+//     transitions: true
+// }
     
 export function Loading() {
 
@@ -34,7 +36,7 @@ export function Loading() {
     )
 }
 
-export default function Main({items:libraryItems, query}:Props) {
+export default function Main({items:libraryItems, query, settings:initialSettings}:Props) {
 
     const [displayItems, setDisplayItems] = useState([])
 
@@ -65,6 +67,23 @@ export default function Main({items:libraryItems, query}:Props) {
     }, [filters, search])
 
     const hideBite = () => setFilters({...filters, bite: false})
+
+    useEffect(() => {
+        const cookieSettings = parseCookies().settings
+        if(JSON.stringify(settings) === JSON.stringify(cookieSettings)) return
+        const saveSettings = async () => {
+            try {
+                await axios({
+                    method: 'POST',
+                    url: '/api/library/settings',
+                    data: {settings}
+                })
+            } catch(e) {
+                console.log('error saving settings to cookies')
+            }
+        }
+        saveSettings()
+    }, [settings])
 
     return (
         <div className={styles['main-section-root']}>
