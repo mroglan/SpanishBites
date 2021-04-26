@@ -8,8 +8,10 @@ import {getAllTimePeriods} from '../../utils/timePeriods'
 import {getAllGenres} from '../../utils/genres'
 import {getAllPassages} from '../../utils/passages'
 import {getTodayBite} from '../../utils/bites'
+import {getInitialSettings} from '../../utils/library'
 import {ClientUnpopulatedAuthor, ClientUnpopulatedBook, ClientGenre, ClientTimePeriod, ClientPassage, ClientSpanishBite} from '../../database/dbInterfaces'
 import useSWR from 'swr'
+import axios from 'axios'
 
 import MainHeader from '../../components/nav/MainHeader'
 import MainFooter from '../../components/nav/MainFooter'
@@ -57,22 +59,21 @@ export default function Library({items, query}:Props) {
 }
 
 // can't use getStaticProps because we need to access query params in case there are any filters
-// simulate static regeneration by setting the header
+// api route /library uses cache control
 export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePropsContext) => {
 
-    ctx.res.setHeader('Cache-control', 's-maxage=1800, stale-while-revalidate')
-
-    const [authors, books, timePeriods, genres, passages, bite] = await Promise.all([getAllUnpopulatedAuthors(), 
-        getAllUnpopulatedBooks(), getAllTimePeriods(), getAllGenres(), getAllPassages(), getTodayBite()])
-
-    return {props: {items: {
-        authors: JSON.parse(JSON.stringify(authors)),
-        books: JSON.parse(JSON.stringify(books)),
-        timePeriods: JSON.parse(JSON.stringify(timePeriods)),
-        genres: JSON.parse(JSON.stringify(genres)),
-        passages: JSON.parse(JSON.stringify(passages)),
-        bite: JSON.parse(JSON.stringify(bite))
-    }, query: ctx.query
-    }}
-
+    try {
+        const {data: {authors, books, timePeriods, genres, passages, bite}} = await axios.get('/api/library')
+        return {props: {
+            items: {
+                authors, books, timePeriods, genres, passages, bite
+            },
+            query: ctx.query
+        }}
+    } catch(e) {
+        return {props: {
+            items: {authors: [], books: [], timePeriods: [], genres: [], passages: [], bite: {}},
+            query: ctx.query
+        }}
+    }
 }
