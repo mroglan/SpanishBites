@@ -28,7 +28,7 @@ export interface Props {
     settings: Settings;
 }
 
-const initialSettings = {
+export const initialSettings = {
     viewMode: 'carousel', 
     transitions: true
 }
@@ -36,8 +36,6 @@ const initialSettings = {
 export default function Library({items, query, settings}:Props) {
 
     const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
-
-    console.log('settings', settings)
 
     return (
         <>
@@ -75,7 +73,7 @@ export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePro
                 authors, books, timePeriods, genres, passages, bite
             },
             query: ctx.query,
-            settings
+            settings: settings && settings.viewMode ? settings : initialSettings
         }}
     } catch(e) {
         return {props: {
