@@ -1,4 +1,4 @@
-import {DBVerificationToken} from '../database/dbInterfaces'
+import {DBVerificationToken, OrganizedDBVerificationToken} from '../database/dbInterfaces'
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
@@ -26,7 +26,7 @@ export const isTokenWithEmail = async (email:string) => {
     )
 }
 
-export const getTokenWithEmail = async (email:string) => {
+export const getTokenWithEmail = async (email:string):Promise<OrganizedDBVerificationToken> => {
 
     const token:DBVerificationToken =  await client.query(
         q.Let(
@@ -39,10 +39,10 @@ export const getTokenWithEmail = async (email:string) => {
         )
     )
 
-    return token ? {...token.data, _id: token.ref.id} : token
+    return token ? {...token.data, _id: token.ref.id} : null
 }
 
-export const getTokenWithToken = async (token:string) => {
+export const getTokenWithToken = async (token:string):Promise<OrganizedDBVerificationToken> => {
 
     const vToken:DBVerificationToken = await client.query(
         q.If(
@@ -52,7 +52,7 @@ export const getTokenWithToken = async (token:string) => {
         )
     )
 
-    return vToken ? {...vToken.data, _id: vToken.ref.id} : vToken
+    return vToken ? {...vToken.data, _id: vToken.ref.id} : null
 }
 
 export const deleteToken = async (id:string) => {
