@@ -25,7 +25,7 @@ export default async function Login(req:NextApiRequest, res:NextApiResponse) {
 
         const {email, password} = req.body
 
-        const user:any = await getUserFromEmail(email)
+        const user = await getUserFromEmail(email)
 
         if(!user) {
             const msg = await findNoUserMessage(email)
