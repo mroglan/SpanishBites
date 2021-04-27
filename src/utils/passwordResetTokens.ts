@@ -1,4 +1,4 @@
-import {DBPasswordResetToken} from '../database/dbInterfaces'
+import {DBPasswordResetToken, OrganizedDBPasswordResetToken} from '../database/dbInterfaces'
 import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 
@@ -25,7 +25,7 @@ export const getTokenWithEmail = async (email:string) => {
     return token ? {...token.data, _id: token.ref.id} : token
 }
 
-export const getTokenWithToken = async (token:string) => {
+export const getTokenWithToken = async (token:string):Promise<OrganizedDBPasswordResetToken|null> => {
 
     const passToken:DBPasswordResetToken = await client.query(
         q.Let(
@@ -38,7 +38,7 @@ export const getTokenWithToken = async (token:string) => {
         )
     )
 
-    return token ? {...passToken.data, _id: passToken.ref.id} : token
+    return passToken ? {...passToken.data, _id: passToken.ref.id} : null
 }
 
 export const isTokenWithToken = async (token:string) => {
