@@ -314,6 +314,10 @@ export interface DBVerificationToken {
     data: VerificationToken;
 }
 
+export interface OrganizedDBVerificationToken extends VerificationToken {
+    _id: string;
+}
+
 
 export interface PasswordResetToken {
     token: string;
@@ -325,6 +329,10 @@ export interface DBPasswordResetToken {
     ref: Ref;
     ts: number;
     data: PasswordResetToken;
+}
+
+export interface OrganizedDBPasswordResetToken extends PasswordResetToken {
+    _id: string;
 }
 
 
