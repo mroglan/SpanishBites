@@ -4,7 +4,7 @@ import {getTokenWithEmail, createToken} from '../../../../utils/passwordResetTok
 import {sendPasswordResetToken} from '../../../../utils/emails'
 import crypto from 'crypto'
 
-const createRandomToken = async () => {
+const createRandomToken = async ():Promise<string> => {
     return await new Promise((res, rej) => {
         crypto.randomBytes(48, (err, buffer) => {
             if(err) return rej(err)
