@@ -9,7 +9,7 @@ export const createToken = async (token:string, email:string, userId:string) => 
     )
 }
 
-export const getTokenWithEmail = async (email:string) => {
+export const getTokenWithEmail = async (email:string):Promise<OrganizedDBPasswordResetToken> => {
 
     const token:DBPasswordResetToken = await client.query(
         q.Let(
@@ -22,10 +22,10 @@ export const getTokenWithEmail = async (email:string) => {
         )
     )
 
-    return token ? {...token.data, _id: token.ref.id} : token
+    return token ? {...token.data, _id: token.ref.id} : null
 }
 
-export const getTokenWithToken = async (token:string):Promise<OrganizedDBPasswordResetToken|null> => {
+export const getTokenWithToken = async (token:string):Promise<OrganizedDBPasswordResetToken> => {
 
     const passToken:DBPasswordResetToken = await client.query(
         q.Let(

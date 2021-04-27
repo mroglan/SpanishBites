@@ -67,7 +67,7 @@ export const getUser = async (id:string) => {
     return {...user.data, _id: user.ref.id}
 }
 
-export const getUserFromEmail = async (email:string) => {
+export const getUserFromEmail = async (email:string):Promise<OrganizedDBUser> => {
 
     const user:DBUser = await client.query(
         q.Let(
@@ -80,7 +80,7 @@ export const getUserFromEmail = async (email:string) => {
         )
     )
 
-    return user ? {...user.data, _id: user.ref.id} : user
+    return user ? {...user.data, _id: user.ref.id} : null
 }
 
 export const updateUserPassword = async (id:string, password:string) => {
