@@ -5,6 +5,7 @@ import Router, {useRouter} from 'next/router'
 import {NoSsr} from '@material-ui/core'
 
 import Main from '../../../../../components/library/indexPage/Main'
+import {initialSettings} from '../../../../../pages/library/index'
 
 const baseAuthor = {firstName: '', lastName: '', birthDate: '', deathDate: '', timePeriod: {}, keyPoints: []}
 
@@ -28,7 +29,7 @@ describe('Main Library', () => {
         timePeriods: [], genres: [], passages: []
     }
 
-    const wrapper = mount(<NoSsr><Main items={libraryItems} query={{}} /></NoSsr>)
+    const wrapper = mount(<NoSsr><Main items={libraryItems} query={{}} settings={initialSettings} /></NoSsr>)
 
     // Router.push.mockImplementation(() => {() => jest.fn()})
 

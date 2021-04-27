@@ -3,12 +3,13 @@ import {shallow} from 'enzyme'
 import styles from '../../../../../styles/Library.module.css'
 
 import DisplayPanel, {Panel} from '../../../../../components/library/indexPage/DisplayPanel'
+import {initialSettings} from '../../../../../pages/library/index'
 
 describe('DisplayPanel', () => {
 
     const items = Array(10).fill({type: 'author', firstName: 'bob', lastName: 'bobbinson', keyPoints: []})
 
-    const wrapper = shallow(<DisplayPanel items={items} />)
+    const wrapper = shallow(<DisplayPanel items={items} settings={initialSettings} />)
 
     // cant check # of panels but can check preview panels
 
