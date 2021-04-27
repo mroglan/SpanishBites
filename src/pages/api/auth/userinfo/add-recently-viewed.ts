@@ -9,7 +9,7 @@ export default async function UpdateRecentlyAdded(req:NextApiRequest, res:NextAp
 
     try {
 
-        const clientUser:any =  await getUserFromApi(req)
+        const clientUser =  await getUserFromApi(req)
 
         if(!clientUser) return res.status(403).json({msg: 'Not Signed In'})
 
