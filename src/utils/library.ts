@@ -1,6 +1,6 @@
 import {Filters, initialFilters} from '../components/library/indexPage/FiltersPanel'
 import {ignoreCapsAndAccentsRegex} from './regex'
-import {ClientPassage, ClientUnpopulatedAuthor, ClientUnpopulatedBook} from '../database/dbInterfaces'
+import {AuthorPopulatedClientBook, ClientPassage, ClientUnpopulatedAuthor, ClientUnpopulatedBook} from '../database/dbInterfaces'
 import {LibraryItems} from '../pages/library/index'
 import {GetServerSidePropsContext} from 'next'
 import {parseCookies} from 'nookies'
@@ -102,10 +102,10 @@ function getListItemInfoForPassage(item:ClientPassage&{type:string}) {
     }
 }
 
-function getListInfoForBook(item:ClientUnpopulatedBook&{type:string}, authors:ClientUnpopulatedAuthor[]) {
+function getListInfoForBook(item:AuthorPopulatedClientBook&{type:string}, authors:ClientUnpopulatedAuthor[]) {
     return {
         title: item.title,
-        subtitle: item.authors.map(author => authors.find(a => a._id === author)).map(a => `${a.firstName} ${a.lastName}`).join(', '),
+        subtitle: item.authors.map(author => authors.find(a => a._id === author._id)).map(a => `${a.firstName} ${a.lastName}`).join(', '),
         image: item.image,
         link: {
             href: '/library/books/[id]',
