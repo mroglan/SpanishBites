@@ -1,5 +1,5 @@
 import React, {useState, createContext, useMemo, useEffect, useCallback} from 'react'
-import {Props, LibraryItems} from '../../../pages/library/index'
+import {LibraryItems} from '../../../pages/library/index'
 import styles from '../../../styles/Library.module.css'
 import SideBar from './SideBar'
 import DisplayPanel from './DisplayPanel'
@@ -14,14 +14,16 @@ import {getQueryParams, getInfoFromQuery, findDisplayItems} from '../../../utils
 import ListDisplay from './ListDisplay'
 import axios from 'axios'
 import {parseCookies} from 'nookies'
+import { Settings } from './Settings'
 
 export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
     bite: {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}})
 
-// const initialSettings = {
-//     viewMode: 'carousel',
-//     transitions: true
-// }
+interface Props {
+    items: LibraryItems;
+    settings: Settings;
+    query: any;
+}
     
 export function Loading() {
 
