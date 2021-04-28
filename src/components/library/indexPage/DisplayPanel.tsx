@@ -193,7 +193,7 @@ export default function DisplayPanel({items, settings}:Props) {
     const updatedItems = useMemo(() => displayItems.map((item:any) => {
         if(item.type === 'author') return item
         if(item.type === 'book') return {...item, authors: item.authors.map(author => {
-            return libraryItems.authors.find(a => a._id === author)
+            return libraryItems.authors.find(a => a._id === author._id)
         })}
         return {...item, book: item.book && {...item.book, authors: item.book.authors.map(author => {
             return libraryItems.authors.find(a => a._id === author)
