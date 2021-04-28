@@ -1,17 +1,20 @@
 import React from 'react'
 import Head from 'next/head'
 import styles from '../../styles/Library.module.css'
-import { GetStaticProps, GetServerSideProps, GetServerSidePropsContext } from 'next'
-import {getInitialSettings} from '../../utils/library'
+import { GetStaticProps } from 'next'
 import {ClientUnpopulatedAuthor, ClientUnpopulatedBook, ClientGenre, ClientTimePeriod, ClientPassage, ClientSpanishBite} from '../../database/dbInterfaces'
 import useSWR from 'swr'
-import axios from 'axios'
 
 import MainHeader from '../../components/nav/MainHeader'
 import MainFooter from '../../components/nav/MainFooter'
-import Main from '../../components/library/indexPage/Main'
-import { ParsedUrlQuery } from 'querystring'
-import {Settings} from '../../components/library/indexPage/Settings'
+import MainWrapper from '../../components/library/indexPage/MainWrapper'
+
+import {getAllAuthors, getAllUnpopulatedAuthors} from '../../utils/authors'
+import {getAllBooks, getAllUnpopulatedBooks} from '../../utils/books'
+import {getAllTimePeriods} from '../../utils/timePeriods'
+import {getAllGenres} from '../../utils/genres'
+import {getAllPassages} from '../../utils/passages'
+import {getTodayBite} from '../../utils/bites'
 
 export interface LibraryItems {
     authors: ClientUnpopulatedAuthor[];
@@ -24,8 +27,6 @@ export interface LibraryItems {
 
 export interface Props {
     items: LibraryItems;
-    query: ParsedUrlQuery;
-    settings: Settings;
 }
 
 export const initialSettings = {
@@ -33,10 +34,10 @@ export const initialSettings = {
     transitions: true
 }
 
-export default function Library({items, query, settings}:Props) {
+export default function Library({items}:Props) {
 
     const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
-
+    
     return (
         <>
             <Head>
@@ -49,7 +50,7 @@ export default function Library({items, query, settings}:Props) {
                     <MainHeader bg="none" user={user} />
                 </div>
                 <div>
-                    <Main items={items} query={query} settings={settings} />
+                    <MainWrapper items={items} />
                 </div>
             </div>
             <div>
@@ -59,27 +60,20 @@ export default function Library({items, query, settings}:Props) {
     )
 }
 
-// can't use getStaticProps because we need to access query params in case there are any filters
-// api route /library uses cache control
-export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePropsContext) => {
+export const getStaticProps:GetStaticProps = async () => {
 
-    try {
-        const [{data: {authors, books, timePeriods, genres, passages, bite}}, settings] = await Promise.all([
-            axios.get('/api/library'), getInitialSettings(ctx)
-        ])
+    const [authors, books, timePeriods, genres, passages, bite] = await Promise.all([
+        getAllUnpopulatedAuthors(), getAllUnpopulatedBooks(), getAllTimePeriods(), getAllGenres(), getAllPassages(), getTodayBite()
+    ])
 
-        return {props: {
-            items: {
-                authors, books, timePeriods, genres, passages, bite
-            },
-            query: ctx.query,
-            settings: settings && settings.viewMode ? settings : initialSettings
-        }}
-    } catch(e) {
-        return {props: {
-            items: {authors: [], books: [], timePeriods: [], genres: [], passages: [], bite: {}},
-            query: ctx.query,
-            settings: {}
-        }}
-    }
+    return {props: {
+        items: {
+            authors: JSON.parse(JSON.stringify(authors)),
+            books: JSON.parse(JSON.stringify(books)),
+            timePeriods: JSON.parse(JSON.stringify(timePeriods)),
+            genres: JSON.parse(JSON.stringify(genres)),
+            passages: JSON.parse(JSON.stringify(passages)),
+            bite: JSON.parse(JSON.stringify(bite))
+        },
+    }, revalidate: 1800}
 }
