@@ -14,7 +14,7 @@ export function SuccessScreen({setSuccess}) {
         <div className={styles['main-root']}>
             <div>
                 <div className={styles['main-img-container']}>
-                    <MailOutlineIcon color="secondary" style={{fontSize: 'clamp(100px, 30vw, 300px)'}} />
+                    <img src="/auth/ink.png" />
                 </div>
                 <div className={styles['main-message-container']}>
                     <Box textAlign="center" mb={1}>

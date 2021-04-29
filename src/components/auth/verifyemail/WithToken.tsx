@@ -34,7 +34,7 @@ export function SuccessScreen() {
     return (
         <>
             <div className={styles['main-img-container']}>
-                <CheckCircleOutlineIcon color="secondary" style={{fontSize: 'clamp(100px, 30vw, 300px)'}} />
+                <img src="/auth/penCheck.png" />
             </div>
             <div className={styles['main-message-container']}>
                 <Box textAlign="center" mb={1}>
