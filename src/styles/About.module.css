@@ -3,14 +3,23 @@
 .title-root {
     height: clamp(100px, calc(100vh - 78px), 750px);    
     background: hsl(50, 100%, 80%);
-    background-image: url('/background/bg1.png');
 }
 
-.title-root > div {
-    height: 100%;
+.title-bg {
+    position: relative;
+    top: 80px;
+    height: calc(100% - 80px);
+    width: 100%;
+    background-image: url('/background/stones.png');
+}
+
+.title-content-container {
+    height: calc(100% + 80px);
     background-image: url('/about/steppingIntoLibrary2.png');
     background-repeat: no-repeat;
     background-position: top center;
+    position: relative;
+    top: -80px;
 }
 
 .title-content {
