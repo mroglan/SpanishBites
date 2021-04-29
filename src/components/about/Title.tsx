@@ -6,13 +6,15 @@ export default function Title() {
 
     return (
         <div className={styles['title-root']}>
-            <div>
-                <div className={styles['title-content']}>
-                    <Box textAlign="center" py={3} px={2}>
-                        <Typography variant="h2" className={styles['catamaran']}>
-                            Step into Spanish Literature
-                        </Typography>
-                    </Box>
+            <div className={styles['title-bg']}>
+                <div className={styles['title-content-container']}>
+                    <div className={styles['title-content']}>
+                        <Box textAlign="center" py={3} px={2}>
+                            <Typography variant="h2" className={styles['catamaran']}>
+                                Step into Spanish Literature
+                            </Typography>
+                        </Box>
+                    </div>
                 </div>
             </div>
         </div>
