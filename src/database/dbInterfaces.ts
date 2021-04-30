@@ -376,3 +376,11 @@ export interface RecentlyViewedItem {
     id: string;
     type: string;
 }
+
+
+export interface ContactMessage {
+    name: string;
+    email: string;
+    type: string;
+    message: string;
+}
