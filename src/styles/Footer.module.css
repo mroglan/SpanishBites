@@ -1,0 +1,24 @@
+
+/* MAIN FOOTER */
+
+.title {
+    color: hsl(229, 100%, 58%);
+    font-weight: 600 !important;
+    white-space: nowrap;
+    font-family: "Catamaran" !important;
+    font-size: 30px !important;
+}
+
+.link {
+    color: hsl(359, 94%, 32%);
+}
+
+.grid-container {
+    justify-content: center;
+}
+
+@media only screen and (max-width: 622px) {
+    .grid-container {
+        justify-content: flex-start;
+    }
+}
