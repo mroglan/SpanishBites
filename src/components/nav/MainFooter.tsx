@@ -1,10 +1,82 @@
 import React from 'react'
+import {Box, Divider, Grid, Typography} from '@material-ui/core'
+import Link from 'next/link'
+import styles from '../../styles/Footer.module.css'
+import {SecondaryLink} from '../items/links'
 
 export default function MainFooter() {
 
     return (
         <div>
-            footer
+            <Divider />
+            <Box mt={1} mx={4}>
+                <Grid className={styles['grid-container']} container spacing={8}>
+                    <Grid item>
+                        <Box mb={1}>
+                            <Link href="/">
+                                <a className={styles.link}>
+                                    <Grid container wrap="nowrap" spacing={1} alignItems="center">
+                                        <Grid item>
+                                            <img src="/logo3.svg" title="Spanish Bites" style={{width: 30, height: 30}} />
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography className={styles.title} variant="h5" component="h1">
+                                                Spanish Bites
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </a>
+                            </Link>
+                        </Box>
+                        <Box mb={1} pl="42px">
+                            <Link href="/contact-us">
+                                <a className={styles.link}>
+                                    <SecondaryLink style={{fontSize: 18}} variant="button">
+                                        Contact us
+                                    </SecondaryLink>
+                                </a>
+                            </Link>
+                        </Box>
+                        <Box pl="42px">
+                            <a href="mailto:maria@spanishbit.es">
+                                <SecondaryLink variant="body1">
+                                    maria@spanishbit.es
+                                </SecondaryLink>
+                            </a>
+                        </Box>
+                    </Grid>
+                    <Grid item>
+                        <Box mt="5px" mb={1}>
+                            <Typography variant="h5">
+                                External Resources
+                            </Typography>
+                        </Box>
+                        <Box>
+                            <Box>
+                                <a href="https://www.casadellibro.com/">
+                                    <SecondaryLink gutterBottom variant="body1">
+                                        Casa del Libro
+                                    </SecondaryLink>
+                                </a>
+                            </Box>
+                            <Box>
+                                <a href="http://www.cervantesvirtual.com/">
+                                    <SecondaryLink gutterBottom variant="body1">
+                                        Biblioteca Virtual Miguel de Cervantes
+                                    </SecondaryLink>
+                                </a>
+                            </Box>
+                            <Box>
+                                <a href="https://www.circulo.es/">
+                                    <SecondaryLink gutterBottom variant="body1">
+                                        Círculo de Lectores
+                                    </SecondaryLink>
+                                </a>
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Box>
         </div>
     )
 }
