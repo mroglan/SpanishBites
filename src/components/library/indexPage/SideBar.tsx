@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/Library.module.css'
-import {SideBarBluePrimaryButton} from '../../items/buttons'
+import {SideBarBluePrimaryButton, SideBarGoldPrimaryButton} from '../../items/buttons'
 import {Typography} from '@material-ui/core'
 import {Filters, initialFilters} from './FiltersPanel'
 
@@ -14,12 +14,17 @@ export default function SideBar({setFilters, closePopup}:Props) {
 
     const changeFilters = (libraryItem:string) => {
         if(Boolean(closePopup)) closePopup()
-        setFilters({...initialFilters, bite: false, libraryItem})
+        setFilters({...initialFilters, bite: false, favorites: false, libraryItem})
     }
 
     const openBite = () => {
         if(Boolean(closePopup)) closePopup()
-        setFilters({...initialFilters, bite: true})
+        setFilters({...initialFilters, favorites: false, bite: true})
+    }
+
+    const openFavorites = () => {
+        if(Boolean(closePopup)) closePopup()
+        setFilters({...initialFilters, favorites: true, bite: false})
     }
 
     return (
@@ -32,13 +37,13 @@ export default function SideBar({setFilters, closePopup}:Props) {
                         </Typography>
                     </SideBarBluePrimaryButton>
                 </li>
-                {/* <li>
-                    <SideBarBluePrimaryButton>
+                <li>
+                    <SideBarGoldPrimaryButton data-testid="sidebar-favorites" onClick={() => openFavorites()}>
                         <Typography variant="body1">
                             Favorites
                         </Typography>
-                    </SideBarBluePrimaryButton>
-                </li> */}
+                    </SideBarGoldPrimaryButton>
+                </li>
                 <li>
                     <SideBarBluePrimaryButton data-testid="sidebar-authors" onClick={() => changeFilters('authors')}>
                         <Typography variant="body1">
