@@ -16,6 +16,7 @@ export interface Filters {
     genres: string[];
     books: string[];
     bite: boolean;
+    favorites: boolean;
 }
 
 export const initialFilters = {
@@ -26,7 +27,8 @@ export const initialFilters = {
     authors: [],
     genres: [],
     books: [],
-    bite: false
+    bite: false,
+    favorites: false
 }
 
 function filtersReducer(state, {type, payload}:{type:string;payload:string|string[];}) {
