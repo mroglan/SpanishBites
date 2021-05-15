@@ -10,6 +10,15 @@ import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import Router from 'next/dist/client/router'
 
+declare module "@material-ui/core/styles/createPalette" {
+  interface Palette {
+    gold: Palette['primary'];
+  }
+  interface PaletteOptions {
+    gold: PaletteOptions['primary'];
+  }
+}
+
 Nprogress.configure({showSpinner: false})
 
 Router.events.on('routeChangeStart', () => {
@@ -43,7 +52,7 @@ export const theme = createMuiTheme({
       dark: 'hsl(359, 94%, 42%)'
     },
     error: {
-      main: 'hsl(356, 81%, 49%)',
+      main: 'hsl(356, 81%, 49%)', 
       light: 'hsl(356, 81%, 59%)',
       dark: 'hsl(356, 81%, 39%)'
     },
@@ -57,6 +66,11 @@ export const theme = createMuiTheme({
       // darker: hsl(50, 100%, 80%)
       paper: '#fff'
     },
+    gold: {
+      main: 'hsl(52, 81%, 42%)', 
+      dark: 'hsl(52, 81%, 35%)', 
+      light: 'hsl(52, 81%, 57%)'
+    }
   },
   spacing: 8,
   overrides: {
