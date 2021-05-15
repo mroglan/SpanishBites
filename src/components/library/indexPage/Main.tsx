@@ -59,8 +59,8 @@ export default function Main({items:libraryItems, query, settings:initialSetting
 
     useEffect(() => {
         if(loading) setLoading(false)
-        if(filters.bite) return
         updateQueryParams(search, filters)
+        if(filters.bite) return
         setDisplayItems(findDisplayItems(libraryItems, search, filters))
     }, [filters, search])
 
