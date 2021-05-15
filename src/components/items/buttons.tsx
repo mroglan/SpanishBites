@@ -74,6 +74,21 @@ export const SideBarBluePrimaryButton = withStyles(theme => ({
     }
 }))(Button)
 
+export const SideBarGoldPrimaryButton = withStyles(theme => ({
+    root: {
+        background: 'hsla(52, 81%, 57%, .2)',
+        borderRadius: '10px',
+        width: '100%',
+        color: theme.palette.gold.dark,
+        padding: `${theme.spacing(2)}px ${theme.spacing(1)}px`,
+        transition: 'color background 300ms',
+        '&:hover': {
+            color: theme.palette.gold.dark,
+            background: 'hsla(52, 81%, 57%, .3)'
+        }
+    }
+}))(Button)
+
 
 export const BluePrimaryIconButton = withStyles(theme => ({
     root: {
