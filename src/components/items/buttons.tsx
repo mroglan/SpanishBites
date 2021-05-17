@@ -96,6 +96,12 @@ export const BluePrimaryIconButton = withStyles(theme => ({
     }
 }))(IconButton)
 
+export const GoldPrimaryIconButton = withStyles(theme => ({
+    root: {
+        color: theme.palette.gold.main
+    }
+}))(IconButton)
+
 
 export const GrayDenseButton = withStyles(theme => ({
     root: {
