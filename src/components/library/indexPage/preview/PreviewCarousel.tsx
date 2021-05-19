@@ -1,14 +1,15 @@
-import React, {memo} from 'react'
+import React, {memo, useContext, useMemo, useState} from 'react'
 import Link from 'next/link'
 import styles from '../../../../styles/Library.module.css'
 import {Grid, Box} from '@material-ui/core'
-import {BlueDenseButton, BluePrimaryIconButton} from '../../../items/buttons'
+import {BlueDenseButton, BluePrimaryIconButton, GoldPrimaryIconButton} from '../../../items/buttons'
 import CloseIcon from '@material-ui/icons/Close';
 import LaunchIcon from '@material-ui/icons/Launch';
-import {ClientUnpopulatedAuthor} from '../../../../database/dbInterfaces'
-import {animated} from 'react-spring'
-import {DisplayItem} from '../DisplayPanel'
-import {LibraryItemsContext} from '../Main'
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
+import useSWR, { mutate } from 'swr'
+import {FavoritesContext} from '../Main'
+import axios from 'axios'
 
 import AuthorPreview from './AuthorPreview'
 import BookPreview from './BookPreview'
@@ -21,17 +22,47 @@ interface Props {
 
 export default memo(function PreviewCarousel({item, closePreview}:Props) {
 
+    const favorites = useContext(FavoritesContext)
+
+    const [marked, setMarked] = useState(false)
+
+    useMemo(() => {
+        if(!favorites) return
+        const isFavorite = !!favorites.find(fav => fav.id === item._id)
+        if(marked === isFavorite) return
+        setMarked(isFavorite)
+    }, [item, favorites])
+
+    const changeFavoriteStatus = async (status:boolean) => {
+        setMarked(status)
+        let newFavorites = []
+        if(status) {
+            newFavorites = [...favorites, {id: item._id, type: item.type}]
+        } else {
+            newFavorites = favorites.filter(fav => fav.id !== item._id)
+        }
+        try {
+            await axios({
+                method: 'POST',
+                url: '/api/favorites',
+                data: {
+                    operation: 'update-favorites',
+                    favorites: newFavorites
+                }
+            })
+        } catch(e) {}
+        mutate('/api/favorites')
+    }
+
     return (
         <div className={styles['preview-root']}>
             <div className={styles['preview-content']}>
                 <div className={styles['preview-visit-container']}>
-                    <Link href={`/library/${item.type}s/[id]`} as={`/library/${item.type}s/${item._id}`}>
-                        <a>
-                            <BluePrimaryIconButton>
-                                <LaunchIcon />
-                            </BluePrimaryIconButton>
-                        </a>
-                    </Link>
+                    {marked ? <GoldPrimaryIconButton onClick={() => changeFavoriteStatus(false)}>
+                        <StarIcon />
+                    </GoldPrimaryIconButton> : <GoldPrimaryIconButton onClick={() => changeFavoriteStatus(true)}>
+                        <StarBorderIcon />
+                    </GoldPrimaryIconButton>}
                 </div>
                 {item.type === 'author' ? <AuthorPreview author={item} /> : 
                 item.type === 'book' ? <BookPreview book={item} /> : 
