@@ -44,7 +44,7 @@ export function Loading() {
 
 export default function Main({items:libraryItems, query, settings:initialSettings}:Props) {
 
-    const {data: favorites} = useSWR('/api/favorites', {shouldRetryOnError: false, initialData: []})
+    const {data: favorites} = useSWR('/api/favorites', {shouldRetryOnError: false})
 
     const [displayItems, setDisplayItems] = useState([])
 
