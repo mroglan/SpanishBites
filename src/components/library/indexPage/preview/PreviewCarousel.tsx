@@ -1,7 +1,7 @@
 import React, {memo, useContext, useMemo, useState} from 'react'
 import Link from 'next/link'
 import styles from '../../../../styles/Library.module.css'
-import {Grid, Box} from '@material-ui/core'
+import {Grid, Box, Tooltip} from '@material-ui/core'
 import {BlueDenseButton, BluePrimaryIconButton, GoldPrimaryIconButton} from '../../../items/buttons'
 import CloseIcon from '@material-ui/icons/Close';
 import LaunchIcon from '@material-ui/icons/Launch';
@@ -58,11 +58,13 @@ export default memo(function PreviewCarousel({item, closePreview}:Props) {
         <div className={styles['preview-root']}>
             <div className={styles['preview-content']}>
                 <div className={styles['preview-visit-container']}>
-                    {marked ? <GoldPrimaryIconButton onClick={() => changeFavoriteStatus(false)}>
-                        <StarIcon />
-                    </GoldPrimaryIconButton> : <GoldPrimaryIconButton onClick={() => changeFavoriteStatus(true)}>
-                        <StarBorderIcon />
-                    </GoldPrimaryIconButton>}
+                    <Tooltip title={marked ? 'Remove Favorite' : 'Add Favorite'}>
+                        {marked ? <GoldPrimaryIconButton onClick={() => changeFavoriteStatus(false)}>
+                            <StarIcon />
+                        </GoldPrimaryIconButton> : <GoldPrimaryIconButton onClick={() => changeFavoriteStatus(true)}>
+                            <StarBorderIcon />
+                        </GoldPrimaryIconButton>}
+                    </Tooltip>
                 </div>
                 {item.type === 'author' ? <AuthorPreview author={item} /> : 
                 item.type === 'book' ? <BookPreview book={item} /> : 
