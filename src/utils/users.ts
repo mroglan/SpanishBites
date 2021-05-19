@@ -58,7 +58,7 @@ export const createUser = async (info:UserInfo) => {
     )
 }
 
-export const getUser = async (id:string) => {
+export const getUser = async (id:string):Promise<OrganizedDBUser> => {
 
     const user:DBUser = await client.query(
         q.Get(q.Ref(q.Collection('users'), id))
