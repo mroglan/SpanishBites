@@ -1,6 +1,7 @@
 import React, {useContext, useMemo, useRef, useEffect, useState} from 'react'
 import styles from '../../../styles/Library.module.css'
-import {Chip, Grid} from '@material-ui/core'
+import {Chip, Grid, emphasize, fade} from '@material-ui/core'
+import {withStyles} from '@material-ui/core/styles'
 
 import {Filters} from './FiltersPanel'
 import {LibraryItemsContext} from './Main'
@@ -16,11 +17,44 @@ interface FilterChipProps {
     onDelete: () => void;
 }
 
+export const GoldChip = withStyles(theme => ({
+    root: {
+        backgroundColor: theme.palette.gold.main,
+        color: theme.palette.primary.contrastText,
+        '& $avatar': {
+            color: theme.palette.primary.contrastText,
+            backgroundColor: theme.palette.gold.dark
+        },
+        '&:hover, &:focus': {
+            backgroundColor: emphasize(theme.palette.gold.main, 0.04),
+        },
+        '&:focus': {
+            backgroundColor: emphasize(theme.palette.gold.main, 0.2),
+        },
+    },
+    deleteIcon: {
+        color: fade(theme.palette.primary.contrastText, 0.7),
+        '&:hover, &:active': {
+          color: theme.palette.primary.contrastText,
+        },
+      },
+}))(Chip)
+
 export function FilterChip({title, onDelete}:FilterChipProps) {
     return (
         <Grid style={{display: 'inline-block'}} item>
             <div data-testid="filter-chip">
                 <Chip label={title} onDelete={onDelete} color="primary" />
+            </div>
+        </Grid>
+    )
+}
+
+export function GoldFilterChip({title, onDelete}:FilterChipProps) {
+    return (
+        <Grid style={{display: 'inline-block'}} item>
+            <div data-testid="filter-chip">
+                <GoldChip label={title} onDelete={onDelete} />
             </div>
         </Grid>
     )
