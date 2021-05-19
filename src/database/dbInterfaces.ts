@@ -230,6 +230,7 @@ export interface User {
     previews: GeneralItem[];
     recentlyViewed: GeneralItem[];
     image: string;
+    favorites?: GeneralItem[];
 }
 
 export interface DBUser {
