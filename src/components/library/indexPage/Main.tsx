@@ -1,4 +1,5 @@
 import React, {useState, createContext, useMemo, useEffect, useCallback} from 'react'
+import {GeneralItem} from '../../../database/dbInterfaces'
 import {LibraryItems} from '../../../pages/library/index'
 import styles from '../../../styles/Library.module.css'
 import SideBar from './SideBar'
@@ -15,9 +16,12 @@ import ListDisplay from './ListDisplay'
 import axios from 'axios'
 import {parseCookies} from 'nookies'
 import { Settings } from './Settings'
+import useSWR from 'swr'
 
 export const LibraryItemsContext = createContext<LibraryItems>({authors: [], books: [], timePeriods: [], genres: [], passages: [], 
     bite: {_id: '', name: '', author: '', image: '', work: '', text: '', desc: '', dates: []}})
+
+export const FavoritesContext = createContext<GeneralItem[]>([])
 
 interface Props {
     items: LibraryItems;
@@ -39,6 +43,8 @@ export function Loading() {
 }
 
 export default function Main({items:libraryItems, query, settings:initialSettings}:Props) {
+
+    const {data: favorites} = useSWR('/api/favorites', {shouldRetryOnError: false, initialData: []})
 
     const [displayItems, setDisplayItems] = useState([])
 
@@ -92,30 +98,32 @@ export default function Main({items:libraryItems, query, settings:initialSetting
             <aside data-testid="library-sidebar" className={`${styles['sidebar']} ${styles['main']}`}>
                 <SideBar setFilters={setFilters} />
             </aside>
-            <LibraryItemsContext.Provider value={libraryItems}>
-                <main style={{display: filters.bite ? 'none' : 'grid'}} className={styles['user-panel-root']}>
-                    <section data-testid="searchpanel-section">
-                        <SearchPanel search={search} setSearch={setSearch} filters={filters} setFilters={setFilters}
-                        settings={settings} setSettings={setSettings} />
-                    </section>
-                    <section data-testid="filtersdisplay-section" className={styles['filters-display-overflow']}>
-                        <FiltersDisplay filters={filters} setFilters={setFilters} />
-                    </section>
-                    <section data-testid="displaypanel-section">
-                        <NoSsr>
-                            {loading ? <Loading /> : 
-                            settings.viewMode === 'list' ? <ListDisplay items={displayItems} /> : 
-                            <DisplayPanel items={displayItems} settings={settings} />}
-                        </NoSsr>
-                        <aside className={styles['popout-sidebar']}>
-                            <PopoutSidebar setFilters={setFilters} />
-                        </aside> 
-                    </section>
-                </main>
-                {filters.bite && <main data-testid="bitedisplay-section">
-                    <BiteDisplay hideBite={hideBite} />
-                </main>}
-            </LibraryItemsContext.Provider>
+            <FavoritesContext.Provider value={favorites}>
+                <LibraryItemsContext.Provider value={libraryItems}>
+                    <main style={{display: filters.bite ? 'none' : 'grid'}} className={styles['user-panel-root']}>
+                        <section data-testid="searchpanel-section">
+                            <SearchPanel search={search} setSearch={setSearch} filters={filters} setFilters={setFilters}
+                            settings={settings} setSettings={setSettings} />
+                        </section>
+                        <section data-testid="filtersdisplay-section" className={styles['filters-display-overflow']}>
+                            <FiltersDisplay filters={filters} setFilters={setFilters} />
+                        </section>
+                        <section data-testid="displaypanel-section">
+                            <NoSsr>
+                                {loading ? <Loading /> : 
+                                settings.viewMode === 'list' ? <ListDisplay items={displayItems} /> : 
+                                <DisplayPanel items={displayItems} settings={settings} />}
+                            </NoSsr>
+                            <aside className={styles['popout-sidebar']}>
+                                <PopoutSidebar setFilters={setFilters} />
+                            </aside> 
+                        </section>
+                    </main>
+                    {filters.bite && <main data-testid="bitedisplay-section">
+                        <BiteDisplay hideBite={hideBite} />
+                    </main>}
+                </LibraryItemsContext.Provider>
+            </FavoritesContext.Provider>
         </div>
     )
 }
