@@ -1,6 +1,6 @@
 import {Filters, initialFilters} from '../components/library/indexPage/FiltersPanel'
 import {ignoreCapsAndAccentsRegex} from './regex'
-import {AuthorPopulatedClientBook, ClientPassage, ClientUnpopulatedAuthor, ClientUnpopulatedBook} from '../database/dbInterfaces'
+import {AuthorPopulatedClientBook, ClientPassage, ClientUnpopulatedAuthor, ClientUnpopulatedBook, GeneralItem} from '../database/dbInterfaces'
 import {LibraryItems} from '../pages/library/index'
 import {GetServerSidePropsContext} from 'next'
 import {parseCookies} from 'nookies'
@@ -41,9 +41,10 @@ export const getInfoFromQuery = (params) => {
 }
 
 
-function searchThruAuthors(authors:ClientUnpopulatedAuthor[], search:string, filters:Filters) {
-    return authors.filter(({firstName, lastName, timePeriod, birthDate, deathDate}) => {
+function searchThruAuthors(authors:ClientUnpopulatedAuthor[], search:string, filters:Filters, favorites:GeneralItem[]) {
+    return authors.filter(({firstName, lastName, timePeriod, birthDate, deathDate, _id}) => {
         if(!`${firstName} ${lastName}`.match(ignoreCapsAndAccentsRegex(search))) return false
+        if(filters.favorites && !favorites.find(fav => fav.id === _id)) return false
         if(filters.timePeriods.length > 0 && !filters.timePeriods.includes(timePeriod)) return false
         if(filters.birthDate && filters.birthDate !== birthDate) return false
         if(filters.deathDate && filters.deathDate !== deathDate) return false
@@ -51,9 +52,10 @@ function searchThruAuthors(authors:ClientUnpopulatedAuthor[], search:string, fil
     }).map(author => ({...author, type: 'author'}))
 }
 
-function searchThruBooks(books:ClientUnpopulatedBook[], search:string, filters:Filters) {
-    return books.filter(({title, timePeriod, authors, genres}) => {
+function searchThruBooks(books:ClientUnpopulatedBook[], search:string, filters:Filters, favorites:GeneralItem[]) {
+    return books.filter(({title, timePeriod, authors, genres, _id}) => {
         if(!title.match(ignoreCapsAndAccentsRegex(search))) return false
+        if(filters.favorites && !favorites.find(fav => fav.id === _id)) return false
         if(filters.timePeriods.length > 0 && !filters.timePeriods.includes(timePeriod)) return false
         if(filters.authors.length > 0 && !filters.authors.find(author => authors.includes(author))) return false
         if(filters.genres.length > 0 && !filters.genres.find(genre => genres.includes(genre))) return false
@@ -61,9 +63,10 @@ function searchThruBooks(books:ClientUnpopulatedBook[], search:string, filters:F
     }).map(book => ({...book, type: 'book'}))
 }
 
-function searchThruPassages(passages:ClientPassage[], search:string, filters:Filters) {
-    return passages.filter(({name, book}) => {
+function searchThruPassages(passages:ClientPassage[], search:string, filters:Filters, favorites:GeneralItem[]) {
+    return passages.filter(({name, book, _id}) => {
         if(!name.match(ignoreCapsAndAccentsRegex(search))) return false
+        if(filters.favorites && !favorites.find(fav => fav.id === _id)) return false
         if(filters.books.length > 0 && !filters.books.includes(book ? book._id : '')) return false
         if(filters.timePeriods.length > 0 && !filters.timePeriods.includes(book.timePeriod)) return false
         if(filters.authors.length > 0 && !filters.authors.find(author => book.authors.includes(author))) return false
@@ -72,21 +75,21 @@ function searchThruPassages(passages:ClientPassage[], search:string, filters:Fil
     }).map(passage => ({...passage, type: 'passage'}))
 }
 
-function searchThruAllItems(libraryItems:LibraryItems, search:string, filters:Filters) {
+function searchThruAllItems(libraryItems:LibraryItems, search:string, filters:Filters, favorites:GeneralItem[]) {
     const items = [];
-    items.push(...searchThruAuthors(libraryItems.authors, search, filters))
-    items.push(...searchThruBooks(libraryItems.books, search, filters))
-    items.push(...searchThruPassages(libraryItems.passages, search, filters))
+    items.push(...searchThruAuthors(libraryItems.authors, search, filters, favorites))
+    items.push(...searchThruBooks(libraryItems.books, search, filters, favorites))
+    items.push(...searchThruPassages(libraryItems.passages, search, filters, favorites))
     return items
 }
 
-export function findDisplayItems(libraryItems:LibraryItems, search:string, filters:Filters) {
+export function findDisplayItems(libraryItems:LibraryItems, search:string, filters:Filters, favorites:GeneralItem[]) {
     const {libraryItem:searchItem} = filters
     const lcSearch = search.toLowerCase()
-    if(searchItem === 'none') return searchThruAllItems(libraryItems, lcSearch, filters)
-    if(searchItem === 'authors') return searchThruAuthors(libraryItems.authors, lcSearch, filters)
-    if(searchItem === 'books') return searchThruBooks(libraryItems.books, lcSearch, filters)
-    return searchThruPassages(libraryItems.passages, lcSearch, filters)
+    if(searchItem === 'none') return searchThruAllItems(libraryItems, lcSearch, filters, favorites)
+    if(searchItem === 'authors') return searchThruAuthors(libraryItems.authors, lcSearch, filters, favorites)
+    if(searchItem === 'books') return searchThruBooks(libraryItems.books, lcSearch, filters, favorites)
+    return searchThruPassages(libraryItems.passages, lcSearch, filters, favorites)
 }
 
 
