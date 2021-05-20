@@ -1,12 +1,18 @@
-import React, {useState, MouseEvent} from 'react'
+import React, {useState, MouseEvent, SetStateAction, Dispatch} from 'react'
 import {Grid, Box, Popper, ClickAwayListener, Backdrop, Paper} from '@material-ui/core'
 import styles from '../../../styles/Library.module.css'
 import {BluePrimaryIconButton, BlueDenseButton} from '../../items/buttons'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CategoryIcon from '@material-ui/icons/Category';
 import SideBar from './SideBar'
+import { Filters } from './FiltersPanel';
 
-export default function PopoutSidebar({setFilters}) {
+interface Props {
+    filters: Filters;
+    setFilters: Dispatch<SetStateAction<Filters>>;
+}
+
+export default function PopoutSidebar({setFilters, filters}:Props) {
 
     const [anchorEl, setAnchorEl] = useState(null)
 
@@ -30,7 +36,7 @@ export default function PopoutSidebar({setFilters}) {
                 <Paper elevation={3} className={`${styles['sidebar']} ${styles['popup']}`}>
                     <ClickAwayListener onClickAway={handleClose}>
                         <div>
-                            <SideBar setFilters={setFilters} closePopup={handleClose} />    
+                            <SideBar setFilters={setFilters} filters={filters} closePopup={handleClose} />    
                         </div> 
                     </ClickAwayListener>
                 </Paper>
