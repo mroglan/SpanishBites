@@ -28,8 +28,6 @@ export const getQueryParams = (search:string, filters:Filters) => {
 
 export const getInfoFromQuery = (params) => {
 
-    console.log('params', params)
-
     return {filters: {
         ...initialFilters,
         ...params,
