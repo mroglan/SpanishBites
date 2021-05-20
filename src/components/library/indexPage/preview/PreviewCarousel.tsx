@@ -34,6 +34,7 @@ export default memo(function PreviewCarousel({item, closePreview}:Props) {
     }, [item, favorites])
 
     const changeFavoriteStatus = async (status:boolean) => {
+        if(!favorites) return
         setMarked(status)
         let newFavorites = []
         if(status) {
@@ -58,13 +59,13 @@ export default memo(function PreviewCarousel({item, closePreview}:Props) {
         <div className={styles['preview-root']}>
             <div className={styles['preview-content']}>
                 <div className={styles['preview-visit-container']}>
-                    <Tooltip title={marked ? 'Remove Favorite' : 'Add Favorite'}>
+                    {favorites && <Tooltip title={marked ? 'Remove Favorite' : 'Add Favorite'}>
                         {marked ? <GoldPrimaryIconButton onClick={() => changeFavoriteStatus(false)}>
                             <StarIcon />
                         </GoldPrimaryIconButton> : <GoldPrimaryIconButton onClick={() => changeFavoriteStatus(true)}>
                             <StarBorderIcon />
                         </GoldPrimaryIconButton>}
-                    </Tooltip>
+                    </Tooltip>}
                 </div>
                 {item.type === 'author' ? <AuthorPreview author={item} /> : 
                 item.type === 'book' ? <BookPreview book={item} /> : 
