@@ -44,7 +44,7 @@ export function Loading() {
 
 export default function Main({items:libraryItems, query, settings:initialSettings}:Props) {
 
-    const {data: favorites}:{data?:GeneralItem[]} = useSWR('/api/favorites', {shouldRetryOnError: false})
+    const {data: favorites, isValidating}:{data?:GeneralItem[];isValidating:boolean} = useSWR('/api/favorites', {shouldRetryOnError: false})
 
     const [displayItems, setDisplayItems] = useState([])
 
@@ -64,9 +64,16 @@ export default function Main({items:libraryItems, query, settings:initialSetting
     }, [])
 
     useEffect(() => {
+        if(isValidating) return
+        if(!filters.favorites) return
+        setDisplayItems(findDisplayItems(libraryItems, search, filters, favorites || []))
+    }, [isValidating])
+
+    useEffect(() => {
         if(loading) setLoading(false)
         updateQueryParams(search, filters)
         if(filters.bite) return
+        if(!favorites && isValidating) return
         setDisplayItems(findDisplayItems(libraryItems, search, filters, favorites || []))
     }, [filters, search])
 
