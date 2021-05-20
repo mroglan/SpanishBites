@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {SetStateAction, Dispatch} from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/Library.module.css'
 import {SideBarBluePrimaryButton, SideBarGoldPrimaryButton} from '../../items/buttons'
@@ -6,15 +6,16 @@ import {Typography} from '@material-ui/core'
 import {Filters, initialFilters} from './FiltersPanel'
 
 interface Props {
-    setFilters: (filters:Filters) => void;
+    setFilters: Dispatch<SetStateAction<Filters>>;
+    filters: Filters;
     closePopup?: () => void;
 }
 
-export default function SideBar({setFilters, closePopup}:Props) {
+export default function SideBar({setFilters, closePopup, filters}:Props) {
 
     const changeFilters = (libraryItem:string) => {
         if(Boolean(closePopup)) closePopup()
-        setFilters({...initialFilters, bite: false, favorites: false, libraryItem})
+        setFilters({...initialFilters, bite: false, favorites: filters.favorites, libraryItem})
     }
 
     const openBite = () => {
@@ -24,7 +25,7 @@ export default function SideBar({setFilters, closePopup}:Props) {
 
     const openFavorites = () => {
         if(Boolean(closePopup)) closePopup()
-        setFilters({...initialFilters, favorites: true, bite: false})
+        setFilters({...filters, favorites: true, bite: false})
     }
 
     return (
