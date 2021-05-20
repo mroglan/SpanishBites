@@ -97,9 +97,14 @@ export default function FiltersDisplay({filters, setFilters}:Props) {
         setFilters({...filters, books: filters.books.filter(book => book !== bookId)})
     }
 
+    const deleteFavorites = () => {
+        setFilters({...filters, favorites: false})
+    }
+
     return (
         <div className={styles['filters-display-root']}>
             <Grid container spacing={1} wrap="nowrap">
+                {filters.favorites && <GoldFilterChip title="Favorites" onDelete={() => deleteFavorites()} />}
                 {filters.libraryItem !== 'none' && <FilterChip title={filters.libraryItem} 
                 onDelete={() => setFilters({...filters, libraryItem: 'none'})} />}
                 {filters.birthDate && <FilterChip title={'Born ' + filters.birthDate}
