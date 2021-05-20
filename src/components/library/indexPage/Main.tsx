@@ -44,7 +44,7 @@ export function Loading() {
 
 export default function Main({items:libraryItems, query, settings:initialSettings}:Props) {
 
-    const {data: favorites} = useSWR('/api/favorites', {shouldRetryOnError: false})
+    const {data: favorites}:{data?:GeneralItem[]} = useSWR('/api/favorites', {shouldRetryOnError: false})
 
     const [displayItems, setDisplayItems] = useState([])
 
@@ -67,7 +67,7 @@ export default function Main({items:libraryItems, query, settings:initialSetting
         if(loading) setLoading(false)
         updateQueryParams(search, filters)
         if(filters.bite) return
-        setDisplayItems(findDisplayItems(libraryItems, search, filters))
+        setDisplayItems(findDisplayItems(libraryItems, search, filters, favorites || []))
     }, [filters, search])
 
     useMemo(() => {
@@ -96,7 +96,7 @@ export default function Main({items:libraryItems, query, settings:initialSetting
     return (
         <div className={styles['main-section-root']}>
             <aside data-testid="library-sidebar" className={`${styles['sidebar']} ${styles['main']}`}>
-                <SideBar setFilters={setFilters} />
+                <SideBar setFilters={setFilters} filters={filters} />
             </aside>
             <FavoritesContext.Provider value={favorites}>
                 <LibraryItemsContext.Provider value={libraryItems}>
@@ -115,7 +115,7 @@ export default function Main({items:libraryItems, query, settings:initialSetting
                                 <DisplayPanel items={displayItems} settings={settings} />}
                             </NoSsr>
                             <aside className={styles['popout-sidebar']}>
-                                <PopoutSidebar setFilters={setFilters} />
+                                <PopoutSidebar setFilters={setFilters} filters={filters} />
                             </aside> 
                         </section>
                     </main>
