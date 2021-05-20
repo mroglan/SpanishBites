@@ -13,6 +13,7 @@ export const getInitialSettings = async (ctx) => {
 export const getQueryParams = (search:string, filters:Filters) => {
     let queryParams:any = {}
 
+    if(filters.favorites) queryParams.favorites = filters.favorites
     if(filters.libraryItem !== 'none') queryParams.libraryItem = filters.libraryItem
     if(filters.authors.length > 0) queryParams.authors = filters.authors
     if(filters.birthDate) queryParams.birthDate = filters.birthDate
