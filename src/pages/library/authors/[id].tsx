@@ -14,6 +14,7 @@ import MainHeader from '../../../components/nav/MainHeader'
 import MainFooter from '../../../components/nav/MainFooter'
 import ResourceNotFound from '../../../components/error/ResourceNotFound'
 import axios from 'axios'
+import Main from '../../../components/library/authors/indiv/Main'
 
 interface Props {
     author: ClientAuthor;
@@ -47,86 +48,7 @@ export default function Author({author}:Props) {
                     <MainHeader bg="none" user={user} />
                 </div>
                 <div className={styles.content}>
-                    <div className={styles['img-container']}>
-                        <img src={author.image || '/no-profile.jpg'} title={author.firstName + ' ' + author.lastName} />
-                    </div>
-                    <div className={styles['content-container']}>
-                        <Paper elevation={3}>
-                            <Box px={3}>
-                                <Box>
-                                    <Typography variant="h3" component="h1">
-                                        {author.firstName + ' ' + author.lastName}
-                                    </Typography>
-                                </Box>
-                                <Box pt={1}>
-                                    <Typography variant="h6">
-                                        {author.birthDate} - {author.deathDate},{' '}
-                                        <Link href="/library/timeperiods/[id]" as={`/library/timeperiods/${author.timePeriod?._id}`}>
-                                            <a>
-                                                <SecondaryLink variant="inherit">
-                                                    {author.timePeriod?.name}
-                                                </SecondaryLink>
-                                            </a>
-                                        </Link>
-                                    </Typography>
-                                </Box>
-                                <Divider />
-                                <Box pt={2}>
-                                    <div className={styles['author-grid-container']}>
-                                        <div>
-                                            <Box pl={3} pb={1}>
-                                                <Typography variant="h5">
-                                                    Key Points
-                                                </Typography>
-                                            </Box>
-                                            <Box>
-                                                <BulletList>
-                                                    {author.keyPoints.map((point, i) => (
-                                                        <li key={i}>
-                                                            <Typography style={{maxWidth: '50ch'}} variant="body1">
-                                                                {point}
-                                                            </Typography>
-                                                        </li>
-                                                    ))}
-                                                </BulletList>
-                                            </Box>
-                                        </div>
-                                        <div>
-                                            <Box pl={3} pb={1}>
-                                                <Typography variant="h5">
-                                                    Relevant Works
-                                                </Typography>
-                                            </Box>
-                                            <Box>
-                                                <BulletList>
-                                                    {author.relevantWorks.map((work, i) => {
-                                                        if(work.link) {
-                                                            return (
-                                                                <li key={i}>
-                                                                    <a href={work.link}>
-                                                                        <SecondaryLink variant="body1">
-                                                                            {work.name}
-                                                                        </SecondaryLink>
-                                                                    </a>
-                                                                </li>
-                                                            )
-                                                        }
-                                                        return (
-                                                            <li key={i}>
-                                                                <Typography variant="body1">
-                                                                    {work.name}
-                                                                </Typography>
-                                                            </li>
-                                                        )
-                                                    })}
-                                                </BulletList>
-                                            </Box>
-                                        </div>
-                                    </div>
-                                </Box>
-                            </Box>
-                        </Paper>
-                    </div>
+                    <Main author={author} />
                 </div>
                 <div className={styles.footer}>
                     <MainFooter />
