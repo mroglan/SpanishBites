@@ -34,7 +34,7 @@ export const initialFilters = {
 function filtersReducer(state, {type, payload}:{type:string;payload:string|string[];}) {
     switch(type) {
         case 'CHANGE_LIBRARY_ITEM':
-            return {...initialFilters, libraryItem: payload}
+            return {...initialFilters, libraryItem: payload, favorites: state.favorites}
         case 'CHANGE_TIME_PERIODS':
             return {...state, timePeriods: payload}
         case 'CHANGE_BIRTHDATE':
