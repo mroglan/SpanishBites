@@ -103,7 +103,7 @@ export default function Main({items:libraryItems, query, settings:initialSetting
     return (
         <div className={styles['main-section-root']}>
             <aside data-testid="library-sidebar" className={`${styles['sidebar']} ${styles['main']}`}>
-                <SideBar setFilters={setFilters} filters={filters} />
+                <SideBar setFilters={setFilters} filters={filters} signedIn={!!favorites} />
             </aside>
             <FavoritesContext.Provider value={favorites}>
                 <LibraryItemsContext.Provider value={libraryItems}>

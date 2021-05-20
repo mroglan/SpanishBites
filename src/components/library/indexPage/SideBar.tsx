@@ -9,9 +9,10 @@ interface Props {
     setFilters: Dispatch<SetStateAction<Filters>>;
     filters: Filters;
     closePopup?: () => void;
+    signedIn: boolean;
 }
 
-export default function SideBar({setFilters, closePopup, filters}:Props) {
+export default function SideBar({setFilters, closePopup, filters, signedIn}:Props) {
 
     const changeFilters = (libraryItem:string) => {
         if(Boolean(closePopup)) closePopup()
@@ -38,13 +39,13 @@ export default function SideBar({setFilters, closePopup, filters}:Props) {
                         </Typography>
                     </SideBarBluePrimaryButton>
                 </li>
-                <li>
+                {signedIn && <li>
                     <SideBarGoldPrimaryButton data-testid="sidebar-favorites" onClick={() => openFavorites()}>
                         <Typography variant="body1">
                             Favorites
                         </Typography>
                     </SideBarGoldPrimaryButton>
-                </li>
+                </li>}
                 <li>
                     <SideBarBluePrimaryButton data-testid="sidebar-authors" onClick={() => changeFilters('authors')}>
                         <Typography variant="body1">
