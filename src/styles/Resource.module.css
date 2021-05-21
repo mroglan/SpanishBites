@@ -23,6 +23,7 @@
     padding: 2rem 1rem 0;
     display: flex;
     align-items: stretch;
+    margin-bottom: 2rem;
 }
 
 .footer {
@@ -42,6 +43,7 @@
 .img-container {
     flex-basis: 40%;
     text-align: center;
+    position: relative;
 }
 
 .img-container img {
@@ -51,6 +53,13 @@
     max-height: 600px;
     margin-right: 1rem;
     border-radius: 4px;
+}
+
+.img-container .star {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: hsl(52, 81%, 42%);
 }
 
 @media (max-width: 960px) {
