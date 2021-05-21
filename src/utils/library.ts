@@ -4,6 +4,8 @@ import {AuthorPopulatedClientBook, ClientPassage, ClientUnpopulatedAuthor, Clien
 import {LibraryItems} from '../pages/library/index'
 import {GetServerSidePropsContext} from 'next'
 import {parseCookies} from 'nookies'
+import axios from 'axios'
+import {mutate} from 'swr'
 
 export const getInitialSettings = async (ctx) => {
     const {librarySettings} = await parseCookies(ctx)
@@ -131,4 +133,21 @@ function getListInfoForAuthor(item:ClientUnpopulatedAuthor&{type:string}) {
 export function getListItemInfo(items, authors:ClientUnpopulatedAuthor[]) {
     return items.map(item => item.type === 'author' ? getListInfoForAuthor(item) : item.type === 'book' ? getListInfoForBook(item, authors) :
     getListItemInfoForPassage(item))
+}
+
+
+export async function changeFavorites(favorites:GeneralItem[]) {
+    try {
+        await axios({
+            method: 'POST',
+            url: '/api/favorites',
+            data: {
+                operation: 'update-favorites',
+                favorites
+            }
+        })
+        mutate('/api/favorites', favorites, false)
+    } catch(e) {
+        console.log('error updating favorites')
+    }
 }
