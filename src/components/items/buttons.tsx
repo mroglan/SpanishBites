@@ -27,6 +27,19 @@ export const RedPrimaryButton = withStyles(theme => ({
     }
 }))(Button)
 
+export const GoldPrimaryButton = withStyles(theme => ({
+    root: {
+        background: theme.palette.gold.main,
+        color: '#fff', 
+        borderRadius: theme.spacing(3),
+        padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
+        transition: 'background 300ms', 
+        '&:hover': {
+            background: theme.palette.gold.dark
+        }
+    }
+}))(Button)
+
 export const BlueSecondaryButton = withStyles(theme => ({
     root: {
         background: 'transparent',
@@ -54,6 +67,20 @@ export const RedSecondaryButton = withStyles(theme => ({
             color: '#fff',
             background: theme.palette.secondary.dark,
             borderColor: theme.palette.secondary.dark
+        }
+    }
+}))(Button)
+
+export const GoldSecondaryButton = withStyles(theme => ({
+    root: {
+        background: 'transparent',
+        border: `2px solid #000`,
+        borderRadius: theme.spacing(3),
+        padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
+        transition: 'background color border 300ms',
+        '&:hover': {
+            background: theme.palette.gold.light,
+            borderColor: theme.palette.gold.light
         }
     }
 }))(Button)
