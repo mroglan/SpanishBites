@@ -15,6 +15,7 @@ import MainHeader from '../../../components/nav/MainHeader'
 import MainFooter from '../../../components/nav/MainFooter'
 import TextDisplay from '../../../components/mui-rte/TextDisplay'
 import ResourceNotFound from '../../../components/error/ResourceNotFound'
+import Main from '../../../components/library/books/indiv/Main'
 
 interface Props {
     book: ClientBook;
@@ -48,67 +49,7 @@ export default function Book({book}:Props) {
                     <MainHeader bg="none" user={user} />
                 </div>
                 <div className={styles.content}>
-                    <div className={styles['img-container']}>
-                        <img src={book.image || '/no-profile.jpg'} title={book.title} />
-                    </div>
-                    <div className={styles['content-container']}>
-                        <Paper elevation={3}>
-                            <Box px={3}>
-                                <Box>
-                                    <Typography variant="h3" component="h1">
-                                        {book.title}
-                                    </Typography>
-                                </Box>
-                                <Box pt={1}>
-                                    <Typography variant="h6">
-                                        By {book.authors.map((author, i) => (
-                                            <Link key={i} href="/library/authors/[id]" as={`/library/authors/${author._id}`}>
-                                                <a>
-                                                    <SecondaryLink variant="inherit">
-                                                        {author.firstName + ' ' + author.lastName}
-                                                        {i + 1 < book.authors.length ? ', ' : ''}
-                                                    </SecondaryLink>
-                                                </a>
-                                            </Link>
-                                        ))}
-                                    </Typography>
-                                </Box>
-                            </Box>
-                            <Divider />
-                            <Box px={3} pt={2}>
-                                <Box>
-                                    <Typography variant="h6">
-                                        Time Period: <Link href="/library/timeperiods/[id]" as={`/library/timeperiods/${book.timePeriod._id}`}>
-                                            <a>
-                                                <SecondaryLink variant="inherit">
-                                                    {book.timePeriod.name}
-                                                </SecondaryLink>
-                                            </a>
-                                        </Link>
-                                    </Typography>
-                                </Box>
-                                <Box pt={1}>
-                                    <Typography variant="h6">
-                                        Genre: {book.genres.map((genre, i) => (
-                                            <Link key={i} href="/library/genres/[id]" as={`/library/genres/${genre._id}`}>
-                                                <a>
-                                                    <SecondaryLink variant="inherit">
-                                                        {genre.name}
-                                                        {i + 1 < book.genres.length ? ', ' : ''}
-                                                    </SecondaryLink>
-                                                </a>
-                                            </Link>
-                                        ))}
-                                    </Typography>
-                                </Box>
-                                <Box pt={1}>
-                                    <Box maxWidth="90ch">
-                                        <TextDisplay text={book.desc} />
-                                    </Box>
-                                </Box>
-                            </Box>
-                        </Paper>
-                    </div>
+                    <Main book={book} />
                 </div>
                 <div className={styles.footer}>
                     <MainFooter />
