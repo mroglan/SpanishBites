@@ -11,7 +11,7 @@ import styles from '../../../styles/Resource.module.css'
 import MainHeader from '../../../components/nav/MainHeader'
 import MainFooter from '../../../components/nav/MainFooter'
 import ResourceNotFound from '../../../components/error/ResourceNotFound'
-import Main from '../../../components/library/passages/Main'
+import Main from '../../../components/library/passages/indiv/Main'
 
 interface Props {
     passage: FullyPopulatedClientPassage;
