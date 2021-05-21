@@ -1,12 +1,15 @@
-import React from 'react'
-import {Box, Typography} from '@material-ui/core'
+import React, {useMemo, useState} from 'react'
+import {Box, Typography, Divider} from '@material-ui/core'
 import Link from 'next/link'
 import styles from '../../../../styles/Resource.module.css'
 import {SecondaryLink} from '../../../items/links'
 import TextDisplay from '../../../mui-rte/TextDisplay'
-import {FullyPopulatedClientPassage} from '../../../../database/dbInterfaces'
+import {FullyPopulatedClientPassage, GeneralItem} from '../../../../database/dbInterfaces'
 import PassageDisplay from './PassageDisplay'
 import PremiumDisplay from './PremiumDisplay'
+import useSWR from 'swr'
+import {changeFavorites} from '../../../../utils/library'
+import {GoldSecondaryButton} from '../../../items/buttons'
 
 interface Props {
     passage: FullyPopulatedClientPassage;
@@ -15,6 +18,22 @@ interface Props {
 export default function Main({passage}:Props) {
 
     const authors:any[] = passage.authors
+
+    const {data: favorites, isValidating}:{data?:GeneralItem[];isValidating:boolean} = useSWR('/api/favorites', {shouldRetryOnError: false})
+
+    const [loading, setLoading] = useState(false)
+
+    const changeFavStatus = async (status:boolean) => {
+        setLoading(true)
+        const newFavorites = status ? [...favorites, {id: passage._id, type: 'authors'}] : favorites.filter(fav => fav.id !== passage._id)
+        await changeFavorites(newFavorites)
+        setLoading(false)
+    }
+
+    const isFavorite = useMemo(() => {
+        if(!favorites) return false
+        return !!favorites.find(fav => fav.id === passage._id)
+    }, [isValidating, favorites])
 
     return (
         <div className={styles['passage-main']}>
@@ -54,6 +73,17 @@ export default function Main({passage}:Props) {
                         {passage.desc}
                     </Typography>
                 </Box>
+                {favorites && <>
+                    <Box py={2}>
+                        {isFavorite ? <div>
+                            <GoldSecondaryButton disabled={loading} onClick={() => changeFavStatus(false)}>
+                                Remove from Favorites
+                            </GoldSecondaryButton>
+                        </div> : <GoldSecondaryButton disabled={loading} onClick={() => changeFavStatus(true)}>
+                            Add to Favorites
+                        </GoldSecondaryButton>}
+                    </Box>
+                </>}
                 <Box flexGrow={1} width="90ch">
                     <PassageDisplay englishText={passage.englishText} spanishText={passage.spanishText} vocab={passage.vocab} />
                 </Box>
