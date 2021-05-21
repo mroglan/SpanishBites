@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../../styles/Resource.module.css'
+import styles from '../../../../styles/Resource.module.css'
 import {Paper, Box, Typography} from '@material-ui/core'
 
 export default function PremiumDisplay() {

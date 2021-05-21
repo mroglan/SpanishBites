@@ -1,6 +1,6 @@
 import React, {useState, ReactNode} from 'react'
-import TextDisplay from '../../mui-rte/TextDisplay'
-import styles from '../../../styles/Resource.module.css'
+import TextDisplay from '../../../mui-rte/TextDisplay'
+import styles from '../../../../styles/Resource.module.css'
 import {Typography, Box, Paper, Tabs, Tab, Table, TableBody, TableContainer, TableHead, TableRow, TableCell} from '@material-ui/core'
 
 interface Props {

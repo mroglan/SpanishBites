@@ -1,7 +1,7 @@
 import React from 'react'
 import {Box, Typography} from '@material-ui/core'
 import Link from 'next/link'
-import styles from '../../../styles/Resource.module.css'
+import styles from '../../../../styles/Resource.module.css'
 import {SecondaryLink} from '../../../items/links'
 import TextDisplay from '../../../mui-rte/TextDisplay'
 import {FullyPopulatedClientPassage} from '../../../../database/dbInterfaces'
