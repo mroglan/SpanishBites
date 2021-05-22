@@ -10,9 +10,10 @@ import { Filters } from './FiltersPanel';
 interface Props {
     filters: Filters;
     setFilters: Dispatch<SetStateAction<Filters>>;
+    signedIn: boolean;
 }
 
-export default function PopoutSidebar({setFilters, filters}:Props) {
+export default function PopoutSidebar({setFilters, filters, signedIn}:Props) {
 
     const [anchorEl, setAnchorEl] = useState(null)
 
@@ -36,7 +37,7 @@ export default function PopoutSidebar({setFilters, filters}:Props) {
                 <Paper elevation={3} className={`${styles['sidebar']} ${styles['popup']}`}>
                     <ClickAwayListener onClickAway={handleClose}>
                         <div>
-                            <SideBar setFilters={setFilters} filters={filters} closePopup={handleClose} />    
+                            <SideBar signedIn={signedIn} setFilters={setFilters} filters={filters} closePopup={handleClose} />    
                         </div> 
                     </ClickAwayListener>
                 </Paper>

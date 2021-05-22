@@ -122,7 +122,7 @@ export default function Main({items:libraryItems, query, settings:initialSetting
                                 <DisplayPanel items={displayItems} settings={settings} />}
                             </NoSsr>
                             <aside className={styles['popout-sidebar']}>
-                                <PopoutSidebar setFilters={setFilters} filters={filters} />
+                                <PopoutSidebar setFilters={setFilters} filters={filters} signedIn={!!favorites} />
                             </aside> 
                         </section>
                     </main>
