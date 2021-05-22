@@ -78,7 +78,7 @@ export default function Main({books}:Props) {
                         <div data-testid="listitem-container" key={book._id}>
                             <ListItem title={book.title} subtitle={book.authors.map((author, i) => (
                                 author.firstName + ' ' + author.lastName
-                            )).join(', ')} image={book.image} link={{href: '/library/books/[id]', as: `/library/books${book._id}`}} />
+                            )).join(', ')} image={book.image} link={{href: '/library/books/[id]', as: `/library/books/${book._id}`}} />
                         </div>
                     ))}
             </Box>}
