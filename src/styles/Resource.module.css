@@ -21,9 +21,13 @@
 .content {
     grid-column: 1 / -1;
     padding: 2rem 1rem 0;
+    
+    margin-bottom: 2rem;
+}
+
+.content > .general-info {
     display: flex;
     align-items: stretch;
-    margin-bottom: 2rem;
 }
 
 .footer {
@@ -64,7 +68,7 @@
 
 @media (max-width: 960px) {
 
-    .content {
+    .content > .general-info {
         flex-direction: column;
     }
 
