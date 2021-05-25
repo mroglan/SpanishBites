@@ -58,3 +58,12 @@ export const getAuthor = async (id:string) => {
 
     return author
 }
+
+export const getPremiumInfo = async (id:string) => {
+
+    const author:DBUnpopulatedAuthor = await client.query(
+        q.Get(q.Ref(q.Collection('authors'), id))
+    )
+
+    return {detailedInfo: author.data.detailedInfo}
+}
