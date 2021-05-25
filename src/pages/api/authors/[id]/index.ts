@@ -1,5 +1,5 @@
 import { NextApiResponse, NextApiRequest } from "next";
-import {getAuthor} from '../../../utils/authors'
+import {getAuthor} from '../../../../utils/authors'
 
 export default async function GetAuthor(req:NextApiRequest, res:NextApiResponse) {
 
