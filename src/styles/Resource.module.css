@@ -21,7 +21,6 @@
 .content {
     grid-column: 1 / -1;
     padding: 2rem 1rem 0;
-    
     margin-bottom: 2rem;
 }
 
@@ -39,6 +38,17 @@
 
 .content-container {
     flex-basis: 60%;
+}
+
+.detailed-info {
+    background: #fff;
+    width: 100%;
+}
+
+.title-container {
+    display: inline-block;
+    border-bottom: 3px solid hsl(229, 100%, 58%);
+    padding-right: 8px;
 }
 
 
