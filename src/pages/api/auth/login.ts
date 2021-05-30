@@ -48,7 +48,7 @@ export default async function Login(req:NextApiRequest, res:NextApiResponse) {
             username: user.username,
             email,
             premiumExpiration: user.premiumExpiration,
-            preview: user.previews,
+            previews: user.previews,
             image: user.image || '',
             name: user.name
         }
