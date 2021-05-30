@@ -186,7 +186,7 @@ interface Passage {
 export interface DBPassage {
     ref: Ref;
     ts: number;
-    data: {book: DBUnpopulatedBook; }
+    data: Passage & {book: DBUnpopulatedBook; };
 }
 
 export interface OrganizedDBPassage extends Passage {
