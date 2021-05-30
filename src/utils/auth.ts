@@ -60,6 +60,9 @@ export const verifyUser = (fn:NextApiHandler) => (req:NextApiRequest, res:NextAp
 }
 
 export const verifyPremiumUser = (fn:NextApiHandler) => (req:NextApiRequest, res:NextApiResponse) => {
+    // when adding preview functionality:
+    // if user has premium, pass true for req.body.hasPremium
+    // if not, pass false and then check if user has preview for item in callback function
     return new Promise<void>(resolve => {
         jwt.verify(req.cookies.auth, process.env.SIGNATURE, async (err, decoded) => {
             if(err || !decoded) {
