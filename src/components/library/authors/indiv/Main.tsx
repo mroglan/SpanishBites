@@ -36,8 +36,6 @@ export default function Main({author}:Props) {
         return !!favorites.find(fav => fav.id === author._id)
     }, [isValidating, favorites])
 
-    console.log(premiumInfo)
-
     return (
         <>
             <div className={styles['general-info']}>
