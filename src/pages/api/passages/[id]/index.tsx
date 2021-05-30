@@ -1,5 +1,5 @@
 import { NextApiResponse, NextApiRequest } from "next";
-import {getPassage} from '../../../utils/passages'
+import {getPassage} from '../../../../utils/passages'
 
 export default async function GetPassage(req:NextApiRequest, res:NextApiResponse) {
 
