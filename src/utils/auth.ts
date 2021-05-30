@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import Router from 'next/router'
 import {parseCookies} from 'nookies'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 export const decodeUser = (auth:string) => {
     return new Promise((res) => {
@@ -46,6 +47,26 @@ export const verifyUser = (fn:NextApiHandler) => (req:NextApiRequest, res:NextAp
     return new Promise<void>(resolve => {
         jwt.verify(req.cookies.auth, process.env.SIGNATURE, async (err, decoded) => {
             if(err || !decoded) {
+                res.status(401).json({msg: 'YOU CANNOT PASS'})
+                return resolve()
+            }
+            if(req.method !== 'GET') {
+                req.body.jwtUser = decoded
+            }
+            await fn(req, res)
+            return resolve()
+        })
+    })
+}
+
+export const verifyPremiumUser = (fn:NextApiHandler) => (req:NextApiRequest, res:NextApiResponse) => {
+    return new Promise<void>(resolve => {
+        jwt.verify(req.cookies.auth, process.env.SIGNATURE, async (err, decoded) => {
+            if(err || !decoded) {
+                res.status(401).json({msg: 'YOU CANNOT PASS'})
+                return resolve()
+            }
+            if(!decoded.premiumExpiration || dayjs(decoded.premiumExpiration).diff(dayjs(), 'day') < 0) {
                 res.status(401).json({msg: 'YOU CANNOT PASS'})
                 return resolve()
             }
