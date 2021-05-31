@@ -80,3 +80,15 @@ export const getPassage = async (id:string) => {
 
     return passage
 }
+
+export const getPremiumInfo = async (id:string) => {
+
+    const passage:DBPassage = await client.query(
+        q.Get(q.Ref(q.Collection('passages'), id))
+    )
+
+    return {
+        annotations: passage.data.annotations,
+        commentary: passage.data.commentary
+    }
+}
