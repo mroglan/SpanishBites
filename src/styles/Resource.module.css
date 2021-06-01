@@ -43,6 +43,7 @@
 .detailed-info {
     background: #fff;
     width: 100%;
+    max-width: 90ch;
 }
 
 .title-container {
@@ -110,23 +111,32 @@
 /* PASSAGE */
 
 .passage-main {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto; /* no clue why auto-fill isn't working */
     margin: 0 1rem;
-    min-height: 100%;
+    gap: 10px;
+}
+
+.passage-basic-info {
+    grid-column: 1/ -1;
 }
 
 .passage-text-container {
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    max-width: 90ch;
+    width: 90ch;
+}
+
+.passage-content {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.passage-content > div {
+    margin-right: 2rem;
+    margin-bottom: 2rem;
 }
 
 .passage-premium-container {
-    flex-grow: 1;
-    min-height: 100%;
+    
 }
 
 .passage-display-tab-container {
