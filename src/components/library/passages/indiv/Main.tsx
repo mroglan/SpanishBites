@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react'
-import {Box, Typography, Divider} from '@material-ui/core'
+import {Box, Typography, Divider, NoSsr} from '@material-ui/core'
 import Link from 'next/link'
 import styles from '../../../../styles/Resource.module.css'
 import {SecondaryLink} from '../../../items/links'
@@ -21,6 +21,8 @@ export default function Main({passage}:Props) {
 
     const {data: favorites, isValidating}:{data?:GeneralItem[];isValidating:boolean} = useSWR('/api/favorites', {shouldRetryOnError: false})
 
+    const {data:premiumInfo}:{data?:{annotations:string;commentary:string;}} = useSWR(`/api/passages/${passage._id}/premium`, {shouldRetryOnError: false})
+
     const [loading, setLoading] = useState(false)
 
     const changeFavStatus = async (status:boolean) => {
@@ -37,7 +39,7 @@ export default function Main({passage}:Props) {
 
     return (
         <div className={styles['passage-main']}>
-            <div className={styles['passage-text-container']}>
+            <div className={styles['passage-basic-info']}>
                 <Box>
                     <Typography variant="h4">
                         {passage.name}
@@ -84,12 +86,14 @@ export default function Main({passage}:Props) {
                         </GoldSecondaryButton>}
                     </Box>
                 </>}
-                <Box flexGrow={1} width="90ch">
-                    <PassageDisplay englishText={passage.englishText} spanishText={passage.spanishText} vocab={passage.vocab} />
-                </Box>
             </div>
-            <div className={styles['passage-premium-container']}>
-                <PremiumDisplay />
+            <div className={styles['passage-content']}>
+                <div className={styles['passage-text-container']}>
+                    <Box >
+                        <PassageDisplay englishText={passage.englishText} spanishText={passage.spanishText} vocab={passage.vocab} />
+                    </Box>
+                </div>
+                <PremiumDisplay info={premiumInfo} />
             </div>
         </div>
     )
