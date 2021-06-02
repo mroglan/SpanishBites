@@ -18,7 +18,8 @@ interface Props {
 const navItems = [
     {name: 'About', link: '/about'},
     {name: 'Book Club', link: '/bookclub'},
-    {name: 'Library', link: '/library'}
+    {name: 'Library', link: '/library'},
+    {name: 'Premium', link: '/premium'}
 ]
 
 function HeaderContent({user, bg}) {
