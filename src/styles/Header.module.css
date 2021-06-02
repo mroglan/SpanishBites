@@ -30,7 +30,7 @@
     display: none;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 815px) {
     .large-screen-content {
         display: none;
     }
