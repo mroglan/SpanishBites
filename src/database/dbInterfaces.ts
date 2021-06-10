@@ -1,6 +1,6 @@
 import {query as q} from 'faunadb'
 
-interface Ref {
+export interface Ref {
     ref: typeof q.Collection;
     id: string;
 }
@@ -384,4 +384,27 @@ export interface ContactMessage {
     email: string;
     type: string;
     message: string;
+}
+
+
+export interface BlogPost {
+    title: string;
+    subtitle: string;
+    content: string;
+    releaseDate: string;
+    keyWords: string[];
+}
+
+export interface DBBlogPost {
+    ref: Ref;
+    ts: number;
+    data: BlogPost;
+}
+
+export interface OrganizedDBBlogPost extends BlogPost {
+    _id: string;
+}
+
+export interface ClientBlogPost extends BlogPost {
+    _id: string;
 }
