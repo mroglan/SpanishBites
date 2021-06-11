@@ -1,11 +1,11 @@
 import React from 'react'
-import { ClientBlogPost } from '../../../database/dbInterfaces';
+import { ClientBlogPost } from '../../../../database/dbInterfaces';
 import {Box, Typography, Paper} from '@material-ui/core'
-import TextDisplay from '../../mui-rte/TextDisplay'
-import BlogTextDisplay from '../../mui-rte/BlogTextDisplay'
+import TextDisplay from '../../../mui-rte/TextDisplay'
+import BlogTextDisplay from '../../../mui-rte/BlogTextDisplay'
 import dayjs from 'dayjs'
-import styles from '../../../styles/Blog.module.css'
-import { Bite } from '../../items/bites';
+import styles from '../../../../styles/Blog.module.css'
+import { Bite } from '../../../items/bites';
 
 interface Props {
     post: ClientBlogPost;
