@@ -26,7 +26,7 @@ export default function BlogPost({post}:Props) {
     return (
         <>
             <Head>
-                <title>{post.title} | Spanish Bites Blog</title>
+                <title>{post.title} | Maria Carmen Blog</title>
             </Head>
             <div className={styles.root}>
                 <div className={styles.header}>
