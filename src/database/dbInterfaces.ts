@@ -5,6 +5,8 @@ export interface Ref {
     id: string;
 }
 
+export type FaunaDate = typeof q.Date;
+
 export interface Event {
     title: string;
     desc: string;
@@ -408,3 +410,5 @@ export interface OrganizedDBBlogPost extends BlogPost {
 export interface ClientBlogPost extends BlogPost {
     _id: string;
 }
+
+export type BlogPostDate = [FaunaDate, Ref]
