@@ -9,7 +9,7 @@ import styles from '../../../../styles/Basic.module.css'
 import { ClientBlogPost } from '../../../../database/dbInterfaces'
 import MainHeader from '../../../../components/nav/MainHeader'
 import MainFooter from '../../../../components/nav/MainFooter'
-import Main from '../../../../components/blog/indiv/Main'
+import Main from '../../../../components/maria/blog/indiv/Main'
 
 interface Props {
     post: ClientBlogPost;
