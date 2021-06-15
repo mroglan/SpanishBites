@@ -9,8 +9,14 @@ describe('SearchPanel', () => {
     const setFilters = jest.fn(val => null)
     const setSearch = jest.fn(val => null)
     const filters:any = {}
+    const settings = {
+        viewMode: 'carousel',
+        transitions: true
+    }
+    const setSettings = jest.fn(val => null)
 
-    const wrapper = shallow(<SearchPanel search={search} setFilters={setFilters} setSearch={setSearch} filters={filters} />)
+    const wrapper = shallow(<SearchPanel settings={settings} search={search} setSettings={setSettings}
+         setFilters={setFilters} setSearch={setSearch} filters={filters} />)
 
     it('Displays filters dropdown when prompted', () => {
         wrapper.find('[data-testid="filters-dropdown-btn"]').simulate('click')

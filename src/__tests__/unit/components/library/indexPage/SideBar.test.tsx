@@ -9,7 +9,7 @@ describe('SideBar', () => {
     const setFilters = jest.fn(val => null)
     const closePopup = jest.fn(() => null)
 
-    const wrapper = shallow(<SideBar setFilters={setFilters} />)
+    const wrapper = shallow(<SideBar filters={initialFilters} signedIn={false} setFilters={setFilters} />)
 
     it('Calls setFilters on selection', () => {
         wrapper.find('[data-testid="sidebar-authors"]').simulate('click')
@@ -21,7 +21,7 @@ describe('SideBar', () => {
         expect(setFilters).toHaveBeenCalledWith({...initialFilters, bite: true})
     })
 
-    const popupWrapper = shallow(<SideBar setFilters={setFilters} closePopup={closePopup} />)
+    const popupWrapper = shallow(<SideBar filters={initialFilters} signedIn={false} setFilters={setFilters} closePopup={closePopup} />)
 
     it('Calls closePopup on selection', () => {
         popupWrapper.find('[data-testid="sidebar-passages"]').simulate('click')
