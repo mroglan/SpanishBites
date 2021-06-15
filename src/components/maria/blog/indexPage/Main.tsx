@@ -39,7 +39,8 @@ export default function Main({posts}:Props) {
                             <Link key={i} href="/maria/blog/[date]" as={`/maria/blog/${post.releaseDate}`}>
                                 <a>
                                     <Box style={{cursor: 'pointer'}} my={3}>
-                                        <animated.div onMouseEnter={() => animateLarger(i)} onMouseLeave={() => animateSmaller()}
+                                        <animated.div data-testid="post-container" 
+                                        onMouseEnter={() => animateLarger(i)} onMouseLeave={() => animateSmaller()}
                                             style={{transform: springs[i].scale.interpolate(s => `scale(${s})`)}}>
                                             <Paper elevation={3}>
                                                 <Box px={2} py={1}>
