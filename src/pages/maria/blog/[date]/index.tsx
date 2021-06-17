@@ -10,6 +10,7 @@ import { ClientBlogPost } from '../../../../database/dbInterfaces'
 import MainHeader from '../../../../components/nav/MainHeader'
 import MainFooter from '../../../../components/nav/MainFooter'
 import Main from '../../../../components/maria/blog/indiv/Main'
+import dayjs from 'dayjs'
 
 interface Props {
     post: ClientBlogPost;
@@ -48,6 +49,8 @@ export const getStaticProps:GetStaticProps = async (ctx:GetStaticPropsContext) =
     try {
 
         const date = ctx.params.date as string
+
+        if(dayjs().diff(dayjs(date)) < 0) throw 'the future is not now'
 
         const post = await getPostFromReleaseDate(date)
 
