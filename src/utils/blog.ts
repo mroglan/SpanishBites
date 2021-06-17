@@ -46,13 +46,28 @@ export const getInitialRecentBlogPosts = async () => {
     ) : undefined
 
     const releasedPosts:{data:BlogPostDate[]} = await client.query(
-        q.Paginate(q.Match(q.Index('all_blogPosts_by_date')), {size: 10, after: closestPost})
+        q.Paginate(q.Match(q.Index('all_blogPosts_by_date')), {size: 11, after: closestPost})
     )
 
     if(closestPost) releasedPosts.data.splice(0, 1)
 
     const posts:DBBlogPost[] = await client.query(
         q.Map(releasedPosts.data, q.Lambda('item', q.Get(q.Select(1, q.Var('item')))))
+    )
+
+    return posts.map(post => ({...post.data, _id: post.ref.id}))
+}
+
+export const loadMoreBlogPosts = async (after:BlogPostDate) => {
+
+    const dates:{data:BlogPostDate[]} = await client.query(
+        q.Paginate(q.Match(q.Index('all_blogPosts_by_date')), {size: 11, after})
+    )
+
+    dates.data.splice(0, 1)
+
+    const posts:DBBlogPost[] = await client.query(
+        q.Map(dates.data, q.Lambda('item', q.Get(q.Select(1, q.Var('item')))))
     )
 
     return posts.map(post => ({...post.data, _id: post.ref.id}))
