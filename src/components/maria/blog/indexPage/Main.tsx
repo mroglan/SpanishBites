@@ -1,21 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { ClientBlogPost } from '../../../../database/dbInterfaces'
 import styles from '../../../../styles/Blog.module.css'
 import {Box, Paper, Typography, Grid} from '@material-ui/core'
 import BlogTextDisplay from '../../../mui-rte/BlogTextDisplay'
 import dayjs from 'dayjs'
-import {BlueDenseButton} from '../../../items/buttons'
+import {BluePrimaryButton} from '../../../items/buttons'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { useSprings, animated } from 'react-spring'
 import Link from 'next/link'
+import axios from 'axios'
 
 interface Props {
     posts: ClientBlogPost[];
 }
 
-export default function Main({posts}:Props) {
+export default function Main({posts:dbPosts}:Props) {
+
+    const [posts, setPosts] = useState(dbPosts)
 
     const [springs, setSprings] = useSprings<any>(posts.length, p => ({scale: 1}))
+
+    const [loadingMore, setLoadingMore] = useState(false)
+    const [morePostsToLoad, setMorePostsToLoad] = useState(dbPosts.length === 10)
 
     const animateLarger = (index:number) => {
         setSprings(i => {
@@ -28,6 +34,25 @@ export default function Main({posts}:Props) {
         setSprings(i => {
             return {scale: 1}
         })
+    }
+
+    const loadMore = async () => {
+        setLoadingMore(true)
+        
+        const afterPost = [posts[posts.length - 1].releaseDate, posts[posts.length - 1]._id]
+
+        try {
+            const {data:newPosts} = await axios({
+                method: 'POST',
+                url: '/api/maria/blog/load-more-posts',
+                data: {afterPost}
+            })
+
+            if(newPosts.length < 10) setMorePostsToLoad(false)
+            setPosts([...posts, ...newPosts])
+        } catch(e) {}
+
+        setLoadingMore(false)
     }
 
     return (
@@ -87,6 +112,13 @@ export default function Main({posts}:Props) {
                             </Link>
                         ))}
                     </div>
+                    {morePostsToLoad && <Box my={2} pb={2}>
+                        <Box mx="auto" maxWidth={300} textAlign="center">
+                            <BluePrimaryButton onClick={() => loadMore()} disabled={loadingMore} fullWidth>
+                                Load More
+                            </BluePrimaryButton>
+                        </Box>
+                    </Box>}
                 </Box>
             </div>
         </div>
