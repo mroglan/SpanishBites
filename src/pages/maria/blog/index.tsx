@@ -38,5 +38,5 @@ export const getStaticProps:GetStaticProps = async () => {
 
     const posts = await getInitialRecentBlogPosts()
 
-    return {props: {posts: JSON.parse(JSON.stringify(posts))}}
+    return {props: {posts: JSON.parse(JSON.stringify(posts))}, revalidate: 1800}
 }
