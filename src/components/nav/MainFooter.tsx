@@ -37,13 +37,6 @@ export default function MainFooter() {
                                 </a>
                             </Link>
                         </Box>
-                        <Box pl="42px">
-                            <a href="mailto:maria@spanishbit.es">
-                                <SecondaryLink variant="body1">
-                                    maria@spanishbit.es
-                                </SecondaryLink>
-                            </a>
-                        </Box>
                     </Grid>
                     <Grid item>
                         <Box mt="5px" mb={1}>
@@ -72,6 +65,31 @@ export default function MainFooter() {
                                         Círculo de Lectores
                                     </SecondaryLink>
                                 </a>
+                            </Box>
+                        </Box>
+                    </Grid>
+                    <Grid item>
+                        <Box mt="5px" mb={1}>
+                            <Typography variant="h5">
+                                Maria
+                            </Typography>
+                        </Box>
+                        <Box>
+                            <Box>
+                                <a href="mailto:maria@spanishbit.es">
+                                    <SecondaryLink variant="body1">
+                                        maria@spanishbit.es
+                                    </SecondaryLink>
+                                </a>
+                            </Box>
+                            <Box>
+                                <Link href="/maria/blog">
+                                    <a>
+                                        <SecondaryLink variant="body1">
+                                            Blog
+                                        </SecondaryLink>
+                                    </a>
+                                </Link>
                             </Box>
                         </Box>
                     </Grid>

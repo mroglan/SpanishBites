@@ -1,0 +1,42 @@
+
+.post-container, .bb-container {
+    position: relative;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.post-container::before, .post-container::after, .bb-container::before, .bb-container::after {
+    content: " ";
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 15px;
+}
+
+.post-container::before, .bb-container::before {
+    box-shadow: -15px 0 10px -15px inset hsl(229, 100%, 58%);
+    left: -15px;
+}
+
+.post-container::after, .bb-container::after {
+    box-shadow: 15px 0 10px -15px inset hsl(229, 100%, 58%);
+    right: -15px;
+}
+
+
+.full-container {
+    background: url('/background/castle.png');
+    background-size: auto 1000px;
+}
+
+.full-container > div {
+    background-color:hsla(50, 100%, 97%, .6);
+}
+
+.content-container {
+    background: hsl(50, 100%, 97%);
+}
+
+.post-list-container {
+    background: hsla(50, 100%, 97%, .6);
+}
