@@ -1,0 +1,39 @@
+
+/* BASIC */
+
+.catamaran {
+    font-family: 'Catamaran' !important;
+}
+
+/* ENTRY BANNER */
+
+.entry-content-container {
+    background: hsl(50, 100%, 90%);
+    padding-right: 100px;
+    position: relative;
+}
+
+.entry-content-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 100px solid transparent;
+    border-bottom: 100px solid transparent;
+    border-right: 100px solid hsl(50, 100%, 97%);
+}
+
+.entry-img-carousel-item {
+    border: 25px solid hsl(50, 100%, 97%);
+    position: relative;
+    top: -50px;
+    border-radius: 50%;
+}
+
+.entry-title {
+    font-size: 3.5rem !important;
+    line-height: 1.3 !important;
+}
+
