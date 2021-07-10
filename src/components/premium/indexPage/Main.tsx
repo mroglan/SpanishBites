@@ -1,5 +1,6 @@
 import React from 'react'
 import EntryBanner from './EntryBanner'
+import PrimaryReasons from './PrimaryReasons'
 
 export default function Main() {
 
@@ -7,6 +8,9 @@ export default function Main() {
         <div>
             <div>
                 <EntryBanner />
+            </div>
+            <div>
+                <PrimaryReasons />
             </div>
         </div>
     )
