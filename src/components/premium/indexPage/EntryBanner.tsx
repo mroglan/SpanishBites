@@ -6,7 +6,7 @@ export default function EntryBanner() {
 
     return (
         <div>
-            <Box mt={3} py={3}>
+            <Box mt={3} mb={4} py={3}>
                 <Box className={styles['entry-content-container']}>
                     <Box mx="auto" maxWidth={1000} minHeight={200}>
                         <Grid container wrap="nowrap" alignItems="center">
