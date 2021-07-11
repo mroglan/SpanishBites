@@ -231,7 +231,7 @@ export interface User {
     premiumExpiration: string;
     previews: GeneralItem[];
     recentlyViewed: GeneralItem[];
-    image?: {src:string;deletToken:string};
+    image?: {src:string;deletToken:string;};
     favorites?: GeneralItem[];
 }
 
@@ -251,7 +251,7 @@ export interface ClientCookieUser {
     email: string;
     premiumExpeiration: string;
     preview: GeneralItem[];
-    image: string;
+    image: {src:string;deleteToken:string;};
     _id: string;
 }
 
