@@ -231,7 +231,7 @@ export interface User {
     premiumExpiration: string;
     previews: GeneralItem[];
     recentlyViewed: GeneralItem[];
-    image: string;
+    image?: {src:string;deletToken:string};
     favorites?: GeneralItem[];
 }
 
