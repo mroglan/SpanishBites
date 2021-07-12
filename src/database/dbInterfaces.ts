@@ -224,7 +224,6 @@ export interface GeneralItem {
 export interface UserImage {
     src: string;
     publicId: string;
-    version: number;
 }
 
 export interface User {
