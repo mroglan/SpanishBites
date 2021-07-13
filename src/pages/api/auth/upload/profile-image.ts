@@ -31,7 +31,7 @@ export default async function ProfileImage(req:NextApiRequest, res:NextApiRespon
 
         const {files} = await new Promise((resolve, reject) => {
             form.parse(req, (err, fields, files) => {
-                if(err || !files.file.path) reject('error uploading file')
+                if(err || !files?.file?.path) reject('error uploading file')
                 if(files.file.type.substring(0, 5) !== 'image') reject('this is not an image')
                 resolve({files})
             })
