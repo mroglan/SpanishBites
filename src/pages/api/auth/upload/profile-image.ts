@@ -40,7 +40,8 @@ export default async function ProfileImage(req:NextApiRequest, res:NextApiRespon
             cloudinary.uploader.upload(files.file.path, {
                 upload_preset: user.image?.publicId ? undefined : 'SBProfilePics',
                 public_id: user.image?.publicId || undefined,
-                overwrite: Boolean(user.image?.publicId)
+                overwrite: Boolean(user.image?.publicId),
+                invalidate: true
             }, (err, result) => {
                 if(err) reject('error uploading to cloudinary')
                 resolve(result)
