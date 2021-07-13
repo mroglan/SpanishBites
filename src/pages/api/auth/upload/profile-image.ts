@@ -65,7 +65,7 @@ export default async function ProfileImage(req:NextApiRequest, res:NextApiRespon
             path: '/'
         })
 
-        return res.status(200).json({msg: 'picture updated'})
+        return res.status(200).json({src: result.secure_url})
     } catch(e) {    
         return res.status(500).json({msg: 'Internal server error'})
     }
