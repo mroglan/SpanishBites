@@ -48,8 +48,6 @@ export default async function ProfileImage(req:NextApiRequest, res:NextApiRespon
             })
         })
 
-        if(user.image) return res.status(200).json({src: result.secure_url})
-
         await updateUserProfileImage(user._id, {
             src: result.secure_url,
             publicId: result.public_id
