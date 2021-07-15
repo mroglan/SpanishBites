@@ -1,4 +1,16 @@
 
+/* BASIC */
+
+.catamaran {
+    font-family: 'Catamaran';
+}
+
+/* MAIN */
+
+.root {
+    display: grid;
+    grid-template-columns: minmax(370px, .5fr) minmax(500px, 1fr);
+}
 
 /* PROFILE PIC */
 
