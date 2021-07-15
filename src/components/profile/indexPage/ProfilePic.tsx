@@ -20,8 +20,10 @@ export default function ProfilePic({user}:Props) {
     const handleFileUpload = async (e) => {
         setLoading(true)
         const file = e.target.files[0]
-        const image = await uploadImage(file)
-        setImgSrc(image.src)
+        try {
+            const image = await uploadImage(file)
+            setImgSrc(image.src)
+        } catch(e) {}
         setLoading(false)
     }
 
