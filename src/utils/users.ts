@@ -2,7 +2,7 @@ import {client} from '../database/fauna-db'
 import {query as q} from 'faunadb'
 import {NextApiRequest} from 'next'
 import jwt from 'jsonwebtoken'
-import {GeneralItem, OrganizedDBUser, DBUser, ClientCookieUser, RecentlyViewedItem} from '../database/dbInterfaces'
+import {GeneralItem, OrganizedDBUser, DBUser, ClientCookieUser, RecentlyViewedItem, UserImage} from '../database/dbInterfaces'
 
 interface UserInfo {
     name: string;
@@ -87,6 +87,25 @@ export const updateUserPassword = async (id:string, password:string) => {
 
     await client.query(
         q.Update(q.Ref(q.Collection('users'), id), {data: {password}})
+    )
+}
+
+interface UserInfoValues {
+    name: string;
+    username: string;
+}
+
+export const updateBasicUserInfo = async (id:string, values:UserInfoValues) => {
+
+    await client.query(
+        q.Update(q.Ref(q.Collection('users'), id), {data: {...values}})
+    )
+}
+
+export const updateUserProfileImage = async (id:string, image:UserImage) => {
+
+    await client.query(
+        q.Update(q.Ref(q.Collection('users'), id), {data: {image}})
     )
 }
 

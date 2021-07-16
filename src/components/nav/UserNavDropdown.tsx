@@ -48,7 +48,7 @@ export default function UserNavDropdown({user}:Props) {
 
     return (
         <div className={classes.root}>
-            <Avatar alt={user.name} className={classes.avatar} src={user.image || '/no-profile.jpg'} onClick={(e) => handleAvatarClick(e)} />
+            <Avatar alt={user.name} className={classes.avatar} src={user.image?.src || '/no-profile.jpg'} onClick={(e) => handleAvatarClick(e)} />
             <Popper style={{zIndex: 2500}} open={Boolean(anchorEl)} anchorEl={anchorEl} role="nav" transition placement="bottom-end">
                 <Paper elevation={3} >
                     <ClickAwayListener onClickAway={handleClose}>

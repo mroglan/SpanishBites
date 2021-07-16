@@ -221,6 +221,11 @@ export interface GeneralItem {
     id: string;
 }
 
+export interface UserImage {
+    src: string;
+    publicId: string;
+}
+
 export interface User {
     username: string;
     name: string;
@@ -231,7 +236,7 @@ export interface User {
     premiumExpiration: string;
     previews: GeneralItem[];
     recentlyViewed: GeneralItem[];
-    image: string;
+    image?: UserImage;
     favorites?: GeneralItem[];
 }
 
@@ -251,7 +256,7 @@ export interface ClientCookieUser {
     email: string;
     premiumExpeiration: string;
     preview: GeneralItem[];
-    image: string;
+    image: UserImage;
     _id: string;
 }
 
