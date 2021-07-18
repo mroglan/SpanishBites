@@ -46,7 +46,7 @@ export default function BasicInfo({user}:Props) {
     }
 
     return (
-        <div>
+        <div className={styles['basicinfo-root']}>
             <Box maxWidth={700}>
                 <Bite>
                     <Paper elevation={3}>
