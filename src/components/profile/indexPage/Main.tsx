@@ -11,8 +11,6 @@ interface Props {
 
 export default function Main({user}:Props) {
 
-    console.log(user)
-
     return (
         <div>
             <Box mt={3} mx={3}>

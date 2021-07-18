@@ -63,7 +63,6 @@ export const theme = createMuiTheme({
     },
     background: {
       default: 'hsl(50, 100%, 97%)',
-      // darker: hsl(50, 100%, 80%)
       paper: '#fff'
     },
     gold: {
