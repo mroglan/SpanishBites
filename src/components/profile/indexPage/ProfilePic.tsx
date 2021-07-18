@@ -28,7 +28,7 @@ export default function ProfilePic({user}:Props) {
     }
 
     return (
-        <div>
+        <div className={styles['pic-root']}>
             <Box maxWidth={400}>
                 <Box className={styles['pic-container']}>
                     <Avatar src={imgSrc || '/no-profile.jpg'} className={styles['pic-avatar']} />

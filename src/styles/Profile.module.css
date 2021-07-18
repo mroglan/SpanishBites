@@ -12,6 +12,28 @@
     grid-template-columns: minmax(370px, .5fr) minmax(500px, 1fr);
 }
 
+@media only screen and (max-width: 950px) {
+    .root {
+        grid-template-columns: minmax(370px, .5fr) minmax(400px, 1fr);
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .root {
+        grid-template-columns: 1fr;
+    }
+    .pic-root {
+        margin-bottom: 2rem;
+    }
+    .pic-root > div {
+        margin: auto;
+    }
+    .basicinfo-root {
+        width: clamp(200px, 100%, 500px);
+        margin: auto;
+    }
+}
+
 /* PROFILE PIC */
 
 .pic-container {
