@@ -10,7 +10,7 @@ export default function EntryBanner() {
                 <Box className={styles['entry-content-container']}>
                     <Box mx="auto" maxWidth={1000} minHeight={200}>
                         <Grid container wrap="nowrap" alignItems="center">
-                            <Grid item>
+                            <Grid item className={styles['entry-visual-grid-item']}>
                                 <Box height={200}>
                                     <Box className={styles['entry-img-carousel-item']}>
                                         <img height={250} src="/premium/authors/cervantes with shades.png" />

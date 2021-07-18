@@ -16,7 +16,7 @@
 .entry-content-container::before {
     content: "";
     position: absolute;
-    top: 0;
+    top: calc(50% - 100px);
     right: 0;
     width: 0;
     height: 0;
@@ -35,6 +35,19 @@
 .entry-title {
     font-size: 3.5rem !important;
     line-height: 1.3 !important;
+}
+
+@media only screen and (max-width: 500px) {
+    .entry-title {
+        font-size: 3rem !important;
+        line-height: 1.1 !important;
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+    .entry-visual-grid-item {
+        display: none;
+    }
 }
 
 /* PREMIUM REASONS */
