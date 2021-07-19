@@ -14,18 +14,22 @@ export const decodeUser = (auth:string) => {
     })
 }
 
-const redirectTo = (ctx:GetServerSidePropsContext, url:string) => {
+interface RedirectQuery {
+    goTo: string;
+}
+
+const redirectTo = (ctx:GetServerSidePropsContext, url:string, query?:RedirectQuery) => {
     if(!ctx.req) {
-        Router.replace('url')
+        Router.replace('url', {query: query ? {goTo: query.goTo} : undefined})
     } else {
         ctx.res.writeHead(302, {
-            Location: `${process.env.BASE_URL}${url}`
+            Location: `${process.env.BASE_URL}${url}?${query ? Object.entries(query)[0][0] + '=' + Object.entries(query)[0][1] : ''}`
         })
         ctx.res?.end()
     }
 }
 
-export async function ensureAuth(ctx:GetServerSidePropsContext) {
+export async function ensureAuth(ctx:GetServerSidePropsContext, query?:RedirectQuery) {
     try {
         const {auth} = parseCookies(ctx)
 
@@ -38,7 +42,7 @@ export async function ensureAuth(ctx:GetServerSidePropsContext) {
 
         return user
     } catch(e) {
-        redirectTo(ctx, '/login')
+        redirectTo(ctx, '/login', query)
         return {}
     }
 }
