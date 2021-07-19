@@ -6,9 +6,11 @@ import {Bite} from '../../items/bites'
 import Link from 'next/link'
 import {PrimaryLink, SecondaryLink} from '../../items/links'
 import axios from 'axios'
-import Router from 'next/router'
+import Router, {useRouter} from 'next/router'
 
 export default function Main() {
+
+    const {query} = useRouter()
 
     const onSubmit = async (values, actions) => {
         try {
@@ -19,7 +21,7 @@ export default function Main() {
             })
 
             Router.push({
-                pathname: '/dashboard'
+                pathname: query.goTo as string || '/dashboard'
             })
         } catch(e) {
             if(e.response.status === 403) {
