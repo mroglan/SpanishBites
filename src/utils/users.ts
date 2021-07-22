@@ -3,6 +3,7 @@ import {query as q} from 'faunadb'
 import {NextApiRequest} from 'next'
 import jwt from 'jsonwebtoken'
 import {GeneralItem, OrganizedDBUser, DBUser, ClientCookieUser, RecentlyViewedItem, UserImage} from '../database/dbInterfaces'
+import dayjs from 'dayjs'
 
 interface UserInfo {
     name: string;
@@ -150,4 +151,13 @@ export async function getRecentlyViewed(id:string) {
     )
 
     return recentlyViewed
+}
+
+export async function addPremium(id:string) {
+
+    const date = dayjs().add(1, 'year').format('YYYY-MM-DD')
+
+    await client.query(
+        q.Update(q.Ref(q.Collection('users'), id), {data: {premiumExpiration: date}})
+    )
 }
