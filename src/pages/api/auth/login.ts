@@ -50,7 +50,8 @@ export default async function Login(req:NextApiRequest, res:NextApiResponse) {
             premiumExpiration: user.premiumExpiration,
             previews: user.previews,
             image: user.image || '',
-            name: user.name
+            name: user.name,
+            customerId: user.customerId
         }
 
         const token = jwt.sign(claims, process.env.SIGNATURE, {expiresIn: '48hr'})
