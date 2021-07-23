@@ -238,6 +238,7 @@ export interface User {
     recentlyViewed: GeneralItem[];
     image?: UserImage;
     favorites?: GeneralItem[];
+    customerId?: string;
 }
 
 export interface DBUser {
