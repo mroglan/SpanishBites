@@ -259,6 +259,7 @@ export interface ClientCookieUser {
     preview: GeneralItem[];
     image: UserImage;
     _id: string;
+    customerId: string;
 }
 
 
