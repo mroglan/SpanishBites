@@ -161,3 +161,10 @@ export async function addPremium(id:string) {
         q.Update(q.Ref(q.Collection('users'), id), {data: {premiumExpiration: date}})
     )
 }
+
+export async function addCustomerId(id:string, cusId:string) {
+
+    await client.query(
+        q.Update(q.Ref(q.Collection('users'), id), {data: {customerId: cusId}})
+    )
+}
