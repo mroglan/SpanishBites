@@ -45,7 +45,7 @@ export default verifyUser(async function UpdateProfile(req:NextApiRequest, res:N
             preview: jwtUser.previews,
             image: jwtUser.image,
             name,
-            customerId: jwtUser.customerId
+            // customerId: jwtUser.customerId
         }
 
         const token = jwt.sign(claims, process.env.SIGNATURE, {expiresIn: '48hr'})
