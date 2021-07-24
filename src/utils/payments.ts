@@ -37,3 +37,14 @@ export async function getPaymentIntent(stripe:Stripe, user:OrganizedDBUser) {
         customer: cusId
     })
 }
+
+export async function getPaymentIntents(stripe:Stripe, user:OrganizedDBUser) {
+
+    if(!user.customerId) {
+        return null
+    }
+
+    return await stripe.paymentIntents.list({
+        customer: user.customerId
+    })
+}
