@@ -39,7 +39,7 @@ export default function CardInfo({vals, onSubmit}:Props) {
                         </Box>
                         <Box my={2}>
                             <FormGroup>
-                                <FormikTextField name="email" label="Email" InputProps={inputProps}
+                                <FormikTextField name="email" label="Email" disabled InputProps={inputProps}
                                 InputLabelProps={inputLabelProps} FormHelperTextProps={formHelperTextProps} />
                             </FormGroup>
                         </Box>
