@@ -34,7 +34,8 @@ export async function getPaymentIntent(stripe:Stripe, user:OrganizedDBUser) {
     return await stripe.paymentIntents.create({
         amount: 2999,
         currency: 'USD',
-        customer: cusId
+        customer: cusId,
+        description: 'Spanish Bites Premium'
     })
 }
 
