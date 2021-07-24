@@ -3,6 +3,9 @@ import Stripe from 'stripe'
 import { getPaymentIntents } from '../../../utils/payments'
 import { getUser, addPremium} from '../../../utils/users'
 import {verifyUser} from '../../../utils/auth'
+import dayjs from 'dayjs'
+import jwt from 'jsonwebtoken'
+import {setCookie} from 'nookies'
 
 export default verifyUser(async function AddPremium(req:NextApiRequest, res:NextApiResponse) {
 
@@ -29,6 +32,20 @@ export default verifyUser(async function AddPremium(req:NextApiRequest, res:Next
         }
 
         await addPremium(user._id)
+
+        const claims = {
+            ...req.body.jwtUser,
+            premiumExpiration: dayjs().add(1, 'year').format('YYYY-MM-DD')
+        }
+
+        const token = jwt.sign(claims, process.env.SIGNATURE) 
+
+        setCookie({res}, 'auth', token, {
+            secure: process.env.NODE_ENV !== 'development',
+            sameSite: true,
+            maxAge: 172800,
+            path: '/'
+        })
 
         return res.status(200).json({msg: 'added premium'})
     } catch(e) {
