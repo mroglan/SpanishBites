@@ -12,7 +12,7 @@ import Stripe from 'stripe'
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements} from '@stripe/react-stripe-js'
 import { parseCookies, setCookie } from 'nookies'
-import { getPaymentIntnet } from '../../../utils/payments'
+import { getPaymentIntent } from '../../../utils/payments'
 import { getUser } from '../../../utils/users'
 
 interface Props {
@@ -57,7 +57,7 @@ export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePro
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
         apiVersion: '2020-08-27'
     })
-    const paymentIntent = await getPaymentIntnet(stripe, user)
+    const paymentIntent = await getPaymentIntent(stripe, user)
 
    return {props: {user, paymentIntent}} 
 }

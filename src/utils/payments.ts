@@ -19,7 +19,7 @@ export const getCustomerId = async (stripe:Stripe, user:OrganizedDBUser) => {
     return customer.id
 }
 
-export async function getPaymentIntnet(stripe:Stripe, user:OrganizedDBUser) {
+export async function getPaymentIntent(stripe:Stripe, user:OrganizedDBUser) {
 
     const cusId = await getCustomerId(stripe, user)
 
