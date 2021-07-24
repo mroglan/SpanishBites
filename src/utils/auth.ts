@@ -4,6 +4,7 @@ import Router from 'next/router'
 import {parseCookies} from 'nookies'
 import axios from 'axios'
 import dayjs from 'dayjs'
+import { ClientCookieUser } from '../database/dbInterfaces'
 
 export const decodeUser = (auth:string) => {
     return new Promise((res) => {
@@ -29,11 +30,11 @@ const redirectTo = (ctx:GetServerSidePropsContext, url:string, query?:RedirectQu
     }
 }
 
-export async function ensureAuth(ctx:GetServerSidePropsContext, query?:RedirectQuery) {
+export async function ensureAuth(ctx:GetServerSidePropsContext, query?:RedirectQuery):Promise<ClientCookieUser> {
     try {
         const {auth} = parseCookies(ctx)
 
-        const user = await new Promise((res, rej) => {
+        const user:ClientCookieUser = await new Promise((res, rej) => {
             jwt.verify(auth, process.env.SIGNATURE, (err, decoded) => {
                 if(!err && decoded) res(decoded)
                 rej('Not Authenticated')
@@ -43,7 +44,7 @@ export async function ensureAuth(ctx:GetServerSidePropsContext, query?:RedirectQ
         return user
     } catch(e) {
         redirectTo(ctx, '/login', query)
-        return {}
+        return null 
     }
 }
 
