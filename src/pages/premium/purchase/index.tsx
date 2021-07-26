@@ -59,5 +59,5 @@ export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePro
     })
     const paymentIntent = await getPaymentIntent(stripe, user)
 
-   return {props: {user, paymentIntent}} 
+   return {props: {user: cookieUser, paymentIntent}} 
 }
