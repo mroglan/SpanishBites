@@ -19,7 +19,7 @@ interface RedirectQuery {
     goTo: string;
 }
 
-const redirectTo = (ctx:GetServerSidePropsContext, url:string, query?:RedirectQuery) => {
+export const redirectTo = (ctx:GetServerSidePropsContext, url:string, query?:RedirectQuery) => {
     if(!ctx.req) {
         Router.replace('url', {query: query ? {goTo: query.goTo} : undefined})
     } else {
