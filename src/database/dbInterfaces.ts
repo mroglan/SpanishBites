@@ -255,7 +255,7 @@ export interface ClientCookieUser {
     username: string;
     name: string;
     email: string;
-    premiumExpeiration: string;
+    premiumExpiration: string;
     preview: GeneralItem[];
     image: UserImage;
     _id: string;
