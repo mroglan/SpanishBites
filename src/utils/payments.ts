@@ -71,7 +71,7 @@ interface ProcessPaymentVals {
 }
 
 export async function processPayment({stripe, elements, paymentIntent}:ProcessPaymentBase, vals:ProcessPaymentVals,
-     type:string, states:ProcessPaymentStates) {
+     states:ProcessPaymentStates) {
 
         const {error, paymentIntent:resPaymentIntent} = await stripe.confirmCardPayment(paymentIntent.client_secret, {
             payment_method: {
@@ -92,7 +92,7 @@ export async function processPayment({stripe, elements, paymentIntent}:ProcessPa
             
             await axios({
                 method: 'POST',
-                url: `/api/premium/${type}`,
+                url: '/api/premium/add',
                 data: {paymentIntentId: resPaymentIntent.id }
             })
             

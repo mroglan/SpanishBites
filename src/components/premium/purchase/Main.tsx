@@ -33,7 +33,7 @@ export default function Main({user, paymentIntent}:Props) {
     const [success, setSuccess] = useState(false)
 
     const onSubmit = async (vals:FormValues, actions:FormikHelpers<FormValues>) => {
-        await processPayment({stripe, elements, paymentIntent}, vals, 'add', {setPayError, setPremiumError, setSuccess})
+        await processPayment({stripe, elements, paymentIntent}, vals, {setPayError, setPremiumError, setSuccess})
     }
 
     return (
