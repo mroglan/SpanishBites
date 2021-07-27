@@ -9,6 +9,7 @@ import axios from 'axios'
 import Stripe from 'stripe'
 import {Alert} from '@material-ui/lab'
 import Success from './Success'
+import {processPayment} from '../../../utils/payments'
 
 interface Props {
     user: ClientCookieUser;
@@ -32,36 +33,7 @@ export default function Main({user, paymentIntent}:Props) {
     const [success, setSuccess] = useState(false)
 
     const onSubmit = async (vals:FormValues, actions:FormikHelpers<FormValues>) => {
-       
-        const {error, paymentIntent:resPaymentIntent} = await stripe.confirmCardPayment(paymentIntent.client_secret, {
-            payment_method: {
-                card: elements.getElement(CardElement),
-                billing_details: {
-                    name: vals.name,
-                    email: vals.email
-                }
-            },
-        })
-
-        if(error) {
-            setPayError(true)
-            return
-        }
-
-        try {
-            
-            await axios({
-                method: 'POST',
-                url: '/api/premium/add',
-                data: {paymentIntentId: resPaymentIntent.id }
-            })
-            
-        } catch(e) {
-            setPremiumError(true)
-            return
-        }
-
-        setSuccess(true)
+        await processPayment({stripe, elements, paymentIntent}, vals, 'add', {setPayError, setPremiumError, setSuccess})
     }
 
     return (
