@@ -31,11 +31,14 @@ export default verifyUser(async function AddPremium(req:NextApiRequest, res:Next
             return res.status(400).json({msg: 'Payment intents not matching'})
         }
 
-        await addPremium(user._id)
+        const currExpiration = !user.premiumExpiration || dayjs().diff(user.premiumExpiration) > 0 ? dayjs().format('YYYY-MM-DD') : 
+        user.premiumExpiration 
+         
+        await addPremium(user._id, currExpiration)
 
         const claims = {
             ...req.body.jwtUser,
-            premiumExpiration: dayjs().add(1, 'year').format('YYYY-MM-DD')
+            premiumExpiration: dayjs(currExpiration).add(1, 'year').format('YYYY-MM-DD')
         }
 
         const token = jwt.sign(claims, process.env.SIGNATURE) 
