@@ -153,9 +153,9 @@ export async function getRecentlyViewed(id:string) {
     return recentlyViewed
 }
 
-export async function addPremium(id:string) {
+export async function addPremium(id:string, currExpiration:string) {
 
-    const date = dayjs().add(1, 'year').format('YYYY-MM-DD')
+    const date = dayjs(currExpiration).add(1, 'year').format('YYYY-MM-DD')
 
     await client.query(
         q.Update(q.Ref(q.Collection('users'), id), {data: {premiumExpiration: date}})
