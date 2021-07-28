@@ -11,10 +11,10 @@ interface Props {
 
 export default function RecentlyViewed({user}:Props) {
 
-    const {data:items} = useSWR(`/api/auth/userinfo/get-recently-viewed?user=${user._id}`, {initialData: []})
+    const {data:items} = useSWR(`/api/auth/userinfo/get-recently-viewed?user=${user._id}`)
 
     const formattedItems = useMemo(() => {
-        return items.map(item => {
+        return (items || []).map(item => {
             return {
                 type: item.type.substring(0, item.type.length - 1),
                 title: item.type === 'authors' ? item.firstName + ' ' + item.lastName : item.type === 'passages' ? item.name : item.title,
