@@ -50,9 +50,9 @@ export default function CardInfo({vals, onSubmit}:Props) {
                                 }
                             }}} />
                         </Box>
-                        <Box mt={4} maxWidth={200} mx="auto">
+                        <Box mt={4} maxWidth={300} mx="auto">
                             <BluePrimaryButton type="submit" fullWidth disabled={isSubmitting || isValidating} variant="contained">
-                                Proceed
+                                Purchase for $29.99 
                             </BluePrimaryButton>
                         </Box>
                     </Form>
