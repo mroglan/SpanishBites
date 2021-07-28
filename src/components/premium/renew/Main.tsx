@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useMemo} from 'react'
 import {FormikHelpers} from 'formik'
 import { ClientCookieUser } from '../../../database/dbInterfaces';
 import Stripe from 'stripe'
@@ -8,6 +8,8 @@ import {Box, Paper, Typography} from '@material-ui/core'
 import {Alert} from '@material-ui/lab'
 import CardInfo from '../../forms/CardInfo'
 import Success from './Success'
+import NotEligableForRenewal from './NotEligableForRenewal'
+import dayjs from 'dayjs'
 
 interface Props {
     user: ClientCookieUser;
@@ -20,6 +22,11 @@ interface FormValues {
 }
 
 export default function Main({user, paymentIntent}:Props) {
+
+    const eligableForRenewal = useMemo(() => {
+       if(dayjs(user.premiumExpiration).subtract(1, 'year').diff(dayjs()) > 0) return false
+       return true 
+    }, [user])
 
     const initialVals = {name: user.name, email: user.email}
 
@@ -56,7 +63,9 @@ export default function Main({user, paymentIntent}:Props) {
                                     Please contact maria@spanishbit.es to renew premium. 
                                 </Alert> 
                             </Box>}
-                            {success ? <Box maxWidth={500} mx="auto">
+                            {!eligableForRenewal ? <Box maxWidth={500} mx="auto">
+                                <NotEligableForRenewal />
+                            </Box> : success ? <Box maxWidth={500} mx="auto">
                                <Success /> 
                             </Box> : <Box maxWidth={500} mx="auto">
                                 <CardInfo vals={initialVals} onSubmit={onSubmit}  /> 
