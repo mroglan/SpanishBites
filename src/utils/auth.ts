@@ -4,7 +4,7 @@ import Router from 'next/router'
 import {parseCookies} from 'nookies'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import { ClientCookieUser } from '../database/dbInterfaces'
+import { ClientCookieUser, OrganizedDBUser } from '../database/dbInterfaces'
 
 export const decodeUser = (auth:string) => {
     return new Promise((res) => {
@@ -46,6 +46,12 @@ export async function ensureAuth(ctx:GetServerSidePropsContext, query?:RedirectQ
         redirectTo(ctx, '/login', query)
         return null 
     }
+}
+
+export function ensureNotPremium(ctx:GetServerSidePropsContext, user:OrganizedDBUser) {
+    if(!user.premiumExpiration) return
+    if(dayjs().diff(dayjs((user.premiumExpiration))) > 0) return
+    redirectTo(ctx, '/premium/renew')
 }
 
 export const verifyUser = (fn:NextApiHandler) => (req:NextApiRequest, res:NextApiResponse) => {

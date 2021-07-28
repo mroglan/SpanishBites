@@ -6,7 +6,7 @@ import Main from '../../../components/premium/purchase/Main'
 import styles from '../../../styles/Basic.module.css'
 import useSWR from 'swr'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { ensureAuth } from '../../../utils/auth'
+import { ensureAuth, ensureNotPremium } from '../../../utils/auth'
 import { ClientCookieUser } from '../../../database/dbInterfaces'
 import Stripe from 'stripe'
 import {loadStripe} from '@stripe/stripe-js'
@@ -53,6 +53,8 @@ export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePro
     const cookieUser:ClientCookieUser = await ensureAuth(ctx, {goTo: '/premium/purchase'})
 
     const user = await getUser(cookieUser._id)
+
+    ensureNotPremium(ctx, user)
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
         apiVersion: '2020-08-27'
