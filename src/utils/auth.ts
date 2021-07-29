@@ -71,8 +71,6 @@ export const verifyUser = (fn:NextApiHandler) => (req:NextApiRequest, res:NextAp
 }
 
 export const verifyPremiumUser = (fn:NextApiHandler) => (req:NextApiRequest, res:NextApiResponse) => {
-    // when adding preview functionality:
-    // check if previews from user cookies includes id
     
     return new Promise<void>(resolve => {
         jwt.verify(req.cookies.auth, process.env.SIGNATURE, async (err, decoded) => {
@@ -80,16 +78,33 @@ export const verifyPremiumUser = (fn:NextApiHandler) => (req:NextApiRequest, res
                 res.status(401).json({msg: 'YOU CANNOT PASS'})
                 return resolve()
             }
+            if(req.method !== 'GET') {
+                req.body.jwtUser = decoded
+            }
+            await fn(req, res)
+            return resolve()
+        })
+    })
+}
+
+export const verifyPremiumForResources = (fn:NextApiHandler) => (req:NextApiRequest, res:NextApiResponse) => {
+
+    return new Promise<void>(resolve => {
+        jwt.verify(req.cookies.auth, process.env.SIGNATURE, async (err, decoded) => {
+            if(err || !decoded) {
+                res.status(200).json(null)
+                return resolve()
+            }
             if(!decoded.previews.find(preview => preview.id === req.query.id)) {
                 if(!decoded.premiumExpiration || dayjs(decoded.premiumExpiration).diff(dayjs(), 'day') < 0) {
-                    res.status(401).json({msg: 'YOU CANNOT PASS'})
+                    res.status(200).json(null)
                     return resolve()
                 }
             }
             if(req.method !== 'GET') {
                 req.body.jwtUser = decoded
             }
-            await fn(req, res)
+            await fn(req, res) 
             return resolve()
         })
     })

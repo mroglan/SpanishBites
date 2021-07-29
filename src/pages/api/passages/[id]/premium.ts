@@ -1,8 +1,8 @@
 import {NextApiRequest, NextApiResponse} from 'next'
 import {getPremiumInfo} from '../../../../utils/passages'
-import {verifyPremiumUser} from '../../../../utils/auth'
+import {verifyPremiumForResources} from '../../../../utils/auth'
 
-export default verifyPremiumUser(async function Premium(req:NextApiRequest, res:NextApiResponse) {
+export default verifyPremiumForResources(async function Premium(req:NextApiRequest, res:NextApiResponse) {
 
     const id = req.query.id  as string
 
