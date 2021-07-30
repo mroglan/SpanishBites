@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from '../../../../styles/Resource.module.css'
 import {SecondaryLink} from '../../../items/links'
 import TextDisplay from '../../../mui-rte/TextDisplay'
-import {FullyPopulatedClientPassage, GeneralItem} from '../../../../database/dbInterfaces'
+import {ClientCookieUser, FullyPopulatedClientPassage, GeneralItem} from '../../../../database/dbInterfaces'
 import PassageDisplay from './PassageDisplay'
 import PremiumDisplay from './PremiumDisplay'
 import useSWR from 'swr'
@@ -13,9 +13,10 @@ import {GoldSecondaryButton} from '../../../items/buttons'
 
 interface Props {
     passage: FullyPopulatedClientPassage;
+    user: ClientCookieUser;
 }
 
-export default function Main({passage}:Props) {
+export default function Main({passage, user}:Props) {
 
     const authors:any[] = passage.authors
 
@@ -93,7 +94,7 @@ export default function Main({passage}:Props) {
                         <PassageDisplay englishText={passage.englishText} spanishText={passage.spanishText} vocab={passage.vocab} />
                     </Box>
                 </div>
-                <PremiumDisplay info={premiumInfo} />
+                <PremiumDisplay info={premiumInfo} user={user} />
             </div>
         </div>
     )

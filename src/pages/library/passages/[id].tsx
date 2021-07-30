@@ -47,7 +47,7 @@ export default function Passage({passage}:Props) {
                     <MainHeader bg="none" user={user} />
                 </div>
                 <div>
-                    <Main passage={passage} />
+                    <Main passage={passage} user={user} />
                 </div>
                 <div className={styles.footer}>
                     <MainFooter />
