@@ -42,7 +42,7 @@ export default verifyUser(async function UpdateProfile(req:NextApiRequest, res:N
             username,
             email: jwtUser.email,
             premiumExpiration: jwtUser.premiumExpiration,
-            preview: jwtUser.previews,
+            previews: jwtUser.previews,
             image: jwtUser.image,
             name,
             // customerId: jwtUser.customerId
