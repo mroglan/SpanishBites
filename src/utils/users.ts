@@ -153,6 +153,13 @@ export async function getRecentlyViewed(id:string) {
     return recentlyViewed
 }
 
+export async function addPreview(user:ClientCookieUser, {type, id}:GeneralItem) {
+
+    await client.query(
+        q.Update(q.Ref(q.Collection('users'), user._id), {data: {previews: [...user.previews, {type, id}]}})
+    )
+}
+
 export async function addPremium(id:string, currExpiration:string) {
 
     const date = dayjs(currExpiration).add(1, 'year').format('YYYY-MM-DD')
