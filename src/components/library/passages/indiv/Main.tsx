@@ -94,7 +94,7 @@ export default function Main({passage, user}:Props) {
                         <PassageDisplay englishText={passage.englishText} spanishText={passage.spanishText} vocab={passage.vocab} />
                     </Box>
                 </div>
-                <PremiumDisplay info={premiumInfo} user={user} />
+                <PremiumDisplay info={premiumInfo} user={user} passageId={passage._id}/>
             </div>
         </div>
     )
