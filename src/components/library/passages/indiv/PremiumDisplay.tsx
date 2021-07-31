@@ -2,17 +2,25 @@ import React from 'react'
 import styles from '../../../../styles/Resource.module.css'
 import {Paper, Box, Typography} from '@material-ui/core'
 import TextDisplay from '../../../mui-rte/TextDisplay'
+import { ClientCookieUser } from '../../../../database/dbInterfaces'
+import Preview from '../../basic/Preview'
 
 interface Props {
     info: {
         annotations:string;
         commentary:string;
-    }
+    };
+    user: ClientCookieUser;
+    passageId: string;
 }
 
-export default function PremiumDisplay({info}:Props) {
+export default function PremiumDisplay({info, user, passageId}:Props) {
 
-    if(!info) return <div />
+    if(!info) return (
+        <Box display="flex" alignItems="center" justifyContent="center">
+            <Preview user={user} type="passage" id={passageId} />
+        </Box>
+    ) 
 
     return (
         <>
