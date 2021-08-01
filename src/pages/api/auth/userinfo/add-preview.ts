@@ -20,8 +20,6 @@ export default verifyUser(async function AddPreview(req:NextApiRequest, res:Next
 
         await addPreview(req.body.jwtUser, itemInfo)
 
-        // make sure to also update the auth cookie
-
         const claims = {...req.body.jwtUser, previews: [...req.body.jwtUser.previews, itemInfo]}
 
         const token = jwt.sign(claims, process.env.SIGNATURE)
