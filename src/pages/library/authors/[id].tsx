@@ -48,7 +48,7 @@ export default function Author({author}:Props) {
                     <MainHeader bg="none" user={user} />
                 </div>
                 <div className={styles.content}>
-                    <Main author={author} />
+                    <Main author={author} user={user}/>
                 </div>
                 <div className={styles.footer}>
                     <MainFooter />
