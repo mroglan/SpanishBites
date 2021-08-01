@@ -4,19 +4,21 @@ import {Paper, Box, Typography, Divider} from '@material-ui/core'
 import Link from 'next/link'
 import {SecondaryLink} from '../../../items/links'
 import {BulletList} from '../../../items/lists'
-import { ClientAuthor, GeneralItem } from '../../../../database/dbInterfaces'
+import { ClientAuthor, GeneralItem, ClientCookieUser } from '../../../../database/dbInterfaces'
 import { GoldPrimaryButton, GoldSecondaryButton } from '../../../items/buttons'
 import useSWR, {mutate} from 'swr'
 import StarIcon from '@material-ui/icons/Star';
 import axios from 'axios'
 import {changeFavorites} from '../../../../utils/library'
 import TextDisplay from '../../../mui-rte/TextDisplay'
+import Preview from '../../basic/Preview'
 
 interface Props {
     author: ClientAuthor;
+    user: ClientCookieUser;
 }
 
-export default function Main({author}:Props) {
+export default function Main({author, user}:Props) {
 
     const {data: favorites, isValidating}:{data?:GeneralItem[];isValidating:boolean} = useSWR('/api/favorites', {shouldRetryOnError: false})
 
@@ -133,6 +135,9 @@ export default function Main({author}:Props) {
                             </Box>
                         </Box>
                     </Paper>
+                    {!premiumInfo && <Box mt={2} mx="auto" maxWidth={500}>
+                        <Preview user={user} type="author" id={author._id}/>
+                    </Box>}
                 </div>
             </div>
             {premiumInfo && <Box mt={3}>
