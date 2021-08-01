@@ -18,7 +18,9 @@ export default function PremiumDisplay({info, user, passageId}:Props) {
 
     if(!info) return (
         <Box display="flex" alignItems="center" justifyContent="center">
-            <Preview user={user} type="passage" id={passageId} />
+            <Box maxWidth={500} mx="auto">
+                <Preview user={user} type="passage" id={passageId} />
+            </Box>
         </Box>
     ) 
 
