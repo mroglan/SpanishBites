@@ -32,8 +32,6 @@ export default function Preview({user, type, id}:Props) {
             })
 
             await mutate(`/api/${type}s/${id}/premium`)
-
-            setLoading(false)
         } catch(e) {
             setLoading(false)
             if(e.response.status === 400) {
