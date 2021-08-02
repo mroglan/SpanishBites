@@ -52,6 +52,8 @@ export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePro
 
     const cookieUser:ClientCookieUser = await ensureAuth(ctx, {goTo: '/premium/purchase'})
 
+    if(!cookieUser) return {props: {}}
+
     const user = await getUser(cookieUser._id)
 
     ensureNotPremium(ctx, user)
