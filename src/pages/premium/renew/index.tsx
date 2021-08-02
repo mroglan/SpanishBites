@@ -51,6 +51,8 @@ export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePro
     
     const cookieUser = await ensureAuth(ctx, {goTo: '/premium/renew'})
 
+    if(!cookieUser) return {props: {}}
+
     if(!cookieUser.premiumExpiration || dayjs().diff(dayjs(cookieUser.premiumExpiration)) > 0) {
         redirectTo(ctx, '/premium/purchase')
         return {props: {}}
