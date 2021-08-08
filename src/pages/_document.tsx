@@ -3,7 +3,21 @@ import Document, { Head, Main, NextScript, Html } from 'next/document';
 import React from 'react';
 import { theme } from './_app';
 
+declare global {
+  interface Window {adsbygoogle: any;}
+}
+
 export default class MyDocument extends Document {
+
+  componentDidMount() {
+    const ads = document.getElementsByClassName('adsbygoogle').length
+    for(let i = 0; i < ads; i++) {
+      try {
+     (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch(e) {}
+    }
+  }
+
   render() {
     return (
       <Html lang="en">
@@ -15,8 +29,11 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
           <link href='https://fonts.googleapis.com/css?family=Catamaran' rel='stylesheet' />
+          <script data-ad-client="ca-pub-3903271828101712" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         </Head>
         <body>
+          {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3903271828101712"
+          crossOrigin="anonymous"></script> */}
           <Main />
           <NextScript />
         </body>
