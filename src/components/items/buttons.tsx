@@ -123,6 +123,12 @@ export const BluePrimaryIconButton = withStyles(theme => ({
     }
 }))(IconButton)
 
+export const RedPrimaryIconButton = withStyles(theme => ({
+    root: {
+        color: theme.palette.secondary.main
+    }
+}))(IconButton)
+
 export const GoldPrimaryIconButton = withStyles(theme => ({
     root: {
         color: theme.palette.gold.main
