@@ -29,11 +29,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
           <link href='https://fonts.googleapis.com/css?family=Catamaran' rel='stylesheet' />
-          <script data-ad-client="ca-pub-3903271828101712" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3903271828101712"
+          crossOrigin="anonymous"></script>
         </Head>
         <body>
-          {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3903271828101712"
-          crossOrigin="anonymous"></script> */}
           <Main />
           <NextScript />
         </body>
