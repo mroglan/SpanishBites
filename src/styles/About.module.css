@@ -138,3 +138,40 @@
         padding: 0 1rem;
     }
 }
+
+
+/* MARIA ABOUT PAGE */
+
+
+.maria-pic-avatar {
+    height: 300px !important;
+    width: 300px !important;
+}
+
+@media only screen and (max-width: 800px) {
+    .maria-pic-avatar {
+        height: 100px !important;
+        width: 100px !important;
+    }
+    .maria-socials {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .maria-sidebar {
+        order: 2;
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+    } 
+    .maria-socials {
+        flex-direction: row;
+    }
+    .maria-content-grid {
+        flex-wrap: wrap !important;
+    } 
+}
