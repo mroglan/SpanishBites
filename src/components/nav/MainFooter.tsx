@@ -76,6 +76,15 @@ export default function MainFooter() {
                         </Box>
                         <Box>
                             <Box>
+                                <Link href="/maria/about">
+                                    <a>
+                                        <SecondaryLink variant="body1">
+                                            About Me
+                                        </SecondaryLink>
+                                    </a>
+                                </Link>
+                            </Box>
+                            <Box>
                                 <a href="mailto:maria@spanishbit.es">
                                     <SecondaryLink variant="body1">
                                         maria@spanishbit.es
