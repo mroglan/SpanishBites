@@ -21,8 +21,8 @@ export default function Main() {
                             <Box>
                                 <Grid container spacing={1} justify="center" className={styles['maria-socials']}>
                                     <Grid item>
-                                        <Link href="#">
-                                            <a>
+                                        <Link href="https://twitter.com/MelendezRoglan">
+                                            <a target="_blank">
                                                 <BluePrimaryIconButton>
                                                     <TwitterIcon style={{fontSize: 40}} />
                                                 </BluePrimaryIconButton>
@@ -30,8 +30,8 @@ export default function Main() {
                                         </Link>              
                                     </Grid>
                                     <Grid item>
-                                        <Link href="#">
-                                            <a>
+                                        <Link href="https://www.facebook.com/mariacarmen.melendez">
+                                            <a target="_blank">
                                                 <BluePrimaryIconButton>
                                                     <FacebookIcon style={{fontSize: 40}} />
                                                 </BluePrimaryIconButton>
@@ -39,8 +39,8 @@ export default function Main() {
                                         </Link>              
                                     </Grid>
                                     <Grid item>
-                                        <Link href="#">
-                                            <a>
+                                        <Link href="https://www.instagram.com/mariacarmenmelendez/">
+                                            <a target="_blank">
                                                 <BluePrimaryIconButton>
                                                     <InstagramIcon style={{fontSize: 40}} />
                                                 </BluePrimaryIconButton>
