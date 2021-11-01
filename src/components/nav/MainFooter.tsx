@@ -3,6 +3,10 @@ import {Box, Divider, Grid, Typography} from '@material-ui/core'
 import Link from 'next/link'
 import styles from '../../styles/Footer.module.css'
 import {SecondaryLink} from '../items/links'
+import InstagramIcon from '@material-ui/icons/Instagram';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import YoutubeIcon from '@material-ui/icons/YouTube';
+import {RedPrimaryButton, RedPrimaryIconButton} from '../items/buttons'
 
 export default function MainFooter() {
 
@@ -28,7 +32,7 @@ export default function MainFooter() {
                                 </a>
                             </Link>
                         </Box>
-                        <Box mb={1} pl="42px">
+                        <Box mb={0} pl="42px">
                             <Link href="/contact-us">
                                 <a className={styles.link}>
                                     <SecondaryLink style={{fontSize: 18}} variant="button">
@@ -36,6 +40,37 @@ export default function MainFooter() {
                                     </SecondaryLink>
                                 </a>
                             </Link>
+                        </Box>
+                        <Box mb={1}>
+                            <Grid container spacing={0} justify="center">
+                                <Grid item>
+                                    <Link href="https://www.youtube.com/channel/UCxKR2DLAYeCYlMEsNOG8yBg">
+                                        <a target="_blank">
+                                            <RedPrimaryIconButton>
+                                                <YoutubeIcon style={{fontSize: 35}} />
+                                            </RedPrimaryIconButton>
+                                        </a>
+                                    </Link>
+                                </Grid>
+                                <Grid item>
+                                    <Link href="https://www.facebook.com/spanishsamples/">
+                                        <a target="_blank">
+                                            <RedPrimaryIconButton>
+                                                <FacebookIcon style={{fontSize: 35}} />
+                                            </RedPrimaryIconButton>
+                                        </a>
+                                    </Link>
+                                </Grid>
+                                <Grid item>
+                                    <Link href="https://www.instagram.com/spanishbit.es/">
+                                        <a target="_blank">
+                                            <RedPrimaryIconButton>
+                                                <InstagramIcon style={{fontSize: 35}} />
+                                            </RedPrimaryIconButton>
+                                        </a>
+                                    </Link>
+                                </Grid>
+                            </Grid>
                         </Box>
                     </Grid>
                     <Grid item>
