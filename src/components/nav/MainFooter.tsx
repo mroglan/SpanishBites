@@ -53,7 +53,7 @@ export default function MainFooter() {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="https://www.facebook.com/spanishsamples/">
+                                    <Link href="https://www.facebook.com/profile.php?id=100074269879439">
                                         <a target="_blank">
                                             <RedPrimaryIconButton>
                                                 <FacebookIcon style={{fontSize: 35}} />
