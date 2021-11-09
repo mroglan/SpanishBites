@@ -10,8 +10,6 @@ import Main from '../../../components/maria/blog/indexPage/Main'
 
 export default function Blog({posts}) {
 
-    console.log(posts)
-
     const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
 
     return (

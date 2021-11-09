@@ -21,7 +21,7 @@ export default function Main({posts:dbPosts}:Props) {
     const [springs, setSprings] = useSprings<any>(posts.length, p => ({scale: 1}))
 
     const [loadingMore, setLoadingMore] = useState(false)
-    const [morePostsToLoad, setMorePostsToLoad] = useState(dbPosts.length === 10)
+    const [morePostsToLoad, setMorePostsToLoad] = useState(dbPosts.length >= 10)
 
     const animateLarger = (index:number) => {
         setSprings(i => {
