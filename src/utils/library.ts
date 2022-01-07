@@ -69,7 +69,7 @@ function searchThruPassages(passages:ClientPassage[], search:string, filters:Fil
         if(!name.match(ignoreCapsAndAccentsRegex(search))) return false
         if(filters.favorites && !favorites.find(fav => fav.id === _id)) return false
         if(filters.books.length > 0 && !filters.books.includes(book ? book._id : '')) return false
-        if(filters.timePeriods.length > 0 && !filters.timePeriods.includes(book.timePeriod)) return false
+        if(filters.timePeriods.length > 0 && !filters.timePeriods.includes(book?.timePeriod)) return false
         if(filters.authors.length > 0 && !filters.authors.find(author => book.authors.includes(author))) return false
         if(filters.genres.length > 0 && !filters.genres.find(genre => book.genres.includes(genre))) return false
         return true
