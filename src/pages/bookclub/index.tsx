@@ -1,7 +1,8 @@
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext, GetStaticProps } from 'next'
 import React from 'react'
-import {ClientCookieUser} from '../../database/dbInterfaces'
+import {ClientClubEvent, ClientCookieUser} from '../../database/dbInterfaces'
 import {decodeUser} from '../../utils/auth'
+import {getCurrentClubEvent} from '../../utils/clubEvents'
 import styles from '../../styles/Basic.module.css'
 import {parseCookies} from 'nookies'
 import MainHeader from '../../components/nav/MainHeader'
@@ -9,18 +10,18 @@ import MainFooter from '../../components/nav/MainFooter'
 import Main from '../../components/bookclub/Main'
 
 interface Props {
-    user: ClientCookieUser | null;
+    event: ClientClubEvent | null;
 }
 
-export default function BookClub({user}:Props) {
+export default function BookClub({event}:Props) {
 
     return (
         <div className={styles.root}>
             <div className={`${styles.header} ${styles.sticky}`}>
-                <MainHeader bg="none" user={user} />
+                <MainHeader bg="none" />
             </div>
             <div className={styles.main}>
-                <Main user={user} />
+                <Main event={event} />
             </div>
             <div className={styles.footer}>
                 <MainFooter />
@@ -29,11 +30,9 @@ export default function BookClub({user}:Props) {
     )
 }
 
-export const getServerSideProps:GetServerSideProps = async (ctx:GetServerSidePropsContext) => {
+export const getStaticProps:GetStaticProps = async () => {
 
-    const {auth} = parseCookies(ctx)
+    const event = await getCurrentClubEvent()
 
-    const user = auth ? await decodeUser(auth) : null
-
-    return {props: {user}}
-}   
+    return {props: {event: JSON.parse(JSON.stringify(event))}, revalidate: 1800}
+}
