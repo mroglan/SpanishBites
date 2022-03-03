@@ -1,25 +1,20 @@
 import React from 'react'
-import { ClientCookieUser } from '../../database/dbInterfaces'
-import Title from './Title'
-import Description from './Description'
-import Survey from './Survey'
+import { ClientClubEvent, ClientCookieUser } from '../../database/dbInterfaces'
+import Current from './Current'
 
 interface Props {
-    user: ClientCookieUser | null;
+    event: ClientClubEvent | null;
 }
 
-export default function Main({user}:Props) {
+export default function Main({event}:Props) {
 
     return (
         <div>
             <section>
-                <Title />
+                <Current event={event} />
             </section>
             <section>
-                <Description />
-            </section>
-            <section>
-                <Survey user={user} />
+                {/* Info for previous books and next months book */}
             </section>
         </div>
     )
