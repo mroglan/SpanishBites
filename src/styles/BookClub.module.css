@@ -19,3 +19,29 @@
     max-width: 900px;
     margin: auto;
 }
+
+/* Current */
+
+.book-img-grid-item {
+    width: 33%;
+}
+
+.book-img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.current-info-box {
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 24px;
+}
+
+@media only screen and (max-width: 700px) {
+    .book-img {
+        display: none;
+    }
+    .book-img-grid-item {
+        display: none;
+    }
+}
