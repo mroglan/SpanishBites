@@ -4,14 +4,17 @@ import {Box, Typography, Grid, colors, Divider, Paper} from '@material-ui/core'
 import styles from '../../styles/BookClub.module.css'
 import {BookDescTextDisplay} from '../mui-rte/TextDisplay'
 import {PrimaryLink} from '../items/links'
+import Next from './Next'
 
 interface Props {
-    event: ClientClubEvent | null;
+    events: {current: ClientClubEvent; prev: ClientClubEvent[]; next: ClientClubEvent;};
 }
 
-export default function Current({event}:Props) {
+export default function Current({events}:Props) {
 
-    if (!event) {
+    const event = events.current
+
+    if (!event || !event._id) {
         return <div>Looks like we're not reading anything this month?</div>
     }
 
@@ -21,6 +24,7 @@ export default function Current({event}:Props) {
                 <Grid container spacing={3}>
                     <Grid item className={styles['book-img-grid-item']} >
                         <img src={event.bookImage} className={styles['book-img']} />
+                        <div />
                     </Grid> 
                     <Grid item style={{flex: 1}}>
                         <Paper elevation={3} className={styles['current-info-box']}>
@@ -28,7 +32,12 @@ export default function Current({event}:Props) {
                                 <Typography variant="h3">
                                     {event.month} {event.year}
                                 </Typography>
-                                <Divider />
+                                <Divider style={{backgroundColor: 'hsl(359, 94%, 32%)'}} />
+                            </Box>
+                            <Box mb={1}>
+                                <Typography variant="h5" >
+                                    <i>{event.bookName}</i> by {event.bookAuthor}
+                                </Typography>
                             </Box>
                             <Box maxWidth={700} mb={3}>
                                 <BookDescTextDisplay text={event.bookDesc} />
@@ -44,6 +53,7 @@ export default function Current({event}:Props) {
                                 </a>
                             </Box>
                         </Paper>
+                        <Next event={events.next} />
                     </Grid>
                 </Grid> 
             </Box>

@@ -23,7 +23,17 @@
 /* Current */
 
 .book-img-grid-item {
+    display: flex;
+    flex-direction: column;
     width: 33%;
+}
+
+.book-img-grid-item div {
+    background-image: url('/background/books.png');
+    background-repeat: repeat-y;
+    background-position: center;
+    background-size: 200px auto;
+    flex: 1;
 }
 
 .book-img {
@@ -35,6 +45,29 @@
     background: #FFFFFF;
     border-radius: 15px;
     padding: 24px;
+    margin-bottom: 10vh;
+}
+
+.next-img-grid-item {
+    width: 33%;
+}
+
+.next-img {
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.next-info-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.next-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
 }
 
 @media only screen and (max-width: 700px) {
