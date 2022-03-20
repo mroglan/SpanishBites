@@ -15,8 +15,6 @@ interface Props {
 
 export default function BookClub({events}:Props) {
 
-    console.log(events)
-
     return (
         <div className={styles.root}>
             <div className={`${styles.header} ${styles.sticky}`}>

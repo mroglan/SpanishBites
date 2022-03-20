@@ -26,7 +26,7 @@ export async function getCurrentClubEvent() {
     }
 }
 
-async function getEventsForYear(year:number) : Promise<OrganizedDBClubEvent[]> {
+export async function getEventsForYear(year:number) : Promise<OrganizedDBClubEvent[]> {
     const yearEvents:any = await client.query(
         q.Map(q.Paginate(q.Match(q.Index('clubEvents_by_year'), year.toString())), 
             q.Lambda('ref', q.Get(q.Var('ref'))) 
@@ -34,6 +34,13 @@ async function getEventsForYear(year:number) : Promise<OrganizedDBClubEvent[]> {
     )
 
     return yearEvents.data.map(event => ({_id: event.ref.id, ...event.data})).sort((a, b) => months[a.month] - months[b.month])
+}
+
+export async function getStartingBookList() {
+
+    const books = await getEventsForYear(dayjs().year())
+
+    return books.filter(book => months[book.month] <= dayjs().month())
 }
 
 export async function getClubEventsForMainBookClubPage() {

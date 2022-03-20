@@ -20,7 +20,7 @@
     margin: auto;
 }
 
-/* Current */
+/* Main Page*/
 
 .book-img-grid-item {
     display: flex;
@@ -77,4 +77,23 @@
     .book-img-grid-item {
         display: none;
     }
+}
+
+
+/* Books List Page */
+
+.books-list-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.books-list-side {
+    flex: 1;
+    background-image: url('/background/books.png');
+    background-repeat: repeat-y;
+    background-position: center;
+    background-size: 200px auto;
+    opacity: .6;
 }
