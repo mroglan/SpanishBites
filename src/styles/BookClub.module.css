@@ -20,10 +20,20 @@
     margin: auto;
 }
 
-/* Current */
+/* Main Page*/
 
 .book-img-grid-item {
+    display: flex;
+    flex-direction: column;
     width: 33%;
+}
+
+.book-img-grid-item div {
+    background-image: url('/background/books.png');
+    background-repeat: repeat-y;
+    background-position: center;
+    background-size: 200px auto;
+    flex: 1;
 }
 
 .book-img {
@@ -35,13 +45,104 @@
     background: #FFFFFF;
     border-radius: 15px;
     padding: 24px;
+    margin-bottom: 10vh;
 }
 
-@media only screen and (max-width: 700px) {
+.next-info-box {
+    margin-bottom: 10vh;
+}
+
+.next-img-grid-item {
+    width: 33%;
+}
+
+.next-img {
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.next-info-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.next-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.prev-img-container {
+    width: 40%;
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+    margin-right: 15px !important;
+}
+
+.prev-img-container img {
+    position: absolute;
+    height: 200px;
+    top: 200px;
+    left: 50%;
+    transform: translate(-50%, -200px);
+    border-radius: 10px;
+}
+
+.prev-img-container img:nth-child(5) {
+    transform: translate(0%, -150px) rotate(25deg);
+}
+
+.prev-img-container img:nth-child(4) {
+    transform: translate(-25%, -180px) rotate(15deg);
+}
+
+.prev-img-container img:nth-child(3) {
+    transform: translate(-50%, -200px) rotate(0deg);
+}
+
+.prev-img-container img:nth-child(2) {
+    transform: translate(-75%, -180px) rotate(-15deg);
+}
+
+.prev-img-container img:nth-child(1) {
+    transform: translate(-100%, -150px) rotate(-25deg);
+}
+
+@media only screen and (max-width: 800px) {
     .book-img {
         display: none;
     }
     .book-img-grid-item {
         display: none;
     }
+}
+
+@media only screen and (max-width: 550px) {
+    .next-img-grid-item {
+        display: none;
+    }
+}
+
+
+/* Books List Page */
+
+.books-list-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.books-list-side {
+    flex: 1;
+    background-image: url('/background/books.png');
+    background-repeat: repeat-y;
+    background-position: center;
+    background-size: 200px auto;
+    opacity: .6;
 }

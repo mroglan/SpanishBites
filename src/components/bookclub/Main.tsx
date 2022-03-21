@@ -3,18 +3,15 @@ import { ClientClubEvent, ClientCookieUser } from '../../database/dbInterfaces'
 import Current from './Current'
 
 interface Props {
-    event: ClientClubEvent | null;
+    events: {current: ClientClubEvent; prev: ClientClubEvent[]; next: ClientClubEvent;};
 }
 
-export default function Main({event}:Props) {
+export default function Main({events}:Props) {
 
     return (
         <div>
             <section>
-                <Current event={event} />
-            </section>
-            <section>
-                {/* Info for previous books and next months book */}
+                <Current events={events} />
             </section>
         </div>
     )

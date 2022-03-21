@@ -1,23 +1,15 @@
 import React from 'react'
-import {ClientClubEvent} from '../../database/dbInterfaces'
-import {Box, Typography, Grid, colors, Divider, Paper} from '@material-ui/core'
-import styles from '../../styles/BookClub.module.css'
-import {BookDescTextDisplay} from '../mui-rte/TextDisplay'
-import {PrimaryLink} from '../items/links'
-import Next from './Next'
-import Previous from './Previous'
+import { ClientClubEvent } from '../../../../database/dbInterfaces'
+import styles from '../../../../styles/BookClub.module.css'
+import {BookDescTextDisplay} from '../../../mui-rte/TextDisplay'
+import {PrimaryLink} from '../../../items/links'
+import {Box, Grid, Typography, Paper, Divider} from '@material-ui/core'
 
 interface Props {
-    events: {current: ClientClubEvent; prev: ClientClubEvent[]; next: ClientClubEvent;};
+    event: ClientClubEvent;
 }
 
-export default function Current({events}:Props) {
-
-    const event = events.current
-
-    if (!event || !event._id) {
-        return <div>Looks like we're not reading anything this month?</div>
-    }
+export default function Main({event}:Props) {
 
     return (
         <div>
@@ -54,8 +46,6 @@ export default function Current({events}:Props) {
                                 </a>
                             </Box>
                         </Paper>
-                        <Next event={events.next} />
-                        <Previous events={events.prev} />
                     </Grid>
                 </Grid> 
             </Box>
