@@ -36,6 +36,12 @@ export async function getEventsForYear(year:number) : Promise<OrganizedDBClubEve
     return yearEvents.data.map(event => ({_id: event.ref.id, ...event.data})).sort((a, b) => months[a.month] - months[b.month])
 }
 
+export async function getEvent(month:string, year:number) {
+    const yearEvents = await getEventsForYear(year)
+
+    return yearEvents.find(event => event.month == month)
+}
+
 export async function getStartingBookList() {
 
     const books = await getEventsForYear(dayjs().year())

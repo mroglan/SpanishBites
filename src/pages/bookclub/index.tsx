@@ -8,6 +8,7 @@ import {parseCookies} from 'nookies'
 import MainHeader from '../../components/nav/MainHeader'
 import MainFooter from '../../components/nav/MainFooter'
 import Main from '../../components/bookclub/Main'
+import useSWR from 'swr'
 
 interface Props {
     events: {current: ClientClubEvent; prev: ClientClubEvent[]; next: ClientClubEvent;};
@@ -15,10 +16,12 @@ interface Props {
 
 export default function BookClub({events}:Props) {
 
+    const {data:user} = useSWR('/api/auth/getuser', {shouldRetryOnError: false})
+
     return (
         <div className={styles.root}>
             <div className={`${styles.header} ${styles.sticky}`}>
-                <MainHeader bg="none" />
+                <MainHeader bg="none" user={user} />
             </div>
             <div className={styles.main}>
                 <Main events={events} />
