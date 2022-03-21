@@ -89,7 +89,7 @@ export default function Events({events:dbEvents}:Props) {
                                         <Paper elevation={3}>
                                             <Grid container spacing={3}>
                                                 <Grid item style={{flex: 1}} className={styles['next-info-container']}>
-                                                    <Box pl={3} >
+                                                    <Box px={3} >
                                                         <Box textAlign="center" mb={3}>
                                                             <Typography variant="h3">
                                                                 {event.month}

@@ -113,11 +113,17 @@
     transform: translate(-100%, -150px) rotate(-25deg);
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
     .book-img {
         display: none;
     }
     .book-img-grid-item {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .next-img-grid-item {
         display: none;
     }
 }
