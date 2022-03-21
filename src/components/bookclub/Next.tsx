@@ -11,7 +11,7 @@ interface Props {
 
 export default function Next({event}:Props) {
 
-    if (!event) {
+    if (!event || !event._id) {
         return <div />
     }
 
