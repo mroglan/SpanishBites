@@ -5,6 +5,7 @@ import styles from '../../styles/BookClub.module.css'
 import {BookDescTextDisplay} from '../mui-rte/TextDisplay'
 import {PrimaryLink} from '../items/links'
 import Next from './Next'
+import Previous from './Previous'
 
 interface Props {
     events: {current: ClientClubEvent; prev: ClientClubEvent[]; next: ClientClubEvent;};
@@ -54,6 +55,7 @@ export default function Current({events}:Props) {
                             </Box>
                         </Paper>
                         <Next event={events.next} />
+                        <Previous events={events.prev} />
                     </Grid>
                 </Grid> 
             </Box>

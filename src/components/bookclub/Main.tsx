@@ -13,9 +13,6 @@ export default function Main({events}:Props) {
             <section>
                 <Current events={events} />
             </section>
-            <section>
-                {/* Info for previous books and next months book */}
-            </section>
         </div>
     )
 }

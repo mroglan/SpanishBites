@@ -26,12 +26,12 @@ export default function Next({event}:Props) {
     }
 
     return (
-        <div>
+        <div className={styles['next-info-box']}>
             <Link href="/bookclub/books/[year]/[month]" as={`/bookclub/books/${event.year}/${event.month}`}>
                 <a>
                     <animated.div onMouseEnter={() => animateLarger()} onMouseLeave={() => animateSmaller()}
                         style={{transform: springs[0].scale.interpolate(s => `scale(${s})`)}}>
-                        <Paper elevation={3}>
+                        <Paper style={{border: '5px solid hsla(229, 100%, 58%, .75)'}} elevation={3}>
                             <Grid container spacing={3}>
                                 <Grid item style={{flex: 1}} className={styles['next-info-container']}>
                                     <Box pl={3} >

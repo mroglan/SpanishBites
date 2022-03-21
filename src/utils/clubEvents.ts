@@ -74,22 +74,19 @@ export async function getClubEventsForMainBookClubPage() {
         return map
     }
 
-    let totalEvents
-
-    if (events.length < 7) {
-        const prevYearEvents = await getEventsForYear(year - 1)
-
-        totalEvents = prevYearEvents.concat(events)
-    } else {
-        totalEvents = events
-    }
-
     map.current = events[events.length - 2]
     map.next = events[events.length - 1]
 
     events.pop()
     events.pop()
-    map.prev = events
+    if (events.length < 7) {
+        const prevYearEvents = await getEventsForYear(year - 1)
+
+        const total = prevYearEvents.concat(events)
+        map.prev = total 
+    } else {
+        map.prev = events
+    }
 
     return map
 }
